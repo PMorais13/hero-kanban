@@ -4,7 +4,7 @@
 
 ---
 
-## 1) Configuração inicial
+## 1 Configuração inicial
 
 - Criar projeto standalone:
   ```bash
@@ -21,7 +21,7 @@
 
 ---
 
-## 2) Organização de pastas
+## 2 Organização de pastas
 
 Estrutura orientada a **features**:
 
@@ -43,7 +43,7 @@ Estrutura orientada a **features**:
 
 ---
 
-## 3) Standalone e rotas
+## 3 Standalone e rotas
 
 - Usar **Standalone Components** em 100% dos casos.  
 - **inject()** em vez de constructor quando apropriado.  
@@ -60,7 +60,7 @@ Estrutura orientada a **features**:
 
 ---
 
-## 4) Tipagem forte
+## 4 Tipagem forte
 
 - Nunca usar `any`.  
 - Preferir **tipos literais**, **union types** e **satisfies** para checagem.  
@@ -87,7 +87,7 @@ export interface TaskVm {
 
 ---
 
-## 5) Estado: Signals + RxJS
+## 5 Estado: Signals + RxJS
 
 - **Signals** para estado local de UI.  
 - **RxJS** para assíncrono, HTTP e streams.  
@@ -116,7 +116,7 @@ export class TasksState {
 
 ---
 
-## 6) HTTP e erros
+## 6 HTTP e erros
 
 - Centralizar HttpClient em **Core**.  
 - **Interceptors** para JWT/erros.  
@@ -135,7 +135,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 7) Performance
+## 7 Performance
 
 - `trackBy` em *ngFor.  
 - Computed signals/memoization para evitar recomputações.  
@@ -145,7 +145,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 8) Acessibilidade (a11y)
+## 8 Acessibilidade (a11y)
 
 - Usar `aria-*` correto.  
 - Gerenciar foco em modais e rotas.  
@@ -154,7 +154,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 9) Design System e UI
+## ) Design System e UI
 
 - **SCSS com tokens** (cores, tipografia, espaçamentos).  
 - Metodologia **BEM** para classes.  
@@ -163,7 +163,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 10) Testes
+## 10 Testes
 
 - Unitários para lógica pura (pipes, utils, services).  
 - Componentes: bindings, renderização condicional, eventos.  
@@ -172,7 +172,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 11) Segurança
+## 11 Segurança
 
 - Evitar `innerHTML`. Usar `DomSanitizer` só se necessário.  
 - Cookies HttpOnly + SameSite preferíveis a localStorage.  
@@ -182,7 +182,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 12) Observabilidade
+## 12 Observabilidade
 
 - Logger com níveis/contexto.  
 - Monitorar tempo de carregamento, falhas HTTP e erros de UI.  
@@ -190,14 +190,14 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 13) i18n
+## 13 i18n
 
 - Usar Angular i18n ou Transloco.  
 - Pipes nativos de locale para números, datas e moedas.  
 
 ---
 
-## 14) CI/CD
+## 14 CI/CD
 
 - Pipeline: Install → Lint → Test → Build → Audit → Deploy.  
 - Conventional Commits.  
@@ -205,7 +205,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 15) Convenções
+## 15 Convenções
 
 - Nomes claros e consistentes.  
 - Extrair funções/métodos quando crescerem demais.  
@@ -214,7 +214,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
 ---
 
-## 16) Exemplos práticos
+## 16 Exemplos práticos
 
 **Componente standalone**
 ```ts
@@ -256,7 +256,7 @@ export const mapDtoToVm = (dto: TaskDto): TaskVm => ({
 
 ---
 
-## 17) Do & Don’t
+## 17 Do & Don’t
 
 **Do**
 - Tipagem forte em tudo.  
@@ -274,7 +274,7 @@ export const mapDtoToVm = (dto: TaskDto): TaskVm => ({
 
 ---
 
-## 18) Critérios de aceite para PRs
+## 18 Critérios de aceite para PRs
 
 - [ ] Sem `any` ou `unknown` sem explicação.  
 - [ ] ESLint + Prettier passam limpos.  
@@ -282,3 +282,20 @@ export const mapDtoToVm = (dto: TaskDto): TaskVm => ({
 - [ ] Acessibilidade básica validada.  
 - [ ] Performance garantida (trackBy, etc.).  
 - [ ] Documentação mínima do porquê das decisões.  
+
+---
+
+## 19) Documentação no README
+
+- Cada **feature** ou módulo importante deve ter uma explicação no README ou em um arquivo `README.md` próprio dentro da pasta da feature.  
+- A documentação deve responder **o porquê** de certas escolhas técnicas, e não apenas o "como".  
+- Incluir no README:
+  - **Objetivo da feature** (para que serve, qual problema resolve).  
+  - **Decisões técnicas** (por que Signals, por que determinado padrão de estado, etc.).  
+  - **Exemplos de uso** (como importar o componente/serviço, como consumir).  
+  - **Dependências relevantes** (libs externas usadas e justificativa).  
+  - **Checklist de manutenção** (testes, acessibilidade, performance).  
+- O README deve ser **curto, claro e atualizado**. Evite documentar detalhes que ficam obsoletos rápido (ex.: nomes de variáveis ou caminhos de arquivo).  
+- Sempre que uma PR introduzir algo novo, **atualizar o README** junto faz parte da entrega.  
+
+---
