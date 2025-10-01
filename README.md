@@ -1,59 +1,41 @@
-# HeroKanban
+# Hero Kanban
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.5.
+Hero Kanban transforma o fluxo de trabalho tradicional em uma jornada cooperativa com missões, recompensas e métricas claras. O objetivo é unir a hierarquia robusta de plataformas como Jira/Trello à motivação de jogos modernos, dando visibilidade para gestores e criando feedback positivo contínuo para os times.
 
-## Development server
+## Visão do Produto
 
-To start a local development server, run:
+- **Hierarquia completa**: Feature → História → Subtask (Subtarefa/Subbug), permitindo rastreabilidade e comunicação clara do progresso.
+- **Quadros configuráveis**: colunas com WIP, cores, ícones e transições controladas para impedir "pulos" indevidos.
+- **Gamificação saudável**: XP compartilhado, missões semanais/diárias, badges e recompensas cosméticas liberadas coletivamente.
+- **Métricas de fluxo**: Lead Time, Cycle Time, Throughput e Cumulative Flow Diagram fazem parte da narrativa da guilda.
 
-```bash
-ng serve
-```
+## Arquitetura Front-end
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Projeto Angular 19 com **standalone components** e **signals** para estado local (`BoardState`).
+- Organização por features em `src/app/features`, seguindo boas práticas do `AGENT.md`.
+- UI construída com componentes puros (`BoardPage`, `BoardColumn`, `BoardCard`) focados em acessibilidade e tipagem forte (`board.models.ts`).
+- Fluxo gamificado demonstrado por dados mockados: níveis do time, progresso de XP e missões com feedback visual.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Executando localmente
 
 ```bash
-ng generate --help
+npm install
+npm start
 ```
 
-## Building
+O servidor sobe em `http://localhost:4200/`. O layout é responsivo e suporta navegação por teclado.
 
-To build the project run:
+## Testes
 
 ```bash
-ng build
+npm test -- --watch=false
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Os testes validam a criação do shell principal e regras de transição/WIP do serviço `BoardState`.
 
-## Running unit tests
+## Próximos passos sugeridos
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. Integrar API real para persistir features, histórias e métricas.
+2. Adicionar drag-and-drop (Angular CDK) com animações e validações das transições configuráveis.
+3. Expandir camada de métricas com gráficos em tempo real e alertas proativos.
+4. Implementar sistema de recompensas/loja compartilhada para o time.

@@ -1,0 +1,62 @@
+<section class="board" aria-labelledby="board-heading">
+  <header class="board__header">
+    <div class="board__intro">
+      <h1 id="board-heading">Missões em andamento</h1>
+      <p>Visual moderno, métricas avançadas e recompensas compartilhadas para manter o squad engajado.</p>
+    </div>
+    <div class="board__progress" role="status" aria-live="polite">
+      <div class="board__level">Guilda nível {{ summary().level }}</div>
+      <div class="board__xp">
+        <div class="board__xp-bar" aria-hidden="true">
+          <span class="board__xp-fill" [style.width.%]="summary().xpProgressPercent"></span>
+        </div>
+        <p>
+          {{ summary().xpEarned }} XP acumulado · faltam {{ summary().xpToNextLevel }} XP para o próximo emblema
+        </p>
+      </div>
+      <dl class="board__stats">
+        <div>
+          <dt>Histórias concluídas</dt>
+          <dd>{{ summary().completedStories }}</dd>
+        </div>
+        <div>
+          <dt>Features ativas</dt>
+          <dd>{{ summary().activeFeatures }}</dd>
+        </div>
+        <div>
+          <dt>Throughput semanal</dt>
+          <dd>{{ summary().weeklyThroughput }}</dd>
+        </div>
+      </dl>
+    </div>
+    <aside class="board__missions" *ngIf="summary().missions.length > 0" aria-label="Missões em destaque">
+      <h2>Missões</h2>
+      <ul>
+        <li *ngFor="let mission of summary().missions">
+          <div class="mission">
+            <div>
+              <p class="mission__title">{{ mission.title }}</p>
+              <p class="mission__target">{{ mission.target }}</p>
+            </div>
+            <span class="mission__reward">{{ mission.reward }}</span>
+            <div
+              class="mission__progress"
+              role="img"
+              [attr.aria-label]="'Progresso ' + (mission.progress * 100 | number:'1.0-0') + '%'"
+            >
+              <span class="mission__progress-fill" [style.width.%]="mission.progress * 100"></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </aside>
+  </header>
+
+  <section class="board__columns" role="list">
+    <kanban-board-column
+      *ngFor="let column of columns(); trackBy: trackColumn"
+      [column]="column"
+      role="listitem"
+    ></kanban-board-column>
+  </section>
+</section>
