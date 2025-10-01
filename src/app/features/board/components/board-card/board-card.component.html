@@ -1,0 +1,26 @@
+<article class="card" [attr.data-priority]="card().priorityLabel">
+  <header class="card__header">
+    <span class="card__priority" [style.background]="card().priorityColor">{{ card().priorityLabel }}</span>
+    <span class="card__xp" aria-label="Recompensa de experiência">{{ card().xp }} XP</span>
+  </header>
+  <h4>{{ card().title }}</h4>
+  <p class="card__feature">Feature: {{ card().featureName }}</p>
+  <ul class="card__labels" *ngIf="card().labels.length > 0" aria-label="Etiquetas">
+    <li *ngFor="let label of card().labels">{{ label }}</li>
+  </ul>
+  <div class="card__assignee">
+    <span class="card__avatar" aria-hidden="true">{{ card().avatarInitials }}</span>
+    <span class="card__assignee-name">{{ card().assignee }}</span>
+  </div>
+  <div class="card__progress">
+    <div class="card__progress-bar" role="img" [attr.aria-label]="'Checklist ' + card().checklistProgressLabel">
+      <span class="card__progress-fill" [style.width.%]="card().completionPercent"></span>
+    </div>
+    <span class="card__progress-label">{{ card().checklistProgressLabel }}</span>
+  </div>
+  <footer class="card__footer">
+    <span>{{ card().estimateLabel }}</span>
+    <span *ngIf="card().dueLabel as due">Entrega {{ due }}</span>
+    <span class="card__mission">{{ card().missionTagline }}</span>
+  </footer>
+</article>

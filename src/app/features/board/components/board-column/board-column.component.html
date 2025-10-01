@@ -1,0 +1,32 @@
+<article class="column" [attr.data-status]="column().status.id">
+  <header class="column__header">
+    <div class="column__identity">
+      <span class="column__icon" [style.background]="column().status.color" aria-hidden="true">
+        <span class="material-symbols-rounded">{{ column().status.icon }}</span>
+      </span>
+      <div>
+        <h3>{{ column().status.name }}</h3>
+        <p>{{ column().status.description }}</p>
+      </div>
+    </div>
+    <span
+      class="column__wip"
+      [class.column__wip--alert]="column().isWipLimitBreached"
+      role="status"
+      aria-live="polite"
+    >
+      {{ column().wipCount }} / {{ column().wipLimit ?? '∞' }} WIP
+    </span>
+  </header>
+
+  <ul class="column__cards" role="list">
+    <li *ngFor="let card of column().cards; trackBy: trackCard" role="listitem">
+      <kanban-board-card [card]="card"></kanban-board-card>
+    </li>
+    <li *ngIf="column().cards.length === 0" class="column__empty">
+      <p>
+        Nada por aqui ainda. Conecte uma missão ou arraste uma história para desbloquear XP nesta etapa.
+      </p>
+    </li>
+  </ul>
+</article>

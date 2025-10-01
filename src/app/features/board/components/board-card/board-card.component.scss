@@ -1,0 +1,128 @@
+.card {
+  display: grid;
+  gap: 0.75rem;
+  background: var(--hk-surface-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 12px 30px -12px rgba(14, 11, 36, 0.65);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover,
+.card:focus-within {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px -12px rgba(14, 11, 36, 0.8);
+}
+
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.card__priority {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  color: #111120;
+  font-weight: 600;
+}
+
+.card__xp {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.card > h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card__feature {
+  margin: 0;
+  color: var(--hk-text-muted);
+  font-size: 0.85rem;
+}
+
+.card__labels {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.card__labels > li {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+}
+
+.card__assignee {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card__avatar {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+  font-weight: 600;
+}
+
+.card__assignee-name {
+  font-size: 0.9rem;
+}
+
+.card__progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.card__progress-bar {
+  position: relative;
+  flex: 1;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.card__progress-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #34d399 0%, #60a5fa 100%);
+}
+
+.card__progress-label {
+  font-size: 0.75rem;
+  color: var(--hk-text-muted);
+}
+
+.card__footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.card__mission {
+  flex-basis: 100%;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.8);
+}
