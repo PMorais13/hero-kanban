@@ -6,7 +6,7 @@
 .board {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
   color: var(--hk-text-primary);
 }
 
@@ -27,9 +27,9 @@
 
 .board__summary-grid {
   display: grid;
-  gap: 1.25rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  align-items: start;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  align-items: stretch;
 }
 
 .board__summary :is(.mat-mdc-card-header, .mat-mdc-card-content) {
@@ -197,13 +197,25 @@
 }
 
 .board__columns {
-  display: grid;
-  gap: 1.5rem;
+  display: flex;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  align-items: stretch;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  padding: 0.25rem clamp(0.5rem, 2vw, 1rem) 0.75rem;
+  scrollbar-gutter: stable both-edges;
 }
 
-@media (min-width: 960px) {
-  .board__columns {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    align-items: start;
-  }
+.board__columns > * {
+  scroll-snap-align: start;
+}
+
+.board__columns::-webkit-scrollbar {
+  height: 0.6rem;
+}
+
+.board__columns::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
 }
