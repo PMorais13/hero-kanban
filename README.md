@@ -30,7 +30,7 @@ Os testes cobrem o shell principal e regras de negócio dos serviços de estado 
 
 ### Organização
 
-- `core/`: estado global do herói e serviços utilitários compartilhados.
+- `core/`: estado global do herói, gerenciamento de tema e serviços utilitários compartilhados.
 - `features/`: cada domínio (quadro, sprints, perfil, etc.) expõe componentes standalone, rotas lazy e serviços próprios.
 - Componentes e estados são tipados (`BoardColumnViewModel`, `Story`, `SprintOverviewViewModel`) para evitar `any`.
 
@@ -63,6 +63,7 @@ Os testes cobrem o shell principal e regras de negócio dos serviços de estado 
 
 ### Perfil do herói (`/perfil`)
 - Consome `HeroControlState` para mostrar nível, conquistas e itens obtidos pela guilda.
+- `ThemeState` habilita seleção dinâmica entre os temas **Noite Estelar** e **Aurora Boreal**, atualizando tokens de cor globais.
 - Componentização standalone facilita futuras expansões como loja ou ranking.
 
 ## Próximos passos sugeridos

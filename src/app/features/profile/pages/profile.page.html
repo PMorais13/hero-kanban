@@ -18,6 +18,41 @@
     </div>
   </section>
 
+  <section class="profile__theme" aria-labelledby="theme-heading">
+    <header>
+      <h2 id="theme-heading">Personalizar tema</h2>
+      <p>Escolha uma paleta visual para combinar com a energia da guilda.</p>
+    </header>
+    <ul class="theme-options" role="radiogroup" [attr.aria-labelledby]="'theme-heading'">
+      <li *ngFor="let theme of themes(); trackBy: trackTheme" class="theme-options__item">
+        <input
+          type="radio"
+          class="theme-option__input"
+          name="theme-selection"
+          [id]="'theme-' + theme.id"
+          [value]="theme.id"
+          [checked]="isThemeSelected(theme.id)"
+          (change)="onThemeSelect(theme.id)"
+        />
+        <label
+          class="theme-option__card"
+          [attr.for]="'theme-' + theme.id"
+          [class.theme-option__card--active]="isThemeSelected(theme.id)"
+          [style.--theme-accent]="theme.accent"
+          [style.--theme-soft-accent]="theme.softAccent"
+          [style.--theme-preview]="theme.previewGradient"
+        >
+          <span class="theme-option__preview" aria-hidden="true"></span>
+          <span class="theme-option__content">
+            <span class="theme-option__title">{{ theme.label }}</span>
+            <span class="theme-option__description">{{ theme.description }}</span>
+          </span>
+          <span class="theme-option__badge" *ngIf="isThemeSelected(theme.id)">Ativo</span>
+        </label>
+      </li>
+    </ul>
+  </section>
+
   <section class="profile__achievements" aria-labelledby="achievements-heading">
     <header>
       <h2 id="achievements-heading">Conquistas desbloqueadas</h2>
