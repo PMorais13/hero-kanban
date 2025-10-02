@@ -55,6 +55,16 @@
         </label>
 
         <label class="create-story-modal__field">
+          <span>Sprint</span>
+          <select formControlName="sprintId">
+            <option value="">Sem sprint</option>
+            <option *ngFor="let sprint of sprints()" [value]="sprint.id">
+              {{ formatSprintLabel(sprint) }}
+            </option>
+          </select>
+        </label>
+
+        <label class="create-story-modal__field">
           <span>Prioridade</span>
           <select formControlName="priority">
             <option *ngFor="let option of priorityOptions" [value]="option.value">{{ option.label }}</option>
