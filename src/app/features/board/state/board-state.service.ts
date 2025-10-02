@@ -14,6 +14,8 @@ import type {
   SprintStoryViewModel,
   Story,
   StoryTask,
+  StoryDetailsTaskViewModel,
+  StoryDetailsViewModel,
   TeamProgressSummary,
 } from './board.models';
 import { BoardConfigState } from './board-config.state';
@@ -461,6 +463,15 @@ export class BoardState {
     return task.id;
   }
 
+  getStoryDetails(storyId: string): StoryDetailsViewModel | null {
+    const story = this._stories().find((item) => item.id === storyId);
+    if (!story) {
+      return null;
+    }
+
+    return this.toStoryDetailsViewModel(story);
+  }
+
   createStory(draft: CreateStoryPayload): Story | null {
     const statusesById = this.getStatusesById();
     const nextStatus = statusesById.get(draft.statusId);
@@ -615,6 +626,54 @@ export class BoardState {
       missionTagline: feature?.mission ?? 'Missão surpresa para a guilda.',
       dueLabel: story.dueDate ? this.formatDueDate(story.dueDate) : undefined,
     } satisfies BoardCardViewModel;
+  }
+
+  private toStoryDetailsViewModel(story: Story): StoryDetailsViewModel {
+    const feature = this._features().find((item) => item.id === story.featureId);
+    const status = this.getStatusesById().get(story.statusId);
+    const sprint = story.sprintId
+      ? this._sprints().find((item) => item.id === story.sprintId)
+      : undefined;
+    const tasks = story.tasks.map(
+      (task) =>
+        ({
+          id: task.id,
+          title: task.title,
+          isDone: task.isDone,
+        }) satisfies StoryDetailsTaskViewModel,
+    );
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter((task) => task.isDone).length;
+    const checklistProgressLabel =
+      totalTasks === 0 ? 'Sem tarefas' : `${completedTasks}/${totalTasks} tarefas`;
+    const completionPercent =
+      totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
+
+    return {
+      id: story.id,
+      title: story.title,
+      featureName: feature?.title ?? 'Feature desconhecida',
+      featureTheme: feature?.theme ?? 'Tema desconhecido',
+      featureMission: feature?.mission ?? 'Missão a ser definida com o squad.',
+      statusLabel: status?.name ?? 'Etapa desconhecida',
+      statusDescription: status?.description ?? 'Etapa não mapeada no fluxo do quadro.',
+      statusColor: status?.color ?? '#64748b',
+      statusIcon: status?.icon ?? 'help',
+      priorityLabel: this.mapPriorityLabel(story.priority),
+      priorityColor: PRIORITY_COLORS[story.priority],
+      assignee: story.assignee,
+      avatarInitials: this.createInitials(story.assignee),
+      estimateLabel: `${story.estimate} pts`,
+      xp: story.xp,
+      labels: story.labels,
+      dueLabel: story.dueDate ? this.formatDueDate(story.dueDate) : undefined,
+      sprintLabel: sprint ? `${sprint.name} · ${this.formatSprintPeriod(sprint)}` : undefined,
+      tasks,
+      completedTasks,
+      totalTasks,
+      checklistProgressLabel,
+      completionPercent,
+    } satisfies StoryDetailsViewModel;
   }
 
   private mapPriorityLabel(priority: Story['priority']): string {

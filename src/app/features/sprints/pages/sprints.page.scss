@@ -11,6 +11,9 @@
 }
 
 .sprints__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   background: var(--hk-surface);
   border: 1px solid var(--hk-border);
   border-radius: 1.5rem;
@@ -18,16 +21,66 @@
   box-shadow: 0 25px 50px -12px rgba(15, 12, 41, 0.4);
 }
 
-.sprints__hero > h1 {
-  margin: 0 0 0.75rem;
+.sprints__hero-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sprints__hero-heading > h1 {
+  margin: 0;
   font-size: clamp(1.8rem, 2.8vw, 2.6rem);
   font-weight: 700;
 }
 
-.sprints__hero > p {
+.sprints__hero-heading > p {
   margin: 0;
   color: var(--hk-text-muted);
   max-width: 62ch;
+}
+
+.sprints__new-task {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 118, 110, 0.4);
+  background: rgba(13, 148, 136, 0.18);
+  color: #ccfbf1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.sprints__new-task:hover,
+.sprints__new-task:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(20, 184, 166, 0.65);
+  background: rgba(20, 184, 166, 0.25);
+}
+
+.sprints__new-task-icon {
+  font-family: 'Material Symbols Rounded';
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+@media (min-width: 720px) {
+  .sprints__hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 719px) {
+  .sprints__new-task {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .sprints__list {

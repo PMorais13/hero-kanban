@@ -1,0 +1,108 @@
+<section
+  *ngIf="story() as details; else notFound"
+  class="story-details"
+  aria-labelledby="story-details-title"
+>
+  <header class="story-details__toolbar">
+    <a routerLink="/" class="story-details__back">
+      <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+      Voltar para o quadro
+    </a>
+    <button type="button" class="story-details__new-task">
+      <span class="material-symbols-rounded" aria-hidden="true">playlist_add</span>
+      Nova tarefa
+    </button>
+  </header>
+
+  <article class="story-details__content">
+    <header class="story-details__summary">
+      <span class="story-details__status" [style.--status-color]="details.statusColor">
+        <span class="material-symbols-rounded" aria-hidden="true">{{ details.statusIcon }}</span>
+        <span class="story-details__status-label">{{ details.statusLabel }}</span>
+      </span>
+      <p class="story-details__status-description">{{ details.statusDescription }}</p>
+      <h1 id="story-details-title">{{ details.title }}</h1>
+      <p class="story-details__theme">Tema: {{ details.featureTheme }}</p>
+      <p class="story-details__mission">{{ details.featureMission }}</p>
+    </header>
+
+    <section class="story-details__meta" aria-label="Informações gerais da história">
+      <div>
+        <span class="story-details__meta-label">Responsável</span>
+        <div class="story-details__assignee">
+          <span class="story-details__avatar" aria-hidden="true">{{ details.avatarInitials }}</span>
+          <span>{{ details.assignee }}</span>
+        </div>
+      </div>
+      <div>
+        <span class="story-details__meta-label">Prioridade</span>
+        <span class="story-details__priority" [style.background]="details.priorityColor">
+          {{ details.priorityLabel }}
+        </span>
+      </div>
+      <div>
+        <span class="story-details__meta-label">Estimativa</span>
+        <span>{{ details.estimateLabel }}</span>
+      </div>
+      <div>
+        <span class="story-details__meta-label">Recompensa</span>
+        <span>{{ details.xp }} XP</span>
+      </div>
+      <div>
+        <span class="story-details__meta-label">Feature</span>
+        <span>{{ details.featureName }}</span>
+      </div>
+      <div *ngIf="details.dueLabel as due">
+        <span class="story-details__meta-label">Entrega</span>
+        <span>{{ due }}</span>
+      </div>
+      <div *ngIf="details.sprintLabel as sprint">
+        <span class="story-details__meta-label">Sprint</span>
+        <span>{{ sprint }}</span>
+      </div>
+    </section>
+
+    <section class="story-details__labels" *ngIf="details.labels.length > 0" aria-label="Etiquetas">
+      <h2>Etiquetas</h2>
+      <ul>
+        <li *ngFor="let label of details.labels">{{ label }}</li>
+      </ul>
+    </section>
+
+    <section class="story-details__tasks" aria-label="Tarefas associadas">
+      <header class="story-details__tasks-header">
+        <h2>Tarefas</h2>
+        <p>{{ details.checklistProgressLabel }}</p>
+      </header>
+      <div
+        class="story-details__tasks-progress"
+        role="img"
+        [attr.aria-label]="'Progresso de checklist ' + details.checklistProgressLabel"
+      >
+        <span class="story-details__tasks-progress-fill" [style.width.%]="details.completionPercent"></span>
+      </div>
+      <ul>
+        <li
+          *ngFor="let task of details.tasks; trackBy: trackTask"
+          class="story-details__task"
+          [class.is-done]="task.isDone"
+        >
+          <span class="story-details__task-indicator" aria-hidden="true"></span>
+          <span class="story-details__task-title">{{ task.title }}</span>
+          <span class="visually-hidden">{{ task.isDone ? 'Concluída' : 'Pendente' }}</span>
+        </li>
+      </ul>
+    </section>
+  </article>
+</section>
+
+<ng-template #notFound>
+  <section class="story-details story-details--empty" aria-labelledby="story-details-missing">
+    <h1 id="story-details-missing">História não encontrada</h1>
+    <p>Não encontramos a missão selecionada. Ela pode ter sido arquivada ou removida do quadro.</p>
+    <a routerLink="/" class="story-details__back">
+      <span class="material-symbols-rounded" aria-hidden="true">arrow_back</span>
+      Voltar para o quadro
+    </a>
+  </section>
+</ng-template>

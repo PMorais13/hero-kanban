@@ -3,6 +3,7 @@ import { NgFor, NgIf } from '@angular/common';
 import type { BoardCardViewModel } from '../../state/board.models';
 import { BoardDragState } from '../../state/board-drag-state.service';
 import { STORY_ID_MIME_TYPE, STORY_STATUS_MIME_TYPE } from '../board-dnd.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'kanban-board-card',
@@ -17,6 +18,7 @@ export class BoardCardComponent {
   protected readonly isDragging = signal(false);
 
   private readonly dragState = inject(BoardDragState);
+  private readonly router = inject(Router);
 
   protected onDragStart(event: DragEvent): void {
     const card = this.card();
@@ -35,5 +37,17 @@ export class BoardCardComponent {
   protected onDragEnd(): void {
     this.dragState.endDrag();
     this.isDragging.set(false);
+  }
+
+  protected openDetails(): void {
+    const card = this.card();
+    void this.router.navigate(['/historia', card.id]);
+  }
+
+  protected handleKeydown(event: KeyboardEvent): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.openDetails();
+    }
   }
 }

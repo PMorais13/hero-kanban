@@ -5,10 +5,16 @@
         <h1 id="board-heading">Missões em andamento</h1>
         <p>Visual moderno, métricas avançadas e recompensas compartilhadas para manter o squad engajado.</p>
       </div>
-      <button type="button" class="board__new-story" (click)="openCreateStory()">
-        <span class="board__new-story-icon" aria-hidden="true">add_circle</span>
-        Nova história
-      </button>
+      <div class="board__actions" role="group" aria-label="Ações rápidas do quadro">
+        <button type="button" class="board__new-story" (click)="openCreateStory()">
+          <span class="board__new-story-icon" aria-hidden="true">add_circle</span>
+          Nova história
+        </button>
+        <button type="button" class="board__new-task">
+          <span class="board__new-task-icon" aria-hidden="true">playlist_add</span>
+          Nova tarefa
+        </button>
+      </div>
     </div>
     <div class="board__progress" role="status" aria-live="polite">
       <div class="board__level">Guilda nível {{ summary().level }}</div>

@@ -158,3 +158,35 @@ export interface SprintOverviewViewModel {
   readonly focus: string;
   readonly stories: readonly SprintStoryViewModel[];
 }
+
+export interface StoryDetailsTaskViewModel {
+  readonly id: string;
+  readonly title: string;
+  readonly isDone: boolean;
+}
+
+export interface StoryDetailsViewModel {
+  readonly id: string;
+  readonly title: string;
+  readonly featureName: string;
+  readonly featureTheme: string;
+  readonly featureMission: string;
+  readonly statusLabel: string;
+  readonly statusDescription: string;
+  readonly statusColor: string;
+  readonly statusIcon: string;
+  readonly priorityLabel: string;
+  readonly priorityColor: string;
+  readonly assignee: string;
+  readonly avatarInitials: string;
+  readonly estimateLabel: string;
+  readonly xp: number;
+  readonly labels: readonly string[];
+  readonly dueLabel?: string;
+  readonly sprintLabel?: string;
+  readonly tasks: readonly StoryDetailsTaskViewModel[];
+  readonly completedTasks: number;
+  readonly totalTasks: number;
+  readonly checklistProgressLabel: string;
+  readonly completionPercent: number;
+}

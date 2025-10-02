@@ -9,12 +9,20 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: grab;
   user-select: none;
+  outline: none;
 }
 
 .card:hover,
-.card:focus-within {
+.card:focus-within,
+.card:focus-visible {
   transform: translateY(-3px);
   box-shadow: 0 18px 40px -12px rgba(14, 11, 36, 0.8);
+}
+
+.card:focus-visible {
+  box-shadow:
+    0 18px 40px -12px rgba(14, 11, 36, 0.8),
+    0 0 0 3px rgba(99, 102, 241, 0.6);
 }
 
 .card--dragging {
