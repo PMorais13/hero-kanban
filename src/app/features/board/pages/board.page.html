@@ -3,7 +3,7 @@
     <mat-card class="board__summary">
       <mat-card-header>
         <div mat-card-avatar class="board__summary-avatar">
-          <mat-icon>view_kanban</mat-icon>
+          <mat-icon fontSet="material-symbols-rounded">view_kanban</mat-icon>
         </div>
         <mat-card-title id="board-heading">Missões em andamento</mat-card-title>
         <mat-card-subtitle>
@@ -15,11 +15,11 @@
         <div class="board__summary-grid">
           <div class="board__actions" role="group" aria-label="Ações rápidas do quadro">
             <button type="button" mat-flat-button color="primary" (click)="openCreateStory()">
-              <mat-icon>add_circle</mat-icon>
+              <mat-icon fontSet="material-symbols-rounded">add_circle</mat-icon>
               Nova história
             </button>
             <button type="button" mat-stroked-button color="accent">
-              <mat-icon>playlist_add</mat-icon>
+              <mat-icon fontSet="material-symbols-rounded">playlist_add</mat-icon>
               Nova tarefa
             </button>
           </div>
@@ -27,7 +27,7 @@
           <div class="board__progress" role="status" aria-live="polite">
             <mat-chip-set class="board__level-chip">
               <mat-chip color="primary" selected>
-                <mat-icon matChipAvatar>workspace_premium</mat-icon>
+                <mat-icon matChipAvatar fontSet="material-symbols-rounded">workspace_premium</mat-icon>
                 Guilda nível {{ summary().level }}
               </mat-chip>
             </mat-chip-set>
@@ -42,15 +42,15 @@
           <div class="board__stats">
             <mat-chip-set>
               <mat-chip variant="outlined">
-                <mat-icon matChipAvatar>task_alt</mat-icon>
+                <mat-icon matChipAvatar fontSet="material-symbols-rounded">task_alt</mat-icon>
                 Histórias concluídas: {{ summary().completedStories }}
               </mat-chip>
               <mat-chip variant="outlined">
-                <mat-icon matChipAvatar>hub</mat-icon>
+                <mat-icon matChipAvatar fontSet="material-symbols-rounded">hub</mat-icon>
                 Features ativas: {{ summary().activeFeatures }}
               </mat-chip>
               <mat-chip variant="outlined">
-                <mat-icon matChipAvatar>monitoring</mat-icon>
+                <mat-icon matChipAvatar fontSet="material-symbols-rounded">monitoring</mat-icon>
                 Throughput semanal: {{ summary().weeklyThroughput }}
               </mat-chip>
             </mat-chip-set>
@@ -68,7 +68,7 @@
         <div class="board__missions-list">
           <article class="mission" *ngFor="let mission of summary().missions">
             <div class="mission__info">
-              <mat-icon aria-hidden="true">auto_awesome</mat-icon>
+              <mat-icon aria-hidden="true" fontSet="material-symbols-rounded">auto_awesome</mat-icon>
               <div>
                 <p class="mission__title">{{ mission.title }}</p>
                 <p class="mission__target">{{ mission.target }}</p>
