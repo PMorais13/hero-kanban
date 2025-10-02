@@ -1,8 +1,17 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
 .board {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   color: var(--hk-text-primary);
+  flex: 1;
+  min-height: 0;
 }
 
 .board__header {
@@ -14,6 +23,7 @@
   padding: clamp(1.25rem, 3vw, 2rem);
   border-radius: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(15, 12, 41, 0.4);
+  flex: 0 0 auto;
 }
 
 .board__intro > h1 {
@@ -159,10 +169,12 @@
   gap: 1.25rem;
   align-items: stretch;
   overflow-x: auto;
+  overflow-y: auto;
   padding-bottom: 0.75rem;
   padding-right: 0.5rem;
   scroll-snap-type: x proximity;
-  min-height: 60vh;
+  flex: 1;
+  min-height: 0;
 }
 
 .board__columns > kanban-board-column {
