@@ -303,6 +303,7 @@ export class BoardState {
   ]);
 
   readonly features = this._features.asReadonly();
+  readonly stories = this._stories.asReadonly();
 
   readonly columns = computed<readonly BoardColumnViewModel[]>(() => {
     const activeStatuses = [...this.boardConfig.statuses()].filter((status) => status.isActive);
