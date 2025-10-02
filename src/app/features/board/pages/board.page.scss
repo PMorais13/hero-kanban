@@ -10,6 +10,18 @@
   color: var(--hk-text-primary);
 }
 
+.board__overview {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+@media (min-width: 1120px) {
+  .board__overview {
+    grid-template-columns: minmax(0, 2.15fr) minmax(0, 1.35fr);
+    align-items: stretch;
+  }
+}
+
 .board__summary {
   background: rgba(20, 22, 42, 0.82);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -118,6 +130,13 @@
   gap: 0.45rem;
 }
 
+
+.board__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding-inline: clamp(0.5rem, 4vw, 2.25rem);
+}
+
 .board__filters {
   display: flex;
   flex-direction: column;
@@ -136,6 +155,8 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 1.25rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .board__missions :is(.mat-mdc-card-header, .mat-mdc-card-content) {
@@ -149,6 +170,11 @@
 
 .board__missions .mat-mdc-card-content {
   padding-bottom: clamp(1.25rem, 4vw, 2.25rem);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.board__missions-list {
   display: grid;
   gap: 0.5rem;
 }
