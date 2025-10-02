@@ -1,0 +1,148 @@
+<section class="create-story-modal" (keydown.escape)="onCancel()">
+  <div class="create-story-modal__backdrop" (click)="onCancel()" aria-hidden="true"></div>
+  <div
+    class="create-story-modal__panel"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="create-story-title"
+  >
+    <form class="create-story-modal__form" (ngSubmit)="onSubmit()" novalidate>
+      <header class="create-story-modal__header">
+        <div>
+          <h2 id="create-story-title">Cadastrar nova história</h2>
+          <p>
+            Conecte uma missão a atividades detalhadas, defina prioridade e acompanhe o progresso da guilda.
+          </p>
+        </div>
+        <button type="button" class="create-story-modal__close" (click)="onCancel()" aria-label="Fechar modal">
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        </button>
+      </header>
+
+      <div class="create-story-modal__grid">
+        <label class="create-story-modal__field">
+          <span>Título da história</span>
+          <input type="text" formControlName="title" placeholder="Ex.: Portal de crafting cooperativo" />
+          <small *ngIf="form.controls.title.invalid && form.controls.title.touched">
+            Informe um título com pelo menos 3 caracteres.
+          </small>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Feature relacionada</span>
+          <select formControlName="featureId">
+            <option value="" disabled>Selecione uma feature</option>
+            <option *ngFor="let feature of features()" [value]="feature.id">{{ feature.title }}</option>
+          </select>
+          <small *ngIf="form.controls.featureId.invalid && form.controls.featureId.touched">
+            Escolha a feature que receberá a nova história.
+          </small>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Etapa do fluxo</span>
+          <select formControlName="statusId">
+            <option value="" disabled>Selecione a etapa</option>
+            <option
+              *ngFor="let option of statusOptions()"
+              [value]="option.status.id"
+              [disabled]="option.isAtLimit"
+            >
+              {{ option.status.name }} · {{ option.wipCount }} / {{ option.wipLimit ?? '∞' }} WIP
+            </option>
+          </select>
+          <small *ngIf="statusAtCapacity()">A etapa selecionada está no limite de WIP.</small>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Prioridade</span>
+          <select formControlName="priority">
+            <option *ngFor="let option of priorityOptions" [value]="option.value">{{ option.label }}</option>
+          </select>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Estimativa (story points)</span>
+          <input type="number" min="1" formControlName="estimate" />
+          <small *ngIf="form.controls.estimate.invalid && form.controls.estimate.touched">
+            Utilize um valor maior ou igual a 1.
+          </small>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Responsável</span>
+          <input type="text" formControlName="assignee" placeholder="Ex.: Joana Silva" />
+          <small *ngIf="form.controls.assignee.invalid && form.controls.assignee.touched">
+            Informe quem liderará a missão.
+          </small>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Etiquetas</span>
+          <input type="text" formControlName="labels" placeholder="Ex.: Backend, Integrations" />
+          <small>Separe etiquetas com vírgula.</small>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Recompensa de XP</span>
+          <input type="number" min="1" formControlName="xp" />
+          <small *ngIf="form.controls.xp.invalid && form.controls.xp.touched">
+            Utilize um valor maior ou igual a 1 XP.
+          </small>
+        </label>
+
+        <label class="create-story-modal__field">
+          <span>Data alvo</span>
+          <input type="date" formControlName="dueDate" />
+        </label>
+      </div>
+
+      <section class="create-story-modal__tasks" aria-labelledby="tasks-heading">
+        <header>
+          <h3 id="tasks-heading">Atividades da guilda</h3>
+          <p>Detalhe as subtarefas que desbloqueiam XP. Marque as que já estão concluídas.</p>
+        </header>
+
+        <div class="create-story-modal__tasks-list" formArrayName="tasks">
+          <article
+            class="create-story-modal__task"
+            *ngFor="let taskGroup of taskArray.controls; let index = index; trackBy: trackTask"
+            [formGroupName]="index"
+          >
+            <label>
+              <span>Descrição da tarefa</span>
+              <input type="text" formControlName="title" placeholder="Ex.: Configurar telemetria de XP" />
+            </label>
+            <div class="create-story-modal__task-actions">
+              <label class="create-story-modal__checkbox">
+                <input type="checkbox" formControlName="isDone" />
+                <span>Concluída</span>
+              </label>
+              <button type="button" (click)="removeTask(index)" aria-label="Remover tarefa">
+                <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+              </button>
+            </div>
+            <small *ngIf="taskGroup.controls.title.invalid && taskGroup.controls.title.touched">
+              Descreva a atividade com pelo menos 3 caracteres.
+            </small>
+          </article>
+          <p *ngIf="taskArray.length === 0" class="create-story-modal__tasks-empty">
+            Nenhuma atividade adicionada ainda. Inclua tarefas para orientar o squad.
+          </p>
+        </div>
+
+        <button type="button" class="create-story-modal__add-task" (click)="addTask()">
+          <span class="material-symbols-rounded" aria-hidden="true">add</span>
+          Adicionar tarefa
+        </button>
+      </section>
+
+      <footer class="create-story-modal__footer">
+        <button type="button" class="create-story-modal__secondary" (click)="onCancel()">Cancelar</button>
+        <button type="submit" class="create-story-modal__primary" [disabled]="form.invalid || statusAtCapacity()">
+          Salvar história
+        </button>
+      </footer>
+    </form>
+  </div>
+</section>

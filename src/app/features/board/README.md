@@ -20,6 +20,11 @@ Rotas lazy-loaded já expõem a `BoardPage`. Componentes podem ser reutilizados 
 ## Dependências externas
 - Nenhuma dependência adicional além do Angular padrão. Fontes Google (Inter e Material Symbols) são carregadas no `index.html` para reforçar a estética gamificada.
 
+## Cadastro de histórias
+- O botão **Nova história** abre o modal standalone `CreateStoryModalComponent`, reunindo dados da missão (título, feature, status, prioridade, responsável, XP e etiquetas) no mesmo visual neon futurista do quadro.
+- As tarefas inseridas no modal tornam-se `StoryTask` tipadas no `BoardState`, alimentando automaticamente o checklist exibido em cada `BoardCard`.
+- O estado valida limites de WIP antes de persistir a nova história; etapas saturadas aparecem desabilitadas no seletor do modal.
+
 ## Checklist de manutenção
 - [ ] Atualizar mocks em `BoardState` ao integrar API real.
 - [ ] Revisar acessibilidade (aria-grabbed, mensagens) quando ampliar a interação de drag-and-drop.
