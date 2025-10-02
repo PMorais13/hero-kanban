@@ -1,0 +1,56 @@
+<section class="board-customizer" aria-labelledby="board-customizer-heading">
+  <header class="board-customizer__header">
+    <div>
+      <h1 id="board-customizer-heading">Personalizar quadro</h1>
+      <p>Ative, reorganize e crie novas etapas para ajustar o fluxo às missões da guilda.</p>
+    </div>
+  </header>
+
+  <section class="board-customizer__statuses" aria-labelledby="status-list-heading">
+    <header>
+      <h2 id="status-list-heading">Etapas disponíveis</h2>
+      <p>Ative apenas os estágios relevantes para o ciclo atual.</p>
+    </header>
+    <ul>
+      <li *ngFor="let status of statuses(); trackBy: trackStatus">
+        <label class="status-toggle">
+          <input
+            type="checkbox"
+            [checked]="status.isActive"
+            (change)="onStatusToggle(status.id, $event)"
+            [attr.aria-label]="'Alternar etapa ' + status.label"
+          />
+          <span class="status-toggle__body">
+            <span class="status-toggle__label">{{ status.label }}</span>
+            <span class="status-toggle__description">{{ status.description }}</span>
+          </span>
+        </label>
+      </li>
+    </ul>
+  </section>
+
+  <section class="board-customizer__create" aria-labelledby="status-create-heading">
+    <header>
+      <h2 id="status-create-heading">Criar nova etapa</h2>
+      <p>Use nomes únicos com pelo menos três caracteres para manter o fluxo organizado.</p>
+    </header>
+    <form (submit)="onStatusFormSubmit($event)" aria-label="Criar nova etapa do quadro">
+      <label class="status-form__label" for="new-status">Nome da etapa</label>
+      <div class="status-form__controls">
+        <input
+          id="new-status"
+          type="text"
+          name="new-status"
+          placeholder="Ex.: Em validação"
+          autocomplete="off"
+          [value]="newStatusName()"
+          (input)="onStatusNameInput($event)"
+        />
+        <button type="submit" [disabled]="!canCreateStatus()">Adicionar</button>
+      </div>
+      <p class="status-form__hint" *ngIf="!canCreateStatus()">
+        Informe um nome exclusivo com pelo menos 3 caracteres.
+      </p>
+    </form>
+  </section>
+</section>

@@ -1,4 +1,19 @@
 <header class="shell-header" role="banner">
+  <button
+    type="button"
+    class="menu-toggle"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="isMenuOpen()"
+    aria-controls="shell-menu"
+    aria-label="Abrir menu do jogador"
+  >
+    <span class="visually-hidden">Abrir menu do jogador</span>
+    <span class="menu-toggle__icon" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </button>
   <div class="shell-header__brand">
     <span class="shell-header__logo" aria-hidden="true">HK</span>
     <div class="shell-header__titles">
@@ -8,11 +23,49 @@
       <p>Fluxo de trabalho épico com objetivos compartilhados.</p>
     </div>
   </div>
-  <nav class="shell-header__nav" aria-label="Menu principal">
-    <a routerLink="/" routerLinkActive="is-active" aria-current="page">Quadro</a>
-    <span class="shell-header__badge" aria-label="Nível da guilda">Lvl 5</span>
-  </nav>
+  <span class="shell-header__badge" aria-label="Nível atual da guilda">Lvl {{ experience().level }}</span>
 </header>
-<main class="shell-main" role="main">
-  <router-outlet></router-outlet>
-</main>
+<div class="shell-body">
+  <aside
+    id="shell-menu"
+    class="shell-menu"
+    role="complementary"
+    aria-label="Menu lateral do jogador"
+    [class.is-open]="isMenuOpen()"
+    [attr.aria-hidden]="!isMenuOpen()"
+    (keydown)="handleMenuKeydown($event)"
+  >
+    <header class="shell-menu__header">
+      <h2>Central do herói</h2>
+      <button type="button" class="menu-close" (click)="closeMenu()" aria-label="Fechar menu lateral">
+        <span aria-hidden="true">×</span>
+      </button>
+    </header>
+
+    <nav class="shell-menu__nav" aria-label="Navegação principal">
+      <h3>Navegação</h3>
+      <ul>
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="closeMenu()"
+            >Quadro</a>
+        </li>
+        <li>
+          <a routerLink="/perfil" routerLinkActive="is-active" (click)="closeMenu()">Perfil</a>
+        </li>
+        <li>
+          <a routerLink="/quadro/personalizar" routerLinkActive="is-active" (click)="closeMenu()">
+            Editar quadro
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="shell-overlay" *ngIf="isMenuOpen()" (click)="closeMenu()" aria-hidden="true"></div>
+  <main class="shell-main" role="main">
+    <router-outlet></router-outlet>
+  </main>
+</div>

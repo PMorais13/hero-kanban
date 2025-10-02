@@ -1,0 +1,57 @@
+<section class="profile" aria-labelledby="profile-heading">
+  <header class="profile__header">
+    <div>
+      <h1 id="profile-heading">Perfil do herói</h1>
+      <p>Consulte o progresso, conquistas e recompensas desbloqueadas pela guilda.</p>
+    </div>
+    <span class="profile__level" aria-label="Nível atual">Lvl {{ experience().level }}</span>
+  </header>
+
+  <section class="profile__xp" aria-labelledby="xp-heading">
+    <h2 id="xp-heading">Experiência acumulada</h2>
+    <p>
+      <strong>{{ experience().current | number: '1.0-0' }}</strong>
+      de {{ experience().nextLevel | number: '1.0-0' }} XP para o próximo nível.
+    </p>
+    <div class="profile__xp-progress" role="img" [attr.aria-label]="'Progresso de experiência em ' + experienceProgress() + '%'">
+      <div class="profile__xp-bar" [style.width.%]="experienceProgress()"></div>
+    </div>
+  </section>
+
+  <section class="profile__achievements" aria-labelledby="achievements-heading">
+    <header>
+      <h2 id="achievements-heading">Conquistas desbloqueadas</h2>
+      <p>Meta conquistas colaborativas para liberar novos cosméticos e títulos.</p>
+    </header>
+    <ul>
+      <li *ngFor="let achievement of achievements(); trackBy: trackAchievement">
+        <article class="achievement-card" [attr.aria-label]="'Conquista ' + achievement.title">
+          <header>
+            <span class="achievement-card__icon" aria-hidden="true">★</span>
+            <div>
+              <p class="achievement-card__title">{{ achievement.title }}</p>
+              <p class="achievement-card__description">{{ achievement.description }}</p>
+            </div>
+          </header>
+          <div class="achievement-card__progress" role="img" [attr.aria-label]="'Progresso ' + achievement.progress + '%'">
+            <div class="achievement-card__progress-bar" [style.width.%]="achievement.progress"></div>
+          </div>
+          <span class="achievement-card__value">{{ achievement.progress }}%</span>
+        </article>
+      </li>
+    </ul>
+  </section>
+
+  <section class="profile__loot" aria-labelledby="loot-heading">
+    <header>
+      <h2 id="loot-heading">Inventário de loots</h2>
+      <p>Itens raros conquistados em desafios recentes da guilda.</p>
+    </header>
+    <ul>
+      <li *ngFor="let item of loot(); trackBy: trackLoot" [attr.data-rarity]="item.rarity">
+        <span class="loot-card__name">{{ item.name }}</span>
+        <span class="loot-card__quantity">×{{ item.quantity }}</span>
+      </li>
+    </ul>
+  </section>
+</section>
