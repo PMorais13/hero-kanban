@@ -128,6 +128,20 @@
   max-width: 65ch;
 }
 
+.story-details__definition {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: var(--hk-text-secondary);
+  line-height: 1.6;
+}
+
+.story-details__definition > strong {
+  color: var(--hk-text-primary);
+}
+
 .story-details__meta {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));

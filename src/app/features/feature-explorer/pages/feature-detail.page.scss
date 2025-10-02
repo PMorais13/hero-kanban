@@ -149,9 +149,28 @@
 }
 
 .story-card__header {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.story-card__type {
+  justify-self: flex-start;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.2);
+  border: 1px solid rgba(99, 102, 241, 0.45);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--hk-text-primary);
+}
+
+.story-card__badge-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .story-card__status {

@@ -5,6 +5,10 @@
       <p>
         Conheça as missões épicas em andamento. Cada feature reúne histórias que impulsionam a jornada da guilda.
       </p>
+      <p class="catalog__definition" role="note">
+        <strong>Feature</strong> é uma iniciativa épica que orienta a estratégia do produto e agrupa histórias relacionadas.
+        Cada história detalha uma entrega de valor que, quando concluída, avança a guilda rumo ao objetivo da feature.
+      </p>
     </div>
     <button type="button" mat-flat-button color="primary" class="catalog__cta" (click)="openCreateFeatureDialog()">
       <mat-icon fontSet="material-symbols-rounded">add</mat-icon>
@@ -20,6 +24,7 @@
         class="feature-card"
       >
         <header class="feature-card__header">
+          <span class="feature-card__type" aria-label="Tipo de item">Feature</span>
           <h2>{{ feature.title }}</h2>
           <p class="feature-card__theme">{{ feature.theme }}</p>
         </header>

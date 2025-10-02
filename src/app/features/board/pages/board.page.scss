@@ -15,6 +15,20 @@
   gap: clamp(1.25rem, 3vw, 2rem);
 }
 
+.board__definition {
+  margin: 0;
+  padding: 0.9rem 1.25rem;
+  border-radius: 1rem;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.32);
+  color: var(--hk-text-secondary);
+  line-height: 1.6;
+}
+
+.board__definition > strong {
+  color: var(--hk-text-primary);
+}
+
 @media (min-width: 1120px) {
   .board__overview {
     grid-template-columns: minmax(0, 2.15fr) minmax(0, 1.35fr);

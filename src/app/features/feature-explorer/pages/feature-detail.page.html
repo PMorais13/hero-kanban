@@ -44,8 +44,11 @@
             class="story-card"
           >
             <header class="story-card__header">
-              <span class="story-card__status" [style.backgroundColor]="story.statusColor">{{ story.statusLabel }}</span>
-              <span class="story-card__priority" [style.color]="story.priorityColor">{{ story.priorityLabel }}</span>
+              <span class="story-card__type" aria-label="Tipo de item">História</span>
+              <div class="story-card__badge-row">
+                <span class="story-card__status" [style.backgroundColor]="story.statusColor">{{ story.statusLabel }}</span>
+                <span class="story-card__priority" [style.color]="story.priorityColor">{{ story.priorityLabel }}</span>
+              </div>
             </header>
 
             <h3 class="story-card__title">{{ story.title }}</h3>
