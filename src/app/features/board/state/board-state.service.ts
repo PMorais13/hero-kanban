@@ -286,10 +286,26 @@ export class BoardState {
   });
 
   moveStory(storyId: string, nextStatusId: string): boolean {
-    const statusesById = new Map(this._statuses().map((status) => [status.id, status] as const));
+    if (!this.isMoveAllowed(storyId, nextStatusId)) {
+      return false;
+    }
+
+    this._stories.update((stories) =>
+      stories.map((item) => (item.id === storyId ? { ...item, statusId: nextStatusId } : item)),
+    );
+
+    return true;
+  }
+
+  canMoveStory(storyId: string, nextStatusId: string): boolean {
+    return this.isMoveAllowed(storyId, nextStatusId);
+  }
+
+  private isMoveAllowed(storyId: string, nextStatusId: string): boolean {
+    const statusesById = this.getStatusesById();
     const story = this._stories().find((item) => item.id === storyId);
     const nextStatus = statusesById.get(nextStatusId);
-    if (!story || !nextStatus) {
+    if (!story || !nextStatus || story.statusId === nextStatusId) {
       return false;
     }
 
@@ -305,11 +321,11 @@ export class BoardState {
       return false;
     }
 
-    this._stories.update((stories) =>
-      stories.map((item) => (item.id === storyId ? { ...item, statusId: nextStatusId } : item)),
-    );
-
     return true;
+  }
+
+  private getStatusesById(): Map<string, BoardStatus> {
+    return new Map(this._statuses().map((status) => [status.id, status] as const));
   }
 
   private toCardViewModel(story: Story): BoardCardViewModel {

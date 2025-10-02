@@ -155,8 +155,16 @@
 }
 
 .board__columns {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  align-items: start;
+  display: flex;
+  gap: 1.25rem;
+  align-items: stretch;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  padding-right: 0.5rem;
+  scroll-snap-type: x proximity;
+  min-height: 60vh;
+}
+
+.board__columns > kanban-board-column {
+  scroll-snap-align: start;
 }

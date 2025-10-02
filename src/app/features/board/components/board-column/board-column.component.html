@@ -1,4 +1,13 @@
-<article class="column" [attr.data-status]="column().status.id">
+<article
+  class="column"
+  [class.column--active-drop]="isDragOver()"
+  [class.column--invalid]="isDropRejected()"
+  [attr.data-status]="column().status.id"
+  (dragenter)="onDragEnter($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
   <header class="column__header">
     <div class="column__identity">
       <span class="column__icon" [style.background]="column().status.color" aria-hidden="true">

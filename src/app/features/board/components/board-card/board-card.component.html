@@ -1,4 +1,12 @@
-<article class="card" [attr.data-priority]="card().priorityLabel">
+<article
+  class="card"
+  [class.card--dragging]="isDragging()"
+  [attr.data-priority]="card().priorityLabel"
+  [attr.aria-grabbed]="isDragging()"
+  draggable="true"
+  (dragstart)="onDragStart($event)"
+  (dragend)="onDragEnd()"
+>
   <header class="card__header">
     <span class="card__priority" [style.background]="card().priorityColor">{{ card().priorityLabel }}</span>
     <span class="card__xp" aria-label="Recompensa de experiência">{{ card().xp }} XP</span>

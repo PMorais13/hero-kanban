@@ -6,7 +6,8 @@ Fornecer um quadro Kanban gamificado que represente a hierarquia Feature → His
 ## Decisões técnicas
 - **Signals** em `BoardState` para manter estado reativo com baixo acoplamento.
 - **ViewModels tipados** (`BoardColumnViewModel`, `BoardCardViewModel`) garantem que a UI receba dados prontos para renderização.
-- **Componentes standalone** desacoplados (`BoardColumn`, `BoardCard`) facilitam testes e futuras integrações com drag-and-drop.
+- **Componentes standalone** desacoplados (`BoardColumn`, `BoardCard`) facilitam testes e composição de UI.
+- **Drag-and-drop nativo** com HTML5 + `BoardDragState` garante movimentação entre colunas respeitando limites de WIP e workflow configurado.
 - **Transições validadas** no serviço (`moveStory`) respeitam workflow configurável e limites de WIP.
 
 ## Uso
@@ -20,6 +21,6 @@ Rotas lazy-loaded já expõem a `BoardPage`. Componentes podem ser reutilizados 
 
 ## Checklist de manutenção
 - [ ] Atualizar mocks em `BoardState` ao integrar API real.
-- [ ] Garantir acessibilidade (aria-labels e feedback textual) quando adicionar drag-and-drop.
+- [ ] Revisar acessibilidade (aria-grabbed, mensagens) quando ampliar a interação de drag-and-drop.
 - [ ] Ajustar tokens de cores globais em `styles.scss` ao introduzir temas.
 - [ ] Cobrir novas regras de transição com testes em `board-state.service.spec.ts`.

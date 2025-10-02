@@ -28,4 +28,12 @@ describe('BoardState', () => {
     const blockedMove = service.moveStory('story-onboarding', 'release');
     expect(blockedMove).toBeFalse();
   });
+
+  it('should expose canMoveStory with the same rules applied on move', () => {
+    expect(service.canMoveStory('story-team-buffs', 'ready')).toBeTrue();
+    expect(service.canMoveStory('story-team-buffs', 'done')).toBeFalse();
+
+    service.moveStory('story-mission-engine', 'release');
+    expect(service.canMoveStory('story-onboarding', 'release')).toBeFalse();
+  });
 });
