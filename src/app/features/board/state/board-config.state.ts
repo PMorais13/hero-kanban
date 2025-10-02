@@ -1,11 +1,13 @@
 import { computed, Injectable, signal } from '@angular/core';
 import type { BoardStatus } from './board.models';
 
-type BoardStatusToggleOption = Readonly<{
+type BoardStatusEditorOption = Readonly<{
   id: string;
-  label: string;
+  name: string;
   description: string;
+  icon: string;
   isActive: boolean;
+  order: number;
 }>;
 
 @Injectable({ providedIn: 'root' })
@@ -118,13 +120,17 @@ export class BoardConfigState {
   private readonly _newStatusName = signal('');
 
   readonly statuses = this._statuses.asReadonly();
-  readonly statusOptions = computed<readonly BoardStatusToggleOption[]>(() =>
-    this._statuses().map((status): BoardStatusToggleOption => ({
-      id: status.id,
-      label: status.name,
-      description: status.description,
-      isActive: status.isActive,
-    })),
+  readonly statusOptions = computed<readonly BoardStatusEditorOption[]>(() =>
+    [...this._statuses()]
+      .sort((a, b) => a.order - b.order)
+      .map((status): BoardStatusEditorOption => ({
+        id: status.id,
+        name: status.name,
+        description: status.description,
+        icon: status.icon,
+        isActive: status.isActive,
+        order: status.order,
+      })),
   );
   readonly newStatusName = this._newStatusName.asReadonly();
 
@@ -158,7 +164,7 @@ export class BoardConfigState {
     const name = this._newStatusName().trim();
     const baseId = this.buildStatusId(name);
     const uniqueId = this.resolveUniqueStatusId(baseId);
-    const label = this.capitalize(name);
+    const label = this.normalizeTitle(name);
 
     this._statuses.update((statuses) => {
       const nextOrder = statuses.reduce((highest, status) => Math.max(highest, status.order), 0) + 1;
@@ -176,7 +182,7 @@ export class BoardConfigState {
         {
           id: uniqueId,
           name: label,
-          shortLabel: label.slice(0, 10),
+          shortLabel: this.buildShortLabel(label),
           description: `Missões na etapa ${name.toLowerCase()}.`,
           category: 'in_progress',
           color: '#0ea5e9',
@@ -202,6 +208,78 @@ export class BoardConfigState {
           : status,
       ),
     );
+  }
+
+  updateStatusName(statusId: string, name: string): void {
+    const normalized = this.normalizeTitle(name);
+
+    this._statuses.update((statuses) =>
+      statuses.map((status) =>
+        status.id === statusId
+          ? {
+              ...status,
+              name: normalized,
+              shortLabel: this.buildShortLabel(normalized),
+            }
+          : status,
+      ),
+    );
+  }
+
+  updateStatusDescription(statusId: string, description: string): void {
+    const sanitized = description.replace(/\s+/g, ' ').trimStart();
+
+    this._statuses.update((statuses) =>
+      statuses.map((status) =>
+        status.id === statusId
+          ? {
+              ...status,
+              description: sanitized.trimEnd(),
+            }
+          : status,
+      ),
+    );
+  }
+
+  updateStatusIcon(statusId: string, icon: string): void {
+    const sanitized = icon.trim();
+    const nextIcon = sanitized.length > 0 ? sanitized : 'flag';
+
+    this._statuses.update((statuses) =>
+      statuses.map((status) =>
+        status.id === statusId
+          ? {
+              ...status,
+              icon: nextIcon,
+            }
+          : status,
+      ),
+    );
+  }
+
+  moveStatus(statusId: string, direction: 'up' | 'down'): void {
+    this._statuses.update((statuses) => {
+      const sorted = [...statuses].sort((a, b) => a.order - b.order);
+      const currentIndex = sorted.findIndex((status) => status.id === statusId);
+
+      if (currentIndex === -1) {
+        return statuses;
+      }
+
+      const targetIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+
+      if (targetIndex < 0 || targetIndex >= sorted.length) {
+        return statuses;
+      }
+
+      const [moved] = sorted.splice(currentIndex, 1);
+      sorted.splice(targetIndex, 0, moved);
+
+      return sorted.map((status, index) => ({
+        ...status,
+        order: index,
+      }));
+    });
   }
 
   private buildStatusId(rawName: string): string {
@@ -233,14 +311,22 @@ export class BoardConfigState {
     return candidate;
   }
 
-  private capitalize(value: string): string {
-    const trimmed = value.trim();
+  private normalizeTitle(value: string): string {
+    const trimmed = value.replace(/\s+/g, ' ').trim();
 
     if (trimmed.length === 0) {
       return '';
     }
 
     return trimmed[0].toUpperCase() + trimmed.slice(1);
+  }
+
+  private buildShortLabel(value: string): string {
+    if (value.length <= 12) {
+      return value;
+    }
+
+    return `${value.slice(0, 11)}…`;
   }
 
   private appendTransition(
@@ -255,4 +341,4 @@ export class BoardConfigState {
   }
 }
 
-export type { BoardStatusToggleOption };
+export type { BoardStatusEditorOption };

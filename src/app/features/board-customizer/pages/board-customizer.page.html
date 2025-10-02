@@ -9,22 +9,78 @@
   <section class="board-customizer__statuses" aria-labelledby="status-list-heading">
     <header>
       <h2 id="status-list-heading">Etapas disponíveis</h2>
-      <p>Ative apenas os estágios relevantes para o ciclo atual.</p>
+      <p>Personalize a identidade de cada etapa e organize o fluxo de trabalho na ordem ideal.</p>
     </header>
     <ul>
-      <li *ngFor="let status of statuses(); trackBy: trackStatus">
-        <label class="status-toggle">
-          <input
-            type="checkbox"
-            [checked]="status.isActive"
-            (change)="onStatusToggle(status.id, $event)"
-            [attr.aria-label]="'Alternar etapa ' + status.label"
-          />
-          <span class="status-toggle__body">
-            <span class="status-toggle__label">{{ status.label }}</span>
-            <span class="status-toggle__description">{{ status.description }}</span>
-          </span>
-        </label>
+      <li *ngFor="let status of statuses(); let index = index; let isLast = last; trackBy: trackStatus" class="status-card">
+        <header class="status-card__header">
+          <div class="status-card__reorder" aria-label="Ordenar etapa">
+            <button
+              type="button"
+              (click)="onMoveStatus(status.id, 'up')"
+              [disabled]="index === 0"
+              [attr.aria-label]="'Mover ' + status.name + ' para cima'"
+            >
+              <span class="material-symbols-rounded" aria-hidden="true">arrow_upward</span>
+            </button>
+            <button
+              type="button"
+              (click)="onMoveStatus(status.id, 'down')"
+              [disabled]="isLast"
+              [attr.aria-label]="'Mover ' + status.name + ' para baixo'"
+            >
+              <span class="material-symbols-rounded" aria-hidden="true">arrow_downward</span>
+            </button>
+          </div>
+          <div class="status-card__identity">
+            <span class="material-symbols-rounded status-card__icon" aria-hidden="true">{{ status.icon }}</span>
+            <span class="status-card__order">Etapa {{ index + 1 }}</span>
+          </div>
+          <label class="status-card__toggle">
+            <input
+              type="checkbox"
+              [checked]="status.isActive"
+              (change)="onStatusToggle(status.id, $event)"
+              [attr.aria-label]="'Alternar etapa ' + status.name"
+            />
+            <span>Ativa</span>
+          </label>
+        </header>
+        <div class="status-card__form">
+          <label class="status-field">
+            <span class="status-field__label">Título</span>
+            <input
+              type="text"
+              [value]="status.name"
+              (input)="onStatusTitleChange(status.id, $event)"
+              autocomplete="off"
+              placeholder="Nome da etapa"
+            />
+          </label>
+          <label class="status-field">
+            <span class="status-field__label">Subtítulo</span>
+            <textarea
+              rows="2"
+              [value]="status.description"
+              (input)="onStatusSubtitleChange(status.id, $event)"
+              placeholder="Descrição rápida da etapa"
+            ></textarea>
+          </label>
+          <label class="status-field">
+            <span class="status-field__label">Ícone</span>
+            <div class="status-field__icon-select">
+              <span class="material-symbols-rounded" aria-hidden="true">{{ status.icon }}</span>
+              <select [value]="status.icon" (change)="onStatusIconChange(status.id, $event)">
+                <option *ngFor="let option of iconOptions" [value]="option.value">
+                  {{ option.label }}
+                </option>
+                <option *ngIf="!hasIconOption(status.icon)" [value]="status.icon">
+                  {{ status.icon }}
+                </option>
+              </select>
+            </div>
+          </label>
+        </div>
       </li>
     </ul>
   </section>
@@ -44,7 +100,7 @@
           placeholder="Ex.: Em validação"
           autocomplete="off"
           [value]="newStatusName()"
-          (input)="onStatusNameInput($event)"
+          (input)="onNewStatusNameInput($event)"
         />
         <button type="submit" [disabled]="!canCreateStatus()">Adicionar</button>
       </div>
