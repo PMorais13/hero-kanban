@@ -75,6 +75,16 @@
               <span class="material-symbols-rounded" aria-hidden="true">edit</span>
               Editar
             </button>
+
+            <button
+              type="button"
+              class="status-item__delete"
+              (click)="onDeleteStatus(status)"
+              [attr.aria-label]="'Remover etapa ' + status.name"
+            >
+              <span class="material-symbols-rounded" aria-hidden="true">delete</span>
+              Remover
+            </button>
           </div>
         </div>
       </li>
@@ -86,22 +96,63 @@
       <h2 id="status-create-heading">Criar nova etapa</h2>
       <p>Use nomes únicos com pelo menos três caracteres para manter o fluxo organizado.</p>
     </header>
-    <form (submit)="onStatusFormSubmit($event)" aria-label="Criar nova etapa do quadro">
-      <label class="status-form__label" for="new-status">Nome da etapa</label>
-      <div class="status-form__controls">
-        <input
-          id="new-status"
-          type="text"
-          name="new-status"
-          placeholder="Ex.: Em validação"
-          autocomplete="off"
-          [value]="newStatusName()"
-          (input)="onNewStatusNameInput($event)"
-        />
-        <button type="submit" [disabled]="!canCreateStatus()">Adicionar</button>
+    <form class="status-form" (submit)="onStatusFormSubmit($event)" aria-label="Criar nova etapa do quadro">
+      <div class="status-form__grid">
+        <label class="status-form__field" for="new-status-name">
+          <span>Nome da etapa</span>
+          <input
+            id="new-status-name"
+            type="text"
+            name="new-status-name"
+            placeholder="Ex.: Em validação"
+            autocomplete="off"
+            [value]="newStatusDraft().name"
+            (input)="onNewStatusNameInput($event)"
+            required
+            minlength="3"
+          />
+        </label>
+
+        <label class="status-form__field" for="new-status-description">
+          <span>Descrição</span>
+          <textarea
+            id="new-status-description"
+            name="new-status-description"
+            rows="3"
+            placeholder="Contexto exibido no quadro"
+            [value]="newStatusDraft().description"
+            (input)="onNewStatusDescriptionInput($event)"
+            required
+          ></textarea>
+        </label>
+
+        <label class="status-form__field status-form__field--icon" for="new-status-icon">
+          <span>Ícone</span>
+          <div class="status-form__icon-select">
+            <span class="material-symbols-rounded" aria-hidden="true">
+              {{ newStatusDraft().icon || 'flag' }}
+            </span>
+            <select
+              id="new-status-icon"
+              name="new-status-icon"
+              [value]="newStatusDraft().icon"
+              (change)="onNewStatusIconChange($event)"
+              required
+            >
+              <option *ngFor="let option of iconOptions" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+        </label>
       </div>
+
+      <div class="status-form__actions">
+        <button type="submit" [disabled]="!canCreateStatus()">Adicionar etapa</button>
+      </div>
+
       <p class="status-form__hint" *ngIf="!canCreateStatus()">
-        Informe um nome exclusivo com pelo menos 3 caracteres.
+        Informe um nome exclusivo, descrição e ícone para a nova etapa.
       </p>
     </form>
   </section>

@@ -18,7 +18,7 @@ export class BoardCustomizerPageComponent {
   private readonly boardConfig = inject(BoardConfigState);
 
   protected readonly statuses = this.boardConfig.statusOptions;
-  protected readonly newStatusName = this.boardConfig.newStatusName;
+  protected readonly newStatusDraft = this.boardConfig.newStatusDraft;
   protected readonly canCreateStatus = this.boardConfig.canCreateStatus;
   protected readonly editingStatusId = signal<string | null>(null);
   protected readonly editingStatus = computed(() => {
@@ -65,6 +65,26 @@ export class BoardCustomizerPageComponent {
     }
 
     this.boardConfig.updateNewStatusName(target.value);
+  }
+
+  protected onNewStatusDescriptionInput(event: Event): void {
+    const target = event.target;
+
+    if (!(target instanceof HTMLTextAreaElement)) {
+      return;
+    }
+
+    this.boardConfig.updateNewStatusDescription(target.value);
+  }
+
+  protected onNewStatusIconChange(event: Event): void {
+    const target = event.target;
+
+    if (!(target instanceof HTMLSelectElement)) {
+      return;
+    }
+
+    this.boardConfig.updateNewStatusIcon(target.value);
   }
 
   protected onStatusFormSubmit(event: Event): void {
@@ -123,6 +143,22 @@ export class BoardCustomizerPageComponent {
     }
 
     this.closeStatusEditor();
+  }
+
+  protected onDeleteStatus(status: BoardStatusEditorOption): void {
+    const confirmation = confirm(
+      `Tem certeza de que deseja remover a etapa "${status.name}"? Essa ação não pode ser desfeita.`,
+    );
+
+    if (!confirmation) {
+      return;
+    }
+
+    this.boardConfig.removeStatus(status.id);
+
+    if (this.editingStatusId() === status.id) {
+      this.closeStatusEditor();
+    }
   }
 }
 

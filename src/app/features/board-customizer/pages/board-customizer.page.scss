@@ -223,31 +223,89 @@
   border-color: rgba(124, 92, 255, 0.75);
 }
 
-.status-form__label {
+.status-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.status-form__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.status-form__field {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.status-form__field span {
+  color: var(--hk-text-muted);
   font-weight: 600;
 }
 
-.status-form__controls {
-  display: flex;
-  gap: 0.85rem;
-}
-
-.status-form__controls input {
-  flex: 1;
+.status-form__field input,
+.status-form__field textarea,
+.status-form__field select {
   padding: 0.75rem 1rem;
   border-radius: 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(8, 8, 18, 0.5);
   color: inherit;
+  font: inherit;
 }
 
-.status-form__controls input:focus-visible {
+.status-form__field textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.status-form__field input:focus-visible,
+.status-form__field textarea:focus-visible,
+.status-form__field select:focus-visible {
   outline: 2px solid rgba(124, 92, 255, 0.6);
   outline-offset: 2px;
 }
 
-.status-form__controls button {
-  padding: 0.75rem 1.25rem;
+.status-form__field--icon {
+  align-self: end;
+}
+
+.status-form__icon-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(8, 8, 18, 0.5);
+}
+
+.status-form__icon-select span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  background: rgba(124, 92, 255, 0.2);
+  color: #f8fafc;
+  font-size: 1.6rem;
+}
+
+.status-form__icon-select select {
+  min-width: 12rem;
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0;
+}
+
+.status-form__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.status-form__actions button {
+  padding: 0.75rem 1.35rem;
   border-radius: 0.9rem;
   border: none;
   font-weight: 600;
@@ -257,14 +315,14 @@
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-.status-form__controls button:disabled {
+.status-form__actions button:disabled {
   cursor: not-allowed;
   filter: grayscale(0.4);
   opacity: 0.65;
 }
 
-.status-form__controls button:not(:disabled):hover,
-.status-form__controls button:not(:disabled):focus-visible {
+.status-form__actions button:not(:disabled):hover,
+.status-form__actions button:not(:disabled):focus-visible {
   transform: translateY(-1px);
   filter: brightness(1.05);
 }
@@ -291,11 +349,47 @@
     justify-content: flex-start;
   }
 
-  .status-form__controls {
-    flex-direction: column;
+  .status-form__grid {
+    grid-template-columns: 1fr;
   }
 
-  .status-form__controls button {
+  .status-form__actions {
+    justify-content: stretch;
+  }
+
+  .status-form__actions button {
     width: 100%;
   }
+}
+
+@media (min-width: 720px) {
+  .status-form__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .status-form__field--icon {
+    grid-column: span 2;
+    max-width: 22rem;
+  }
+}
+
+.status-item__delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(248, 113, 113, 0.55);
+  background: rgba(248, 113, 113, 0.15);
+  color: #fecaca;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease, border-color 0.2s ease;
+}
+
+.status-item__delete:hover,
+.status-item__delete:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  border-color: rgba(248, 113, 113, 0.8);
 }
