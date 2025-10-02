@@ -1,0 +1,67 @@
+<section class="status-editor-modal" (keydown.escape)="onCancel()">
+  <div class="status-editor-modal__backdrop" (click)="onCancel()" aria-hidden="true"></div>
+  <div
+    class="status-editor-modal__panel"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-labelledby]="'status-editor-title-' + status().id"
+  >
+    <form class="status-editor-modal__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <header class="status-editor-modal__header">
+        <div class="status-editor-modal__symbol" aria-hidden="true">
+          <span class="material-symbols-rounded">{{ status().icon }}</span>
+        </div>
+        <div>
+          <h2 [id]="'status-editor-title-' + status().id">Editar etapa</h2>
+          <p>Atualize o nome, a descrição e o ícone exibidos na jornada do quadro.</p>
+        </div>
+        <button
+          type="button"
+          class="status-editor-modal__close"
+          (click)="onCancel()"
+          aria-label="Fechar editor"
+        >
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        </button>
+      </header>
+
+      <div class="status-editor-modal__fields">
+        <label class="status-editor-modal__field">
+          <span>Nome</span>
+          <input type="text" formControlName="name" autocomplete="off" required />
+          <small *ngIf="form.controls.name.invalid && form.controls.name.touched">
+            Informe um nome com pelo menos 3 caracteres.
+          </small>
+        </label>
+
+        <label class="status-editor-modal__field">
+          <span>Descrição</span>
+          <textarea
+            rows="3"
+            formControlName="description"
+            placeholder="Contexto exibido no quadro"
+          ></textarea>
+        </label>
+
+        <label class="status-editor-modal__field">
+          <span>Ícone</span>
+          <div class="status-editor-modal__icon-select">
+            <span class="material-symbols-rounded" aria-hidden="true">
+              {{ form.controls.icon.value || status().icon }}
+            </span>
+            <select formControlName="icon">
+              <option *ngFor="let option of iconOptionsWithFallback()" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+          </div>
+        </label>
+      </div>
+
+      <footer class="status-editor-modal__footer">
+        <button type="button" class="status-editor-modal__secondary" (click)="onCancel()">Cancelar</button>
+        <button type="submit" class="status-editor-modal__primary">Salvar alterações</button>
+      </footer>
+    </form>
+  </div>
+</section>
