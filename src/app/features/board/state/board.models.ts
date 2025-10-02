@@ -25,6 +25,20 @@ export interface Mission {
   readonly progress: number;
 }
 
+export interface Sprint {
+  readonly id: string;
+  readonly name: string;
+  readonly goal: string;
+  readonly focus: string;
+  readonly startDateIso: string;
+  readonly endDateIso: string;
+}
+
+export interface SprintFilterOption {
+  readonly id: string;
+  readonly label: string;
+}
+
 export type Priority = 'low' | 'medium' | 'high' | 'critical';
 
 export interface StoryTask {
@@ -49,6 +63,7 @@ export interface CreateStoryPayload {
   readonly xp: number;
   readonly dueDate?: string;
   readonly tasks: readonly StoryTaskDraft[];
+  readonly sprintId?: string | null;
 }
 
 export interface Story {
@@ -63,6 +78,7 @@ export interface Story {
   readonly xp: number;
   readonly tasks: readonly StoryTask[];
   readonly dueDate?: string;
+  readonly sprintId?: string;
 }
 
 export interface Feature {
@@ -116,4 +132,29 @@ export interface TeamProgressSummary {
   readonly activeFeatures: number;
   readonly weeklyThroughput: number;
   readonly missions: readonly Mission[];
+}
+
+export interface SprintStoryTaskViewModel {
+  readonly id: string;
+  readonly title: string;
+  readonly isDone: boolean;
+}
+
+export interface SprintStoryViewModel {
+  readonly id: string;
+  readonly title: string;
+  readonly estimateLabel: string;
+  readonly statusLabel: string;
+  readonly statusColor: string;
+  readonly tasks: readonly SprintStoryTaskViewModel[];
+}
+
+export interface SprintOverviewViewModel {
+  readonly sprint: Sprint;
+  readonly periodLabel: string;
+  readonly totalPoints: number;
+  readonly plannedStories: number;
+  readonly completedStories: number;
+  readonly focus: string;
+  readonly stories: readonly SprintStoryViewModel[];
 }

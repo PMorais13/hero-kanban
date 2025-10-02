@@ -6,7 +6,7 @@
         <p>Visual moderno, métricas avançadas e recompensas compartilhadas para manter o squad engajado.</p>
       </div>
       <button type="button" class="board__new-story" (click)="openCreateStory()">
-        <mat-icon aria-hidden="true">add_circle</mat-icon>
+        <span class="board__new-story-icon" aria-hidden="true">add_circle</span>
         Nova história
       </button>
     </div>
@@ -34,6 +34,20 @@
           <dd>{{ summary().weeklyThroughput }}</dd>
         </div>
       </dl>
+    </div>
+    <div class="board__filters" role="region" aria-label="Filtros do quadro">
+      <label class="board__filter" for="board-sprint-filter">
+        <span class="board__filter-label">Sprint</span>
+        <select
+          #sprintSelector
+          id="board-sprint-filter"
+          class="board__filter-select"
+          (change)="onSprintFilterSelected(sprintSelector.value)"
+          [value]="selectedSprintId()"
+        >
+          <option *ngFor="let option of sprintOptions()" [value]="option.id">{{ option.label }}</option>
+        </select>
+      </label>
     </div>
     <aside class="board__missions" *ngIf="summary().missions.length > 0" aria-label="Missões em destaque">
       <h2>Missões</h2>

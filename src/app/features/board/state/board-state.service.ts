@@ -7,6 +7,11 @@ import type {
   CreateStoryPayload,
   Feature,
   Mission,
+  Sprint,
+  SprintFilterOption,
+  SprintOverviewViewModel,
+  SprintStoryTaskViewModel,
+  SprintStoryViewModel,
   Story,
   StoryTask,
   TeamProgressSummary,
@@ -21,6 +26,7 @@ const PRIORITY_COLORS: Record<string, string> = {
 } as const;
 
 const XP_PER_LEVEL = 120;
+const ALL_SPRINTS_FILTER = 'all-sprints';
 
 @Injectable({ providedIn: 'root' })
 export class BoardState {
@@ -64,6 +70,27 @@ export class BoardState {
     },
   ]);
 
+  private readonly _sprints = signal<Sprint[]>([
+    {
+      id: 'sprint-nebula',
+      name: 'Sprint Nebulosa',
+      goal: 'Dar visibilidade previsível ao fluxo de valor.',
+      focus: 'Analytics e narrativa do fluxo',
+      startDateIso: '2024-06-03',
+      endDateIso: '2024-06-14',
+    },
+    {
+      id: 'sprint-aether',
+      name: 'Sprint Aether',
+      goal: 'Habilitar recompensas colaborativas com segurança.',
+      focus: 'Gamificação e economia cooperativa',
+      startDateIso: '2024-06-17',
+      endDateIso: '2024-06-28',
+    },
+  ]);
+
+  private readonly _selectedSprintId = signal<string>(ALL_SPRINTS_FILTER);
+
   private readonly _stories = signal<Story[]>([
     {
       id: 'story-flow-analytics',
@@ -74,6 +101,7 @@ export class BoardState {
       estimate: 5,
       assignee: 'Aline Santos',
       labels: ['Analytics', 'Observability'],
+      sprintId: 'sprint-nebula',
       xp: 85,
       tasks: [
         {
@@ -113,6 +141,7 @@ export class BoardState {
       estimate: 8,
       assignee: 'Diego Martins',
       labels: ['Gamificação', 'UI'],
+      sprintId: 'sprint-nebula',
       xp: 110,
       tasks: [
         {
@@ -157,6 +186,7 @@ export class BoardState {
       estimate: 3,
       assignee: 'Helena Pires',
       labels: ['Backend', 'Gamificação'],
+      sprintId: 'sprint-aether',
       xp: 60,
       tasks: [
         {
@@ -190,6 +220,7 @@ export class BoardState {
       estimate: 5,
       assignee: 'Iuri Paiva',
       labels: ['Analytics', 'Data Viz'],
+      sprintId: 'sprint-nebula',
       xp: 95,
       tasks: [
         {
@@ -233,6 +264,7 @@ export class BoardState {
       estimate: 5,
       assignee: 'Clara Sato',
       labels: ['Pesquisa', 'UX'],
+      sprintId: 'sprint-aether',
       xp: 70,
       tasks: [
         {
@@ -271,6 +303,7 @@ export class BoardState {
       estimate: 2,
       assignee: 'Rafael Lima',
       labels: ['Growth'],
+      sprintId: 'sprint-nebula',
       xp: 40,
       tasks: [
         {
@@ -303,14 +336,62 @@ export class BoardState {
   ]);
 
   readonly features = this._features.asReadonly();
+  readonly sprints = this._sprints.asReadonly();
   readonly stories = this._stories.asReadonly();
+  readonly selectedSprintId = this._selectedSprintId.asReadonly();
+
+  readonly sprintFilterOptions = computed<readonly SprintFilterOption[]>(() => {
+    return [
+      { id: ALL_SPRINTS_FILTER, label: 'Todas as sprints' },
+      ...this._sprints().map((sprint) => ({
+        id: sprint.id,
+        label: `${sprint.name} · ${this.formatSprintPeriod(sprint)}`,
+      } satisfies SprintFilterOption)),
+    ];
+  });
+
+  readonly sprintOverviews = computed<readonly SprintOverviewViewModel[]>(() => {
+    const statusesById = this.getStatusesById();
+    return this._sprints().map((sprint) => {
+      const sprintStories = this._stories().filter((story) => story.sprintId === sprint.id);
+      const stories = sprintStories.map((story) => {
+        const status = statusesById.get(story.statusId);
+        return {
+          id: story.id,
+          title: story.title,
+          estimateLabel: `${story.estimate} pts`,
+          statusLabel: status?.name ?? 'Etapa desconhecida',
+          statusColor: status?.color ?? '#6b7280',
+          tasks: story.tasks.map((task) => ({
+            id: task.id,
+            title: task.title,
+            isDone: task.isDone,
+          }) satisfies SprintStoryTaskViewModel),
+        } satisfies SprintStoryViewModel;
+      });
+      const totalPoints = sprintStories.reduce((total, story) => total + story.estimate, 0);
+      const completedStories = sprintStories.filter((story) =>
+        (statusesById.get(story.statusId)?.category ?? 'todo') === 'done',
+      ).length;
+      return {
+        sprint,
+        periodLabel: this.formatSprintPeriod(sprint),
+        totalPoints,
+        plannedStories: sprintStories.length,
+        completedStories,
+        focus: sprint.focus,
+        stories,
+      } satisfies SprintOverviewViewModel;
+    });
+  });
 
   readonly columns = computed<readonly BoardColumnViewModel[]>(() => {
     const activeStatuses = [...this.boardConfig.statuses()].filter((status) => status.isActive);
     activeStatuses.sort((a, b) => a.order - b.order);
+    const selectedSprintId = this._selectedSprintId();
     return activeStatuses.map((status) => {
       const cards = this._stories()
-        .filter((story) => story.statusId === status.id)
+        .filter((story) => story.statusId === status.id && this.shouldIncludeStoryInSprint(story, selectedSprintId))
         .map((story) => this.toCardViewModel(story));
       const wipLimit = status.wipLimit;
       const wipCount = cards.length;
@@ -327,9 +408,12 @@ export class BoardState {
   readonly statusOptions = computed<readonly BoardStatusWithCapacity[]>(() => {
     const activeStatuses = [...this.boardConfig.statuses()].filter((status) => status.isActive);
     activeStatuses.sort((a, b) => a.order - b.order);
+    const selectedSprintId = this._selectedSprintId();
 
     return activeStatuses.map((status) => {
-      const wipCount = this._stories().filter((story) => story.statusId === status.id).length;
+      const wipCount = this._stories().filter(
+        (story) => story.statusId === status.id && this.shouldIncludeStoryInSprint(story, selectedSprintId),
+      ).length;
       const wipLimit = status.wipLimit;
       const isAtLimit = wipLimit !== undefined && wipCount >= wipLimit;
       return { status, wipCount, wipLimit, isAtLimit } satisfies BoardStatusWithCapacity;
@@ -355,6 +439,27 @@ export class BoardState {
       missions: this._missions(),
     } satisfies TeamProgressSummary;
   });
+
+  setSprintFilter(sprintId: string): void {
+    if (sprintId === this._selectedSprintId()) {
+      return;
+    }
+
+    const isValid = sprintId === ALL_SPRINTS_FILTER || this._sprints().some((sprint) => sprint.id === sprintId);
+    this._selectedSprintId.set(isValid ? sprintId : ALL_SPRINTS_FILTER);
+  }
+
+  trackSprintOverview(_: number, overview: SprintOverviewViewModel): string {
+    return overview.sprint.id;
+  }
+
+  trackSprintStory(_: number, story: SprintStoryViewModel): string {
+    return story.id;
+  }
+
+  trackSprintTask(_: number, task: SprintStoryTaskViewModel): string {
+    return task.id;
+  }
 
   createStory(draft: CreateStoryPayload): Story | null {
     const statusesById = this.getStatusesById();
@@ -388,6 +493,9 @@ export class BoardState {
         isDone: task.isDone,
       }) satisfies StoryTask);
 
+    const sprintId =
+      draft.sprintId && this._sprints().some((sprint) => sprint.id === draft.sprintId) ? draft.sprintId : undefined;
+
     const newStory: Story = {
       id: this.createId('story'),
       featureId: draft.featureId,
@@ -400,6 +508,7 @@ export class BoardState {
       xp: draft.xp,
       tasks,
       dueDate: draft.dueDate && draft.dueDate.length > 0 ? draft.dueDate : undefined,
+      sprintId,
     } satisfies Story;
 
     this._stories.update((stories) => [newStory, ...stories]);
@@ -446,6 +555,24 @@ export class BoardState {
 
   private getStatusesById(): Map<string, BoardStatus> {
     return new Map(this.boardConfig.statuses().map((status) => [status.id, status] as const));
+  }
+
+  private shouldIncludeStoryInSprint(story: Story, selectedSprintId: string): boolean {
+    if (selectedSprintId === ALL_SPRINTS_FILTER) {
+      return true;
+    }
+
+    return story.sprintId === selectedSprintId;
+  }
+
+  private formatSprintPeriod(sprint: Sprint): string {
+    const formatter = new Intl.DateTimeFormat('pt-BR', {
+      day: '2-digit',
+      month: 'short',
+    });
+    const start = formatter.format(new Date(sprint.startDateIso));
+    const end = formatter.format(new Date(sprint.endDateIso));
+    return `${start} – ${end}`;
   }
 
   private hasCapacityForStatus(status: BoardStatus): boolean {

@@ -1,0 +1,82 @@
+<section class="sprints" aria-labelledby="sprints-heading">
+  <header class="sprints__hero">
+    <h1 id="sprints-heading">Planejamento de sprints</h1>
+    <p>
+      Acompanhe o objetivo, o foco estratégico e todas as histórias previstas para cada sprint. Use este painel para alinhar o
+      squad antes das cerimônias e garantir que nenhuma tarefa épica fique de fora.
+    </p>
+  </header>
+
+  <section
+    *ngIf="hasSprints(); else emptySprints"
+    class="sprints__list"
+    aria-label="Sprints planejadas e suas histórias"
+  >
+    <article
+      *ngFor="let overview of sprintOverviews(); trackBy: trackSprint"
+      class="sprint"
+      [attr.aria-labelledby]="overview.sprint.id + '-title'"
+    >
+      <header class="sprint__header">
+        <div class="sprint__heading">
+          <h2 id="{{ overview.sprint.id + '-title' }}">{{ overview.sprint.name }}</h2>
+          <p class="sprint__goal">{{ overview.sprint.goal }}</p>
+        </div>
+        <dl class="sprint__meta">
+          <div>
+            <dt>Período</dt>
+            <dd>{{ overview.periodLabel }}</dd>
+          </div>
+          <div>
+            <dt>Histórias planejadas</dt>
+            <dd>{{ overview.plannedStories }}</dd>
+          </div>
+          <div>
+            <dt>Pontos totais</dt>
+            <dd>{{ overview.totalPoints }}</dd>
+          </div>
+          <div>
+            <dt>Histórias concluídas</dt>
+            <dd>{{ overview.completedStories }}</dd>
+          </div>
+        </dl>
+      </header>
+      <p class="sprint__focus" aria-label="Foco da sprint">{{ overview.focus }}</p>
+      <ul class="sprint__stories">
+        <li *ngFor="let story of overview.stories; trackBy: trackStory">
+          <article class="sprint-story" [attr.aria-labelledby]="story.id + '-title'">
+            <header class="sprint-story__header">
+              <h3 id="{{ story.id + '-title' }}">{{ story.title }}</h3>
+              <p class="sprint-story__meta">
+                <span class="sprint-story__status" [style.--status-color]="story.statusColor">{{ story.statusLabel }}</span>
+                <span aria-hidden="true">•</span>
+                <span>{{ story.estimateLabel }}</span>
+              </p>
+            </header>
+            <ul class="sprint-story__tasks" aria-label="Tarefas previstas">
+              <li
+                *ngFor="let task of story.tasks; trackBy: trackTask"
+                class="sprint-story__task"
+                [class.is-done]="task.isDone"
+              >
+                <span class="sprint-story__task-indicator" aria-hidden="true"></span>
+                <span class="sprint-story__task-title">{{ task.title }}</span>
+                <span class="visually-hidden">{{ task.isDone ? 'Concluída' : 'Pendente' }}</span>
+              </li>
+            </ul>
+          </article>
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <ng-template #emptySprints>
+    <section class="sprints__empty" aria-label="Sem sprints planejadas">
+      <h2>Nenhuma sprint cadastrada</h2>
+      <p>
+        Cadastre sprints no painel principal para começar a agrupar histórias e garantir que as missões prioritárias tenham uma
+        janela de entrega clara.
+      </p>
+    </section>
+  </ng-template>
+</section>
