@@ -1,10 +1,19 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatOptionModule } from '@angular/material/core';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+
 import type { BoardColumnViewModel, CreateStoryPayload } from '../state/board.models';
 import { BoardState } from '../state/board-state.service';
 import { BoardColumnComponent } from '../components/board-column/board-column.component';
 import { CreateStoryModalComponent } from '../components/create-story-modal/create-story-modal.component';
-
 
 @Component({
   selector: 'hk-board-page',
@@ -12,7 +21,22 @@ import { CreateStoryModalComponent } from '../components/create-story-modal/crea
   templateUrl: './board.page.html',
   styleUrls: ['./board.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, NgIf, DecimalPipe, BoardColumnComponent, CreateStoryModalComponent],
+  imports: [
+    NgFor,
+    NgIf,
+    DecimalPipe,
+    BoardColumnComponent,
+    CreateStoryModalComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatDividerModule,
+  ],
 })
 export class BoardPageComponent {
   private readonly boardState = inject(BoardState);

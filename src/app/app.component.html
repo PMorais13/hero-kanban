@@ -1,79 +1,67 @@
-<header class="shell-header" role="banner">
-  <button
-    type="button"
-    class="menu-toggle"
-    (click)="toggleMenu()"
-    [attr.aria-expanded]="isMenuOpen()"
-    aria-controls="shell-menu"
-    aria-label="Abrir menu do jogador"
-  >
-    <span class="visually-hidden">Abrir menu do jogador</span>
-    <span class="menu-toggle__icon" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-  <div class="shell-header__brand">
-    <span class="shell-header__logo" aria-hidden="true">HK</span>
-    <div class="shell-header__titles">
-      <a routerLink="/" routerLinkActive="is-active" aria-label="Ir para o quadro de missões">
-        Hero Kanban
-      </a>
-      <p>Fluxo de trabalho épico com objetivos compartilhados.</p>
-    </div>
-  </div>
-  <span class="shell-header__badge" aria-label="Nível atual da guilda">Lvl {{ experience().level }}</span>
-</header>
-<div class="shell-body">
-  <aside
-    id="shell-menu"
-    class="shell-menu"
-    role="complementary"
-    aria-label="Menu lateral do jogador"
-    [class.is-open]="isMenuOpen()"
-    [attr.aria-hidden]="!isMenuOpen()"
+<mat-sidenav-container class="shell-container">
+  <mat-sidenav
+    class="shell-sidenav"
+    [mode]="'over'"
+    [opened]="isMenuOpen()"
+    (openedChange)="handleSidenavStateChange($event)"
     (keydown)="handleMenuKeydown($event)"
+    role="navigation"
+    aria-label="Menu lateral do jogador"
   >
-    <header class="shell-menu__header">
+    <header class="shell-sidenav__header">
       <h2>Central do herói</h2>
-      <button type="button" class="menu-close" (click)="closeMenu()" aria-label="Fechar menu lateral">
-        <span aria-hidden="true">×</span>
+      <button type="button" mat-icon-button (click)="closeMenu()" aria-label="Fechar menu lateral">
+        <mat-icon>close</mat-icon>
       </button>
     </header>
 
-    <nav class="shell-menu__nav" aria-label="Navegação principal">
-      <h3>Navegação</h3>
-      <ul>
-        <li>
-          <a
-            routerLink="/"
-            routerLinkActive="is-active"
-            [routerLinkActiveOptions]="{ exact: true }"
-            (click)="closeMenu()"
-            >Quadro</a>
-        </li>
-        <li>
-          <a routerLink="/sprints" routerLinkActive="is-active" (click)="closeMenu()">Sprints</a>
-        </li>
-        <li>
-          <a routerLink="/features" routerLinkActive="is-active" (click)="closeMenu()">
-            Features &amp; histórias
+    <mat-nav-list>
+      <h3 matSubheader>Navegação</h3>
+      <a
+        mat-list-item
+        *ngFor="let item of navItems"
+        [routerLink]="item.link"
+        routerLinkActive="is-active"
+        (click)="closeMenu()"
+        [routerLinkActiveOptions]="item.exact ? exactMatchOptions : defaultMatchOptions"
+      >
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+        <span matListItemLine>{{ item.description }}</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="shell-toolbar">
+      <button type="button" mat-icon-button (click)="toggleMenu()" aria-label="Abrir menu do jogador">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="shell-toolbar__brand">
+        <span class="shell-toolbar__logo" aria-hidden="true">HK</span>
+        <div class="shell-toolbar__titles">
+          <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="exactMatchOptions">
+            Hero Kanban
           </a>
-        </li>
-        <li>
-          <a routerLink="/perfil" routerLinkActive="is-active" (click)="closeMenu()">Perfil</a>
-        </li>
-        <li>
-          <a routerLink="/quadro/personalizar" routerLinkActive="is-active" (click)="closeMenu()">
-            Editar quadro
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </aside>
-  <div class="shell-overlay" *ngIf="isMenuOpen()" (click)="closeMenu()" aria-hidden="true"></div>
-  <main class="shell-main" role="main">
-    <router-outlet></router-outlet>
-  </main>
-</div>
+          <p>Fluxo de trabalho épico com objetivos compartilhados.</p>
+        </div>
+      </div>
+      <span class="shell-toolbar__spacer"></span>
+      <mat-chip color="accent" selected aria-label="Nível atual da guilda">
+        <mat-icon matChipAvatar>military_tech</mat-icon>
+        Lvl {{ experience().level }}
+      </mat-chip>
+    </mat-toolbar>
+
+    <section class="shell-progress" aria-live="polite" aria-label="Progresso de experiência da guilda">
+      <mat-progress-bar mode="determinate" [value]="experienceProgress()"></mat-progress-bar>
+      <p>
+        {{ experience().current }} XP acumulado · faltam {{ remainingExperience() }} XP para o próximo nível
+      </p>
+    </section>
+
+    <main class="shell-main" role="main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

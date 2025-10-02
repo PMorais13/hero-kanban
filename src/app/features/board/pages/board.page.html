@@ -1,82 +1,98 @@
 <section class="board" aria-labelledby="board-heading">
-  <header class="board__header">
-    <div class="board__intro">
-      <div class="board__intro-text">
-        <h1 id="board-heading">Missões em andamento</h1>
-        <p>Visual moderno, métricas avançadas e recompensas compartilhadas para manter o squad engajado.</p>
+  <mat-card class="board__summary">
+    <mat-card-header>
+      <div mat-card-avatar class="board__summary-avatar">
+        <mat-icon>view_kanban</mat-icon>
       </div>
-      <div class="board__actions" role="group" aria-label="Ações rápidas do quadro">
-        <button type="button" class="board__new-story" (click)="openCreateStory()">
-          <span class="board__new-story-icon" aria-hidden="true">add_circle</span>
-          Nova história
-        </button>
-        <button type="button" class="board__new-task">
-          <span class="board__new-task-icon" aria-hidden="true">playlist_add</span>
-          Nova tarefa
-        </button>
+      <mat-card-title id="board-heading">Missões em andamento</mat-card-title>
+      <mat-card-subtitle>
+        Visual moderno, métricas avançadas e recompensas compartilhadas para manter o squad engajado.
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="board__summary-grid">
+        <div class="board__actions" role="group" aria-label="Ações rápidas do quadro">
+          <button type="button" mat-flat-button color="primary" (click)="openCreateStory()">
+            <mat-icon>add_circle</mat-icon>
+            Nova história
+          </button>
+          <button type="button" mat-stroked-button color="accent">
+            <mat-icon>playlist_add</mat-icon>
+            Nova tarefa
+          </button>
+        </div>
+
+        <div class="board__progress" role="status" aria-live="polite">
+          <mat-chip-set class="board__level-chip">
+            <mat-chip color="primary" selected>
+              <mat-icon matChipAvatar>workspace_premium</mat-icon>
+              Guilda nível {{ summary().level }}
+            </mat-chip>
+          </mat-chip-set>
+          <mat-progress-bar mode="determinate" [value]="summary().xpProgressPercent"></mat-progress-bar>
+          <p>
+            {{ summary().xpEarned }} XP acumulado · faltam {{ summary().xpToNextLevel }} XP para o próximo emblema
+          </p>
+        </div>
+
+        <mat-divider class="board__divider"></mat-divider>
+
+        <div class="board__stats">
+          <mat-chip-set>
+            <mat-chip variant="outlined">
+              <mat-icon matChipAvatar>task_alt</mat-icon>
+              Histórias concluídas: {{ summary().completedStories }}
+            </mat-chip>
+            <mat-chip variant="outlined">
+              <mat-icon matChipAvatar>hub</mat-icon>
+              Features ativas: {{ summary().activeFeatures }}
+            </mat-chip>
+            <mat-chip variant="outlined">
+              <mat-icon matChipAvatar>monitoring</mat-icon>
+              Throughput semanal: {{ summary().weeklyThroughput }}
+            </mat-chip>
+          </mat-chip-set>
+        </div>
+
+        <div class="board__filters" role="region" aria-label="Filtros do quadro">
+          <mat-form-field appearance="fill" class="board__filter">
+            <mat-label>Sprint</mat-label>
+            <mat-select [value]="selectedSprintId()" (valueChange)="onSprintFilterSelected($event)">
+              <mat-option *ngFor="let option of sprintOptions()" [value]="option.id">
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-    </div>
-    <div class="board__progress" role="status" aria-live="polite">
-      <div class="board__level">Guilda nível {{ summary().level }}</div>
-      <div class="board__xp">
-        <div class="board__xp-bar" aria-hidden="true">
-          <span class="board__xp-fill" [style.width.%]="summary().xpProgressPercent"></span>
-        </div>
-        <p>
-          {{ summary().xpEarned }} XP acumulado · faltam {{ summary().xpToNextLevel }} XP para o próximo emblema
-        </p>
-      </div>
-      <dl class="board__stats">
-        <div>
-          <dt>Histórias concluídas</dt>
-          <dd>{{ summary().completedStories }}</dd>
-        </div>
-        <div>
-          <dt>Features ativas</dt>
-          <dd>{{ summary().activeFeatures }}</dd>
-        </div>
-        <div>
-          <dt>Throughput semanal</dt>
-          <dd>{{ summary().weeklyThroughput }}</dd>
-        </div>
-      </dl>
-    </div>
-    <div class="board__filters" role="region" aria-label="Filtros do quadro">
-      <label class="board__filter" for="board-sprint-filter">
-        <span class="board__filter-label">Sprint</span>
-        <select
-          #sprintSelector
-          id="board-sprint-filter"
-          class="board__filter-select"
-          (change)="onSprintFilterSelected(sprintSelector.value)"
-          [value]="selectedSprintId()"
-        >
-          <option *ngFor="let option of sprintOptions()" [value]="option.id">{{ option.label }}</option>
-        </select>
-      </label>
-    </div>
-    <aside class="board__missions" *ngIf="summary().missions.length > 0" aria-label="Missões em destaque">
-      <h2>Missões</h2>
-      <ul>
-        <li *ngFor="let mission of summary().missions">
-          <div class="mission">
-            <div>
-              <p class="mission__title">{{ mission.title }}</p>
-              <p class="mission__target">{{ mission.target }}</p>
-            </div>
-            <span class="mission__reward">{{ mission.reward }}</span>
-            <div
-              class="mission__progress"
-              role="img"
-              [attr.aria-label]="'Progresso ' + (mission.progress * 100 | number:'1.0-0') + '%'"
-            >
-              <span class="mission__progress-fill" [style.width.%]="mission.progress * 100"></span>
-            </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="summary().missions.length > 0" class="board__missions" aria-label="Missões em destaque">
+    <mat-card-header>
+      <mat-card-title>Missões</mat-card-title>
+      <mat-card-subtitle>Objetivos que destravam recompensas extras para a guilda.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mission" *ngFor="let mission of summary().missions">
+        <div class="mission__info">
+          <mat-icon aria-hidden="true">auto_awesome</mat-icon>
+          <div>
+            <p class="mission__title">{{ mission.title }}</p>
+            <p class="mission__target">{{ mission.target }}</p>
           </div>
-        </li>
-      </ul>
-    </aside>
-  </header>
+        </div>
+        <span class="mission__reward">{{ mission.reward }}</span>
+        <mat-progress-bar
+          class="mission__progress"
+          mode="determinate"
+          [value]="mission.progress * 100"
+          [attr.aria-label]="'Progresso ' + (mission.progress * 100 | number: '1.0-0') + '%'"
+        ></mat-progress-bar>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <section class="board__columns" role="list">
     <kanban-board-column
