@@ -7,6 +7,7 @@ import type {
   FeatureOverviewCardViewModel,
   FeatureStoryCardViewModel,
 } from './feature-explorer.models';
+import type { CreateFeaturePayload } from '@features/board/state/board.models';
 
 const PRIORITY_METADATA: Record<Priority, { readonly label: string; readonly color: string }> = {
   low: { label: 'Baixo', color: '#4ade80' },
@@ -73,6 +74,10 @@ export class FeatureExplorerState {
 
   getFeatureDetail(featureId: string): FeatureDetailViewModel | undefined {
     return this.featureDetailsMap().get(featureId);
+  }
+
+  createFeature(payload: CreateFeaturePayload): void {
+    this.boardState.createFeature(payload);
   }
 
   private toFeatureCard(feature: Feature, storyCount: number): FeatureOverviewCardViewModel {

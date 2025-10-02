@@ -1,0 +1,29 @@
+.create-feature {
+  display: grid;
+  gap: 1.5rem;
+  color: var(--hk-text-primary);
+}
+
+.create-feature__description {
+  margin: 0 0 1rem;
+  color: var(--hk-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-dialog-actions {
+  padding: 0 1.5rem 1.5rem;
+}
+
+button[mat-flat-button] {
+  font-weight: 600;
+}
+
+button[mat-stroked-button] {
+  border-color: rgba(124, 92, 255, 0.45);
+  color: var(--hk-text-primary);
+}

@@ -4,6 +4,7 @@ import type {
   BoardColumnViewModel,
   BoardStatus,
   BoardStatusWithCapacity,
+  CreateFeaturePayload,
   CreateStoryPayload,
   Feature,
   Mission,
@@ -52,6 +53,21 @@ export class BoardState {
       mission: 'Criar sistema de desbloqueio de cosméticos e efeitos.',
     },
   ]);
+
+  createFeature(payload: CreateFeaturePayload): void {
+    const featureId = `feat-${crypto.randomUUID?.() ?? Math.random().toString(36).slice(2)}`;
+
+    const newFeature: Feature = {
+      id: featureId,
+      title: payload.title.trim(),
+      theme: payload.theme.trim(),
+      mission: payload.mission.trim(),
+      xpReward: Math.max(0, Math.round(payload.xpReward)),
+      progress: 0,
+    };
+
+    this._features.update((current) => [...current, newFeature]);
+  }
 
   private readonly _missions = signal<Mission[]>([
     {

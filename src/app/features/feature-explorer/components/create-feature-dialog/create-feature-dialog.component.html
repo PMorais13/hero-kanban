@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Nova feature</h2>
+<form class="create-feature" [formGroup]="featureForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <p class="create-feature__description">
+      Preencha a ficha da missão para adicionar uma nova feature ao mapa da guilda.
+    </p>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Nome da feature</mat-label>
+      <input matInput formControlName="title" cdkFocusInitial maxlength="80" required />
+      <mat-hint align="end">{{ featureForm.get('title')?.value?.length ?? 0 }}/80</mat-hint>
+      <mat-error *ngIf="featureForm.get('title')?.hasError('required')">Informe um nome.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Tema</mat-label>
+      <input matInput formControlName="theme" maxlength="100" required />
+      <mat-hint align="end">{{ featureForm.get('theme')?.value?.length ?? 0 }}/100</mat-hint>
+      <mat-error *ngIf="featureForm.get('theme')?.hasError('required')">Descreva o tema.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Missão</mat-label>
+      <textarea matInput formControlName="mission" rows="3" maxlength="200" required></textarea>
+      <mat-hint align="end">{{ featureForm.get('mission')?.value?.length ?? 0 }}/200</mat-hint>
+      <mat-error *ngIf="featureForm.get('mission')?.hasError('required')">Explique a missão.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Recompensa de XP</mat-label>
+      <input matInput type="number" min="0" formControlName="xpReward" required />
+      <mat-error *ngIf="featureForm.get('xpReward')?.hasError('required')">Informe o XP previsto.</mat-error>
+      <mat-error *ngIf="featureForm.get('xpReward')?.hasError('min')">Use um valor positivo.</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-stroked-button (click)="onCancel()">Cancelar</button>
+    <button type="submit" mat-flat-button color="primary">Adicionar feature</button>
+  </mat-dialog-actions>
+</form>
