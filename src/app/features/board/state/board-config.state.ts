@@ -10,6 +10,12 @@ type BoardStatusEditorOption = Readonly<{
   order: number;
 }>;
 
+type NewStatusDraft = Readonly<{
+  name: string;
+  description: string;
+  icon: string;
+}>;
+
 @Injectable({ providedIn: 'root' })
 export class BoardConfigState {
   private readonly _statuses = signal<BoardStatus[]>([
@@ -117,7 +123,11 @@ export class BoardConfigState {
     },
   ]);
 
-  private readonly _newStatusName = signal('');
+  private readonly _newStatusDraft = signal<NewStatusDraft>({
+    name: '',
+    description: '',
+    icon: 'flag',
+  });
 
   readonly statuses = this._statuses.asReadonly();
   readonly statusOptions = computed<readonly BoardStatusEditorOption[]>(() =>
@@ -132,10 +142,11 @@ export class BoardConfigState {
         order: status.order,
       })),
   );
-  readonly newStatusName = this._newStatusName.asReadonly();
+  readonly newStatusDraft = this._newStatusDraft.asReadonly();
 
   readonly canCreateStatus = computed(() => {
-    const candidate = this._newStatusName().trim();
+    const draft = this._newStatusDraft();
+    const candidate = draft.name.trim();
 
     if (candidate.length < 3) {
       return false;
@@ -144,16 +155,42 @@ export class BoardConfigState {
     const normalizedName = candidate.toLowerCase();
     const baseId = this.buildStatusId(candidate);
 
-    return !this._statuses().some(
+    const hasDuplicate = this._statuses().some(
       (status) =>
         status.id === baseId ||
         status.name.toLowerCase() === normalizedName ||
         status.shortLabel.toLowerCase() === normalizedName,
     );
+
+    if (hasDuplicate) {
+      return false;
+    }
+
+    const hasDescription = draft.description.trim().length > 0;
+    const hasIcon = draft.icon.trim().length > 0;
+
+    return hasDescription && hasIcon;
   });
 
   updateNewStatusName(value: string): void {
-    this._newStatusName.set(value);
+    this._newStatusDraft.update((draft) => ({
+      ...draft,
+      name: value,
+    }));
+  }
+
+  updateNewStatusDescription(value: string): void {
+    this._newStatusDraft.update((draft) => ({
+      ...draft,
+      description: value,
+    }));
+  }
+
+  updateNewStatusIcon(value: string): void {
+    this._newStatusDraft.update((draft) => ({
+      ...draft,
+      icon: value.trim() || 'flag',
+    }));
   }
 
   addCustomStatus(): void {
@@ -161,10 +198,13 @@ export class BoardConfigState {
       return;
     }
 
-    const name = this._newStatusName().trim();
+    const draft = this._newStatusDraft();
+    const name = draft.name.trim();
     const baseId = this.buildStatusId(name);
     const uniqueId = this.resolveUniqueStatusId(baseId);
     const label = this.normalizeTitle(name);
+    const normalizedDescription = draft.description.replace(/\s+/g, ' ').trim();
+    const icon = draft.icon.trim() || 'flag';
 
     this._statuses.update((statuses) => {
       const nextOrder = statuses.reduce((highest, status) => Math.max(highest, status.order), 0) + 1;
@@ -183,10 +223,13 @@ export class BoardConfigState {
           id: uniqueId,
           name: label,
           shortLabel: this.buildShortLabel(label),
-          description: `Missões na etapa ${name.toLowerCase()}.`,
+          description:
+            normalizedDescription.length > 0
+              ? normalizedDescription
+              : `Missões na etapa ${name.toLowerCase()}.`,
           category: 'in_progress',
           color: '#0ea5e9',
-          icon: 'flag',
+          icon,
           order: nextOrder,
           isActive: true,
           allowedTransitions: ['done'],
@@ -194,7 +237,7 @@ export class BoardConfigState {
       ];
     });
 
-    this._newStatusName.set('');
+    this.resetNewStatusDraft();
   }
 
   toggleStatus(statusId: string, isActive: boolean): void {
@@ -282,6 +325,31 @@ export class BoardConfigState {
         ...status,
         order: index,
       }));
+    });
+  }
+
+  removeStatus(statusId: string): void {
+    this._statuses.update((statuses) => {
+      if (!statuses.some((status) => status.id === statusId)) {
+        return statuses;
+      }
+
+      const sorted = [...statuses].sort((a, b) => a.order - b.order);
+      const filtered = sorted.filter((status) => status.id !== statusId);
+
+      return filtered.map((status, index) => ({
+        ...status,
+        order: index,
+        allowedTransitions: status.allowedTransitions.filter((transition) => transition !== statusId),
+      }));
+    });
+  }
+
+  private resetNewStatusDraft(): void {
+    this._newStatusDraft.set({
+      name: '',
+      description: '',
+      icon: 'flag',
     });
   }
 
