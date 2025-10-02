@@ -11,7 +11,7 @@
     <header class="shell-sidenav__header">
       <h2>Central do herói</h2>
       <button type="button" mat-icon-button (click)="closeMenu()" aria-label="Fechar menu lateral">
-        <mat-icon>close</mat-icon>
+        <mat-icon fontSet="material-symbols-rounded">close</mat-icon>
       </button>
     </header>
 
@@ -25,7 +25,7 @@
         (click)="closeMenu()"
         [routerLinkActiveOptions]="item.exact ? exactMatchOptions : defaultMatchOptions"
       >
-        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <mat-icon matListItemIcon fontSet="material-symbols-rounded">{{ item.icon }}</mat-icon>
         <span matListItemTitle>{{ item.label }}</span>
         <span matListItemLine>{{ item.description }}</span>
       </a>
@@ -35,7 +35,7 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary" class="shell-toolbar">
       <button type="button" mat-icon-button (click)="toggleMenu()" aria-label="Abrir menu do jogador">
-        <mat-icon>menu</mat-icon>
+        <mat-icon fontSet="material-symbols-rounded">menu</mat-icon>
       </button>
       <div class="shell-toolbar__brand">
         <span class="shell-toolbar__logo" aria-hidden="true">HK</span>
@@ -48,7 +48,7 @@
       </div>
       <span class="shell-toolbar__spacer"></span>
       <mat-chip color="accent" selected aria-label="Nível atual da guilda">
-        <mat-icon matChipAvatar>military_tech</mat-icon>
+        <mat-icon matChipAvatar fontSet="material-symbols-rounded">military_tech</mat-icon>
         Lvl {{ experience().level }}
       </mat-chip>
     </mat-toolbar>
