@@ -4,6 +4,8 @@ import type { BoardColumnViewModel, CreateStoryPayload } from '../state/board.mo
 import { BoardState } from '../state/board-state.service';
 import { BoardColumnComponent } from '../components/board-column/board-column.component';
 import { CreateStoryModalComponent } from '../components/create-story-modal/create-story-modal.component';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @Component({
   selector: 'hk-board-page',
@@ -11,7 +13,7 @@ import { CreateStoryModalComponent } from '../components/create-story-modal/crea
   templateUrl: './board.page.html',
   styleUrls: ['./board.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, NgIf, DecimalPipe, BoardColumnComponent, CreateStoryModalComponent],
+  imports: [NgFor, NgIf, DecimalPipe, BoardColumnComponent, CreateStoryModalComponent, MatIconModule],
 })
 export class BoardPageComponent {
   private readonly boardState = inject(BoardState);
