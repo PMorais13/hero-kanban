@@ -50,7 +50,8 @@ Os testes cobrem o shell principal e regras de negócio dos serviços de estado 
 - Métricas destacam XP acumulado, nível e throughput semanal diretamente no header.
 
 ### Personalização do quadro (`/quadro/personalizar`)
-- Página `BoardCustomizerPageComponent` manipula `BoardConfigState`, permitindo ativar/pausar etapas e ajustar limites.
+- Página `BoardCustomizerPageComponent` manipula `BoardConfigState`, permitindo ativar/pausar etapas, renomear títulos e subtítulos e escolher o ícone que representa cada fase.
+- Etapas podem ser reordenadas para refletir o fluxo atual com comandos acessíveis (setas) e o resultado é persistido no `order` das colunas.
 - Atualizações refletem imediatamente no quadro principal graças ao estado compartilhado.
 
 ### Feature Explorer (`/features`)
