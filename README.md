@@ -13,6 +13,7 @@ Hero Kanban transforma o fluxo de trabalho tradicional em uma jornada cooperativ
 
 - Projeto Angular 19 com **standalone components** e **signals** para estado local (`BoardState`).
 - Organização por features em `src/app/features`, seguindo boas práticas do `AGENT.md`.
+- **Feature Explorer** dedicado para navegar entre features e histórias. Reaproveita o `BoardState` para manter uma fonte única de dados.
 - UI construída com componentes puros (`BoardPage`, `BoardColumn`, `BoardCard`) focados em acessibilidade e tipagem forte (`board.models.ts`).
 - Fluxo gamificado demonstrado por dados mockados: níveis do time, progresso de XP e missões com feedback visual.
 
@@ -31,7 +32,7 @@ O servidor sobe em `http://localhost:4200/`. O layout é responsivo e suporta na
 npm test -- --watch=false
 ```
 
-Os testes validam a criação do shell principal e regras de transição/WIP do serviço `BoardState`.
+Os testes validam a criação do shell principal, regras de transição/WIP do serviço `BoardState` e os view models agregados do `FeatureExplorerState`.
 
 ## Próximos passos sugeridos
 

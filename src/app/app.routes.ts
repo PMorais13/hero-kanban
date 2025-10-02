@@ -19,6 +19,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'features',
+    loadChildren: () =>
+      import('./features/feature-explorer/feature-explorer.routes').then(
+        (m) => m.FEATURE_EXPLORER_ROUTES,
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

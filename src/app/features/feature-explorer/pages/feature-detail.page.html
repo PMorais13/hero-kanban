@@ -1,0 +1,86 @@
+<ng-container *ngIf="feature() as feature; else notFound">
+  <section class="feature-detail" aria-labelledby="feature-detail-title">
+    <nav class="feature-detail__breadcrumb" aria-label="Navegação secundária">
+      <a routerLink="/features">← Voltar para catálogo</a>
+    </nav>
+
+    <header class="feature-detail__header">
+      <h1 id="feature-detail-title">{{ feature.title }}</h1>
+      <p class="feature-detail__theme">{{ feature.theme }}</p>
+      <p class="feature-detail__mission">{{ feature.mission }}</p>
+
+      <dl class="feature-detail__metrics">
+        <div>
+          <dt>Progresso</dt>
+          <dd>
+            <span class="feature-detail__progress" role="presentation">
+              <span class="feature-detail__progress-bar" [style.width.%]="feature.progressPercent"></span>
+            </span>
+            <span class="feature-detail__metric-value">{{ feature.progressPercent }}% concluída</span>
+          </dd>
+        </div>
+        <div>
+          <dt>Recompensa</dt>
+          <dd class="feature-detail__metric-value">{{ feature.xpRewardLabel }}</dd>
+        </div>
+        <div>
+          <dt>Histórias</dt>
+          <dd class="feature-detail__metric-value">{{ feature.storyCount }}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <section class="story-section" aria-labelledby="feature-stories-title">
+      <div class="story-section__header">
+        <h2 id="feature-stories-title">Histórias vinculadas</h2>
+        <p>Cards com status, prioridade e responsável de cada missão.</p>
+      </div>
+
+      <ng-container *ngIf="feature.stories.length > 0; else noStories">
+        <div class="story-grid" role="list">
+          <article
+            *ngFor="let story of feature.stories; trackBy: trackStory"
+            role="listitem"
+            class="story-card"
+          >
+            <header class="story-card__header">
+              <span class="story-card__status" [style.backgroundColor]="story.statusColor">{{ story.statusLabel }}</span>
+              <span class="story-card__priority" [style.color]="story.priorityColor">{{ story.priorityLabel }}</span>
+            </header>
+
+            <h3 class="story-card__title">{{ story.title }}</h3>
+
+            <dl class="story-card__meta">
+              <div>
+                <dt>Responsável</dt>
+                <dd>{{ story.assignee }}</dd>
+              </div>
+              <div>
+                <dt>XP</dt>
+                <dd>{{ story.xpLabel }}</dd>
+              </div>
+              <div>
+                <dt>Estimativa</dt>
+                <dd>{{ story.estimateLabel }}</dd>
+              </div>
+            </dl>
+
+            <p class="story-card__checklist">{{ story.checklistProgressLabel }}</p>
+            <p class="story-card__due" *ngIf="story.dueLabel as dueLabel">Entrega prevista: {{ dueLabel }}</p>
+          </article>
+        </div>
+      </ng-container>
+    </section>
+  </section>
+</ng-container>
+
+<ng-template #noStories>
+  <p class="story-section__empty">Nenhuma história vinculada a esta feature ainda.</p>
+</ng-template>
+
+<ng-template #notFound>
+  <section class="feature-detail feature-detail--empty">
+    <p>Não encontramos a feature solicitada. Volte para o catálogo para explorar outras missões.</p>
+    <a routerLink="/features" class="feature-detail__link">Abrir catálogo</a>
+  </section>
+</ng-template>

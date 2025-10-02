@@ -1,0 +1,57 @@
+<section class="catalog" aria-labelledby="feature-catalog-title">
+  <header class="catalog__header">
+    <h1 id="feature-catalog-title">Explorar features e histórias</h1>
+    <p>
+      Conheça as missões épicas em andamento. Cada feature reúne histórias que impulsionam a jornada da guilda.
+    </p>
+  </header>
+
+  <ng-container *ngIf="featureCards().length > 0; else emptyState">
+    <div class="catalog__grid" role="list">
+      <article
+        *ngFor="let feature of featureCards(); trackBy: trackById"
+        role="listitem"
+        class="feature-card"
+      >
+        <header class="feature-card__header">
+          <h2>{{ feature.title }}</h2>
+          <p class="feature-card__theme">{{ feature.theme }}</p>
+        </header>
+
+        <p class="feature-card__mission">{{ feature.mission }}</p>
+
+        <dl class="feature-card__metrics">
+          <div>
+            <dt>Progresso</dt>
+            <dd>{{ feature.progressPercent }}% concluída</dd>
+          </div>
+          <div>
+            <dt>Histórias</dt>
+            <dd>{{ feature.storyCount }} em andamento</dd>
+          </div>
+          <div>
+            <dt>Recompensa</dt>
+            <dd>{{ feature.xpRewardLabel }}</dd>
+          </div>
+        </dl>
+
+        <div
+          class="feature-card__progress"
+          role="progressbar"
+          [attr.aria-valuenow]="feature.progressPercent"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [attr.aria-label]="'Progresso da feature ' + feature.title"
+        >
+          <span class="feature-card__progress-bar" [style.width.%]="feature.progressPercent"></span>
+        </div>
+
+        <a [routerLink]="['/features', feature.id]" class="feature-card__link">Ver detalhes da feature</a>
+      </article>
+    </div>
+  </ng-container>
+</section>
+
+<ng-template #emptyState>
+  <p class="catalog__empty">Nenhuma feature encontrada no momento.</p>
+</ng-template>
