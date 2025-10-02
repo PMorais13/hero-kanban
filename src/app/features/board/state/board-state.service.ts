@@ -3,9 +3,12 @@ import type {
   BoardCardViewModel,
   BoardColumnViewModel,
   BoardStatus,
+  BoardStatusWithCapacity,
+  CreateStoryPayload,
   Feature,
   Mission,
   Story,
+  StoryTask,
   TeamProgressSummary,
 } from './board.models';
 import { BoardConfigState } from './board-config.state';
@@ -72,8 +75,33 @@ export class BoardState {
       assignee: 'Aline Santos',
       labels: ['Analytics', 'Observability'],
       xp: 85,
-      completedChecklistItems: 3,
-      totalChecklistItems: 5,
+      tasks: [
+        {
+          id: 'task-flow-analytics-research',
+          title: 'Mapear eventos de ciclo com o time de dados',
+          isDone: true,
+        },
+        {
+          id: 'task-flow-analytics-dashboard',
+          title: 'Prototipar painéis de lead e cycle time',
+          isDone: true,
+        },
+        {
+          id: 'task-flow-analytics-api',
+          title: 'Instrumentar coleta de métricas no backend',
+          isDone: true,
+        },
+        {
+          id: 'task-flow-analytics-narrative',
+          title: 'Criar narrativa visual para squads acompanharem progresso',
+          isDone: false,
+        },
+        {
+          id: 'task-flow-analytics-review',
+          title: 'Validar indicadores com chapter de produto',
+          isDone: false,
+        },
+      ],
       dueDate: new Date().toISOString(),
     },
     {
@@ -86,8 +114,38 @@ export class BoardState {
       assignee: 'Diego Martins',
       labels: ['Gamificação', 'UI'],
       xp: 110,
-      completedChecklistItems: 1,
-      totalChecklistItems: 6,
+      tasks: [
+        {
+          id: 'task-avatars-style',
+          title: 'Definir estilo base dos avatares cooperativos',
+          isDone: true,
+        },
+        {
+          id: 'task-avatars-sync',
+          title: 'Arquitetar sincronização em tempo real',
+          isDone: false,
+        },
+        {
+          id: 'task-avatars-store',
+          title: 'Persistir acessórios desbloqueados da guilda',
+          isDone: false,
+        },
+        {
+          id: 'task-avatars-accessibility',
+          title: 'Garantir contraste e acessibilidade nos temas',
+          isDone: false,
+        },
+        {
+          id: 'task-avatars-feedback',
+          title: 'Prototipar animações de reação do squad',
+          isDone: false,
+        },
+        {
+          id: 'task-avatars-tests',
+          title: 'Planejar testes multijogador no playtest interno',
+          isDone: false,
+        },
+      ],
       dueDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3).toISOString(),
     },
     {
@@ -100,8 +158,28 @@ export class BoardState {
       assignee: 'Helena Pires',
       labels: ['Backend', 'Gamificação'],
       xp: 60,
-      completedChecklistItems: 4,
-      totalChecklistItems: 4,
+      tasks: [
+        {
+          id: 'task-mission-engine-schema',
+          title: 'Modelar esquema de missões semanais',
+          isDone: true,
+        },
+        {
+          id: 'task-mission-engine-cron',
+          title: 'Implementar rotinas de agendamento de missões',
+          isDone: true,
+        },
+        {
+          id: 'task-mission-engine-rules',
+          title: 'Configurar regras de recompensa colaborativa',
+          isDone: true,
+        },
+        {
+          id: 'task-mission-engine-tests',
+          title: 'Cobrir fluxo com testes automatizados',
+          isDone: true,
+        },
+      ],
     },
     {
       id: 'story-cfd',
@@ -113,8 +191,38 @@ export class BoardState {
       assignee: 'Iuri Paiva',
       labels: ['Analytics', 'Data Viz'],
       xp: 95,
-      completedChecklistItems: 5,
-      totalChecklistItems: 6,
+      tasks: [
+        {
+          id: 'task-cfd-data',
+          title: 'Consolidar dados históricos de fluxo',
+          isDone: true,
+        },
+        {
+          id: 'task-cfd-ux',
+          title: 'Prototipar interações do gráfico cumulativo',
+          isDone: true,
+        },
+        {
+          id: 'task-cfd-performance',
+          title: 'Otimizar consultas para carregamento dinâmico',
+          isDone: true,
+        },
+        {
+          id: 'task-cfd-tooltips',
+          title: 'Implementar tooltips narrativos por etapa',
+          isDone: true,
+        },
+        {
+          id: 'task-cfd-story',
+          title: 'Conectar progresso com storytelling de guilda',
+          isDone: true,
+        },
+        {
+          id: 'task-cfd-review',
+          title: 'Validar insights com PM e analytics',
+          isDone: false,
+        },
+      ],
     },
     {
       id: 'story-team-buffs',
@@ -126,8 +234,33 @@ export class BoardState {
       assignee: 'Clara Sato',
       labels: ['Pesquisa', 'UX'],
       xp: 70,
-      completedChecklistItems: 0,
-      totalChecklistItems: 5,
+      tasks: [
+        {
+          id: 'task-team-buffs-interviews',
+          title: 'Entrevistar squads sobre rituais energizantes',
+          isDone: false,
+        },
+        {
+          id: 'task-team-buffs-catalog',
+          title: 'Catalogar buffs colaborativos possíveis',
+          isDone: false,
+        },
+        {
+          id: 'task-team-buffs-scoring',
+          title: 'Definir critérios de pontuação por buff',
+          isDone: false,
+        },
+        {
+          id: 'task-team-buffs-prototype',
+          title: 'Prototipar painel de buffs para squads',
+          isDone: false,
+        },
+        {
+          id: 'task-team-buffs-validation',
+          title: 'Rodar sessão de validação com chapter agile',
+          isDone: false,
+        },
+      ],
     },
     {
       id: 'story-onboarding',
@@ -139,10 +272,37 @@ export class BoardState {
       assignee: 'Rafael Lima',
       labels: ['Growth'],
       xp: 40,
-      completedChecklistItems: 5,
-      totalChecklistItems: 5,
+      tasks: [
+        {
+          id: 'task-onboarding-journey',
+          title: 'Mapear jornada de onboarding gamificada',
+          isDone: true,
+        },
+        {
+          id: 'task-onboarding-copy',
+          title: 'Redigir narrativa de boas-vindas',
+          isDone: true,
+        },
+        {
+          id: 'task-onboarding-assets',
+          title: 'Criar assets visuais para recompensas iniciais',
+          isDone: true,
+        },
+        {
+          id: 'task-onboarding-instrumentation',
+          title: 'Instrumentar métricas de adesão',
+          isDone: true,
+        },
+        {
+          id: 'task-onboarding-playtest',
+          title: 'Executar playtest com novos membros da guilda',
+          isDone: true,
+        },
+      ],
     },
   ]);
+
+  readonly features = this._features.asReadonly();
 
   readonly columns = computed<readonly BoardColumnViewModel[]>(() => {
     const activeStatuses = [...this.boardConfig.statuses()].filter((status) => status.isActive);
@@ -160,6 +320,18 @@ export class BoardState {
         wipLimit,
         isWipLimitBreached: wipLimit !== undefined && wipCount > wipLimit,
       } satisfies BoardColumnViewModel;
+    });
+  });
+
+  readonly statusOptions = computed<readonly BoardStatusWithCapacity[]>(() => {
+    const activeStatuses = [...this.boardConfig.statuses()].filter((status) => status.isActive);
+    activeStatuses.sort((a, b) => a.order - b.order);
+
+    return activeStatuses.map((status) => {
+      const wipCount = this._stories().filter((story) => story.statusId === status.id).length;
+      const wipLimit = status.wipLimit;
+      const isAtLimit = wipLimit !== undefined && wipCount >= wipLimit;
+      return { status, wipCount, wipLimit, isAtLimit } satisfies BoardStatusWithCapacity;
     });
   });
 
@@ -182,6 +354,57 @@ export class BoardState {
       missions: this._missions(),
     } satisfies TeamProgressSummary;
   });
+
+  createStory(draft: CreateStoryPayload): Story | null {
+    const statusesById = this.getStatusesById();
+    const nextStatus = statusesById.get(draft.statusId);
+    const title = draft.title.trim();
+    const assignee = draft.assignee.trim();
+
+    if (!nextStatus || !nextStatus.isActive || title.length === 0 || assignee.length === 0) {
+      return null;
+    }
+
+    if (!this.hasCapacityForStatus(nextStatus)) {
+      return null;
+    }
+
+    const featureExists = this._features().some((feature) => feature.id === draft.featureId);
+    if (!featureExists) {
+      return null;
+    }
+
+    const labels = draft.labels.map((label) => label.trim()).filter((label) => label.length > 0);
+    const tasks = draft.tasks
+      .map((task) => ({
+        title: task.title.trim(),
+        isDone: task.isDone,
+      }))
+      .filter((task) => task.title.length > 0)
+      .map((task) => ({
+        id: this.createId('task'),
+        title: task.title,
+        isDone: task.isDone,
+      }) satisfies StoryTask);
+
+    const newStory: Story = {
+      id: this.createId('story'),
+      featureId: draft.featureId,
+      title,
+      statusId: nextStatus.id,
+      priority: draft.priority,
+      estimate: draft.estimate,
+      assignee,
+      labels,
+      xp: draft.xp,
+      tasks,
+      dueDate: draft.dueDate && draft.dueDate.length > 0 ? draft.dueDate : undefined,
+    } satisfies Story;
+
+    this._stories.update((stories) => [newStory, ...stories]);
+
+    return newStory;
+  }
 
   moveStory(storyId: string, nextStatusId: string): boolean {
     if (!this.isMoveAllowed(storyId, nextStatusId)) {
@@ -213,9 +436,7 @@ export class BoardState {
       return false;
     }
 
-    const allowedCount = nextStatus.wipLimit ?? Number.POSITIVE_INFINITY;
-    const nextCount = this._stories().filter((item) => item.statusId === nextStatusId).length;
-    if (nextCount >= allowedCount) {
+    if (!this.hasCapacityForStatus(nextStatus)) {
       return false;
     }
 
@@ -226,8 +447,28 @@ export class BoardState {
     return new Map(this.boardConfig.statuses().map((status) => [status.id, status] as const));
   }
 
+  private hasCapacityForStatus(status: BoardStatus): boolean {
+    const allowedCount = status.wipLimit ?? Number.POSITIVE_INFINITY;
+    const nextCount = this._stories().filter((item) => item.statusId === status.id).length;
+    return nextCount < allowedCount;
+  }
+
+  private createId(prefix: string): string {
+    if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+      return `${prefix}-${crypto.randomUUID()}`;
+    }
+
+    return `${prefix}-${Math.random().toString(36).slice(2, 10)}-${Date.now().toString(36)}`;
+  }
+
   private toCardViewModel(story: Story): BoardCardViewModel {
     const feature = this._features().find((item) => item.id === story.featureId);
+    const totalChecklistItems = story.tasks.length;
+    const completedChecklistItems = story.tasks.filter((task) => task.isDone).length;
+    const checklistProgressLabel =
+      totalChecklistItems === 0
+        ? 'Sem checklist'
+        : `${completedChecklistItems}/${totalChecklistItems} checklist`;
     return {
       id: story.id,
       statusId: story.statusId,
@@ -240,11 +481,9 @@ export class BoardState {
       labels: story.labels,
       estimateLabel: `${story.estimate} pts`,
       xp: story.xp,
-      checklistProgressLabel: `${story.completedChecklistItems}/${story.totalChecklistItems} checklist`,
+      checklistProgressLabel,
       completionPercent:
-        story.totalChecklistItems === 0
-          ? 0
-          : Math.round((story.completedChecklistItems / story.totalChecklistItems) * 100),
+        totalChecklistItems === 0 ? 0 : Math.round((completedChecklistItems / totalChecklistItems) * 100),
       missionTagline: feature?.mission ?? 'Missão surpresa para a guilda.',
       dueLabel: story.dueDate ? this.formatDueDate(story.dueDate) : undefined,
     } satisfies BoardCardViewModel;

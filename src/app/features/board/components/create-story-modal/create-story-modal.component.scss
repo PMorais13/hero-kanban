@@ -1,0 +1,294 @@
+.create-story-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
+.create-story-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 20, 0.75);
+  backdrop-filter: blur(8px);
+}
+
+.create-story-modal__panel {
+  position: relative;
+  width: min(720px, calc(100vw - 2rem));
+  max-height: calc(100vh - 3rem);
+  overflow: auto;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(145deg, rgba(24, 22, 54, 0.95), rgba(16, 18, 42, 0.95));
+  box-shadow: 0 30px 80px rgba(8, 9, 29, 0.65);
+}
+
+.create-story-modal__form {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  color: var(--hk-text-primary);
+}
+
+.create-story-modal__header {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.create-story-modal__header h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+}
+
+.create-story-modal__header p {
+  margin: 0.5rem 0 0;
+  color: var(--hk-text-muted);
+  max-width: 46ch;
+}
+
+.create-story-modal__close {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.create-story-modal__close:hover,
+.create-story-modal__close:focus-visible {
+  background: rgba(255, 255, 255, 0.14);
+  transform: scale(1.05);
+}
+
+.create-story-modal__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.create-story-modal__field {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.create-story-modal__field > span {
+  font-weight: 600;
+}
+
+.create-story-modal__field input,
+.create-story-modal__field select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(14, 16, 38, 0.75);
+  color: inherit;
+  font: inherit;
+}
+
+.create-story-modal__field input:focus-visible,
+.create-story-modal__field select:focus-visible {
+  outline: 2px solid rgba(124, 92, 255, 0.6);
+  outline-offset: 2px;
+}
+
+.create-story-modal__field small {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
+
+.create-story-modal__field small.ng-star-inserted {
+  color: #fbbf24;
+}
+
+.create-story-modal__tasks {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.create-story-modal__tasks > header {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.create-story-modal__tasks h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.create-story-modal__tasks p {
+  margin: 0;
+  color: var(--hk-text-muted);
+}
+
+.create-story-modal__tasks-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.create-story-modal__task {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(124, 92, 255, 0.2);
+  background: rgba(124, 92, 255, 0.08);
+}
+
+.create-story-modal__task label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.create-story-modal__task small {
+  color: #fbbf24;
+  font-size: 0.8rem;
+}
+
+.create-story-modal__task input[type='text'] {
+  padding: 0.7rem 1rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(10, 12, 28, 0.75);
+  color: inherit;
+}
+
+.create-story-modal__task input[type='text']:focus-visible {
+  outline: 2px solid rgba(124, 92, 255, 0.7);
+  outline-offset: 2px;
+}
+
+.create-story-modal__task-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-story-modal__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.create-story-modal__checkbox input {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: #7c5cff;
+}
+
+.create-story-modal__task-actions button {
+  border: none;
+  background: rgba(248, 113, 113, 0.18);
+  color: #fca5a5;
+  border-radius: 999px;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.create-story-modal__task-actions button:hover,
+.create-story-modal__task-actions button:focus-visible {
+  background: rgba(248, 113, 113, 0.3);
+  transform: scale(1.05);
+}
+
+.create-story-modal__tasks-empty {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+  color: var(--hk-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.create-story-modal__add-task {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(124, 92, 255, 0.9), rgba(79, 70, 229, 0.9));
+  color: #ffffff;
+  cursor: pointer;
+  width: fit-content;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.create-story-modal__add-task:hover,
+.create-story-modal__add-task:focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.create-story-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.create-story-modal__secondary {
+  padding: 0.85rem 1.4rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: var(--hk-text-primary);
+  cursor: pointer;
+}
+
+.create-story-modal__secondary:hover,
+.create-story-modal__secondary:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.create-story-modal__primary {
+  padding: 0.9rem 1.6rem;
+  border-radius: 0.9rem;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, #7c5cff 0%, #4f46e5 100%);
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.create-story-modal__primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+.create-story-modal__primary:not(:disabled):hover,
+.create-story-modal__primary:not(:disabled):focus-visible {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+@media (max-width: 640px) {
+  .create-story-modal__header {
+    flex-direction: column;
+  }
+
+  .create-story-modal__footer {
+    flex-direction: column;
+  }
+
+  .create-story-modal__footer button {
+    width: 100%;
+  }
+}

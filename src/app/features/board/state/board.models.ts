@@ -27,6 +27,30 @@ export interface Mission {
 
 export type Priority = 'low' | 'medium' | 'high' | 'critical';
 
+export interface StoryTask {
+  readonly id: string;
+  readonly title: string;
+  readonly isDone: boolean;
+}
+
+export interface StoryTaskDraft {
+  readonly title: string;
+  readonly isDone: boolean;
+}
+
+export interface CreateStoryPayload {
+  readonly title: string;
+  readonly featureId: string;
+  readonly statusId: string;
+  readonly priority: Priority;
+  readonly estimate: number;
+  readonly assignee: string;
+  readonly labels: readonly string[];
+  readonly xp: number;
+  readonly dueDate?: string;
+  readonly tasks: readonly StoryTaskDraft[];
+}
+
 export interface Story {
   readonly id: string;
   readonly featureId: string;
@@ -37,8 +61,7 @@ export interface Story {
   readonly assignee: string;
   readonly labels: readonly string[];
   readonly xp: number;
-  readonly completedChecklistItems: number;
-  readonly totalChecklistItems: number;
+  readonly tasks: readonly StoryTask[];
   readonly dueDate?: string;
 }
 
@@ -75,6 +98,13 @@ export interface BoardColumnViewModel {
   readonly wipCount: number;
   readonly wipLimit?: number;
   readonly isWipLimitBreached: boolean;
+}
+
+export interface BoardStatusWithCapacity {
+  readonly status: BoardStatus;
+  readonly wipCount: number;
+  readonly wipLimit?: number;
+  readonly isAtLimit: boolean;
 }
 
 export interface TeamProgressSummary {

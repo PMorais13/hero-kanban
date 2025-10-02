@@ -1,8 +1,14 @@
 <section class="board" aria-labelledby="board-heading">
   <header class="board__header">
     <div class="board__intro">
-      <h1 id="board-heading">Missões em andamento</h1>
-      <p>Visual moderno, métricas avançadas e recompensas compartilhadas para manter o squad engajado.</p>
+      <div class="board__intro-text">
+        <h1 id="board-heading">Missões em andamento</h1>
+        <p>Visual moderno, métricas avançadas e recompensas compartilhadas para manter o squad engajado.</p>
+      </div>
+      <button type="button" class="board__new-story" (click)="openCreateStory()">
+        <span class="material-symbols-rounded" aria-hidden="true">add_circle</span>
+        Nova história
+      </button>
     </div>
     <div class="board__progress" role="status" aria-live="polite">
       <div class="board__level">Guilda nível {{ summary().level }}</div>
@@ -59,4 +65,12 @@
       role="listitem"
     ></kanban-board-column>
   </section>
+
+  <kanban-create-story-modal
+    *ngIf="isCreatingStory()"
+    [features]="features()"
+    [statusOptions]="statusOptions()"
+    (dismissed)="closeCreateStory()"
+    (submitted)="onStorySubmitted($event)"
+  ></kanban-create-story-modal>
 </section>
