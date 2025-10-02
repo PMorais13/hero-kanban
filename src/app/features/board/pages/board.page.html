@@ -112,6 +112,8 @@
     *ngIf="isCreatingStory()"
     [features]="features()"
     [statusOptions]="statusOptions()"
+    [sprints]="sprints()"
+    [activeSprintId]="selectedSprintId()"
     (dismissed)="closeCreateStory()"
     (submitted)="onStorySubmitted($event)"
   ></kanban-create-story-modal>

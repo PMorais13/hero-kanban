@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, input, signal, inject } from '@angular/core';
-import { NgFor, NgIf } from '@angular/common';
+import { NgFor } from '@angular/common';
 import type { BoardColumnViewModel } from '../../state/board.models';
 import { BoardCardComponent } from '../board-card/board-card.component';
 import { BoardState } from '../../state/board-state.service';
@@ -11,7 +11,7 @@ import { BoardDragState } from '../../state/board-drag-state.service';
   templateUrl: './board-column.component.html',
   styleUrls: ['./board-column.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, NgIf, BoardCardComponent],
+  imports: [NgFor, BoardCardComponent],
 })
 export class BoardColumnComponent implements OnDestroy {
   readonly column = input.required<BoardColumnViewModel>();

@@ -21,6 +21,7 @@ import type {
   CreateStoryPayload,
   Feature,
   Priority,
+  Sprint,
 } from '../../state/board.models';
 
 interface StoryTaskForm {
@@ -41,6 +42,8 @@ type StoryTaskFormGroup = FormGroup<StoryTaskForm>;
 export class CreateStoryModalComponent {
   readonly features = input.required<readonly Feature[]>();
   readonly statusOptions = input.required<readonly BoardStatusWithCapacity[]>();
+  readonly sprints = input.required<readonly Sprint[]>();
+  readonly activeSprintId = input<string | null | undefined>();
 
   readonly dismissed = output<void>();
   readonly submitted = output<CreateStoryPayload>();
@@ -53,6 +56,10 @@ export class CreateStoryModalComponent {
   ];
 
   private readonly formBuilder = inject(NonNullableFormBuilder);
+  private readonly sprintPeriodFormatter = new Intl.DateTimeFormat('pt-BR', {
+    day: '2-digit',
+    month: 'short',
+  });
 
   protected readonly form = this.formBuilder.group({
     title: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
@@ -64,6 +71,7 @@ export class CreateStoryModalComponent {
     labels: this.formBuilder.control(''),
     xp: this.formBuilder.control(40, { validators: [Validators.required, Validators.min(1)] }),
     dueDate: this.formBuilder.control(''),
+    sprintId: this.formBuilder.control(''),
     tasks: this.formBuilder.array<StoryTaskFormGroup>([]),
   });
 
@@ -77,6 +85,8 @@ export class CreateStoryModalComponent {
     () => {
       const featureOptions = this.features();
       const statusOptions = this.statusOptions();
+      const sprintOptions = this.sprints();
+      const selectedSprintId = this.activeSprintId();
 
       if (featureOptions.length > 0 && this.form.controls.featureId.value === '') {
         this.form.controls.featureId.setValue(featureOptions[0].id);
@@ -86,6 +96,15 @@ export class CreateStoryModalComponent {
       if (currentStatusId === '' && statusOptions.length > 0) {
         const firstAvailable = statusOptions.find((option) => !option.isAtLimit) ?? statusOptions[0];
         this.form.controls.statusId.setValue(firstAvailable.status.id);
+      }
+
+      if (
+        typeof selectedSprintId === 'string' &&
+        selectedSprintId.length > 0 &&
+        this.form.controls.sprintId.value === '' &&
+        sprintOptions.some((option) => option.id === selectedSprintId)
+      ) {
+        this.form.controls.sprintId.setValue(selectedSprintId);
       }
     },
     { allowSignalWrites: true },
@@ -132,6 +151,7 @@ export class CreateStoryModalComponent {
         .filter((label) => label.length > 0),
       xp: value.xp,
       dueDate: value.dueDate ? new Date(value.dueDate).toISOString() : undefined,
+      sprintId: value.sprintId.length > 0 ? value.sprintId : undefined,
       tasks: value.tasks.map((task) => ({
         title: task.title,
         isDone: task.isDone,
@@ -153,6 +173,7 @@ export class CreateStoryModalComponent {
       labels: '',
       xp: 40,
       dueDate: '',
+      sprintId: '',
     });
     this.taskArray.clear();
   }
@@ -162,5 +183,11 @@ export class CreateStoryModalComponent {
       title: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
       isDone: this.formBuilder.control(false),
     });
+  }
+
+  protected formatSprintLabel(sprint: Sprint): string {
+    const start = this.sprintPeriodFormatter.format(new Date(sprint.startDateIso));
+    const end = this.sprintPeriodFormatter.format(new Date(sprint.endDateIso));
+    return `${sprint.name} · ${start} – ${end}`;
   }
 }

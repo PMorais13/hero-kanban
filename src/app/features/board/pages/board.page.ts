@@ -44,6 +44,7 @@ export class BoardPageComponent {
   protected readonly columns = this.boardState.columns;
   protected readonly summary = this.boardState.summary;
   protected readonly features = this.boardState.features;
+  protected readonly sprints = this.boardState.sprints;
   protected readonly statusOptions = this.boardState.statusOptions;
   protected readonly sprintOptions = this.boardState.sprintFilterOptions;
   protected readonly selectedSprintId = this.boardState.selectedSprintId;
