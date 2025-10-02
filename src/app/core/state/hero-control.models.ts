@@ -12,13 +12,6 @@ export interface LootItem {
   readonly rarity: 'comum' | 'raro' | 'lendário';
 }
 
-export interface BoardStatusOption {
-  readonly id: string;
-  readonly label: string;
-  readonly description: string;
-  readonly isActive: boolean;
-}
-
 export interface ExperienceSummary {
   readonly level: number;
   readonly current: number;

@@ -5,6 +5,7 @@ Fornecer um quadro Kanban gamificado que represente a hierarquia Feature → His
 
 ## Decisões técnicas
 - **Signals** em `BoardState` para manter estado reativo com baixo acoplamento.
+- **`BoardConfigState`** centraliza a configuração das etapas e é reutilizado pelo personalizador e pelo quadro principal.
 - **ViewModels tipados** (`BoardColumnViewModel`, `BoardCardViewModel`) garantem que a UI receba dados prontos para renderização.
 - **Componentes standalone** desacoplados (`BoardColumn`, `BoardCard`) facilitam testes e composição de UI.
 - **Drag-and-drop nativo** com HTML5 + `BoardDragState` garante movimentação entre colunas respeitando limites de WIP e workflow configurado.

@@ -1,4 +1,4 @@
-import { computed, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import type {
   BoardCardViewModel,
   BoardColumnViewModel,
@@ -8,6 +8,7 @@ import type {
   Story,
   TeamProgressSummary,
 } from './board.models';
+import { BoardConfigState } from './board-config.state';
 
 const PRIORITY_COLORS: Record<string, string> = {
   low: '#4ade80',
@@ -20,110 +21,7 @@ const XP_PER_LEVEL = 120;
 
 @Injectable({ providedIn: 'root' })
 export class BoardState {
-  private readonly _statuses = signal<BoardStatus[]>([
-    {
-      id: 'backlog',
-      name: 'Backlog Estratégico',
-      shortLabel: 'Backlog',
-      description: 'Ideias priorizadas aguardando missão de kickoff.',
-      category: 'todo',
-      color: '#6366f1',
-      icon: 'lightbulb',
-      order: 1,
-      wipLimit: 12,
-      isActive: true,
-      allowedTransitions: ['ready', 'icebox'],
-    },
-    {
-      id: 'ready',
-      name: 'Preparação',
-      shortLabel: 'Ready',
-      description: 'Briefing validado, squad alinhado e artefatos prontos.',
-      category: 'todo',
-      color: '#a855f7',
-      icon: 'rocket_launch',
-      order: 2,
-      wipLimit: 6,
-      isActive: true,
-      allowedTransitions: ['in_dev', 'backlog'],
-    },
-    {
-      id: 'in_dev',
-      name: 'Em Desenvolvimento',
-      shortLabel: 'Dev',
-      description: 'Squad em missão ativa, acompanhando XP diário.',
-      category: 'in_progress',
-      color: '#f97316',
-      icon: 'smart_toy',
-      order: 3,
-      wipLimit: 4,
-      isActive: true,
-      allowedTransitions: ['code_review', 'blocked', 'ready'],
-    },
-    {
-      id: 'code_review',
-      name: 'Revisão & Playtest',
-      shortLabel: 'Review',
-      description: 'QA funcional, feedback dos jogadores e ajuste fino.',
-      category: 'in_progress',
-      color: '#facc15',
-      icon: 'stadia_controller',
-      order: 4,
-      wipLimit: 3,
-      isActive: true,
-      allowedTransitions: ['release', 'in_dev'],
-    },
-    {
-      id: 'release',
-      name: 'Implantação Épica',
-      shortLabel: 'Deploy',
-      description: 'Feature pronta para o lançamento global.',
-      category: 'in_progress',
-      color: '#38bdf8',
-      icon: 'rocket',
-      order: 5,
-      wipLimit: 2,
-      isActive: true,
-      allowedTransitions: ['done', 'code_review'],
-    },
-    {
-      id: 'done',
-      name: 'Concluído',
-      shortLabel: 'Done',
-      description: 'Missões que renderam XP para a guilda.',
-      category: 'done',
-      color: '#34d399',
-      icon: 'emoji_events',
-      order: 6,
-      isActive: true,
-      allowedTransitions: ['release'],
-    },
-    {
-      id: 'icebox',
-      name: 'Icebox',
-      shortLabel: 'Ice',
-      description: 'Ideias estacionadas aguardando novo contexto.',
-      category: 'todo',
-      color: '#94a3b8',
-      icon: 'ac_unit',
-      order: 0,
-      isActive: false,
-      allowedTransitions: ['backlog'],
-    },
-    {
-      id: 'blocked',
-      name: 'Bloqueado',
-      shortLabel: 'Block',
-      description: 'Dependências ou riscos críticos identificados.',
-      category: 'in_progress',
-      color: '#ef4444',
-      icon: 'report',
-      order: 7,
-      wipLimit: 2,
-      isActive: true,
-      allowedTransitions: ['in_dev', 'code_review'],
-    },
-  ]);
+  private readonly boardConfig = inject(BoardConfigState);
 
   private readonly _features = signal<Feature[]>([
     {
@@ -247,7 +145,7 @@ export class BoardState {
   ]);
 
   readonly columns = computed<readonly BoardColumnViewModel[]>(() => {
-    const activeStatuses = [...this._statuses()].filter((status) => status.isActive);
+    const activeStatuses = [...this.boardConfig.statuses()].filter((status) => status.isActive);
     activeStatuses.sort((a, b) => a.order - b.order);
     return activeStatuses.map((status) => {
       const cards = this._stories()
@@ -266,7 +164,7 @@ export class BoardState {
   });
 
   readonly summary = computed<TeamProgressSummary>(() => {
-    const statusesById = new Map(this._statuses().map((status) => [status.id, status] as const));
+    const statusesById = new Map(this.boardConfig.statuses().map((status) => [status.id, status] as const));
     const completedStories = this._stories().filter((story) => statusesById.get(story.statusId)?.category === 'done');
     const xpEarned = completedStories.reduce((total, story) => total + story.xp, 0);
     const level = Math.floor(xpEarned / XP_PER_LEVEL) + 1;
@@ -325,7 +223,7 @@ export class BoardState {
   }
 
   private getStatusesById(): Map<string, BoardStatus> {
-    return new Map(this._statuses().map((status) => [status.id, status] as const));
+    return new Map(this.boardConfig.statuses().map((status) => [status.id, status] as const));
   }
 
   private toCardViewModel(story: Story): BoardCardViewModel {

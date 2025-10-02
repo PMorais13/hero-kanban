@@ -14,32 +14,10 @@ describe('HeroControlState', () => {
     expect(state.achievements().length).toBeGreaterThan(0);
     expect(state.loot().length).toBeGreaterThan(0);
   });
+  it('should calculate experience progress in percentage', () => {
+    const progress = state.experienceProgress();
 
-  it('should add a custom status when the name is unique', () => {
-    state.updateNewStatusName('Exploração');
-    const initialLength = state.boardStatuses().length;
-
-    state.addCustomStatus();
-
-    const statuses = state.boardStatuses();
-    expect(statuses.length).toBe(initialLength + 1);
-    expect(statuses.some((item) => item.label === 'Exploração')).toBeTrue();
-  });
-
-  it('should avoid duplicating a status with the same label', () => {
-    const initialLength = state.boardStatuses().length;
-
-    state.updateNewStatusName('Backlog');
-    state.addCustomStatus();
-
-    expect(state.boardStatuses().length).toBe(initialLength);
-  });
-
-  it('should toggle a status active flag', () => {
-    const target = state.boardStatuses()[0];
-
-    state.toggleStatus(target.id, !target.isActive);
-
-    expect(state.boardStatuses()[0].isActive).toBe(!target.isActive);
+    expect(progress).toBeGreaterThanOrEqual(0);
+    expect(progress).toBeLessThanOrEqual(100);
   });
 });

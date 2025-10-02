@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
-import { HeroControlState } from '@app/core/state/hero-control.state';
-import type { BoardStatusOption } from '@app/core/state/hero-control.models';
+import { BoardConfigState } from '@features/board/state/board-config.state';
+import type { BoardStatusToggleOption } from '@features/board/state/board-config.state';
 
 @Component({
   selector: 'hk-board-customizer-page',
@@ -12,13 +12,13 @@ import type { BoardStatusOption } from '@app/core/state/hero-control.models';
   imports: [NgFor, NgIf],
 })
 export class BoardCustomizerPageComponent {
-  private readonly heroControl = inject(HeroControlState);
+  private readonly boardConfig = inject(BoardConfigState);
 
-  protected readonly statuses = this.heroControl.boardStatuses;
-  protected readonly newStatusName = this.heroControl.newStatusName;
-  protected readonly canCreateStatus = this.heroControl.canCreateStatus;
+  protected readonly statuses = this.boardConfig.statusOptions;
+  protected readonly newStatusName = this.boardConfig.newStatusName;
+  protected readonly canCreateStatus = this.boardConfig.canCreateStatus;
 
-  protected trackStatus(_: number, status: BoardStatusOption): string {
+  protected trackStatus(_: number, status: BoardStatusToggleOption): string {
     return status.id;
   }
 
@@ -29,7 +29,7 @@ export class BoardCustomizerPageComponent {
       return;
     }
 
-    this.heroControl.toggleStatus(statusId, target.checked);
+    this.boardConfig.toggleStatus(statusId, target.checked);
   }
 
   protected onStatusNameInput(event: Event): void {
@@ -39,11 +39,11 @@ export class BoardCustomizerPageComponent {
       return;
     }
 
-    this.heroControl.updateNewStatusName(target.value);
+    this.boardConfig.updateNewStatusName(target.value);
   }
 
   protected onStatusFormSubmit(event: Event): void {
     event.preventDefault();
-    this.heroControl.addCustomStatus();
+    this.boardConfig.addCustomStatus();
   }
 }

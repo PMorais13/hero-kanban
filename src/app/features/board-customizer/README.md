@@ -4,7 +4,7 @@
 Permitir que a guilda adapte o fluxo de trabalho ativando ou criando novas etapas diretamente por meio de uma rota dedicada.
 
 ## Decisões técnicas
-- Utilização do `HeroControlState` para manter as etapas sincronizadas entre o shell e a página de edição.
+- Utilização do `BoardConfigState` para manter as etapas sincronizadas entre a página de edição e o quadro principal.
 - Componentização standalone com lazy-loading para evitar impacto no bundle inicial.
 
 ## Exemplos de uso
