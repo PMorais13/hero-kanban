@@ -4,7 +4,6 @@ import type { BoardColumnViewModel, CreateStoryPayload } from '../state/board.mo
 import { BoardState } from '../state/board-state.service';
 import { BoardColumnComponent } from '../components/board-column/board-column.component';
 import { CreateStoryModalComponent } from '../components/create-story-modal/create-story-modal.component';
-import {MatIconModule} from '@angular/material/icon';
 
 
 @Component({
@@ -13,7 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
   templateUrl: './board.page.html',
   styleUrls: ['./board.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, NgIf, DecimalPipe, BoardColumnComponent, CreateStoryModalComponent, MatIconModule],
+  imports: [NgFor, NgIf, DecimalPipe, BoardColumnComponent, CreateStoryModalComponent],
 })
 export class BoardPageComponent {
   private readonly boardState = inject(BoardState);
@@ -22,6 +21,8 @@ export class BoardPageComponent {
   protected readonly summary = this.boardState.summary;
   protected readonly features = this.boardState.features;
   protected readonly statusOptions = this.boardState.statusOptions;
+  protected readonly sprintOptions = this.boardState.sprintFilterOptions;
+  protected readonly selectedSprintId = this.boardState.selectedSprintId;
   protected readonly isCreatingStory = signal(false);
 
   protected trackColumn(_: number, column: BoardColumnViewModel): string {
@@ -41,5 +42,9 @@ export class BoardPageComponent {
     if (created) {
       this.isCreatingStory.set(false);
     }
+  }
+
+  protected onSprintFilterSelected(sprintId: string): void {
+    this.boardState.setSprintFilter(sprintId);
   }
 }

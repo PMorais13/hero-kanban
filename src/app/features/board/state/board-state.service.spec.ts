@@ -88,4 +88,37 @@ describe('BoardState', () => {
     });
     expect(blocked).toBeNull();
   });
+
+  it('should filter visible cards by selected sprint', () => {
+    const allColumns = service.columns();
+    const allVisibleIds = allColumns.flatMap((column) => column.cards.map((card) => card.id));
+    expect(allVisibleIds).toContain('story-flow-analytics');
+    expect(allVisibleIds).toContain('story-mission-engine');
+
+    service.setSprintFilter('sprint-aether');
+    const filteredIds = service
+      .columns()
+      .flatMap((column) => column.cards.map((card) => card.id));
+
+    expect(filteredIds).toContain('story-mission-engine');
+    expect(filteredIds).toContain('story-team-buffs');
+    expect(filteredIds).not.toContain('story-flow-analytics');
+  });
+
+  it('should summarise sprints with their stories and totals', () => {
+    const overviews = service.sprintOverviews();
+    const nebula = overviews.find((item) => item.sprint.id === 'sprint-nebula');
+    expect(nebula).toBeDefined();
+    expect(nebula?.plannedStories).toBeGreaterThan(0);
+    expect(nebula?.stories.some((story) => story.id === 'story-flow-analytics')).toBeTrue();
+    expect(nebula?.totalPoints).toBeGreaterThan(0);
+  });
+
+  it('should reset sprint filter when an unknown sprint is provided', () => {
+    service.setSprintFilter('sprint-aether');
+    expect(service.selectedSprintId()).toBe('sprint-aether');
+
+    service.setSprintFilter('unknown-sprint');
+    expect(service.selectedSprintId()).toBe('all-sprints');
+  });
 });

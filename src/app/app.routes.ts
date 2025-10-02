@@ -26,6 +26,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'sprints',
+    loadChildren: () =>
+      import('./features/sprints/sprints.routes').then((m) => m.SPRINTS_ROUTES),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

@@ -10,6 +10,7 @@ Fornecer um quadro Kanban gamificado que represente a hierarquia Feature → His
 - **Componentes standalone** desacoplados (`BoardColumn`, `BoardCard`) facilitam testes e composição de UI.
 - **Drag-and-drop nativo** com HTML5 + `BoardDragState` garante movimentação entre colunas respeitando limites de WIP e workflow configurado.
 - **Transições validadas** no serviço (`moveStory`) respeitam workflow configurável e limites de WIP.
+- **Planejamento de sprint integrado**: `BoardState` expõe `sprintFilterOptions`, `setSprintFilter` e `sprintOverviews`, permitindo filtrar o quadro por sprint e reutilizar os mesmos dados no hub dedicado de sprints.
 
 ## Uso
 ```ts
@@ -24,6 +25,7 @@ Rotas lazy-loaded já expõem a `BoardPage`. Componentes podem ser reutilizados 
 - O botão **Nova história** abre o modal standalone `CreateStoryModalComponent`, reunindo dados da missão (título, feature, status, prioridade, responsável, XP e etiquetas) no mesmo visual neon futurista do quadro.
 - As tarefas inseridas no modal tornam-se `StoryTask` tipadas no `BoardState`, alimentando automaticamente o checklist exibido em cada `BoardCard`.
 - O estado valida limites de WIP antes de persistir a nova história; etapas saturadas aparecem desabilitadas no seletor do modal.
+- Histórias podem ser associadas a uma sprint (`sprintId`) e o filtro lateral do quadro consome esse vínculo para mostrar apenas as missões relevantes daquela janela de entrega.
 
 ## Checklist de manutenção
 - [ ] Atualizar mocks em `BoardState` ao integrar API real.
