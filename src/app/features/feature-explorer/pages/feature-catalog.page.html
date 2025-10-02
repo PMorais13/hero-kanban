@@ -1,9 +1,15 @@
 <section class="catalog" aria-labelledby="feature-catalog-title">
   <header class="catalog__header">
-    <h1 id="feature-catalog-title">Explorar features e histórias</h1>
-    <p>
-      Conheça as missões épicas em andamento. Cada feature reúne histórias que impulsionam a jornada da guilda.
-    </p>
+    <div class="catalog__heading">
+      <h1 id="feature-catalog-title">Explorar features e histórias</h1>
+      <p>
+        Conheça as missões épicas em andamento. Cada feature reúne histórias que impulsionam a jornada da guilda.
+      </p>
+    </div>
+    <button type="button" mat-flat-button color="primary" class="catalog__cta" (click)="openCreateFeatureDialog()">
+      <mat-icon>add</mat-icon>
+      Nova feature
+    </button>
   </header>
 
   <ng-container *ngIf="featureCards().length > 0; else emptyState">

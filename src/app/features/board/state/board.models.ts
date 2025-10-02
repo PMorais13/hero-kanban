@@ -90,6 +90,13 @@ export interface Feature {
   readonly mission: string;
 }
 
+export interface CreateFeaturePayload {
+  readonly title: string;
+  readonly theme: string;
+  readonly mission: string;
+  readonly xpReward: number;
+}
+
 export interface BoardCardViewModel {
   readonly id: string;
   readonly title: string;
