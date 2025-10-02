@@ -83,16 +83,29 @@ describe('BoardConfigState', () => {
     expect(state.statuses()[2].icon).toBe('flag');
   });
 
-  it('should move statuses up and down updating their order', () => {
+  it('should reorder statuses when a new target index is provided', () => {
     const before = state.statusOptions().map((option) => option.id);
     const targetId = before[1];
 
-    state.moveStatus(targetId, 'up');
-    const afterUp = state.statusOptions().map((option) => option.id);
-    expect(afterUp[0]).toBe(targetId);
+    state.reorderStatus(targetId, 3);
+    const after = state.statusOptions().map((option) => option.id);
 
-    state.moveStatus(targetId, 'down');
-    const afterDown = state.statusOptions().map((option) => option.id);
-    expect(afterDown[1]).toBe(targetId);
+    expect(after[3]).toBe(targetId);
+  });
+
+  it('should clamp invalid reorder indices to the available range', () => {
+    const lastStatusId = state.statusOptions().at(-1)?.id;
+
+    if (!lastStatusId) {
+      fail('Expected at least one status option');
+      return;
+    }
+
+    state.reorderStatus(lastStatusId, -10);
+    expect(state.statusOptions()[0].id).toBe(lastStatusId);
+
+    state.reorderStatus(lastStatusId, 999);
+    const latest = state.statusOptions();
+    expect(latest[latest.length - 1].id).toBe(lastStatusId);
   });
 });

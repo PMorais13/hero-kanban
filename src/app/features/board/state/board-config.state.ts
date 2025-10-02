@@ -257,7 +257,7 @@ export class BoardConfigState {
     );
   }
 
-  moveStatus(statusId: string, direction: 'up' | 'down'): void {
+  reorderStatus(statusId: string, targetIndex: number): void {
     this._statuses.update((statuses) => {
       const sorted = [...statuses].sort((a, b) => a.order - b.order);
       const currentIndex = sorted.findIndex((status) => status.id === statusId);
@@ -266,14 +266,17 @@ export class BoardConfigState {
         return statuses;
       }
 
-      const targetIndex = direction === 'up' ? currentIndex - 1 : currentIndex + 1;
+      const normalizedTargetIndex = Math.min(
+        Math.max(targetIndex, 0),
+        sorted.length - 1,
+      );
 
-      if (targetIndex < 0 || targetIndex >= sorted.length) {
+      if (normalizedTargetIndex === currentIndex) {
         return statuses;
       }
 
       const [moved] = sorted.splice(currentIndex, 1);
-      sorted.splice(targetIndex, 0, moved);
+      sorted.splice(normalizedTargetIndex, 0, moved);
 
       return sorted.map((status, index) => ({
         ...status,

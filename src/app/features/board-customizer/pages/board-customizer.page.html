@@ -11,75 +11,71 @@
       <h2 id="status-list-heading">Etapas disponíveis</h2>
       <p>Personalize a identidade de cada etapa e organize o fluxo de trabalho na ordem ideal.</p>
     </header>
-    <ul>
-      <li *ngFor="let status of statuses(); let index = index; let isLast = last; trackBy: trackStatus" class="status-card">
-        <header class="status-card__header">
-          <div class="status-card__reorder" aria-label="Ordenar etapa">
+    <ul
+      class="status-list"
+      cdkDropList
+      [cdkDropListData]="statuses()"
+      (cdkDropListDropped)="onStatusDrop($event)"
+      aria-describedby="status-list-heading"
+    >
+      <li
+        *ngFor="let status of statuses(); let index = index; trackBy: trackStatus"
+        class="status-item"
+        cdkDrag
+        cdkDragLockAxis="y"
+        [cdkDragData]="status"
+      >
+        <div class="status-item__main">
+          <span class="material-symbols-rounded status-item__icon" aria-hidden="true">{{ status.icon }}</span>
+          <div class="status-item__info">
+            <p class="status-item__title">{{ status.name }}</p>
+            <p class="status-item__subtitle">{{ status.description || 'Sem descrição cadastrada.' }}</p>
+          </div>
+        </div>
+
+        <div class="status-item__meta">
+          <div class="status-item__snacks" role="list" aria-label="Resumo da etapa">
+            <span class="status-item__snack" role="listitem">Etapa {{ index + 1 }}</span>
+            <span
+              class="status-item__snack"
+              [class.status-item__snack--inactive]="!status.isActive"
+              role="listitem"
+            >
+              {{ status.isActive ? 'Ativa' : 'Inativa' }}
+            </span>
+          </div>
+
+          <div class="status-item__actions" aria-label="Ações da etapa">
             <button
               type="button"
-              (click)="onMoveStatus(status.id, 'up')"
-              [disabled]="index === 0"
-              [attr.aria-label]="'Mover ' + status.name + ' para cima'"
+              class="status-item__drag-handle"
+              cdkDragHandle
+              [attr.aria-label]="'Reordenar etapa ' + status.name"
+              title="Arraste para reordenar"
             >
-              <span class="material-symbols-rounded" aria-hidden="true">arrow_upward</span>
+              <span class="material-symbols-rounded" aria-hidden="true">drag_indicator</span>
             </button>
+
+            <label class="status-item__toggle">
+              <input
+                type="checkbox"
+                [checked]="status.isActive"
+                (change)="onStatusToggle(status.id, $event)"
+                [attr.aria-label]="'Alternar etapa ' + status.name"
+              />
+              <span>{{ status.isActive ? 'Ativa' : 'Inativa' }}</span>
+            </label>
+
             <button
               type="button"
-              (click)="onMoveStatus(status.id, 'down')"
-              [disabled]="isLast"
-              [attr.aria-label]="'Mover ' + status.name + ' para baixo'"
+              class="status-item__edit"
+              (click)="openStatusEditor(status.id)"
+              [attr.aria-label]="'Editar etapa ' + status.name"
             >
-              <span class="material-symbols-rounded" aria-hidden="true">arrow_downward</span>
+              <span class="material-symbols-rounded" aria-hidden="true">edit</span>
+              Editar
             </button>
           </div>
-          <div class="status-card__identity">
-            <span class="material-symbols-rounded status-card__icon" aria-hidden="true">{{ status.icon }}</span>
-            <span class="status-card__order">Etapa {{ index + 1 }}</span>
-          </div>
-          <label class="status-card__toggle">
-            <input
-              type="checkbox"
-              [checked]="status.isActive"
-              (change)="onStatusToggle(status.id, $event)"
-              [attr.aria-label]="'Alternar etapa ' + status.name"
-            />
-            <span>Ativa</span>
-          </label>
-        </header>
-        <div class="status-card__form">
-          <label class="status-field">
-            <span class="status-field__label">Título</span>
-            <input
-              type="text"
-              [value]="status.name"
-              (input)="onStatusTitleChange(status.id, $event)"
-              autocomplete="off"
-              placeholder="Nome da etapa"
-            />
-          </label>
-          <label class="status-field">
-            <span class="status-field__label">Subtítulo</span>
-            <textarea
-              rows="2"
-              [value]="status.description"
-              (input)="onStatusSubtitleChange(status.id, $event)"
-              placeholder="Descrição rápida da etapa"
-            ></textarea>
-          </label>
-          <label class="status-field">
-            <span class="status-field__label">Ícone</span>
-            <div class="status-field__icon-select">
-              <span class="material-symbols-rounded" aria-hidden="true">{{ status.icon }}</span>
-              <select [value]="status.icon" (change)="onStatusIconChange(status.id, $event)">
-                <option *ngFor="let option of iconOptions" [value]="option.value">
-                  {{ option.label }}
-                </option>
-                <option *ngIf="!hasIconOption(status.icon)" [value]="status.icon">
-                  {{ status.icon }}
-                </option>
-              </select>
-            </div>
-          </label>
         </div>
       </li>
     </ul>
@@ -110,3 +106,11 @@
     </form>
   </section>
 </section>
+
+<hk-status-editor-modal
+  *ngIf="editingStatus() as status"
+  [status]="status"
+  [iconOptions]="iconOptions"
+  (dismissed)="closeStatusEditor()"
+  (submitted)="onStatusEditorSubmit($event)"
+></hk-status-editor-modal>
