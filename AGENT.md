@@ -299,3 +299,10 @@ export const mapDtoToVm = (dto: TaskDto): TaskVm => ({
 - Sempre que uma PR introduzir algo novo, **atualizar o README** junto faz parte da entrega.  
 
 ---
+
+## 20 UI com Angular Material
+
+- Priorizar componentes do Angular Material para shell, formulários e cards (toolbar, sidenav, buttons, form-field, select, chip, progress-bar).
+- Sempre habilitar `provideAnimationsAsync()` no `app.config.ts` quando usar Material.
+- Preferir `mat-icon` com Material Symbols pré-carregados no `index.html`.
+- Configure o tema global em `styles.scss` (via prebuilt theme ou API de theming) garantindo coerência com o visual escuro existente.
