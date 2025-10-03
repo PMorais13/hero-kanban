@@ -4,11 +4,32 @@
   [class.column--invalid]="isDropRejected()"
   [attr.data-status]="column().status.id"
   [attr.aria-label]="column().status.name"
+  [attr.aria-describedby]="'column-description-' + column().status.id"
+  [style.--status-color]="column().status.color"
   (dragenter)="onDragEnter($event)"
   (dragover)="onDragOver($event)"
   (dragleave)="onDragLeave($event)"
   (drop)="onDrop($event)"
 >
+  <header class="column__header">
+    <div class="column__identity">
+      <span class="column__icon" aria-hidden="true">
+        <mat-icon fontSet="material-symbols-rounded">{{ column().status.icon }}</mat-icon>
+      </span>
+      <div class="column__titles">
+        <p class="column__name">{{ column().status.name }}</p>
+        <p class="column__description" [id]="'column-description-' + column().status.id">
+          {{ column().status.description }}
+        </p>
+      </div>
+    </div>
+    <div class="column__meta" role="status" [attr.aria-label]="wipAriaLabel()">
+      <span class="column__short-label" aria-hidden="true">{{ column().status.shortLabel }}</span>
+      <span class="column__wip" [class.column__wip--breached]="column().isWipLimitBreached">
+        {{ wipDisplayLabel() }}
+      </span>
+    </div>
+  </header>
   <ul class="column__cards" role="list">
     <li *ngFor="let card of column().cards; trackBy: trackCard" role="listitem">
       <kanban-board-card [card]="card"></kanban-board-card>
