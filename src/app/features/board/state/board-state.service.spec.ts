@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { BoardState } from './board-state.service';
-import type { CreateStoryPayload } from './board.models';
+import type { CreateSprintPayload, CreateStoryPayload } from './board.models';
 
 describe('BoardState', () => {
   let service: BoardState;
@@ -120,5 +120,33 @@ describe('BoardState', () => {
 
     service.setSprintFilter('unknown-sprint');
     expect(service.selectedSprintId()).toBe('all-sprints');
+  });
+
+  it('should create a new sprint when the payload is valid', () => {
+    const payload: CreateSprintPayload = {
+      name: 'Sprint Aurora',
+      goal: 'Lançar o painel cooperativo de conquistas.',
+      focus: 'Integrações e alinhamento com comunidades',
+      startDateIso: '2024-07-01',
+      endDateIso: '2024-07-12',
+    };
+
+    const created = service.createSprint(payload);
+    expect(created).not.toBeNull();
+    expect(service.sprints().some((sprint) => sprint.id === created?.id)).toBeTrue();
+    expect(service.sprintOverviews().some((overview) => overview.sprint.id === created?.id)).toBeTrue();
+  });
+
+  it('should block sprint creation when the period is invalid', () => {
+    const payload: CreateSprintPayload = {
+      name: 'Sprint Eclipse',
+      goal: 'Preparar o lançamento do hub de insights.',
+      focus: 'Dados e confiabilidade',
+      startDateIso: '2024-08-15',
+      endDateIso: '2024-08-10',
+    };
+
+    const created = service.createSprint(payload);
+    expect(created).toBeNull();
   });
 });
