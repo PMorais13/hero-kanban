@@ -5,6 +5,7 @@ import type {
   BoardStatus,
   BoardStatusWithCapacity,
   CreateFeaturePayload,
+  CreateSprintPayload,
   CreateStoryPayload,
   Feature,
   Mission,
@@ -106,6 +107,42 @@ export class BoardState {
       endDateIso: '2024-06-28',
     },
   ]);
+
+  createSprint(payload: CreateSprintPayload): Sprint | null {
+    const name = payload.name.trim();
+    const goal = payload.goal.trim();
+    const focus = payload.focus.trim();
+    const startDateIso = payload.startDateIso.trim();
+    const endDateIso = payload.endDateIso.trim();
+
+    if (name.length < 3 || goal.length < 5 || focus.length < 3) {
+      return null;
+    }
+
+    const startTimestamp = Date.parse(startDateIso);
+    const endTimestamp = Date.parse(endDateIso);
+
+    if (Number.isNaN(startTimestamp) || Number.isNaN(endTimestamp) || startTimestamp > endTimestamp) {
+      return null;
+    }
+
+    const sprint: Sprint = {
+      id: this.createId('sprint'),
+      name,
+      goal,
+      focus,
+      startDateIso,
+      endDateIso,
+    };
+
+    this._sprints.update((current) => {
+      const next = [...current, sprint];
+      next.sort((a, b) => Date.parse(a.startDateIso) - Date.parse(b.startDateIso));
+      return next;
+    });
+
+    return sprint;
+  }
 
   private readonly _selectedSprintId = signal<string>(ALL_SPRINTS_FILTER);
 

@@ -34,6 +34,14 @@ export interface Sprint {
   readonly endDateIso: string;
 }
 
+export interface CreateSprintPayload {
+  readonly name: string;
+  readonly goal: string;
+  readonly focus: string;
+  readonly startDateIso: string;
+  readonly endDateIso: string;
+}
+
 export interface SprintFilterOption {
   readonly id: string;
   readonly label: string;

@@ -7,9 +7,9 @@
         squad antes das cerimônias e garantir que nenhuma tarefa épica fique de fora.
       </p>
     </div>
-    <button type="button" class="sprints__new-task">
-      <span class="sprints__new-task-icon" aria-hidden="true">playlist_add</span>
-      Nova tarefa
+    <button type="button" class="sprints__new-sprint" (click)="openCreateSprint()">
+      <span class="sprints__new-sprint-icon" aria-hidden="true">playlist_add</span>
+      Nova sprint
     </button>
   </header>
 
@@ -86,3 +86,9 @@
     </section>
   </ng-template>
 </section>
+
+<hk-create-sprint-modal
+  *ngIf="isCreatingSprint()"
+  (dismissed)="closeCreateSprint()"
+  (submitted)="onSprintSubmitted($event)"
+></hk-create-sprint-modal>

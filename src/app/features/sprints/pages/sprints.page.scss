@@ -39,7 +39,7 @@
   max-width: 62ch;
 }
 
-.sprints__new-task {
+.sprints__new-sprint {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -53,14 +53,14 @@
   transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
 
-.sprints__new-task:hover,
-.sprints__new-task:focus-visible {
+.sprints__new-sprint:hover,
+.sprints__new-sprint:focus-visible {
   transform: translateY(-1px);
   border-color: rgba(var(--hk-accent-rgb), 0.65);
   background: rgba(var(--hk-accent-rgb), 0.25);
 }
 
-.sprints__new-task-icon {
+.sprints__new-sprint-icon {
   font-family: 'Material Symbols Rounded';
   font-weight: 400;
   font-style: normal;
@@ -77,7 +77,7 @@
 }
 
 @media (max-width: 719px) {
-  .sprints__new-task {
+  .sprints__new-sprint {
     width: 100%;
     justify-content: center;
   }

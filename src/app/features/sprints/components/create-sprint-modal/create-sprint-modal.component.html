@@ -1,0 +1,68 @@
+<section class="create-sprint-modal" (keydown.escape)="onCancel()">
+  <div class="create-sprint-modal__backdrop" (click)="onCancel()" aria-hidden="true"></div>
+  <div class="create-sprint-modal__panel" role="dialog" aria-modal="true" aria-labelledby="create-sprint-title">
+    <form class="create-sprint-modal__form" (ngSubmit)="onSubmit()" novalidate>
+      <header class="create-sprint-modal__header">
+        <div>
+          <h2 id="create-sprint-title">Cadastrar nova sprint</h2>
+          <p>Planeje o próximo ciclo com objetivo claro, foco estratégico e datas alinhadas à guilda.</p>
+        </div>
+        <button type="button" class="create-sprint-modal__close" (click)="onCancel()" aria-label="Fechar modal">
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        </button>
+      </header>
+
+      <div class="create-sprint-modal__grid">
+        <label class="create-sprint-modal__field">
+          <span>Nome da sprint</span>
+          <input type="text" formControlName="name" placeholder="Ex.: Sprint Aurora" />
+          <small *ngIf="form.controls.name.invalid && form.controls.name.touched">
+            Informe um nome com pelo menos 3 caracteres.
+          </small>
+        </label>
+
+        <label class="create-sprint-modal__field">
+          <span>Objetivo</span>
+          <textarea formControlName="goal" rows="3" placeholder="Defina o resultado esperado para o squad"></textarea>
+          <small *ngIf="form.controls.goal.invalid && form.controls.goal.touched">
+            Explique o objetivo estratégico da sprint.
+          </small>
+        </label>
+
+        <label class="create-sprint-modal__field">
+          <span>Foco estratégico</span>
+          <input type="text" formControlName="focus" placeholder="Ex.: Integrações e estabilidade" />
+          <small *ngIf="form.controls.focus.invalid && form.controls.focus.touched">
+            Descreva o foco principal da guilda nesta sprint.
+          </small>
+        </label>
+
+        <div class="create-sprint-modal__dates">
+          <label class="create-sprint-modal__field">
+            <span>Início</span>
+            <input type="date" formControlName="startDate" />
+            <small *ngIf="form.controls.startDate.invalid && form.controls.startDate.touched">
+              Informe a data de início da sprint.
+            </small>
+          </label>
+
+          <label class="create-sprint-modal__field">
+            <span>Término</span>
+            <input type="date" formControlName="endDate" />
+            <small *ngIf="form.controls.endDate.invalid && form.controls.endDate.touched">
+              Informe a data de término da sprint.
+            </small>
+            <small *ngIf="hasInvalidPeriod">A data final deve ser posterior ou igual ao início.</small>
+          </label>
+        </div>
+      </div>
+
+      <footer class="create-sprint-modal__footer">
+        <button type="button" class="create-sprint-modal__secondary" (click)="onCancel()">Cancelar</button>
+        <button type="submit" class="create-sprint-modal__primary" [disabled]="form.invalid || hasInvalidPeriod">
+          Salvar sprint
+        </button>
+      </footer>
+    </form>
+  </div>
+</section>
