@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, input, signal, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 import type { BoardColumnViewModel } from '../../state/board.models';
 import { BoardCardComponent } from '../board-card/board-card.component';
 import { BoardState } from '../../state/board-state.service';
@@ -11,7 +12,7 @@ import { BoardDragState } from '../../state/board-drag-state.service';
   templateUrl: './board-column.component.html',
   styleUrls: ['./board-column.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, BoardCardComponent],
+  imports: [NgFor, BoardCardComponent, MatIconModule],
 })
 export class BoardColumnComponent implements OnDestroy {
   readonly column = input.required<BoardColumnViewModel>();
@@ -21,6 +22,27 @@ export class BoardColumnComponent implements OnDestroy {
   private readonly boardState = inject(BoardState);
   private readonly dragState = inject(BoardDragState);
   private dropFeedbackTimeoutId: number | undefined;
+
+  protected wipDisplayLabel(): string {
+    const column = this.column();
+    if (column.wipLimit !== undefined) {
+      return `${column.wipCount} / ${column.wipLimit}`;
+    }
+
+    return `${column.wipCount}`;
+  }
+
+  protected wipAriaLabel(): string {
+    const column = this.column();
+    if (column.wipLimit !== undefined) {
+      const prefix = column.isWipLimitBreached ? 'Limite de WIP excedido' : 'Limite de WIP';
+      const pluralized = column.wipCount === 1 ? 'história' : 'histórias';
+      return `${prefix}: ${column.wipCount} de ${column.wipLimit} ${pluralized}`;
+    }
+
+    const pluralized = column.wipCount === 1 ? 'história' : 'histórias';
+    return `${column.wipCount} ${pluralized} em andamento`;
+  }
 
   protected trackCard(_: number, card: BoardColumnViewModel['cards'][number]): string {
     return card.id;
