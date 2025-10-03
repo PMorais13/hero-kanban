@@ -6,7 +6,8 @@
 
 .shell-container {
   height: 100%;
-  background: radial-gradient(circle at 10% 20%, #302b63 0%, #1c1a3b 40%, #0f0c29 100%);
+  background: var(--hk-shell-background);
+  transition: background 240ms ease;
 }
 
 .shell-toolbar {
@@ -14,7 +15,7 @@
   gap: 1.5rem;
   padding: 0 1.5rem;
   backdrop-filter: blur(16px);
-  box-shadow: 0 10px 30px rgba(6, 4, 20, 0.35);
+  box-shadow: var(--hk-toolbar-shadow);
 }
 
 .shell-toolbar__brand {
@@ -30,9 +31,9 @@
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 1rem;
-  background: linear-gradient(135deg, #ff6b6b 0%, #845ef7 100%);
+  background: var(--hk-logo-gradient);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--hk-heading-letter-spacing, 0.08em);
 }
 
 .shell-toolbar__titles {
@@ -47,12 +48,14 @@
   font-weight: 600;
   text-decoration: none;
   color: inherit;
+  font-family: var(--hk-heading-font-family);
+  letter-spacing: var(--hk-heading-letter-spacing, 0.04em);
 }
 
 .shell-toolbar__titles > p {
   margin: 0;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--hk-text-muted);
 }
 
 .shell-toolbar__spacer {
@@ -63,7 +66,7 @@
   display: grid;
   gap: 0.4rem;
   padding: 1rem 1.5rem 0.5rem;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--hk-text-secondary);
 }
 
 .shell-progress > p {
@@ -78,11 +81,12 @@
 
 .shell-sidenav {
   width: min(22rem, 90vw);
-  background: rgba(20, 22, 42, 0.92);
+  background: var(--hk-sidenav-background);
   color: var(--hk-text-primary);
   backdrop-filter: blur(24px);
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid var(--hk-sidenav-border);
   padding-bottom: 1.5rem;
+  transition: background 240ms ease, border-color 240ms ease;
 }
 
 .shell-sidenav__header {
@@ -109,7 +113,7 @@ mat-nav-list a.mat-mdc-list-item {
 
 mat-nav-list a.mat-mdc-list-item.is-active,
 mat-nav-list a.mat-mdc-list-item:hover {
-  background: rgba(124, 92, 255, 0.16);
+  background: var(--hk-nav-hover);
 }
 
 mat-chip {

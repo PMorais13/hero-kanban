@@ -11,6 +11,7 @@ export interface ThemeOption {
   readonly softAccent: string;
   readonly previewGradient: string;
   readonly tone: 'dark' | 'light';
+  readonly previewFontFamily: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -26,6 +27,7 @@ export class ThemeState {
       softAccent: 'rgba(124, 92, 255, 0.28)',
       previewGradient: 'linear-gradient(135deg, #1b1933 0%, #433978 100%)',
       tone: 'dark',
+      previewFontFamily: "'Chakra Petch', 'Inter', 'Segoe UI', sans-serif",
     },
     {
       id: 'aurora-crest',
@@ -35,6 +37,7 @@ export class ThemeState {
       softAccent: 'rgba(29, 211, 176, 0.25)',
       previewGradient: 'linear-gradient(135deg, #012a4a 0%, #036666 100%)',
       tone: 'dark',
+      previewFontFamily: "'Space Grotesk', 'Rubik', 'Segoe UI', sans-serif",
     },
   ]);
 
