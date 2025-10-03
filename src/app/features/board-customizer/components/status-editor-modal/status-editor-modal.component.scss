@@ -47,7 +47,7 @@
   width: 3rem;
   height: 3rem;
   border-radius: 1rem;
-  background: rgba(124, 92, 255, 0.25);
+  background: rgba(var(--hk-accent-rgb), 0.25);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -82,8 +82,8 @@
 .status-editor-modal__close:hover,
 .status-editor-modal__close:focus-visible {
   transform: translateY(-1px);
-  border-color: rgba(124, 92, 255, 0.6);
-  background: rgba(124, 92, 255, 0.25);
+  border-color: rgba(var(--hk-accent-rgb), 0.6);
+  background: rgba(var(--hk-accent-rgb), 0.25);
 }
 
 .status-editor-modal__fields {
@@ -120,7 +120,7 @@
 .status-editor-modal__field input:focus-visible,
 .status-editor-modal__field textarea:focus-visible,
 .status-editor-modal__field select:focus-visible {
-  outline: 2px solid rgba(124, 92, 255, 0.6);
+  outline: 2px solid rgba(var(--hk-accent-rgb), 0.6);
   outline-offset: 2px;
 }
 
@@ -142,7 +142,7 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.8rem;
-  background: rgba(124, 92, 255, 0.2);
+  background: rgba(var(--hk-accent-rgb), 0.2);
   color: #f8fafc;
   font-size: 1.7rem;
 }
@@ -175,7 +175,7 @@
 }
 
 .status-editor-modal__primary {
-  background: linear-gradient(135deg, #7c5cff 0%, #4f46e5 100%);
+  background: var(--hk-accent-gradient);
   color: #ffffff;
 }
 

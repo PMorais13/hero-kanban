@@ -45,9 +45,9 @@
   gap: 0.5rem;
   padding: 0.85rem 1.4rem;
   border-radius: 999px;
-  border: 1px solid rgba(15, 118, 110, 0.4);
-  background: rgba(13, 148, 136, 0.18);
-  color: #ccfbf1;
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.4);
+  background: rgba(var(--hk-accent-rgb), 0.18);
+  color: var(--hk-text-primary);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
@@ -56,8 +56,8 @@
 .sprints__new-task:hover,
 .sprints__new-task:focus-visible {
   transform: translateY(-1px);
-  border-color: rgba(20, 184, 166, 0.65);
-  background: rgba(20, 184, 166, 0.25);
+  border-color: rgba(var(--hk-accent-rgb), 0.65);
+  background: rgba(var(--hk-accent-rgb), 0.25);
 }
 
 .sprints__new-task-icon {
@@ -161,8 +161,8 @@
   margin: 0;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
-  background: rgba(79, 70, 229, 0.18);
-  border: 1px solid rgba(79, 70, 229, 0.35);
+  background: rgba(var(--hk-accent-rgb), 0.18);
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.35);
   color: var(--hk-text-primary);
   font-weight: 500;
 }
@@ -254,8 +254,8 @@
 
 .sprint-story__task:hover,
 .sprint-story__task:focus-visible {
-  border-color: rgba(124, 92, 255, 0.5);
-  background: rgba(124, 92, 255, 0.12);
+  border-color: rgba(var(--hk-accent-rgb), 0.5);
+  background: rgba(var(--hk-accent-rgb), 0.12);
 }
 
 .sprint-story__task-indicator {
@@ -268,7 +268,7 @@
 }
 
 .sprint-story__task.is-done .sprint-story__task-indicator {
-  background: linear-gradient(135deg, #34d399 0%, #22d3ee 100%);
+  background: var(--hk-accent-gradient);
   border-color: transparent;
 }
 

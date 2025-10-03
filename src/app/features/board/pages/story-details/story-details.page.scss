@@ -177,7 +177,7 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4f46e5 0%, #38bdf8 100%);
+  background: var(--hk-accent-gradient);
   font-weight: 600;
 }
 
@@ -288,7 +288,7 @@
 }
 
 .story-details__task.is-done .story-details__task-indicator {
-  background: linear-gradient(135deg, #34d399 0%, #22d3ee 100%);
+  background: var(--hk-accent-gradient);
 }
 
 .story-details__task-title {

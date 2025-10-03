@@ -24,6 +24,6 @@ button[mat-flat-button] {
 }
 
 button[mat-stroked-button] {
-  border-color: rgba(124, 92, 255, 0.45);
+  border-color: rgba(var(--hk-accent-rgb), 0.45);
   color: var(--hk-text-primary);
 }
