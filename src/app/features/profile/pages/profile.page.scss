@@ -38,7 +38,11 @@
   justify-content: center;
   padding: 0.5rem 1rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(124, 92, 255, 0.8), rgba(79, 70, 229, 0.8));
+  background: linear-gradient(
+    135deg,
+    rgba(var(--hk-accent-rgb), 0.8),
+    rgba(var(--hk-accent-strong-rgb), 0.8)
+  );
   font-weight: 600;
   letter-spacing: 0.08em;
 }
@@ -101,8 +105,12 @@
 
 .theme-option__card {
   --theme-accent: var(--hk-accent);
-  --theme-soft-accent: rgba(124, 92, 255, 0.22);
-  --theme-preview: linear-gradient(135deg, rgba(124, 92, 255, 0.5), rgba(124, 92, 255, 0.1));
+  --theme-soft-accent: rgba(var(--hk-accent-rgb), 0.22);
+  --theme-preview: linear-gradient(
+    135deg,
+    rgba(var(--hk-accent-rgb), 0.5),
+    rgba(var(--hk-accent-rgb), 0.1)
+  );
   --theme-font-family: var(--hk-heading-font-family);
   display: grid;
   gap: 0.75rem;
@@ -179,7 +187,7 @@
 .profile__xp-bar {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #7c5cff 0%, #00d4ff 100%);
+  background: var(--hk-accent-gradient-progress);
 }
 
 .profile__achievements,
@@ -264,7 +272,7 @@
 .achievement-card__progress-bar {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #34d399 0%, #22d3ee 100%);
+  background: var(--hk-accent-gradient);
 }
 
 .achievement-card__value {

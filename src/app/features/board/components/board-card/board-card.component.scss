@@ -22,7 +22,7 @@
 .card:focus-visible {
   box-shadow:
     0 18px 40px -12px rgba(14, 11, 36, 0.8),
-    0 0 0 3px rgba(99, 102, 241, 0.6);
+    0 0 0 3px rgba(var(--hk-accent-rgb), 0.6);
 }
 
 .card--dragging {
@@ -94,7 +94,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+  background: var(--hk-accent-gradient);
   font-weight: 600;
 }
 
@@ -121,7 +121,7 @@
 .card__progress-fill {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #34d399 0%, #60a5fa 100%);
+  background: var(--hk-accent-gradient-progress);
 }
 
 .card__progress-label {

@@ -30,8 +30,8 @@
 
 .feature-detail__breadcrumb > a:hover,
 .feature-detail__breadcrumb > a:focus-visible {
-  background: rgba(124, 92, 255, 0.35);
-  border-color: rgba(124, 92, 255, 0.55);
+  background: rgba(var(--hk-accent-rgb), 0.35);
+  border-color: rgba(var(--hk-accent-rgb), 0.55);
 }
 
 .feature-detail__header {
@@ -108,7 +108,7 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(90deg, #22d3ee 0%, #6366f1 50%, #a855f7 100%);
+  background: var(--hk-accent-gradient-progress);
 }
 
 .story-section {
@@ -157,8 +157,8 @@
   justify-self: flex-start;
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
-  background: rgba(99, 102, 241, 0.2);
-  border: 1px solid rgba(99, 102, 241, 0.45);
+  background: rgba(var(--hk-accent-rgb), 0.18);
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.45);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -257,8 +257,8 @@
   justify-content: center;
   padding: 0.65rem 1.2rem;
   border-radius: 0.9rem;
-  background: rgba(124, 92, 255, 0.25);
-  border: 1px solid rgba(124, 92, 255, 0.45);
+  background: rgba(var(--hk-accent-rgb), 0.25);
+  border: 1px solid rgba(var(--hk-accent-rgb), 0.45);
   color: var(--hk-text-primary);
   text-decoration: none;
   font-weight: 600;
@@ -267,8 +267,8 @@
 
 .feature-detail__link:hover,
 .feature-detail__link:focus-visible {
-  background: rgba(124, 92, 255, 0.4);
-  border-color: rgba(124, 92, 255, 0.6);
+  background: rgba(var(--hk-accent-rgb), 0.4);
+  border-color: rgba(var(--hk-accent-rgb), 0.6);
 }
 
 @media (max-width: 720px) {

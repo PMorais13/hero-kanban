@@ -22,7 +22,7 @@
 
 .column--active-drop {
   border-color: var(--hk-accent);
-  background: rgba(124, 92, 255, 0.15);
+  background: rgba(var(--hk-accent-rgb), 0.15);
   box-shadow: 0 0 0 2px var(--hk-accent-soft), 0 20px 32px -24px rgba(14, 12, 41, 0.8);
 }
 
