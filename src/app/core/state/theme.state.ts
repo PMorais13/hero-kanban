@@ -7,7 +7,21 @@ import {
   STATIC_THEME_OPTIONS,
   type ThemeId,
   type ThemeOption,
+  type ThemeProfileTokens,
 } from './theme.config';
+
+const PROFILE_TOKEN_TO_CSS_VARIABLE: ReadonlyArray<readonly [keyof ThemeProfileTokens, string]> = [
+  ['textPrimary', '--hk-profile-text-primary'],
+  ['textSecondary', '--hk-profile-text-secondary'],
+  ['textMuted', '--hk-profile-text-muted'],
+  ['border', '--hk-profile-border'],
+  ['borderStrong', '--hk-profile-border-strong'],
+  ['surface', '--hk-profile-surface'],
+  ['surfaceSoft', '--hk-profile-surface-soft'],
+  ['surfaceSubtle', '--hk-profile-surface-subtle'],
+  ['progressTrack', '--hk-profile-progress-track'],
+  ['shadow', '--hk-profile-shadow'],
+];
 
 @Injectable({ providedIn: 'root' })
 export class ThemeState {
@@ -50,9 +64,12 @@ export class ThemeState {
     const rootElement = documentRef.documentElement;
     const bodyElement = documentRef.body;
     const overlayElement = this.overlayContainer?.getContainerElement();
+    const theme = this._themes().find((option) => option.id === themeId);
+    const profileTokens = theme?.profile;
 
     if (rootElement) {
       rootElement.dataset['theme'] = themeId;
+      this.applyProfileTokens(rootElement, profileTokens);
     }
 
     if (bodyElement) {
@@ -63,7 +80,22 @@ export class ThemeState {
       overlayElement.dataset['theme'] = themeId;
     }
   }
+
+  private applyProfileTokens(
+    target: HTMLElement,
+    profileTokens: ThemeProfileTokens | undefined,
+  ): void {
+    for (const [tokenKey, cssVariable] of PROFILE_TOKEN_TO_CSS_VARIABLE) {
+      const value = profileTokens?.[tokenKey];
+
+      if (value) {
+        target.style.setProperty(cssVariable, value);
+      } else {
+        target.style.removeProperty(cssVariable);
+      }
+    }
+  }
 }
 
 export { DEFAULT_THEME_ID } from './theme.config';
-export type { ThemeId, ThemeOption, ThemeTone } from './theme.config';
+export type { ThemeId, ThemeOption, ThemeTone, ThemeProfileTokens } from './theme.config';

@@ -4,16 +4,16 @@
 }
 
 .profile {
-  --profile-text-primary: var(--hk-text-primary);
-  --profile-text-secondary: var(--hk-text-secondary);
-  --profile-text-muted: var(--hk-text-muted);
-  --profile-border: rgba(255, 255, 255, 0.08);
-  --profile-border-strong: rgba(255, 255, 255, 0.18);
-  --profile-surface: rgba(13, 16, 34, 0.8);
-  --profile-surface-soft: rgba(255, 255, 255, 0.06);
-  --profile-surface-subtle: rgba(255, 255, 255, 0.03);
-  --profile-progress-track: rgba(124, 92, 255, 0.16);
-  --profile-shadow: 0 28px 60px rgba(10, 12, 28, 0.45);
+  --profile-text-primary: var(--hk-profile-text-primary, var(--hk-text-primary));
+  --profile-text-secondary: var(--hk-profile-text-secondary, var(--hk-text-secondary));
+  --profile-text-muted: var(--hk-profile-text-muted, var(--hk-text-muted));
+  --profile-border: var(--hk-profile-border, rgba(255, 255, 255, 0.08));
+  --profile-border-strong: var(--hk-profile-border-strong, rgba(255, 255, 255, 0.18));
+  --profile-surface: var(--hk-profile-surface, rgba(13, 16, 34, 0.8));
+  --profile-surface-soft: var(--hk-profile-surface-soft, rgba(255, 255, 255, 0.06));
+  --profile-surface-subtle: var(--hk-profile-surface-subtle, rgba(255, 255, 255, 0.03));
+  --profile-progress-track: var(--hk-profile-progress-track, rgba(124, 92, 255, 0.16));
+  --profile-shadow: var(--hk-profile-shadow, 0 28px 60px rgba(10, 12, 28, 0.45));
 
   display: grid;
   gap: 2rem;
@@ -23,32 +23,6 @@
   border: 1px solid var(--profile-border);
   box-shadow: var(--profile-shadow);
   color: var(--profile-text-primary);
-}
-
-:host-context([data-theme='radiant-dawn']) .profile {
-  --profile-text-primary: #0f172a;
-  --profile-text-secondary: #1f2937;
-  --profile-text-muted: #64748b;
-  --profile-border: rgba(15, 23, 42, 0.08);
-  --profile-border-strong: rgba(15, 23, 42, 0.16);
-  --profile-surface: #ffffff;
-  --profile-surface-soft: rgba(226, 232, 240, 0.65);
-  --profile-surface-subtle: rgba(226, 232, 240, 0.45);
-  --profile-progress-track: rgba(15, 23, 42, 0.1);
-  --profile-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
-}
-
-:host-context([data-theme='celestial-tides']) .profile {
-  --profile-text-primary: #0f172a;
-  --profile-text-secondary: #1f2937;
-  --profile-text-muted: #64748b;
-  --profile-border: rgba(15, 118, 110, 0.12);
-  --profile-border-strong: rgba(15, 118, 110, 0.22);
-  --profile-surface: #ffffff;
-  --profile-surface-soft: rgba(207, 250, 254, 0.65);
-  --profile-surface-subtle: rgba(207, 250, 254, 0.45);
-  --profile-progress-track: rgba(20, 184, 166, 0.2);
-  --profile-shadow: 0 24px 48px rgba(15, 118, 110, 0.15);
 }
 
 .profile__header {
