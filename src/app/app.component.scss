@@ -169,6 +169,32 @@ mat-chip {
   font-weight: 600;
 }
 
+.shell-toolbar__chip {
+  --mdc-chip-container-color: var(--hk-chip-accent-background);
+  --mdc-chip-elevated-container-color: var(--hk-chip-accent-background);
+  --mdc-chip-label-text-color: var(--hk-chip-accent-text);
+  --mdc-chip-selected-label-text-color: var(--hk-chip-accent-text);
+  --mdc-chip-with-icon-icon-color: var(--hk-chip-accent-text);
+  --mdc-chip-outline-color: var(--hk-chip-accent-border);
+  --mdc-chip-focus-outline-color: var(--hk-chip-accent-focus);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-inline: 0.85rem;
+  border-radius: 999px;
+  background: var(--hk-chip-accent-background);
+  border: 1px solid var(--hk-chip-accent-border);
+  color: var(--hk-chip-accent-text);
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--hk-chip-accent-hover);
+    border-color: var(--hk-chip-accent-focus);
+    box-shadow: 0 0 0 1px var(--hk-chip-accent-focus);
+  }
+}
+
 @media (min-width: 960px) {
   .shell-toolbar {
     position: sticky;

@@ -111,6 +111,38 @@
   border-radius: 999px;
 }
 
+.board__level-chip-set {
+  display: inline-flex;
+}
+
+.board__level-chip {
+  --mdc-chip-container-color: var(--hk-chip-primary-background);
+  --mdc-chip-elevated-container-color: var(--hk-chip-primary-background);
+  --mdc-chip-label-text-color: var(--hk-chip-primary-text);
+  --mdc-chip-selected-label-text-color: var(--hk-chip-primary-text);
+  --mdc-chip-with-icon-icon-color: var(--hk-chip-primary-text);
+  --mdc-chip-outline-color: var(--hk-chip-primary-border);
+  --mdc-chip-focus-outline-color: var(--hk-chip-primary-focus);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-inline: 0.85rem;
+  border-radius: 999px;
+  background: var(--hk-chip-primary-background);
+  border: 1px solid var(--hk-chip-primary-border);
+  color: var(--hk-chip-primary-text);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--hk-chip-primary-hover);
+    border-color: var(--hk-chip-primary-focus);
+    box-shadow: 0 0 0 1px var(--hk-chip-primary-focus);
+  }
+}
+
 .board__progress > p {
   margin: 0;
   color: var(--hk-text-muted);
