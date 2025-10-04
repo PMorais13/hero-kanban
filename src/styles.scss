@@ -442,6 +442,138 @@ $hero-theme: mat.define-theme((
   --mdc-linear-progress-track-color: rgba(37, 99, 235, 0.16);
 }
 
+:root[data-theme='celestial-tides'] {
+  color-scheme: light;
+  --hk-text-primary: #0f172a;
+  --hk-text-secondary: rgba(15, 23, 42, 0.78);
+  --hk-text-muted: rgba(15, 23, 42, 0.6);
+  --hk-surface: #ffffff;
+  --hk-surface-elevated: #ecfeff;
+  --hk-border: rgba(15, 118, 110, 0.12);
+  --hk-accent: #14b8a6;
+  --hk-accent-rgb: 20, 184, 166;
+  --hk-accent-soft: rgba(20, 184, 166, 0.16);
+  --hk-accent-strong: #0f766e;
+  --hk-accent-strong-rgb: 15, 118, 110;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.16);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.2);
+  --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.28);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.42);
+  --hk-chip-primary-text: var(--hk-text-primary);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.22);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.28);
+  --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.38);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.52);
+  --hk-chip-accent-text: var(--hk-text-primary);
+  --hk-accent-gradient: linear-gradient(135deg, #a7f3d0 0%, #5eead4 45%, #0ea5e9 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, #14b8a6 0%, #0ea5e9 50%, #6366f1 100%);
+  --hk-success: #059669;
+  --hk-success-rgb: 5, 150, 105;
+  --hk-success-soft: rgba(5, 150, 105, 0.16);
+  --hk-success-border: rgba(var(--hk-success-rgb), 0.24);
+  --hk-warning: #f59e0b;
+  --hk-danger: #ef4444;
+  --hk-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --hk-heading-font-family: 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-letter-spacing: 0.05em;
+  --hk-body-background-color: #f4fbfb;
+  --hk-body-background-image: radial-gradient(circle at 18% 12%, rgba(94, 234, 212, 0.32), transparent 55%),
+    radial-gradient(circle at 82% 15%, rgba(56, 189, 248, 0.26), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f0fdfa 65%, #e0f2fe 100%);
+  --hk-shell-background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(236, 254, 255, 0.98) 100%);
+  --hk-toolbar-shadow: 0 12px 28px rgba(15, 118, 110, 0.18);
+  --hk-sidenav-background: rgba(255, 255, 255, 0.94);
+  --hk-sidenav-border: rgba(15, 118, 110, 0.14);
+  --hk-logo-gradient: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 45%, #38bdf8 100%);
+  --hk-nav-hover: rgba(20, 184, 166, 0.14);
+  background-color: var(--hk-body-background-color);
+  font-family: var(--hk-font-family);
+
+  --mat-sys-color-primary: var(--hk-accent);
+  --mat-sys-color-on-primary: #ffffff;
+  --mat-sys-color-primary-container: #c8f7f0;
+  --mat-sys-color-on-primary-container: #064e3b;
+
+  --mat-sys-color-secondary: #0ea5e9;
+  --mat-sys-color-on-secondary: #ffffff;
+  --mat-sys-color-secondary-container: #d9f4ff;
+  --mat-sys-color-on-secondary-container: #0c4a6e;
+
+  --mat-sys-color-tertiary: #6366f1;
+  --mat-sys-color-on-tertiary: #ffffff;
+  --mat-sys-color-tertiary-container: #e0e7ff;
+  --mat-sys-color-on-tertiary-container: #1e1b4b;
+
+  --mat-sys-color-error: var(--hk-danger);
+  --mat-sys-color-on-error: #ffffff;
+  --mat-sys-color-error-container: #fee2e2;
+  --mat-sys-color-on-error-container: #7f1d1d;
+
+  --mat-sys-color-surface: #f4fbfb;
+  --mat-sys-color-surface-dim: #e3f4f4;
+  --mat-sys-color-surface-bright: #ffffff;
+  --mat-sys-color-surface-container-lowest: #ffffff;
+  --mat-sys-color-surface-container-low: #f0fbfb;
+  --mat-sys-color-surface-container: rgba(255, 255, 255, 0.97);
+  --mat-sys-color-surface-container-high: rgba(235, 248, 248, 0.97);
+  --mat-sys-color-surface-container-highest: rgba(220, 240, 240, 0.97);
+
+  --mat-sys-color-on-surface: var(--hk-text-primary);
+  --mat-sys-color-on-surface-variant: rgba(15, 23, 42, 0.64);
+  --mat-sys-color-outline: rgba(15, 118, 110, 0.18);
+  --mat-sys-color-outline-variant: rgba(15, 118, 110, 0.12);
+  --mat-sys-color-inverse-surface: #0f172a;
+  --mat-sys-color-inverse-on-surface: #f8fafc;
+  --mat-sys-color-inverse-primary: #5eead4;
+  --mat-sys-color-shadow: rgba(15, 118, 110, 0.12);
+  --mat-sys-color-surface-tint: var(--hk-accent);
+  --mat-sys-elevation-level2: 0 12px 28px rgba(15, 118, 110, 0.14);
+
+  --mat-toolbar-container-background-color: rgba(255, 255, 255, 0.95);
+  --mat-toolbar-container-text-color: var(--hk-text-primary);
+  --mat-toolbar-container-shadow-color: rgba(15, 118, 110, 0.18);
+  --mat-sidenav-container-background-color: rgba(236, 254, 255, 0.7);
+  --mat-sidenav-content-background-color: transparent;
+  --mat-sidenav-container-text-color: var(--hk-text-primary);
+  --mat-list-active-indicator-color: var(--hk-accent);
+  --mat-list-item-label-text-color: var(--hk-text-secondary);
+  --mat-card-background-color: #ffffff;
+  --mat-card-title-text-color: var(--hk-text-primary);
+  --mat-card-subtitle-text-color: var(--hk-text-muted);
+  --mat-chip-selected-container-color: var(--hk-accent-soft);
+  --mat-chip-selected-label-text-color: var(--hk-text-primary);
+  --mat-chip-selected-avatar-color: var(--hk-accent);
+  --mat-chip-focus-ring-color: rgba(20, 184, 166, 0.28);
+  --mat-select-panel-background-color: rgba(255, 255, 255, 0.98);
+  --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
+  --mat-option-selected-state-label-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-container-color: rgba(255, 255, 255, 0.92);
+  --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-hover-active-indicator-color: rgba(20, 184, 166, 0.65);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-active-indicator-color: rgba(20, 184, 166, 0.28);
+  --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
+  --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
+  --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-outline-color: rgba(20, 184, 166, 0.28);
+  --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
+  --mdc-outlined-text-field-hover-outline-color: rgba(20, 184, 166, 0.48);
+  --mdc-protected-button-container-color: rgba(20, 184, 166, 0.16);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
+  --mdc-unelevated-button-container-color: var(--hk-accent);
+  --mdc-unelevated-button-label-text-color: #ffffff;
+  --mdc-unelevated-button-disabled-container-color: rgba(15, 23, 42, 0.08);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(15, 23, 42, 0.3);
+  --mdc-outlined-button-outline-color: rgba(15, 118, 110, 0.18);
+  --mdc-outlined-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-button-disabled-outline-color: rgba(15, 23, 42, 0.08);
+  --mdc-outlined-button-disabled-label-text-color: rgba(15, 23, 42, 0.3);
+  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  --mdc-icon-button-disabled-icon-color: rgba(15, 23, 42, 0.25);
+  --mdc-linear-progress-active-indicator-color: var(--hk-accent);
+  --mdc-linear-progress-track-color: rgba(20, 184, 166, 0.18);
+}
+
 :root[data-theme='ember-forge'] {
   color-scheme: dark;
   --hk-text-primary: #fff6f0;

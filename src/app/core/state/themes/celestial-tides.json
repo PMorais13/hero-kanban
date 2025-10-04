@@ -1,0 +1,10 @@
+{
+  "id": "celestial-tides",
+  "label": "Maré Celestial",
+  "description": "Tema claro inspirado em tons aquáticos e jade luminoso.",
+  "accent": "#14b8a6",
+  "softAccent": "rgba(20, 184, 166, 0.18)",
+  "previewGradient": "linear-gradient(135deg, #d1fae5 0%, #ecfeff 100%)",
+  "tone": "light",
+  "previewFontFamily": "'Inter', 'Segoe UI', sans-serif"
+}
