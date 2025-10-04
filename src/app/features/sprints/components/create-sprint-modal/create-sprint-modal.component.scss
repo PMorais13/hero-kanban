@@ -10,8 +10,8 @@
 .create-sprint-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(13, 17, 28, 0.75);
-  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--hk-body-background-color) 45%, rgba(8, 10, 24, 0.72));
+  backdrop-filter: blur(14px);
 }
 
 .create-sprint-modal__panel {
@@ -19,9 +19,13 @@
   width: min(560px, 100%);
   max-height: calc(100vh - 2 * clamp(1rem, 4vw, 2.5rem));
   border-radius: 1.75rem;
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  background: linear-gradient(160deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
-  box-shadow: 0 35px 80px -25px rgba(12, 10, 36, 0.6);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 85%, transparent);
+  background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--hk-surface-elevated) 92%, transparent),
+      color-mix(in srgb, var(--hk-surface) 90%, transparent)
+    );
+  box-shadow: var(--mat-sys-elevation-level2, 0 35px 80px -25px rgba(12, 10, 36, 0.6));
   overflow: hidden;
   color: var(--hk-text-primary);
 }
@@ -59,9 +63,9 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  background: rgba(15, 23, 42, 0.6);
-  color: inherit;
+  border: 1px solid color-mix(in srgb, var(--hk-border) 75%, transparent);
+  background: color-mix(in srgb, var(--hk-surface) 86%, transparent);
+  color: var(--hk-text-secondary);
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
 }
@@ -69,8 +73,9 @@
 .create-sprint-modal__close:hover,
 .create-sprint-modal__close:focus-visible {
   transform: translateY(-1px);
-  border-color: rgba(var(--hk-accent-rgb), 0.7);
-  background: rgba(var(--hk-accent-rgb), 0.25);
+  border-color: color-mix(in srgb, var(--hk-accent) 55%, var(--hk-border));
+  background: color-mix(in srgb, var(--hk-accent-soft) 60%, var(--hk-surface));
+  color: var(--hk-text-primary);
 }
 
 .create-sprint-modal__grid {
@@ -104,11 +109,11 @@
 
 .create-sprint-modal__field input,
 .create-sprint-modal__field textarea {
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 85%, transparent);
   border-radius: 0.9rem;
   padding: 0.75rem 1rem;
-  background: rgba(15, 23, 42, 0.6);
-  color: inherit;
+  background: color-mix(in srgb, var(--hk-surface) 88%, transparent);
+  color: var(--hk-text-primary);
   font: inherit;
 }
 
@@ -120,13 +125,13 @@
 .create-sprint-modal__field input:focus-visible,
 .create-sprint-modal__field textarea:focus-visible {
   outline: none;
-  border-color: rgba(var(--hk-accent-rgb), 0.6);
-  box-shadow: 0 0 0 3px rgba(var(--hk-accent-rgb), 0.2);
+  border-color: color-mix(in srgb, var(--hk-accent) 60%, var(--hk-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hk-accent) 28%, transparent);
 }
 
 .create-sprint-modal__field small {
   font-size: 0.8rem;
-  color: #fda4af;
+  color: color-mix(in srgb, var(--hk-danger) 80%, var(--hk-text-primary) 20%);
 }
 
 .create-sprint-modal__footer {
@@ -146,23 +151,28 @@
 }
 
 .create-sprint-modal__secondary {
-  background: transparent;
-  border-color: rgba(148, 163, 184, 0.4);
+  background: color-mix(in srgb, var(--hk-surface) 82%, transparent);
+  border-color: color-mix(in srgb, var(--hk-border) 85%, transparent);
   color: var(--hk-text-secondary);
 }
 
 .create-sprint-modal__secondary:hover,
 .create-sprint-modal__secondary:focus-visible {
   transform: translateY(-1px);
-  border-color: rgba(var(--hk-accent-rgb), 0.65);
+  border-color: color-mix(in srgb, var(--hk-accent) 50%, var(--hk-border));
+  background: color-mix(in srgb, var(--hk-accent-soft) 45%, var(--hk-surface));
   color: var(--hk-text-primary);
 }
 
 .create-sprint-modal__primary {
-  background: linear-gradient(135deg, rgba(var(--hk-accent-rgb), 0.9), rgba(59, 130, 246, 0.85));
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--hk-accent) 92%, rgba(255, 255, 255, 0.05)),
+    color-mix(in srgb, var(--hk-accent-strong, var(--hk-accent)) 85%, rgba(0, 0, 0, 0.05))
+  );
   border: none;
-  color: #0b1120;
-  box-shadow: 0 18px 40px -18px rgba(37, 99, 235, 0.9);
+  color: color-mix(in srgb, #0b1120 70%, var(--hk-text-primary) 30%);
+  box-shadow: 0 18px 40px -18px color-mix(in srgb, var(--hk-accent) 70%, transparent);
 }
 
 .create-sprint-modal__primary:disabled {
@@ -174,7 +184,7 @@
 .create-sprint-modal__primary:not(:disabled):hover,
 .create-sprint-modal__primary:not(:disabled):focus-visible {
   transform: translateY(-1px);
-  box-shadow: 0 22px 50px -18px rgba(37, 99, 235, 0.95);
+  box-shadow: 0 22px 50px -18px color-mix(in srgb, var(--hk-accent) 78%, transparent);
 }
 
 @media (max-width: 520px) {
