@@ -9,6 +9,7 @@ import type {
   CreateStoryPayload,
   Feature,
   Mission,
+  Priority,
   Sprint,
   SprintFilterOption,
   SprintOverviewViewModel,
@@ -22,12 +23,12 @@ import type {
 } from './board.models';
 import { BoardConfigState } from './board-config.state';
 
-const PRIORITY_COLORS: Record<string, string> = {
-  low: '#4ade80',
-  medium: '#facc15',
-  high: '#fb7185',
-  critical: '#f97316',
-} as const;
+const PRIORITY_COLORS = {
+  low: 'var(--hk-priority-low)',
+  medium: 'var(--hk-priority-medium)',
+  high: 'var(--hk-priority-high)',
+  critical: 'var(--hk-priority-critical)',
+} as const satisfies Record<Priority, string>;
 
 const XP_PER_LEVEL = 120;
 const ALL_SPRINTS_FILTER = 'all-sprints';
@@ -416,7 +417,7 @@ export class BoardState {
           title: story.title,
           estimateLabel: `${story.estimate} pts`,
           statusLabel: status?.name ?? 'Etapa desconhecida',
-          statusColor: status?.color ?? '#6b7280',
+          statusColor: status?.color ?? 'var(--hk-status-icebox)',
           tasks: story.tasks.map((task) => ({
             id: task.id,
             title: task.title,
@@ -710,7 +711,7 @@ export class BoardState {
       featureMission: feature?.mission ?? 'Missão a ser definida com o squad.',
       statusLabel: status?.name ?? 'Etapa desconhecida',
       statusDescription: status?.description ?? 'Etapa não mapeada no fluxo do quadro.',
-      statusColor: status?.color ?? '#64748b',
+      statusColor: status?.color ?? 'var(--hk-status-icebox)',
       statusIcon: status?.icon ?? 'help',
       priorityLabel: this.mapPriorityLabel(story.priority),
       priorityColor: PRIORITY_COLORS[story.priority],
