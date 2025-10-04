@@ -41,15 +41,15 @@
 
           <div class="board__stats">
             <mat-chip-set>
-              <mat-chip variant="outlined">
+              <mat-chip class="board__stats-chip" color="primary" selected>
                 <mat-icon matChipAvatar fontSet="material-symbols-rounded">task_alt</mat-icon>
                 Histórias concluídas: {{ summary().completedStories }}
               </mat-chip>
-              <mat-chip variant="outlined">
+              <mat-chip class="board__stats-chip" color="primary" selected>
                 <mat-icon matChipAvatar fontSet="material-symbols-rounded">hub</mat-icon>
                 Features ativas: {{ summary().activeFeatures }}
               </mat-chip>
-              <mat-chip variant="outlined">
+              <mat-chip class="board__stats-chip" color="primary" selected>
                 <mat-icon matChipAvatar fontSet="material-symbols-rounded">monitoring</mat-icon>
                 Throughput semanal: {{ summary().weeklyThroughput }}
               </mat-chip>
