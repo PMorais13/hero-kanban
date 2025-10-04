@@ -13,7 +13,7 @@
 .create-story-modal__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(4, 6, 20, 0.75);
+  background: color-mix(in srgb, #000 35%, var(--hk-body-background-color, #0f0c29) 65%);
   backdrop-filter: blur(8px);
 }
 
@@ -23,9 +23,9 @@
   max-height: calc(100vh - 2 * var(--create-story-modal-padding));
   overflow: auto;
   border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(145deg, rgba(24, 22, 54, 0.95), rgba(16, 18, 42, 0.95));
-  box-shadow: 0 30px 80px rgba(8, 9, 29, 0.65);
+  border: 1px solid var(--hk-border);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 96%, transparent);
+  box-shadow: var(--mat-sys-elevation-level2, 0 30px 80px rgba(8, 9, 29, 0.65));
 }
 
 .create-story-modal__form {
@@ -55,7 +55,7 @@
 
 .create-story-modal__close {
   border: none;
-  background: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 90%, transparent);
   border-radius: 999px;
   width: 2.5rem;
   height: 2.5rem;
@@ -68,7 +68,7 @@
 
 .create-story-modal__close:hover,
 .create-story-modal__close:focus-visible {
-  background: rgba(255, 255, 255, 0.14);
+  background: color-mix(in srgb, var(--hk-accent-soft) 55%, var(--hk-surface));
   transform: scale(1.05);
 }
 
@@ -93,8 +93,8 @@
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(14, 16, 38, 0.75);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 75%, transparent);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 90%, transparent);
   color: inherit;
   font: inherit;
 }
@@ -106,12 +106,12 @@
 }
 
 .create-story-modal__field small {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--hk-text-muted);
   font-size: 0.8rem;
 }
 
 .create-story-modal__field small.ng-star-inserted {
-  color: #fbbf24;
+  color: var(--hk-warning);
 }
 
 .create-story-modal__tasks {
@@ -144,8 +144,8 @@
   gap: 0.75rem;
   padding: 1rem;
   border-radius: 1.25rem;
-  border: 1px solid rgba(var(--hk-accent-rgb), 0.2);
-  background: rgba(var(--hk-accent-rgb), 0.08);
+  border: 1px solid color-mix(in srgb, var(--hk-accent) 35%, var(--hk-border));
+  background: color-mix(in srgb, var(--hk-accent-soft) 55%, var(--hk-surface));
 }
 
 .create-story-modal__task label {
@@ -154,15 +154,15 @@
 }
 
 .create-story-modal__task small {
-  color: #fbbf24;
+  color: var(--hk-warning);
   font-size: 0.8rem;
 }
 
 .create-story-modal__task input[type='text'] {
   padding: 0.7rem 1rem;
   border-radius: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(10, 12, 28, 0.75);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 75%, transparent);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 88%, transparent);
   color: inherit;
 }
 
@@ -192,8 +192,8 @@
 
 .create-story-modal__task-actions button {
   border: none;
-  background: rgba(248, 113, 113, 0.18);
-  color: #fca5a5;
+  background: color-mix(in srgb, var(--hk-danger) 20%, var(--hk-surface));
+  color: color-mix(in srgb, var(--hk-danger) 60%, var(--hk-text-primary));
   border-radius: 999px;
   width: 2.25rem;
   height: 2.25rem;
@@ -205,7 +205,7 @@
 
 .create-story-modal__task-actions button:hover,
 .create-story-modal__task-actions button:focus-visible {
-  background: rgba(248, 113, 113, 0.3);
+  background: color-mix(in srgb, var(--hk-danger) 35%, var(--hk-surface));
   transform: scale(1.05);
 }
 
@@ -213,7 +213,7 @@
   margin: 0;
   padding: 1rem;
   border-radius: 1rem;
-  border: 1px dashed rgba(255, 255, 255, 0.18);
+  border: 1px dashed color-mix(in srgb, var(--hk-border) 75%, transparent);
   color: var(--hk-text-muted);
   font-size: 0.9rem;
   text-align: center;
@@ -253,15 +253,15 @@
 .create-story-modal__secondary {
   padding: 0.85rem 1.4rem;
   border-radius: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--hk-border) 75%, transparent);
+  background: color-mix(in srgb, var(--hk-surface) 92%, transparent);
   color: var(--hk-text-primary);
   cursor: pointer;
 }
 
 .create-story-modal__secondary:hover,
 .create-story-modal__secondary:focus-visible {
-  background: rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--hk-accent-soft) 55%, var(--hk-surface));
 }
 
 .create-story-modal__primary {
