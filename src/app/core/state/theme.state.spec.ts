@@ -1,26 +1,47 @@
 import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 
+import { OverlayContainer } from '@angular/cdk/overlay';
+
 import { ThemeState } from './theme.state';
 
 describe('ThemeState', () => {
   let state: ThemeState;
   let documentRef: Document;
+  let overlayContainerElement: HTMLElement;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    overlayContainerElement = document.createElement('div');
+
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: OverlayContainer,
+          useValue: {
+            getContainerElement: () => overlayContainerElement,
+            ngOnDestroy: () => {},
+          } as OverlayContainer,
+        },
+      ],
+    });
     documentRef = TestBed.inject(DOCUMENT);
     documentRef.documentElement.dataset['theme'] = '';
+    documentRef.body.dataset['theme'] = '';
+    overlayContainerElement.dataset['theme'] = '';
     state = TestBed.inject(ThemeState);
   });
 
   afterEach(() => {
     documentRef.documentElement.dataset['theme'] = '';
+    documentRef.body.dataset['theme'] = '';
+    overlayContainerElement.dataset['theme'] = '';
   });
 
   it('should expose the default theme and apply it to the document', () => {
     expect(state.currentTheme()).toBe('stellar-night');
     expect(documentRef.documentElement.dataset['theme']).toBe('stellar-night');
+    expect(documentRef.body.dataset['theme']).toBe('stellar-night');
+    expect(overlayContainerElement.dataset['theme']).toBe('stellar-night');
   });
 
   it('should expose the available themes with their tone metadata', () => {
@@ -35,6 +56,8 @@ describe('ThemeState', () => {
 
     expect(state.currentTheme()).toBe('radiant-dawn');
     expect(documentRef.documentElement.dataset['theme']).toBe('radiant-dawn');
+    expect(documentRef.body.dataset['theme']).toBe('radiant-dawn');
+    expect(overlayContainerElement.dataset['theme']).toBe('radiant-dawn');
   });
 
   it('should ignore unknown theme identifiers', () => {
