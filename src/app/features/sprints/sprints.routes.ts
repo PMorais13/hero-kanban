@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { SprintsPageComponent } from './pages/sprints.page';
 
 export const SPRINTS_ROUTES: Routes = [
   {
     path: '',
-    component: SprintsPageComponent,
+    loadComponent: () =>
+      import('./pages/sprints.page').then((m) => m.SprintsPageComponent),
     title: 'Hero Kanban — Planejamento de Sprints',
   },
 ];

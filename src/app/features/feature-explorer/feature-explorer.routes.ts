@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { FeatureCatalogPage } from './pages/feature-catalog.page';
-import { FeatureDetailPage } from './pages/feature-detail.page';
 
 export const FEATURE_EXPLORER_ROUTES: Routes = [
   {
     path: '',
-    component: FeatureCatalogPage,
+    loadComponent: () =>
+      import('./pages/feature-catalog.page').then((m) => m.FeatureCatalogPage),
   },
   {
     path: ':featureId',
-    component: FeatureDetailPage,
+    loadComponent: () =>
+      import('./pages/feature-detail.page').then((m) => m.FeatureDetailPage),
   },
 ];
