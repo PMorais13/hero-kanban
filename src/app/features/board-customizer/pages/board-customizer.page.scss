@@ -7,15 +7,16 @@
   display: grid;
   gap: 2rem;
   padding: clamp(1rem, 3vw, 2.5rem);
-  background: rgba(13, 16, 34, 0.85);
+  background: var(--hk-surface);
   border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 24px 56px rgba(10, 12, 28, 0.45);
+  border: 1px solid var(--hk-border);
+  box-shadow: var(--mat-sys-elevation-level2, 0 24px 56px rgba(10, 12, 28, 0.45));
 }
 
 .board-customizer__header h1 {
   margin: 0;
   font-size: clamp(1.7rem, 3vw, 2.2rem);
+  color: var(--hk-text-primary);
 }
 
 .board-customizer__header p {
@@ -61,20 +62,21 @@
   gap: 1rem;
   padding: 1.25rem;
   border-radius: 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.05);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  border: 1px solid var(--hk-border);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 92%, transparent);
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .status-item:hover,
 .status-item:focus-within {
-  border-color: rgba(var(--hk-accent-rgb), 0.45);
-  background: rgba(var(--hk-accent-rgb), 0.12);
+  border-color: color-mix(in srgb, var(--hk-accent) 45%, var(--hk-border));
+  background: color-mix(in srgb, var(--hk-accent-soft) 65%, var(--hk-surface));
+  box-shadow: var(--mat-sys-elevation-level2, 0 20px 40px rgba(10, 12, 28, 0.35));
 }
 
 .status-item.cdk-drag-preview {
-  box-shadow: 0 24px 48px rgba(10, 12, 28, 0.6);
-  border-color: rgba(var(--hk-accent-rgb), 0.65);
+  box-shadow: var(--mat-sys-elevation-level2, 0 24px 48px rgba(10, 12, 28, 0.6));
+  border-color: color-mix(in srgb, var(--hk-accent) 65%, var(--hk-border));
 }
 
 .status-item.cdk-drag-placeholder {
@@ -98,8 +100,8 @@
   width: 3rem;
   height: 3rem;
   border-radius: 1rem;
-  background: rgba(var(--hk-accent-rgb), 0.2);
-  color: #f8fafc;
+  background: color-mix(in srgb, var(--hk-accent-soft) 70%, var(--hk-surface));
+  color: var(--hk-text-primary);
   font-size: 1.8rem;
 }
 
@@ -141,17 +143,17 @@
   gap: 0.35rem;
   padding: 0.4rem 0.75rem;
   border-radius: 999px;
-  background: rgba(var(--hk-accent-rgb), 0.18);
-  border: 1px solid rgba(var(--hk-accent-rgb), 0.35);
+  background: color-mix(in srgb, var(--hk-accent-soft) 65%, var(--hk-surface));
+  border: 1px solid color-mix(in srgb, var(--hk-accent) 45%, var(--hk-border));
   font-size: 0.85rem;
   font-weight: 600;
-  color: #e2e8f0;
+  color: var(--hk-text-primary);
 }
 
 .status-item__snack--inactive {
-  background: rgba(248, 113, 113, 0.15);
-  border-color: rgba(248, 113, 113, 0.35);
-  color: #fecaca;
+  background: color-mix(in srgb, var(--hk-danger) 18%, var(--hk-surface));
+  border-color: color-mix(in srgb, var(--hk-danger) 45%, var(--hk-border));
+  color: color-mix(in srgb, var(--hk-danger) 55%, var(--hk-text-primary));
 }
 
 .status-item__actions {
@@ -169,8 +171,8 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 75%, transparent);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 88%, transparent);
   color: inherit;
   cursor: grab;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
@@ -183,8 +185,8 @@
 .status-item__drag-handle:hover,
 .status-item__drag-handle:focus-visible {
   transform: translateY(-1px);
-  border-color: rgba(var(--hk-accent-rgb), 0.6);
-  background: rgba(var(--hk-accent-rgb), 0.25);
+  border-color: color-mix(in srgb, var(--hk-accent) 45%, var(--hk-border));
+  background: color-mix(in srgb, var(--hk-accent-soft) 60%, var(--hk-surface));
 }
 
 .status-item__toggle {
@@ -208,9 +210,9 @@
   gap: 0.35rem;
   padding: 0.6rem 0.9rem;
   border-radius: 0.9rem;
-  border: 1px solid rgba(var(--hk-accent-rgb), 0.45);
-  background: rgba(var(--hk-accent-rgb), 0.15);
-  color: #ede9fe;
+  border: 1px solid color-mix(in srgb, var(--hk-accent) 45%, var(--hk-border));
+  background: color-mix(in srgb, var(--hk-accent-soft) 60%, var(--hk-surface));
+  color: var(--hk-text-primary);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease, border-color 0.2s ease;
@@ -220,7 +222,7 @@
 .status-item__edit:focus-visible {
   transform: translateY(-1px);
   filter: brightness(1.05);
-  border-color: rgba(var(--hk-accent-rgb), 0.75);
+  border-color: color-mix(in srgb, var(--hk-accent) 65%, var(--hk-border));
 }
 
 .status-form {
@@ -248,8 +250,8 @@
 .status-form__field select {
   padding: 0.75rem 1rem;
   border-radius: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(8, 8, 18, 0.5);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 80%, transparent);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 90%, transparent);
   color: inherit;
   font: inherit;
 }
@@ -276,8 +278,8 @@
   gap: 0.75rem;
   padding: 0.5rem;
   border-radius: 0.85rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(8, 8, 18, 0.5);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 75%, transparent);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 88%, transparent);
 }
 
 .status-form__icon-select span {
@@ -287,8 +289,8 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.75rem;
-  background: rgba(var(--hk-accent-rgb), 0.2);
-  color: #f8fafc;
+  background: color-mix(in srgb, var(--hk-accent-soft) 70%, var(--hk-surface));
+  color: var(--hk-text-primary);
   font-size: 1.6rem;
 }
 
@@ -313,6 +315,7 @@
   color: #ffffff;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease;
+  box-shadow: var(--mat-sys-elevation-level2, 0 14px 30px rgba(var(--hk-accent-strong-rgb, 79, 70, 229), 0.35));
 }
 
 .status-form__actions button:disabled {
@@ -379,9 +382,9 @@
   gap: 0.35rem;
   padding: 0.6rem 0.9rem;
   border-radius: 0.9rem;
-  border: 1px solid rgba(248, 113, 113, 0.55);
-  background: rgba(248, 113, 113, 0.15);
-  color: #fecaca;
+  border: 1px solid color-mix(in srgb, var(--hk-danger) 45%, var(--hk-border));
+  background: color-mix(in srgb, var(--hk-danger) 18%, var(--hk-surface));
+  color: color-mix(in srgb, var(--hk-danger) 55%, var(--hk-text-primary));
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease, border-color 0.2s ease;
@@ -391,5 +394,5 @@
 .status-item__delete:focus-visible {
   transform: translateY(-1px);
   filter: brightness(1.05);
-  border-color: rgba(248, 113, 113, 0.8);
+  border-color: color-mix(in srgb, var(--hk-danger) 65%, var(--hk-border));
 }
