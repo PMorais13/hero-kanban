@@ -14,6 +14,7 @@ export interface ThemeOption {
 import stellarNightManifest from './themes/stellar-night.json';
 import auroraCrestManifest from './themes/aurora-crest.json';
 import radiantDawnManifest from './themes/radiant-dawn.json';
+import celestialTidesManifest from './themes/celestial-tides.json';
 import emberForgeManifest from './themes/ember-forge.json';
 import quantumMistManifest from './themes/quantum-mist.json';
 
@@ -36,6 +37,7 @@ const themeOptions = [
   manifestToThemeOption(stellarNightManifest as ThemeManifest),
   manifestToThemeOption(auroraCrestManifest as ThemeManifest),
   manifestToThemeOption(radiantDawnManifest as ThemeManifest),
+  manifestToThemeOption(celestialTidesManifest as ThemeManifest),
   manifestToThemeOption(emberForgeManifest as ThemeManifest),
   manifestToThemeOption(quantumMistManifest as ThemeManifest),
 ] as const satisfies readonly ThemeOption[];

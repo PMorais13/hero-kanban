@@ -47,8 +47,9 @@ describe('ThemeState', () => {
   it('should expose the available themes with their tone metadata', () => {
     const themes = state.themes();
 
-    expect(themes.length).toBeGreaterThanOrEqual(5);
+    expect(themes.length).toBeGreaterThanOrEqual(6);
     expect(themes.some((theme) => theme.id === 'radiant-dawn' && theme.tone === 'light')).toBeTrue();
+    expect(themes.some((theme) => theme.id === 'celestial-tides' && theme.tone === 'light')).toBeTrue();
   });
 
   it('should change the theme when a valid option is selected', () => {
@@ -58,6 +59,15 @@ describe('ThemeState', () => {
     expect(documentRef.documentElement.dataset['theme']).toBe('radiant-dawn');
     expect(documentRef.body.dataset['theme']).toBe('radiant-dawn');
     expect(overlayContainerElement.dataset['theme']).toBe('radiant-dawn');
+  });
+
+  it('should apply the Celestial Tides theme tokens when selected', () => {
+    state.setTheme('celestial-tides');
+
+    expect(state.currentTheme()).toBe('celestial-tides');
+    expect(documentRef.documentElement.dataset['theme']).toBe('celestial-tides');
+    expect(documentRef.body.dataset['theme']).toBe('celestial-tides');
+    expect(overlayContainerElement.dataset['theme']).toBe('celestial-tides');
   });
 
   it('should ignore unknown theme identifiers', () => {
