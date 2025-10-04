@@ -107,13 +107,62 @@ mat-nav-list {
 }
 
 mat-nav-list a.mat-mdc-list-item {
+  color: var(--hk-text-secondary);
   border-radius: 0.75rem;
   margin: 0.2rem 0.5rem;
+  transition: background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
 }
 
 mat-nav-list a.mat-mdc-list-item.is-active,
 mat-nav-list a.mat-mdc-list-item:hover {
   background: var(--hk-nav-hover);
+}
+
+mat-nav-list h3[matSubheader] {
+  margin: 0.25rem 1rem 0.75rem;
+  color: var(--hk-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+mat-nav-list a.mat-mdc-list-item .mat-icon {
+  color: currentColor;
+  transition: color 180ms ease;
+}
+
+mat-nav-list a.mat-mdc-list-item .mat-mdc-list-item-title {
+  color: currentColor;
+  font-weight: 600;
+}
+
+mat-nav-list a.mat-mdc-list-item .mat-mdc-list-item-line {
+  color: var(--hk-text-muted);
+  transition: color 180ms ease;
+}
+
+mat-nav-list a.mat-mdc-list-item:hover .mat-mdc-list-item-line,
+mat-nav-list a.mat-mdc-list-item:focus-visible .mat-mdc-list-item-line {
+  color: var(--hk-text-secondary);
+}
+
+mat-nav-list a.mat-mdc-list-item:hover .mat-icon,
+mat-nav-list a.mat-mdc-list-item:focus-visible .mat-icon,
+mat-nav-list a.mat-mdc-list-item.is-active .mat-icon {
+  color: var(--hk-accent);
+}
+
+mat-nav-list a.mat-mdc-list-item:focus-visible {
+  box-shadow: 0 0 0 2px rgba(var(--hk-accent-rgb), 0.35);
+}
+
+mat-nav-list a.mat-mdc-list-item.is-active {
+  color: var(--hk-text-primary);
+  box-shadow: inset 0 0 0 1px rgba(var(--hk-accent-rgb), 0.45);
+}
+
+mat-nav-list a.mat-mdc-list-item.is-active .mat-mdc-list-item-line {
+  color: color-mix(in srgb, var(--hk-text-secondary) 70%, var(--hk-text-primary));
 }
 
 mat-chip {
