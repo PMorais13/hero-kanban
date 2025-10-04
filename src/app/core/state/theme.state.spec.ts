@@ -23,11 +23,18 @@ describe('ThemeState', () => {
     expect(documentRef.documentElement.dataset['theme']).toBe('stellar-night');
   });
 
-  it('should change the theme when a valid option is selected', () => {
-    state.setTheme('aurora-crest');
+  it('should expose the available themes with their tone metadata', () => {
+    const themes = state.themes();
 
-    expect(state.currentTheme()).toBe('aurora-crest');
-    expect(documentRef.documentElement.dataset['theme']).toBe('aurora-crest');
+    expect(themes.length).toBeGreaterThanOrEqual(5);
+    expect(themes.some((theme) => theme.id === 'radiant-dawn' && theme.tone === 'light')).toBeTrue();
+  });
+
+  it('should change the theme when a valid option is selected', () => {
+    state.setTheme('radiant-dawn');
+
+    expect(state.currentTheme()).toBe('radiant-dawn');
+    expect(documentRef.documentElement.dataset['theme']).toBe('radiant-dawn');
   });
 
   it('should ignore unknown theme identifiers', () => {
