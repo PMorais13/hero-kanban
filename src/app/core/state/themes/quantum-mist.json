@@ -1,0 +1,10 @@
+{
+  "id": "quantum-mist",
+  "label": "Neblina Quântica",
+  "description": "Tons futuristas de lilás e ciano com brilho metálico.",
+  "accent": "#a855f7",
+  "softAccent": "rgba(168, 85, 247, 0.26)",
+  "previewGradient": "linear-gradient(135deg, #1a1033 0%, #3a1a5a 100%)",
+  "tone": "dark",
+  "previewFontFamily": "'Space Grotesk', 'Inter', 'Segoe UI', sans-serif"
+}

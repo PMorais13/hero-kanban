@@ -1,0 +1,10 @@
+{
+  "id": "ember-forge",
+  "label": "Forja em Brasas",
+  "description": "Paleta vibrante inspirada em brasas e metais aquecidos.",
+  "accent": "#f97316",
+  "softAccent": "rgba(249, 115, 22, 0.22)",
+  "previewGradient": "linear-gradient(135deg, #2d1b18 0%, #7c2d12 100%)",
+  "tone": "dark",
+  "previewFontFamily": "'Rubik', 'Inter', 'Segoe UI', sans-serif"
+}

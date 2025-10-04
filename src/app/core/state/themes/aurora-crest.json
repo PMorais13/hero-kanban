@@ -1,0 +1,10 @@
+{
+  "id": "aurora-crest",
+  "label": "Aurora Boreal",
+  "description": "Mistura esmeralda e azul para uma interface energizante.",
+  "accent": "#1dd3b0",
+  "softAccent": "rgba(29, 211, 176, 0.25)",
+  "previewGradient": "linear-gradient(135deg, #012a4a 0%, #036666 100%)",
+  "tone": "dark",
+  "previewFontFamily": "'Space Grotesk', 'Rubik', 'Segoe UI', sans-serif"
+}
