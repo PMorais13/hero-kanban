@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Injectable, signal } from '@angular/core';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 export type ThemeId =
   | 'stellar-night'
@@ -22,6 +23,7 @@ export interface ThemeOption {
 @Injectable({ providedIn: 'root' })
 export class ThemeState {
   private readonly documentRef = inject(DOCUMENT);
+  private readonly overlayContainer = inject(OverlayContainer, { optional: true });
 
   private readonly _themes = signal<readonly ThemeOption[]>([
     {
@@ -101,12 +103,26 @@ export class ThemeState {
   }
 
   private applyTheme(themeId: ThemeId): void {
-    const rootElement = this.documentRef?.documentElement;
+    const documentRef = this.documentRef;
 
-    if (!rootElement) {
+    if (!documentRef) {
       return;
     }
 
-    rootElement.dataset['theme'] = themeId;
+    const rootElement = documentRef.documentElement;
+    const bodyElement = documentRef.body;
+    const overlayElement = this.overlayContainer?.getContainerElement();
+
+    if (rootElement) {
+      rootElement.dataset['theme'] = themeId;
+    }
+
+    if (bodyElement) {
+      bodyElement.dataset['theme'] = themeId;
+    }
+
+    if (overlayElement) {
+      overlayElement.dataset['theme'] = themeId;
+    }
   }
 }
