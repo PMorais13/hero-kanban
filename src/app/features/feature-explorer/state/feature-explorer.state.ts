@@ -10,10 +10,10 @@ import type {
 import type { CreateFeaturePayload } from '@features/board/state/board.models';
 
 const PRIORITY_METADATA: Record<Priority, { readonly label: string; readonly color: string }> = {
-  low: { label: 'Baixo', color: '#4ade80' },
-  medium: { label: 'Médio', color: '#facc15' },
-  high: { label: 'Alto', color: '#fb7185' },
-  critical: { label: 'Crítico', color: '#f97316' },
+  low: { label: 'Baixo', color: 'var(--hk-priority-low)' },
+  medium: { label: 'Médio', color: 'var(--hk-priority-medium)' },
+  high: { label: 'Alto', color: 'var(--hk-priority-high)' },
+  critical: { label: 'Crítico', color: 'var(--hk-priority-critical)' },
 } as const;
 
 @Injectable({ providedIn: 'root' })
@@ -44,7 +44,7 @@ export class FeatureExplorerState {
     for (const story of stories) {
       const status = statusById.get(story.statusId);
       const statusLabel = status?.name ?? 'Status desconhecido';
-      const statusColor = status?.color ?? '#64748b';
+      const statusColor = status?.color ?? 'var(--hk-status-icebox)';
       const storyCard = this.toStoryCard(story, statusLabel, statusColor);
       const existing = storyCardsByFeature.get(story.featureId) ?? [];
       storyCardsByFeature.set(story.featureId, [...existing, storyCard]);

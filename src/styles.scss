@@ -59,6 +59,18 @@ $hero-theme: mat.define-theme((
   --hk-chip-accent-text: var(--hk-text-primary);
   --hk-accent-gradient: linear-gradient(135deg, var(--hk-accent) 0%, var(--hk-accent-strong) 100%);
   --hk-accent-gradient-progress: linear-gradient(90deg, var(--hk-accent) 0%, #6366f1 50%, #22d3ee 100%);
+  --hk-status-backlog: color-mix(in srgb, var(--hk-accent) 65%, var(--hk-accent-strong) 35%);
+  --hk-status-ready: var(--hk-accent);
+  --hk-status-in-dev: color-mix(in srgb, var(--hk-warning) 80%, var(--hk-accent) 20%);
+  --hk-status-code-review: color-mix(in srgb, var(--hk-warning) 65%, var(--hk-text-primary) 35%);
+  --hk-status-release: color-mix(in srgb, var(--hk-accent-strong) 85%, var(--hk-accent) 15%);
+  --hk-status-done: var(--hk-success);
+  --hk-status-icebox: color-mix(in srgb, var(--hk-text-muted) 65%, var(--hk-border) 35%);
+  --hk-status-blocked: var(--hk-danger);
+  --hk-priority-low: var(--hk-success);
+  --hk-priority-medium: var(--hk-warning);
+  --hk-priority-high: color-mix(in srgb, var(--hk-danger) 80%, var(--hk-warning) 20%);
+  --hk-priority-critical: color-mix(in srgb, var(--hk-danger) 90%, var(--hk-accent) 10%);
   --hk-success: #6ee7b7;
   --hk-success-rgb: 110, 231, 183;
   --hk-success-soft: rgba(110, 231, 183, 0.2);
