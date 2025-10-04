@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 
-import { ThemeState } from './theme.state';
+import { DEFAULT_THEME_ID, ThemeState } from './theme.state';
 
 describe('ThemeState', () => {
   let state: ThemeState;
@@ -38,10 +38,10 @@ describe('ThemeState', () => {
   });
 
   it('should expose the default theme and apply it to the document', () => {
-    expect(state.currentTheme()).toBe('stellar-night');
-    expect(documentRef.documentElement.dataset['theme']).toBe('stellar-night');
-    expect(documentRef.body.dataset['theme']).toBe('stellar-night');
-    expect(overlayContainerElement.dataset['theme']).toBe('stellar-night');
+    expect(state.currentTheme()).toBe(DEFAULT_THEME_ID);
+    expect(documentRef.documentElement.dataset['theme']).toBe(DEFAULT_THEME_ID);
+    expect(documentRef.body.dataset['theme']).toBe(DEFAULT_THEME_ID);
+    expect(overlayContainerElement.dataset['theme']).toBe(DEFAULT_THEME_ID);
   });
 
   it('should expose the available themes with their tone metadata', () => {

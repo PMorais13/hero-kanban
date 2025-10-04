@@ -1,0 +1,10 @@
+{
+  "id": "stellar-night",
+  "label": "Noite Estelar",
+  "description": "Tema original com tons profundos e acento violeta.",
+  "accent": "#7c5cff",
+  "softAccent": "rgba(124, 92, 255, 0.28)",
+  "previewGradient": "linear-gradient(135deg, #1b1933 0%, #433978 100%)",
+  "tone": "dark",
+  "previewFontFamily": "'Chakra Petch', 'Inter', 'Segoe UI', sans-serif"
+}
