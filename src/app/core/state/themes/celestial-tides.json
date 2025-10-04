@@ -6,5 +6,17 @@
   "softAccent": "rgba(20, 184, 166, 0.18)",
   "previewGradient": "linear-gradient(135deg, #d1fae5 0%, #ecfeff 100%)",
   "tone": "light",
-  "previewFontFamily": "'Inter', 'Segoe UI', sans-serif"
+  "previewFontFamily": "'Inter', 'Segoe UI', sans-serif",
+  "profile": {
+    "textPrimary": "#0f172a",
+    "textSecondary": "#1f2937",
+    "textMuted": "#64748b",
+    "border": "rgba(15, 118, 110, 0.12)",
+    "borderStrong": "rgba(15, 118, 110, 0.22)",
+    "surface": "#ffffff",
+    "surfaceSoft": "rgba(207, 250, 254, 0.65)",
+    "surfaceSubtle": "rgba(207, 250, 254, 0.45)",
+    "progressTrack": "rgba(20, 184, 166, 0.2)",
+    "shadow": "0 24px 48px rgba(15, 118, 110, 0.15)"
+  }
 }
