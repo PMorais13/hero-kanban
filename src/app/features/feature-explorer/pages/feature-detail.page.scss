@@ -2,10 +2,10 @@
   display: grid;
   gap: 2.5rem;
   padding: clamp(1rem, 3vw, 2rem);
-  background: rgba(17, 19, 36, 0.72);
+  background: var(--hk-surface-elevated);
   border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2rem 3.5rem rgba(8, 9, 22, 0.4);
+  border: 1px solid var(--hk-border);
+  box-shadow: var(--mat-sys-elevation-level2);
   color: var(--hk-text-secondary);
 }
 
@@ -20,8 +20,8 @@
   gap: 0.5rem;
   padding: 0.5rem 0.85rem;
   border-radius: 0.9rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: color-mix(in srgb, var(--hk-surface) 80%, transparent);
+  border: 1px solid var(--hk-border);
   text-decoration: none;
   color: var(--hk-text-primary);
   font-weight: 600;
@@ -69,8 +69,8 @@
   gap: 0.5rem;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--hk-surface);
+  border: 1px solid var(--hk-border);
 }
 
 .feature-detail__metrics dt {
@@ -99,8 +99,8 @@
   width: 100%;
   height: 0.75rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: color-mix(in srgb, var(--hk-surface) 88%, var(--hk-border) 12%);
+  border: 1px solid var(--hk-border);
   overflow: hidden;
 }
 
@@ -143,8 +143,8 @@
   gap: 0.9rem;
   padding: 1.25rem;
   border-radius: 1.25rem;
-  background: rgba(20, 22, 42, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--hk-surface);
+  border: 1px solid var(--hk-border);
   box-shadow: 0 1.2rem 2.6rem rgba(7, 8, 20, 0.45);
 }
 
@@ -157,13 +157,13 @@
   justify-self: flex-start;
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
-  background: rgba(var(--hk-accent-rgb), 0.18);
-  border: 1px solid rgba(var(--hk-accent-rgb), 0.45);
+  background: var(--hk-chip-primary-background);
+  border: 1px solid var(--hk-chip-primary-border);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--hk-text-primary);
+  color: var(--hk-chip-primary-text);
 }
 
 .story-card__badge-row {
@@ -183,7 +183,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #0f0c29;
+  color: var(--hk-body-background-color);
 }
 
 .story-card__priority {
