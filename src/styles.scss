@@ -702,18 +702,18 @@ a {
   box-sizing: border-box;
 }
 
-.mdc-evolution-chip__cell--primary {
-  background-color: var(--hk-accent-soft);
-  border: 1px solid color-mix(in srgb, var(--hk-accent) 45%, var(--hk-border));
-  color: var(--hk-text-primary);
-  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
+// .mdc-evolution-chip__cell--primary {
+//   background-color: var(--hk-accent-soft);
+//   border: 1px solid color-mix(in srgb, var(--hk-accent) 45%, var(--hk-border));
+//   color: var(--hk-text-primary);
+//   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+// }
 
-.mdc-evolution-chip--selected .mdc-evolution-chip__cell--primary {
-  background-color: color-mix(in srgb, var(--hk-accent) 40%, var(--hk-surface));
-  border-color: color-mix(in srgb, var(--hk-accent) 65%, var(--hk-border));
-  color: var(--hk-text-primary);
-}
+// .mdc-evolution-chip--selected .mdc-evolution-chip__cell--primary {
+//   background-color: color-mix(in srgb, var(--hk-accent) 40%, var(--hk-surface));
+//   border-color: color-mix(in srgb, var(--hk-accent) 65%, var(--hk-border));
+//   color: var(--hk-text-primary);
+// }
 
 .mdc-evolution-chip__cell--primary .mdc-evolution-chip__action--primary,
 .mdc-evolution-chip__action--primary {

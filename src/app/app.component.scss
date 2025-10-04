@@ -181,9 +181,7 @@ mat-chip {
   align-items: center;
   gap: 0.4rem;
   padding-inline: 0.85rem;
-  border-radius: 999px;
   background: var(--hk-chip-accent-background);
-  border: 1px solid var(--hk-chip-accent-border);
   color: var(--hk-chip-accent-text);
   transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 
