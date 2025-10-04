@@ -1,7 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Injectable, signal } from '@angular/core';
 
-export type ThemeId = 'stellar-night' | 'aurora-crest';
+export type ThemeId =
+  | 'stellar-night'
+  | 'aurora-crest'
+  | 'radiant-dawn'
+  | 'ember-forge'
+  | 'quantum-mist';
 
 export interface ThemeOption {
   readonly id: ThemeId;
@@ -38,6 +43,36 @@ export class ThemeState {
       previewGradient: 'linear-gradient(135deg, #012a4a 0%, #036666 100%)',
       tone: 'dark',
       previewFontFamily: "'Space Grotesk', 'Rubik', 'Segoe UI', sans-serif",
+    },
+    {
+      id: 'radiant-dawn',
+      label: 'Aurora Matinal',
+      description: 'Tema claro com foco em clareza e contrastes azulados.',
+      accent: '#2563eb',
+      softAccent: 'rgba(37, 99, 235, 0.18)',
+      previewGradient: 'linear-gradient(135deg, #f1f5ff 0%, #cfe1ff 100%)',
+      tone: 'light',
+      previewFontFamily: "'Inter', 'Segoe UI', sans-serif",
+    },
+    {
+      id: 'ember-forge',
+      label: 'Forja em Brasas',
+      description: 'Paleta vibrante inspirada em brasas e metais aquecidos.',
+      accent: '#f97316',
+      softAccent: 'rgba(249, 115, 22, 0.22)',
+      previewGradient: 'linear-gradient(135deg, #2d1b18 0%, #7c2d12 100%)',
+      tone: 'dark',
+      previewFontFamily: "'Rubik', 'Inter', 'Segoe UI', sans-serif",
+    },
+    {
+      id: 'quantum-mist',
+      label: 'Neblina Quântica',
+      description: 'Tons futuristas de lilás e ciano com brilho metálico.',
+      accent: '#a855f7',
+      softAccent: 'rgba(168, 85, 247, 0.26)',
+      previewGradient: 'linear-gradient(135deg, #1a1033 0%, #3a1a5a 100%)',
+      tone: 'dark',
+      previewFontFamily: "'Space Grotesk', 'Inter', 'Segoe UI', sans-serif",
     },
   ]);
 
