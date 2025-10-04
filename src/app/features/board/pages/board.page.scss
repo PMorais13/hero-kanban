@@ -144,6 +144,33 @@
   gap: 0.45rem;
 }
 
+.board__stats-chip {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  --mdc-chip-container-color: var(--hk-accent-soft);
+  --mdc-chip-elevated-container-color: var(--hk-accent-soft);
+  --mdc-chip-label-text-color: var(--hk-text-primary);
+  --mdc-chip-selected-label-text-color: var(--hk-text-primary);
+  --mdc-chip-with-icon-icon-color: var(--hk-text-primary);
+  --mdc-chip-outline-color: rgba(var(--hk-accent-strong-rgb), 0.35);
+  --mdc-chip-focus-outline-color: rgba(var(--hk-accent-strong-rgb), 0.55);
+  --mdc-chip-hover-state-layer-color: rgba(var(--hk-accent-rgb), 0.3);
+  --mdc-chip-focus-state-layer-color: rgba(var(--hk-accent-rgb), 0.35);
+  background: var(--hk-accent-soft);
+  color: var(--hk-text-primary);
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+
+.board__stats-chip mat-icon {
+  color: currentColor;
+}
+
+.board__stats-chip:focus-visible,
+.board__stats-chip:hover {
+  background: rgba(var(--hk-accent-rgb), 0.22);
+  box-shadow: 0 0 0 1px rgba(var(--hk-accent-strong-rgb), 0.5);
+}
+
 
 .board__toolbar {
   display: flex;
