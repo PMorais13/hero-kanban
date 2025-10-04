@@ -13,6 +13,43 @@
   padding: clamp(1.5rem, 3vw, 2.5rem);
   box-shadow: 0 30px 60px -28px rgba(13, 10, 36, 0.65);
   color: var(--hk-text-primary);
+  --story-details-primary-color: var(--hk-accent);
+  --story-details-primary-strong: var(--hk-accent-strong, var(--hk-accent));
+  --story-details-primary-soft: color-mix(in srgb, var(--story-details-primary-color) 16%, transparent);
+  --story-details-primary-soft-hover: color-mix(in srgb, var(--story-details-primary-color) 26%, transparent);
+  --story-details-primary-border: color-mix(in srgb, var(--story-details-primary-strong) 42%, transparent);
+  --story-details-primary-border-hover: color-mix(
+    in srgb,
+    var(--story-details-primary-strong) 58%,
+    transparent
+  );
+  --story-details-success-color: var(--hk-success);
+  --story-details-success-soft: color-mix(in srgb, var(--story-details-success-color) 18%, transparent);
+  --story-details-success-soft-hover: color-mix(
+    in srgb,
+    var(--story-details-success-color) 28%,
+    transparent
+  );
+  --story-details-success-border: color-mix(in srgb, var(--story-details-success-color) 42%, transparent);
+  --story-details-success-border-hover: color-mix(
+    in srgb,
+    var(--story-details-success-color) 56%,
+    transparent
+  );
+  --story-details-muted-surface: color-mix(in srgb, var(--hk-text-primary) 8%, transparent);
+  --story-details-muted-border: color-mix(in srgb, var(--hk-border) 70%, transparent);
+  --story-details-elevated-surface: color-mix(in srgb, var(--hk-surface-elevated) 88%, var(--hk-surface) 12%);
+  --story-details-task-surface: color-mix(in srgb, var(--hk-surface-elevated) 82%, var(--hk-surface) 18%);
+  --story-details-task-border: color-mix(in srgb, var(--hk-border) 78%, transparent);
+  --story-details-task-indicator: color-mix(in srgb, var(--hk-text-muted) 55%, transparent);
+  --story-details-task-done-surface: color-mix(in srgb, var(--hk-success) 18%, var(--story-details-task-surface));
+  --story-details-task-done-border: color-mix(in srgb, var(--hk-success) 52%, transparent);
+  --story-details-progress-background: color-mix(in srgb, var(--hk-text-muted) 14%, transparent);
+  --story-details-progress-fill: var(
+    --hk-accent-gradient-progress,
+    linear-gradient(90deg, var(--story-details-primary-color) 0%, var(--story-details-primary-strong) 100%)
+  );
+  --story-details-label-surface: color-mix(in srgb, var(--hk-text-primary) 10%, transparent);
 }
 
 .story-details__toolbar {
@@ -30,9 +67,9 @@
   padding: 0.6rem 1.1rem;
   border-radius: 999px;
   text-decoration: none;
-  color: #bfdbfe;
-  background: rgba(37, 99, 235, 0.18);
-  border: 1px solid rgba(59, 130, 246, 0.35);
+  color: var(--story-details-primary-color);
+  background: var(--story-details-primary-soft);
+  border: 1px solid var(--story-details-primary-border);
   font-weight: 600;
   transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
@@ -40,8 +77,8 @@
 .story-details__back:hover,
 .story-details__back:focus-visible {
   transform: translateY(-1px);
-  background: rgba(59, 130, 246, 0.28);
-  border-color: rgba(59, 130, 246, 0.55);
+  background: var(--story-details-primary-soft-hover);
+  border-color: var(--story-details-primary-border-hover);
 }
 
 .story-details__new-task {
@@ -50,9 +87,9 @@
   gap: 0.5rem;
   padding: 0.8rem 1.4rem;
   border-radius: 999px;
-  border: 1px solid rgba(217, 70, 239, 0.4);
-  background: rgba(236, 72, 153, 0.18);
-  color: #fbcfe8;
+  border: 1px solid var(--story-details-success-border);
+  background: var(--story-details-success-soft);
+  color: var(--hk-text-primary);
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
@@ -61,8 +98,8 @@
 .story-details__new-task:hover,
 .story-details__new-task:focus-visible {
   transform: translateY(-1px);
-  border-color: rgba(236, 72, 153, 0.6);
-  background: rgba(236, 72, 153, 0.28);
+  border-color: var(--story-details-success-border-hover);
+  background: var(--story-details-success-soft-hover);
 }
 
 .story-details__content {
@@ -81,8 +118,8 @@
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: var(--story-details-muted-surface);
+  border: 1px solid var(--story-details-muted-border);
   color: var(--hk-text-primary);
   position: relative;
 }
@@ -132,8 +169,8 @@
   margin: 0;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
-  background: rgba(59, 130, 246, 0.12);
-  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: color-mix(in srgb, var(--story-details-primary-color) 12%, var(--hk-surface));
+  border: 1px solid var(--story-details-primary-border);
   color: var(--hk-text-secondary);
   line-height: 1.6;
 }
@@ -149,8 +186,8 @@
 }
 
 .story-details__meta > div {
-  background: rgba(15, 23, 42, 0.65);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--story-details-elevated-surface);
+  border: 1px solid var(--story-details-muted-border);
   border-radius: 1rem;
   padding: 0.85rem 1rem;
   display: grid;
@@ -187,7 +224,7 @@
   justify-content: center;
   padding: 0.35rem 0.75rem;
   border-radius: 999px;
-  color: #0f172a;
+  color: var(--hk-text-primary);
   font-weight: 600;
 }
 
@@ -214,7 +251,7 @@
 .story-details__labels > ul > li {
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--story-details-label-surface);
   font-size: 0.85rem;
 }
 
@@ -244,14 +281,14 @@
   position: relative;
   height: 0.65rem;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--story-details-progress-background);
   overflow: hidden;
 }
 
 .story-details__tasks-progress-fill {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #34d399 0%, #60a5fa 100%);
+  background: var(--story-details-progress-fill);
   transition: width 0.3s ease;
 }
 
@@ -270,25 +307,25 @@
   align-items: center;
   padding: 0.75rem 1rem;
   border-radius: 1rem;
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: var(--story-details-task-surface);
+  border: 1px solid var(--story-details-task-border);
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .story-details__task.is-done {
-  border-color: rgba(74, 222, 128, 0.55);
-  background: rgba(74, 222, 128, 0.12);
+  border-color: var(--story-details-task-done-border);
+  background: var(--story-details-task-done-surface);
 }
 
 .story-details__task-indicator {
   width: 0.65rem;
   height: 0.65rem;
   border-radius: 50%;
-  background: rgba(148, 163, 184, 0.6);
+  background: var(--story-details-task-indicator);
 }
 
 .story-details__task.is-done .story-details__task-indicator {
-  background: var(--hk-accent-gradient);
+  background: var(--story-details-progress-fill);
 }
 
 .story-details__task-title {
