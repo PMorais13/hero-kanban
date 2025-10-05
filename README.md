@@ -65,7 +65,7 @@ Os testes cobrem o shell principal e regras de negócio dos serviços de estado 
 
 ### Perfil do herói (`/perfil`)
 - Consome `HeroControlState` para mostrar nível, conquistas e itens obtidos pela guilda.
-- `ThemeState` habilita seleção dinâmica entre as paletas **Noite Estelar**, **Aurora Boreal**, **Aurora Matinal**, **Maré Celestial**, **Forja em Brasas** e **Neblina Quântica**, atualizando tokens de cor globais.
+- `ThemeState` habilita seleção dinâmica entre as paletas **Noite Estelar**, **Aurora Boreal**, **Aurora Matinal**, **Maré Celestial**, **Forja em Brasas**, **Neblina Quântica**, **Pulso da Nebulosa**, **Boulevard do Pôr do Sol**, **Latão de Engrenagens**, **Santuário Verdejante** e **Lúmina Polar**, atualizando tokens de cor globais.
 - Componentização standalone facilita futuras expansões como loja ou ranking.
 
 ## Próximos passos sugeridos

@@ -1049,6 +1049,668 @@ mat-card-subtitle,
   --mdc-linear-progress-track-color: rgba(168, 85, 247, 0.3);
 }
 
+:root[data-theme='nebula-pulse'] {
+  color-scheme: dark;
+  --hk-text-primary: #f5faff;
+  --hk-text-secondary: rgba(218, 242, 255, 0.9);
+  --hk-text-muted: rgba(191, 226, 250, 0.76);
+  --hk-surface: rgba(10, 6, 32, 0.9);
+  --hk-surface-elevated: rgba(18, 10, 48, 0.94);
+  --hk-border: rgba(10, 255, 194, 0.18);
+  --hk-accent: #ff4ecd;
+  --hk-accent-rgb: 255, 78, 205;
+  --hk-accent-soft: rgba(255, 78, 205, 0.28);
+  --hk-accent-strong: #0affc2;
+  --hk-accent-strong-rgb: 10, 255, 194;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.26);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.34);
+  --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.5);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.68);
+  --hk-chip-primary-text: var(--hk-text-primary);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.34);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.42);
+  --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.58);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.76);
+  --hk-chip-accent-text: var(--hk-text-primary);
+  --hk-accent-gradient: linear-gradient(135deg, #ff4ecd 0%, #845ef7 40%, #0affc2 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, #ff4ecd 0%, #38bdf8 50%, #0affc2 100%);
+  --hk-success: #22d3ee;
+  --hk-success-rgb: 34, 211, 238;
+  --hk-success-soft: rgba(34, 211, 238, 0.24);
+  --hk-success-border: rgba(var(--hk-success-rgb), 0.4);
+  --hk-warning: #fde047;
+  --hk-danger: #fb7185;
+  --hk-font-family: 'Chakra Petch', 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-font-family: 'Space Grotesk', 'Chakra Petch', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-letter-spacing: 0.08em;
+  --hk-body-background-color: #050014;
+  --hk-body-background-image: radial-gradient(circle at 18% 16%, rgba(255, 78, 205, 0.35), transparent 52%),
+    radial-gradient(circle at 82% 12%, rgba(10, 255, 194, 0.28), transparent 48%),
+    radial-gradient(circle at 45% 85%, rgba(59, 130, 246, 0.24), transparent 58%),
+    linear-gradient(180deg, rgba(5, 0, 20, 0.96) 0%, rgba(4, 8, 26, 0.96) 100%);
+  --hk-shell-background: linear-gradient(135deg, rgba(26, 11, 60, 0.94) 0%, rgba(5, 0, 20, 0.94) 100%);
+  --hk-toolbar-shadow: 0 18px 44px rgba(5, 0, 26, 0.52);
+  --hk-sidenav-background: rgba(12, 6, 38, 0.94);
+  --hk-sidenav-border: rgba(10, 255, 194, 0.2);
+  --hk-logo-gradient: linear-gradient(135deg, #ff4ecd 0%, #845ef7 45%, #0affc2 100%);
+  --hk-nav-hover: rgba(255, 78, 205, 0.24);
+  background-color: var(--hk-body-background-color);
+  font-family: var(--hk-font-family);
+
+  --mat-sys-color-primary: var(--hk-accent);
+  --mat-sys-color-on-primary: #2a001d;
+  --mat-sys-color-primary-container: rgba(84, 24, 72, 0.92);
+  --mat-sys-color-on-primary-container: #ffe3ff;
+
+  --mat-sys-color-secondary: #38bdf8;
+  --mat-sys-color-on-secondary: #011f28;
+  --mat-sys-color-secondary-container: rgba(12, 53, 82, 0.92);
+  --mat-sys-color-on-secondary-container: #d9f6ff;
+
+  --mat-sys-color-tertiary: #0affc2;
+  --mat-sys-color-on-tertiary: #012a20;
+  --mat-sys-color-tertiary-container: rgba(5, 44, 36, 0.92);
+  --mat-sys-color-on-tertiary-container: #c2ffef;
+
+  --mat-sys-color-error: var(--hk-danger);
+  --mat-sys-color-on-error: #2c0b0b;
+  --mat-sys-color-error-container: rgba(63, 20, 20, 0.92);
+  --mat-sys-color-on-error-container: #fee2e2;
+
+  --mat-sys-color-surface: #050014;
+  --mat-sys-color-surface-dim: #040010;
+  --mat-sys-color-surface-bright: #180f32;
+  --mat-sys-color-surface-container-lowest: #020008;
+  --mat-sys-color-surface-container-low: rgba(10, 6, 34, 0.9);
+  --mat-sys-color-surface-container: rgba(16, 9, 46, 0.94);
+  --mat-sys-color-surface-container-high: rgba(22, 12, 58, 0.95);
+  --mat-sys-color-surface-container-highest: rgba(30, 16, 70, 0.96);
+
+  --mat-sys-color-on-surface: var(--hk-text-primary);
+  --mat-sys-color-on-surface-variant: rgba(191, 226, 250, 0.72);
+  --mat-sys-color-outline: rgba(10, 255, 194, 0.2);
+  --mat-sys-color-outline-variant: rgba(10, 255, 194, 0.14);
+  --mat-sys-color-inverse-surface: #f5faff;
+  --mat-sys-color-inverse-on-surface: #160734;
+  --mat-sys-color-inverse-primary: #f9a8ff;
+  --mat-sys-color-shadow: rgba(5, 0, 20, 0.6);
+  --mat-sys-color-surface-tint: var(--hk-accent);
+  --mat-sys-elevation-level2: 0 20px 44px rgba(5, 0, 26, 0.54);
+
+  --mat-toolbar-container-background-color: rgba(10, 6, 34, 0.94);
+  --mat-toolbar-container-text-color: var(--hk-text-primary);
+  --mat-toolbar-container-shadow-color: rgba(5, 0, 26, 0.54);
+  --mat-sidenav-container-background-color: #020010;
+  --mat-sidenav-content-background-color: transparent;
+  --mat-sidenav-container-text-color: var(--hk-text-primary);
+  --mat-list-active-indicator-color: var(--hk-accent);
+  --mat-list-item-label-text-color: var(--hk-text-secondary);
+  --mat-card-background-color: rgba(21, 11, 52, 0.94);
+  --mat-card-title-text-color: var(--hk-text-primary);
+  --mat-card-subtitle-text-color: var(--hk-text-muted);
+  --mat-chip-selected-container-color: var(--hk-accent-soft);
+  --mat-chip-selected-label-text-color: var(--hk-text-primary);
+  --mat-chip-selected-avatar-color: var(--hk-text-primary);
+  --mat-chip-focus-ring-color: rgba(10, 255, 194, 0.42);
+  --mat-select-panel-background-color: rgba(8, 4, 30, 0.98);
+  --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
+  --mat-option-selected-state-label-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-container-color: rgba(8, 4, 30, 0.72);
+  --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-hover-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-active-indicator-color: rgba(255, 78, 205, 0.52);
+  --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
+  --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
+  --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-outline-color: rgba(10, 255, 194, 0.34);
+  --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
+  --mdc-outlined-text-field-hover-outline-color: rgba(255, 78, 205, 0.58);
+  --mdc-protected-button-container-color: rgba(255, 78, 205, 0.28);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
+  --mdc-unelevated-button-container-color: var(--hk-accent);
+  --mdc-unelevated-button-label-text-color: #2a001d;
+  --mdc-unelevated-button-disabled-container-color: rgba(255, 255, 255, 0.08);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(255, 255, 255, 0.36);
+  --mdc-outlined-button-outline-color: rgba(10, 255, 194, 0.34);
+  --mdc-outlined-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-button-disabled-outline-color: rgba(255, 255, 255, 0.12);
+  --mdc-outlined-button-disabled-label-text-color: rgba(255, 255, 255, 0.3);
+  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  --mdc-icon-button-disabled-icon-color: rgba(255, 255, 255, 0.3);
+  --mdc-linear-progress-active-indicator-color: var(--hk-accent);
+  --mdc-linear-progress-track-color: rgba(255, 78, 205, 0.32);
+}
+
+:root[data-theme='sunset-boulevard'] {
+  color-scheme: dark;
+  --hk-text-primary: #fff6fa;
+  --hk-text-secondary: rgba(255, 226, 236, 0.92);
+  --hk-text-muted: rgba(255, 210, 223, 0.75);
+  --hk-surface: rgba(24, 16, 44, 0.9);
+  --hk-surface-elevated: rgba(38, 22, 66, 0.94);
+  --hk-border: rgba(251, 113, 133, 0.2);
+  --hk-accent: #fb7185;
+  --hk-accent-rgb: 251, 113, 133;
+  --hk-accent-soft: rgba(251, 113, 133, 0.26);
+  --hk-accent-strong: #fbbf24;
+  --hk-accent-strong-rgb: 251, 191, 36;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.26);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.34);
+  --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.45);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.62);
+  --hk-chip-primary-text: var(--hk-text-primary);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.32);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.4);
+  --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.58);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.74);
+  --hk-chip-accent-text: var(--hk-text-primary);
+  --hk-accent-gradient: linear-gradient(135deg, #fb7185 0%, #f472b6 45%, #fbbf24 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, #fb7185 0%, #a855f7 50%, #fbbf24 100%);
+  --hk-success: #34d399;
+  --hk-success-rgb: 52, 211, 153;
+  --hk-success-soft: rgba(52, 211, 153, 0.22);
+  --hk-success-border: rgba(var(--hk-success-rgb), 0.34);
+  --hk-warning: #fbbf24;
+  --hk-danger: #f97316;
+  --hk-font-family: 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-font-family: 'Chakra Petch', 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-letter-spacing: 0.07em;
+  --hk-body-background-color: #1a142f;
+  --hk-body-background-image: radial-gradient(circle at 20% 12%, rgba(251, 113, 133, 0.26), transparent 55%),
+    radial-gradient(circle at 82% 18%, rgba(244, 114, 182, 0.28), transparent 52%),
+    radial-gradient(circle at 50% 85%, rgba(251, 191, 36, 0.18), transparent 60%),
+    linear-gradient(180deg, rgba(16, 10, 32, 0.96) 0%, rgba(20, 12, 42, 0.96) 100%);
+  --hk-shell-background: linear-gradient(135deg, rgba(40, 16, 80, 0.94) 0%, rgba(20, 12, 42, 0.94) 100%);
+  --hk-toolbar-shadow: 0 18px 44px rgba(16, 10, 32, 0.5);
+  --hk-sidenav-background: rgba(26, 16, 50, 0.94);
+  --hk-sidenav-border: rgba(251, 113, 133, 0.2);
+  --hk-logo-gradient: linear-gradient(135deg, #fb7185 0%, #f472b6 45%, #fbbf24 100%);
+  --hk-nav-hover: rgba(251, 113, 133, 0.2);
+  background-color: var(--hk-body-background-color);
+  font-family: var(--hk-font-family);
+
+  --mat-sys-color-primary: var(--hk-accent);
+  --mat-sys-color-on-primary: #2f0714;
+  --mat-sys-color-primary-container: rgba(90, 21, 50, 0.92);
+  --mat-sys-color-on-primary-container: #ffe4ec;
+
+  --mat-sys-color-secondary: #a855f7;
+  --mat-sys-color-on-secondary: #31094a;
+  --mat-sys-color-secondary-container: rgba(68, 24, 112, 0.92);
+  --mat-sys-color-on-secondary-container: #f5ebff;
+
+  --mat-sys-color-tertiary: #fbbf24;
+  --mat-sys-color-on-tertiary: #2f1800;
+  --mat-sys-color-tertiary-container: rgba(92, 56, 4, 0.92);
+  --mat-sys-color-on-tertiary-container: #fff1c2;
+
+  --mat-sys-color-error: var(--hk-danger);
+  --mat-sys-color-on-error: #2c0b0b;
+  --mat-sys-color-error-container: rgba(63, 20, 20, 0.92);
+  --mat-sys-color-on-error-container: #fee2e2;
+
+  --mat-sys-color-surface: #1a142f;
+  --mat-sys-color-surface-dim: #120c24;
+  --mat-sys-color-surface-bright: #2c1f4d;
+  --mat-sys-color-surface-container-lowest: #0e091c;
+  --mat-sys-color-surface-container-low: rgba(24, 16, 44, 0.9);
+  --mat-sys-color-surface-container: rgba(32, 20, 58, 0.94);
+  --mat-sys-color-surface-container-high: rgba(40, 24, 70, 0.95);
+  --mat-sys-color-surface-container-highest: rgba(50, 28, 82, 0.96);
+
+  --mat-sys-color-on-surface: var(--hk-text-primary);
+  --mat-sys-color-on-surface-variant: rgba(255, 210, 223, 0.7);
+  --mat-sys-color-outline: rgba(251, 113, 133, 0.24);
+  --mat-sys-color-outline-variant: rgba(251, 113, 133, 0.18);
+  --mat-sys-color-inverse-surface: #fff6fa;
+  --mat-sys-color-inverse-on-surface: #31174a;
+  --mat-sys-color-inverse-primary: #fecdd3;
+  --mat-sys-color-shadow: rgba(16, 10, 32, 0.58);
+  --mat-sys-color-surface-tint: var(--hk-accent);
+  --mat-sys-elevation-level2: 0 20px 44px rgba(16, 10, 32, 0.52);
+
+  --mat-toolbar-container-background-color: rgba(24, 16, 44, 0.94);
+  --mat-toolbar-container-text-color: var(--hk-text-primary);
+  --mat-toolbar-container-shadow-color: rgba(16, 10, 32, 0.52);
+  --mat-sidenav-container-background-color: #100924;
+  --mat-sidenav-content-background-color: transparent;
+  --mat-sidenav-container-text-color: var(--hk-text-primary);
+  --mat-list-active-indicator-color: var(--hk-accent);
+  --mat-list-item-label-text-color: var(--hk-text-secondary);
+  --mat-card-background-color: rgba(36, 20, 64, 0.94);
+  --mat-card-title-text-color: var(--hk-text-primary);
+  --mat-card-subtitle-text-color: var(--hk-text-muted);
+  --mat-chip-selected-container-color: var(--hk-accent-soft);
+  --mat-chip-selected-label-text-color: var(--hk-text-primary);
+  --mat-chip-selected-avatar-color: var(--hk-text-primary);
+  --mat-chip-focus-ring-color: rgba(251, 191, 36, 0.36);
+  --mat-select-panel-background-color: rgba(24, 16, 44, 0.98);
+  --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
+  --mat-option-selected-state-label-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-container-color: rgba(20, 12, 40, 0.72);
+  --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-hover-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-active-indicator-color: rgba(251, 113, 133, 0.52);
+  --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
+  --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
+  --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-outline-color: rgba(251, 113, 133, 0.34);
+  --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
+  --mdc-outlined-text-field-hover-outline-color: rgba(251, 113, 133, 0.58);
+  --mdc-protected-button-container-color: rgba(251, 113, 133, 0.26);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
+  --mdc-unelevated-button-container-color: var(--hk-accent);
+  --mdc-unelevated-button-label-text-color: #2f0714;
+  --mdc-unelevated-button-disabled-container-color: rgba(255, 255, 255, 0.08);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(255, 255, 255, 0.36);
+  --mdc-outlined-button-outline-color: rgba(251, 113, 133, 0.34);
+  --mdc-outlined-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-button-disabled-outline-color: rgba(255, 255, 255, 0.12);
+  --mdc-outlined-button-disabled-label-text-color: rgba(255, 255, 255, 0.3);
+  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  --mdc-icon-button-disabled-icon-color: rgba(255, 255, 255, 0.3);
+  --mdc-linear-progress-active-indicator-color: var(--hk-accent);
+  --mdc-linear-progress-track-color: rgba(251, 113, 133, 0.28);
+}
+
+:root[data-theme='clockwork-brass'] {
+  color-scheme: dark;
+  --hk-text-primary: #fff3e5;
+  --hk-text-secondary: rgba(255, 235, 213, 0.88);
+  --hk-text-muted: rgba(255, 218, 188, 0.7);
+  --hk-surface: rgba(28, 18, 10, 0.92);
+  --hk-surface-elevated: rgba(42, 27, 14, 0.95);
+  --hk-border: rgba(217, 119, 6, 0.24);
+  --hk-accent: #d97706;
+  --hk-accent-rgb: 217, 119, 6;
+  --hk-accent-soft: rgba(217, 119, 6, 0.28);
+  --hk-accent-strong: #0d9488;
+  --hk-accent-strong-rgb: 13, 148, 136;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.28);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.36);
+  --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.48);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.66);
+  --hk-chip-primary-text: var(--hk-text-primary);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.34);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.42);
+  --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.56);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.74);
+  --hk-chip-accent-text: var(--hk-text-primary);
+  --hk-accent-gradient: linear-gradient(135deg, #d97706 0%, #facc15 40%, #0d9488 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, #d97706 0%, #14b8a6 50%, #f59e0b 100%);
+  --hk-success: #22c55e;
+  --hk-success-rgb: 34, 197, 94;
+  --hk-success-soft: rgba(34, 197, 94, 0.22);
+  --hk-success-border: rgba(var(--hk-success-rgb), 0.36);
+  --hk-warning: #facc15;
+  --hk-danger: #ef4444;
+  --hk-font-family: 'Cinzel Decorative', 'Great Vibes', 'Inter', serif;
+  --hk-heading-font-family: 'Great Vibes', 'Cinzel Decorative', 'Inter', serif;
+  --hk-heading-letter-spacing: 0.06em;
+  --hk-body-background-color: #120d08;
+  --hk-body-background-image: radial-gradient(circle at 22% 14%, rgba(217, 119, 6, 0.3), transparent 52%),
+    radial-gradient(circle at 78% 10%, rgba(13, 148, 136, 0.26), transparent 48%),
+    linear-gradient(180deg, rgba(18, 13, 8, 0.96) 0%, rgba(14, 10, 6, 0.96) 100%);
+  --hk-shell-background: linear-gradient(135deg, rgba(59, 41, 24, 0.94) 0%, rgba(18, 12, 8, 0.94) 100%);
+  --hk-toolbar-shadow: 0 22px 50px rgba(12, 8, 4, 0.56);
+  --hk-sidenav-background: rgba(26, 17, 10, 0.94);
+  --hk-sidenav-border: rgba(217, 119, 6, 0.22);
+  --hk-logo-gradient: linear-gradient(135deg, #facc15 0%, #d97706 45%, #0d9488 100%);
+  --hk-nav-hover: rgba(217, 119, 6, 0.22);
+  background-color: var(--hk-body-background-color);
+  font-family: var(--hk-font-family);
+
+  --mat-sys-color-primary: var(--hk-accent);
+  --mat-sys-color-on-primary: #2c1600;
+  --mat-sys-color-primary-container: rgba(85, 48, 16, 0.92);
+  --mat-sys-color-on-primary-container: #ffedd5;
+
+  --mat-sys-color-secondary: #0d9488;
+  --mat-sys-color-on-secondary: #011f1c;
+  --mat-sys-color-secondary-container: rgba(9, 56, 52, 0.92);
+  --mat-sys-color-on-secondary-container: #c4fff8;
+
+  --mat-sys-color-tertiary: #facc15;
+  --mat-sys-color-on-tertiary: #332400;
+  --mat-sys-color-tertiary-container: rgba(91, 62, 6, 0.92);
+  --mat-sys-color-on-tertiary-container: #fff6cf;
+
+  --mat-sys-color-error: var(--hk-danger);
+  --mat-sys-color-on-error: #2c0b0b;
+  --mat-sys-color-error-container: rgba(63, 20, 20, 0.92);
+  --mat-sys-color-on-error-container: #fee2e2;
+
+  --mat-sys-color-surface: #120d08;
+  --mat-sys-color-surface-dim: #0e0906;
+  --mat-sys-color-surface-bright: #25180f;
+  --mat-sys-color-surface-container-lowest: #080502;
+  --mat-sys-color-surface-container-low: rgba(24, 16, 10, 0.9);
+  --mat-sys-color-surface-container: rgba(32, 21, 12, 0.94);
+  --mat-sys-color-surface-container-high: rgba(40, 26, 14, 0.95);
+  --mat-sys-color-surface-container-highest: rgba(52, 32, 18, 0.96);
+
+  --mat-sys-color-on-surface: var(--hk-text-primary);
+  --mat-sys-color-on-surface-variant: rgba(255, 218, 188, 0.7);
+  --mat-sys-color-outline: rgba(217, 119, 6, 0.26);
+  --mat-sys-color-outline-variant: rgba(217, 119, 6, 0.18);
+  --mat-sys-color-inverse-surface: #fff3e5;
+  --mat-sys-color-inverse-on-surface: #3d2a15;
+  --mat-sys-color-inverse-primary: #facc15;
+  --mat-sys-color-shadow: rgba(12, 8, 4, 0.6);
+  --mat-sys-color-surface-tint: var(--hk-accent);
+  --mat-sys-elevation-level2: 0 22px 50px rgba(12, 8, 4, 0.56);
+
+  --mat-toolbar-container-background-color: rgba(26, 17, 10, 0.94);
+  --mat-toolbar-container-text-color: var(--hk-text-primary);
+  --mat-toolbar-container-shadow-color: rgba(12, 8, 4, 0.56);
+  --mat-sidenav-container-background-color: #0b0603;
+  --mat-sidenav-content-background-color: transparent;
+  --mat-sidenav-container-text-color: var(--hk-text-primary);
+  --mat-list-active-indicator-color: var(--hk-accent);
+  --mat-list-item-label-text-color: var(--hk-text-secondary);
+  --mat-card-background-color: rgba(40, 26, 14, 0.94);
+  --mat-card-title-text-color: var(--hk-text-primary);
+  --mat-card-subtitle-text-color: var(--hk-text-muted);
+  --mat-chip-selected-container-color: var(--hk-accent-soft);
+  --mat-chip-selected-label-text-color: var(--hk-text-primary);
+  --mat-chip-selected-avatar-color: var(--hk-text-primary);
+  --mat-chip-focus-ring-color: rgba(13, 148, 136, 0.38);
+  --mat-select-panel-background-color: rgba(28, 18, 10, 0.98);
+  --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
+  --mat-option-selected-state-label-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-container-color: rgba(24, 15, 9, 0.74);
+  --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-hover-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-active-indicator-color: rgba(217, 119, 6, 0.5);
+  --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
+  --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
+  --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-outline-color: rgba(217, 119, 6, 0.38);
+  --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
+  --mdc-outlined-text-field-hover-outline-color: rgba(217, 119, 6, 0.6);
+  --mdc-protected-button-container-color: rgba(217, 119, 6, 0.28);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
+  --mdc-unelevated-button-container-color: var(--hk-accent);
+  --mdc-unelevated-button-label-text-color: #2c1600;
+  --mdc-unelevated-button-disabled-container-color: rgba(255, 255, 255, 0.08);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(255, 255, 255, 0.36);
+  --mdc-outlined-button-outline-color: rgba(217, 119, 6, 0.38);
+  --mdc-outlined-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-button-disabled-outline-color: rgba(255, 255, 255, 0.12);
+  --mdc-outlined-button-disabled-label-text-color: rgba(255, 255, 255, 0.3);
+  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  --mdc-icon-button-disabled-icon-color: rgba(255, 255, 255, 0.3);
+  --mdc-linear-progress-active-indicator-color: var(--hk-accent);
+  --mdc-linear-progress-track-color: rgba(217, 119, 6, 0.32);
+}
+
+:root[data-theme='verdant-sanctuary'] {
+  color-scheme: light;
+  --hk-text-primary: #12261a;
+  --hk-text-secondary: rgba(18, 38, 26, 0.72);
+  --hk-text-muted: rgba(18, 38, 26, 0.56);
+  --hk-surface: #ffffff;
+  --hk-surface-elevated: #f1fcf6;
+  --hk-border: rgba(15, 157, 88, 0.18);
+  --hk-accent: #0f9d58;
+  --hk-accent-rgb: 15, 157, 88;
+  --hk-accent-soft: rgba(15, 157, 88, 0.16);
+  --hk-accent-strong: #34d399;
+  --hk-accent-strong-rgb: 52, 211, 153;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.18);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.24);
+  --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.32);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.48);
+  --hk-chip-primary-text: var(--hk-text-primary);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.22);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.3);
+  --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.4);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.55);
+  --hk-chip-accent-text: var(--hk-text-primary);
+  --hk-accent-gradient: linear-gradient(135deg, #bbf7d0 0%, #6ee7b7 40%, #0f9d58 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, #0f9d58 0%, #34d399 50%, #f59e0b 100%);
+  --hk-success: #16a34a;
+  --hk-success-rgb: 22, 163, 74;
+  --hk-success-soft: rgba(22, 163, 74, 0.16);
+  --hk-success-border: rgba(var(--hk-success-rgb), 0.28);
+  --hk-warning: #f59e0b;
+  --hk-danger: #dc2626;
+  --hk-font-family: 'Inter', 'Rubik', 'Segoe UI', sans-serif;
+  --hk-heading-font-family: 'Rubik', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-letter-spacing: 0.05em;
+  --hk-body-background-color: #f3fff3;
+  --hk-body-background-image: radial-gradient(circle at 18% 10%, rgba(110, 231, 183, 0.32), transparent 55%),
+    radial-gradient(circle at 78% 15%, rgba(59, 130, 246, 0.16), transparent 52%),
+    linear-gradient(180deg, #ffffff 0%, #ecfdf5 60%, #d1fae5 100%);
+  --hk-shell-background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(222, 247, 227, 0.96) 100%);
+  --hk-toolbar-shadow: 0 14px 32px rgba(15, 118, 110, 0.18);
+  --hk-sidenav-background: rgba(255, 255, 255, 0.94);
+  --hk-sidenav-border: rgba(15, 157, 88, 0.18);
+  --hk-logo-gradient: linear-gradient(135deg, #0f9d58 0%, #34d399 45%, #f59e0b 100%);
+  --hk-nav-hover: rgba(15, 157, 88, 0.14);
+  background-color: var(--hk-body-background-color);
+  font-family: var(--hk-font-family);
+
+  --mat-sys-color-primary: var(--hk-accent);
+  --mat-sys-color-on-primary: #ffffff;
+  --mat-sys-color-primary-container: #d1fae5;
+  --mat-sys-color-on-primary-container: #0b3d26;
+
+  --mat-sys-color-secondary: #34d399;
+  --mat-sys-color-on-secondary: #022c1a;
+  --mat-sys-color-secondary-container: #cffaea;
+  --mat-sys-color-on-secondary-container: #064e3b;
+
+  --mat-sys-color-tertiary: #f59e0b;
+  --mat-sys-color-on-tertiary: #351900;
+  --mat-sys-color-tertiary-container: #ffedd5;
+  --mat-sys-color-on-tertiary-container: #7c2d12;
+
+  --mat-sys-color-error: var(--hk-danger);
+  --mat-sys-color-on-error: #ffffff;
+  --mat-sys-color-error-container: #fee2e2;
+  --mat-sys-color-on-error-container: #7f1d1d;
+
+  --mat-sys-color-surface: #f3fff3;
+  --mat-sys-color-surface-dim: #e5f5e8;
+  --mat-sys-color-surface-bright: #ffffff;
+  --mat-sys-color-surface-container-lowest: #ffffff;
+  --mat-sys-color-surface-container-low: #f1fcf6;
+  --mat-sys-color-surface-container: rgba(255, 255, 255, 0.97);
+  --mat-sys-color-surface-container-high: rgba(233, 250, 241, 0.97);
+  --mat-sys-color-surface-container-highest: rgba(216, 244, 230, 0.97);
+
+  --mat-sys-color-on-surface: var(--hk-text-primary);
+  --mat-sys-color-on-surface-variant: rgba(18, 38, 26, 0.58);
+  --mat-sys-color-outline: rgba(15, 157, 88, 0.2);
+  --mat-sys-color-outline-variant: rgba(15, 157, 88, 0.14);
+  --mat-sys-color-inverse-surface: #1f2937;
+  --mat-sys-color-inverse-on-surface: #f8fafc;
+  --mat-sys-color-inverse-primary: #86efac;
+  --mat-sys-color-shadow: rgba(15, 118, 110, 0.16);
+  --mat-sys-color-surface-tint: var(--hk-accent);
+  --mat-sys-elevation-level2: 0 14px 32px rgba(15, 118, 110, 0.2);
+
+  --mat-toolbar-container-background-color: rgba(255, 255, 255, 0.94);
+  --mat-toolbar-container-text-color: var(--hk-text-primary);
+  --mat-toolbar-container-shadow-color: rgba(15, 118, 110, 0.18);
+  --mat-sidenav-container-background-color: rgba(236, 253, 245, 0.7);
+  --mat-sidenav-content-background-color: transparent;
+  --mat-sidenav-container-text-color: var(--hk-text-primary);
+  --mat-list-active-indicator-color: var(--hk-accent);
+  --mat-list-item-label-text-color: var(--hk-text-secondary);
+  --mat-card-background-color: #ffffff;
+  --mat-card-title-text-color: var(--hk-text-primary);
+  --mat-card-subtitle-text-color: var(--hk-text-muted);
+  --mat-chip-selected-container-color: var(--hk-accent-soft);
+  --mat-chip-selected-label-text-color: var(--hk-text-primary);
+  --mat-chip-selected-avatar-color: var(--hk-accent);
+  --mat-chip-focus-ring-color: rgba(15, 157, 88, 0.24);
+  --mat-select-panel-background-color: rgba(255, 255, 255, 0.98);
+  --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
+  --mat-option-selected-state-label-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-container-color: rgba(255, 255, 255, 0.92);
+  --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-hover-active-indicator-color: rgba(15, 157, 88, 0.7);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-active-indicator-color: rgba(15, 157, 88, 0.3);
+  --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
+  --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
+  --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-outline-color: rgba(15, 157, 88, 0.24);
+  --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
+  --mdc-outlined-text-field-hover-outline-color: rgba(15, 157, 88, 0.42);
+  --mdc-protected-button-container-color: rgba(15, 157, 88, 0.18);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
+  --mdc-unelevated-button-container-color: var(--hk-accent);
+  --mdc-unelevated-button-label-text-color: #ffffff;
+  --mdc-unelevated-button-disabled-container-color: rgba(15, 23, 42, 0.08);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(15, 23, 42, 0.3);
+  --mdc-outlined-button-outline-color: rgba(15, 157, 88, 0.24);
+  --mdc-outlined-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-button-disabled-outline-color: rgba(15, 23, 42, 0.08);
+  --mdc-outlined-button-disabled-label-text-color: rgba(15, 23, 42, 0.3);
+  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  --mdc-icon-button-disabled-icon-color: rgba(15, 23, 42, 0.3);
+  --mdc-linear-progress-active-indicator-color: var(--hk-accent);
+  --mdc-linear-progress-track-color: rgba(15, 157, 88, 0.2);
+}
+
+:root[data-theme='polar-lumina'] {
+  color-scheme: light;
+  --hk-text-primary: #0b1b2a;
+  --hk-text-secondary: rgba(11, 27, 42, 0.7);
+  --hk-text-muted: rgba(11, 27, 42, 0.5);
+  --hk-surface: #ffffff;
+  --hk-surface-elevated: #f1f9ff;
+  --hk-border: rgba(30, 144, 255, 0.18);
+  --hk-accent: #1e90ff;
+  --hk-accent-rgb: 30, 144, 255;
+  --hk-accent-soft: rgba(30, 144, 255, 0.16);
+  --hk-accent-strong: #6366f1;
+  --hk-accent-strong-rgb: 99, 102, 241;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.18);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.24);
+  --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.32);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.48);
+  --hk-chip-primary-text: var(--hk-text-primary);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.22);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.3);
+  --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.42);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.58);
+  --hk-chip-accent-text: var(--hk-text-primary);
+  --hk-accent-gradient: linear-gradient(135deg, #e0f2ff 0%, #9bd0ff 45%, #1e90ff 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, #1e90ff 0%, #38bdf8 50%, #6366f1 100%);
+  --hk-success: #0ea5e9;
+  --hk-success-rgb: 14, 165, 233;
+  --hk-success-soft: rgba(14, 165, 233, 0.18);
+  --hk-success-border: rgba(var(--hk-success-rgb), 0.32);
+  --hk-warning: #fbbf24;
+  --hk-danger: #ef4444;
+  --hk-font-family: 'Inter', 'Space Grotesk', 'Segoe UI', sans-serif;
+  --hk-heading-font-family: 'Space Grotesk', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-letter-spacing: 0.05em;
+  --hk-body-background-color: #f6fbff;
+  --hk-body-background-image: radial-gradient(circle at 20% 12%, rgba(30, 144, 255, 0.24), transparent 55%),
+    radial-gradient(circle at 80% 18%, rgba(99, 102, 241, 0.18), transparent 52%),
+    linear-gradient(180deg, #ffffff 0%, #edf6ff 60%, #d8ecff 100%);
+  --hk-shell-background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(224, 242, 255, 0.96) 100%);
+  --hk-toolbar-shadow: 0 12px 30px rgba(14, 34, 54, 0.16);
+  --hk-sidenav-background: rgba(255, 255, 255, 0.94);
+  --hk-sidenav-border: rgba(30, 144, 255, 0.16);
+  --hk-logo-gradient: linear-gradient(135deg, #1e90ff 0%, #38bdf8 45%, #6366f1 100%);
+  --hk-nav-hover: rgba(30, 144, 255, 0.14);
+  background-color: var(--hk-body-background-color);
+  font-family: var(--hk-font-family);
+
+  --mat-sys-color-primary: var(--hk-accent);
+  --mat-sys-color-on-primary: #ffffff;
+  --mat-sys-color-primary-container: #dbeafe;
+  --mat-sys-color-on-primary-container: #0b3a66;
+
+  --mat-sys-color-secondary: #38bdf8;
+  --mat-sys-color-on-secondary: #012436;
+  --mat-sys-color-secondary-container: #d7f3ff;
+  --mat-sys-color-on-secondary-container: #0b4a6f;
+
+  --mat-sys-color-tertiary: #6366f1;
+  --mat-sys-color-on-tertiary: #ffffff;
+  --mat-sys-color-tertiary-container: #e0e7ff;
+  --mat-sys-color-on-tertiary-container: #1e1b4b;
+
+  --mat-sys-color-error: var(--hk-danger);
+  --mat-sys-color-on-error: #ffffff;
+  --mat-sys-color-error-container: #fee2e2;
+  --mat-sys-color-on-error-container: #7f1d1d;
+
+  --mat-sys-color-surface: #f6fbff;
+  --mat-sys-color-surface-dim: #e4f1fb;
+  --mat-sys-color-surface-bright: #ffffff;
+  --mat-sys-color-surface-container-lowest: #ffffff;
+  --mat-sys-color-surface-container-low: #f1f9ff;
+  --mat-sys-color-surface-container: rgba(255, 255, 255, 0.97);
+  --mat-sys-color-surface-container-high: rgba(233, 244, 255, 0.97);
+  --mat-sys-color-surface-container-highest: rgba(215, 235, 255, 0.97);
+
+  --mat-sys-color-on-surface: var(--hk-text-primary);
+  --mat-sys-color-on-surface-variant: rgba(11, 27, 42, 0.54);
+  --mat-sys-color-outline: rgba(30, 144, 255, 0.2);
+  --mat-sys-color-outline-variant: rgba(30, 144, 255, 0.14);
+  --mat-sys-color-inverse-surface: #1e293b;
+  --mat-sys-color-inverse-on-surface: #f8fafc;
+  --mat-sys-color-inverse-primary: #93c5fd;
+  --mat-sys-color-shadow: rgba(14, 34, 54, 0.16);
+  --mat-sys-color-surface-tint: var(--hk-accent);
+  --mat-sys-elevation-level2: 0 12px 30px rgba(14, 34, 54, 0.18);
+
+  --mat-toolbar-container-background-color: rgba(255, 255, 255, 0.94);
+  --mat-toolbar-container-text-color: var(--hk-text-primary);
+  --mat-toolbar-container-shadow-color: rgba(14, 34, 54, 0.16);
+  --mat-sidenav-container-background-color: rgba(224, 242, 255, 0.7);
+  --mat-sidenav-content-background-color: transparent;
+  --mat-sidenav-container-text-color: var(--hk-text-primary);
+  --mat-list-active-indicator-color: var(--hk-accent);
+  --mat-list-item-label-text-color: var(--hk-text-secondary);
+  --mat-card-background-color: #ffffff;
+  --mat-card-title-text-color: var(--hk-text-primary);
+  --mat-card-subtitle-text-color: var(--hk-text-muted);
+  --mat-chip-selected-container-color: var(--hk-accent-soft);
+  --mat-chip-selected-label-text-color: var(--hk-text-primary);
+  --mat-chip-selected-avatar-color: var(--hk-accent);
+  --mat-chip-focus-ring-color: rgba(30, 144, 255, 0.26);
+  --mat-select-panel-background-color: rgba(255, 255, 255, 0.98);
+  --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
+  --mat-option-selected-state-label-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-container-color: rgba(255, 255, 255, 0.92);
+  --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-hover-active-indicator-color: rgba(30, 144, 255, 0.72);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-active-indicator-color: rgba(30, 144, 255, 0.3);
+  --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
+  --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
+  --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-outline-color: rgba(30, 144, 255, 0.24);
+  --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
+  --mdc-outlined-text-field-hover-outline-color: rgba(30, 144, 255, 0.42);
+  --mdc-protected-button-container-color: rgba(30, 144, 255, 0.18);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
+  --mdc-unelevated-button-container-color: var(--hk-accent);
+  --mdc-unelevated-button-label-text-color: #ffffff;
+  --mdc-unelevated-button-disabled-container-color: rgba(15, 23, 42, 0.08);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(15, 23, 42, 0.3);
+  --mdc-outlined-button-outline-color: rgba(30, 144, 255, 0.24);
+  --mdc-outlined-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-button-disabled-outline-color: rgba(15, 23, 42, 0.08);
+  --mdc-outlined-button-disabled-label-text-color: rgba(15, 23, 42, 0.3);
+  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  --mdc-icon-button-disabled-icon-color: rgba(15, 23, 42, 0.3);
+  --mdc-linear-progress-active-indicator-color: var(--hk-accent);
+  --mdc-linear-progress-track-color: rgba(30, 144, 255, 0.2);
+}
+
 a {
   color: inherit;
 }
