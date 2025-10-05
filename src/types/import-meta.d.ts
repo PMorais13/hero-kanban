@@ -17,4 +17,8 @@ declare interface ImportMeta {
       readonly eager: true;
     },
   ): Record<string, { readonly default: T }>;
+
+  glob(
+    pattern: string,
+  ): Record<string, () => Promise<unknown>>;
 }

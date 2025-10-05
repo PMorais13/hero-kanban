@@ -1,19 +1,45 @@
 import { DOCUMENT } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 import { DEFAULT_THEME_ID, ThemeState } from './theme.state';
+import { THEME_MANIFEST_URLS, type ThemeManifest } from './theme.config';
 
 describe('ThemeState', () => {
   let state: ThemeState;
   let documentRef: Document;
   let overlayContainerElement: HTMLElement;
+  let httpMock: HttpTestingController;
+
+  const manifestFixtures = new Map<string, ThemeManifest>(
+    Object.entries(
+      import.meta.glob<ThemeManifest>('./themes/*.json', { eager: true, import: 'default' }),
+    ).map(([resourcePath, manifest]) => [
+      `/themes/${resourcePath.replace('./themes/', '')}`,
+      manifest,
+    ]),
+  );
+
+  const flushThemeManifestRequests = () => {
+    for (const url of THEME_MANIFEST_URLS) {
+      const request = httpMock.expectOne(url);
+      const manifest = manifestFixtures.get(url);
+
+      if (!manifest) {
+        throw new Error(`No manifest fixture registered for URL ${url}.`);
+      }
+
+      request.flush(manifest);
+    }
+  };
 
   beforeEach(() => {
     overlayContainerElement = document.createElement('div');
 
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
         {
           provide: OverlayContainer,
@@ -25,16 +51,19 @@ describe('ThemeState', () => {
       ],
     });
     documentRef = TestBed.inject(DOCUMENT);
+    httpMock = TestBed.inject(HttpTestingController);
     documentRef.documentElement.dataset['theme'] = '';
     documentRef.body.dataset['theme'] = '';
     overlayContainerElement.dataset['theme'] = '';
     state = TestBed.inject(ThemeState);
+    flushThemeManifestRequests();
   });
 
   afterEach(() => {
     documentRef.documentElement.dataset['theme'] = '';
     documentRef.body.dataset['theme'] = '';
     overlayContainerElement.dataset['theme'] = '';
+    httpMock.verify();
   });
 
   it('should expose the default theme and apply it to the document', () => {

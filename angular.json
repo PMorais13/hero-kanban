@@ -29,6 +29,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "*.json",
+                "input": "src/app/core/state/themes",
+                "output": "themes"
               }
             ],
             "styles": [
@@ -88,6 +93,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "*.json",
+                "input": "src/app/core/state/themes",
+                "output": "themes"
               }
             ],
             "styles": [
