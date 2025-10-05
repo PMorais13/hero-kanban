@@ -1,16 +1,3 @@
-import auroraCrestManifest from './themes/aurora-crest.json';
-import celestialTidesManifest from './themes/celestial-tides.json';
-import clockworkBrassManifest from './themes/clockwork-brass.json';
-import emberForgeManifest from './themes/ember-forge.json';
-import nebulaPulseManifest from './themes/nebula-pulse.json';
-import polarLuminaManifest from './themes/polar-lumina.json';
-import quantumMistManifest from './themes/quantum-mist.json';
-import radiantDawnManifest from './themes/radiant-dawn.json';
-import royalManuscriptManifest from './themes/royal-manuscript.json';
-import stellarNightManifest from './themes/stellar-night.json';
-import sunsetBoulevardManifest from './themes/sunset-boulevard.json';
-import verdantSanctuaryManifest from './themes/verdant-sanctuary.json';
-
 export type ThemeTone = 'dark' | 'light';
 
 export interface ThemeProfileTokens {
@@ -36,82 +23,10 @@ export interface ThemeOption {
   readonly tone: ThemeTone;
   readonly previewFontFamily: string;
   readonly profile?: ThemeProfileTokens;
-}
-
-type ThemeManifest = Omit<ThemeOption, 'tone' | 'profile'> & {
-  readonly tone: string;
+  readonly stylesheet?: string;
   readonly isDefault?: boolean;
-  readonly profile?: ThemeProfileTokens;
-};
-
-const themeManifests = Object.freeze([
-  auroraCrestManifest,
-  celestialTidesManifest,
-  clockworkBrassManifest,
-  emberForgeManifest,
-  nebulaPulseManifest,
-  polarLuminaManifest,
-  quantumMistManifest,
-  radiantDawnManifest,
-  royalManuscriptManifest,
-  stellarNightManifest,
-  sunsetBoulevardManifest,
-  verdantSanctuaryManifest,
-]) as readonly ThemeManifest[];
-
-if (themeManifests.length === 0) {
-  throw new Error('No theme manifests were found. Provide at least one theme manifest.');
 }
-
-const isThemeTone = (value: string): value is ThemeTone => value === 'dark' || value === 'light';
-
-const manifestToThemeOption = (manifest: ThemeManifest): ThemeOption => {
-  const { tone, isDefault: _isDefault, profile, ...optionFields } = manifest;
-
-  if (!isThemeTone(tone)) {
-    throw new Error(`Invalid tone "${tone}" provided by theme manifest "${manifest.id}".`);
-  }
-
-  return {
-    ...optionFields,
-    tone,
-    profile: profile ? Object.freeze({ ...profile }) : undefined,
-  } satisfies ThemeOption;
-};
-
-const defaultThemeManifest =
-  themeManifests.find((manifest) => manifest.isDefault === true) ??
-  themeManifests.find((manifest) => manifest.id === 'stellar-night') ??
-  themeManifests[0];
-
-const sortedThemeManifests = themeManifests
-  .slice()
-  .sort((first, second) => {
-    if (first.id === defaultThemeManifest.id) {
-      return -1;
-    }
-
-    if (second.id === defaultThemeManifest.id) {
-      return 1;
-    }
-
-    return first.label.localeCompare(second.label, 'pt-BR', { sensitivity: 'base' });
-  });
-
-const themeOptions = Object.freeze(sortedThemeManifests.map(manifestToThemeOption)) as readonly ThemeOption[];
 
 export type ThemeId = ThemeOption['id'];
 
-export interface ThemeConfiguration<TOptions extends readonly ThemeOption[] = readonly ThemeOption[]> {
-  readonly defaultThemeId: TOptions[number]['id'];
-  readonly options: TOptions;
-}
-
-const staticThemeConfiguration = {
-  defaultThemeId: themeOptions[0].id,
-  options: themeOptions,
-} satisfies ThemeConfiguration<typeof themeOptions>;
-
-export const STATIC_THEME_CONFIGURATION = staticThemeConfiguration;
-export const DEFAULT_THEME_ID: ThemeId = staticThemeConfiguration.defaultThemeId;
-export const STATIC_THEME_OPTIONS: readonly ThemeOption[] = staticThemeConfiguration.options;
+export const DEFAULT_THEME_ID: ThemeId = 'stellar-night';

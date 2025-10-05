@@ -1,10 +1,20 @@
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+
 import { AppComponent } from './app.component';
+import { ThemeService } from './core/services/theme.service';
+
+class ThemeServiceStub {
+  getThemes() {
+    return of([]);
+  }
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [{ provide: ThemeService, useClass: ThemeServiceStub }],
     }).compileComponents();
   });
 
