@@ -66,18 +66,22 @@ export class ThemeState {
     const overlayElement = this.overlayContainer?.getContainerElement();
     const theme = this._themes().find((option) => option.id === themeId);
     const profileTokens = theme?.profile;
+    const previewFontFamily = theme?.previewFontFamily;
 
     if (rootElement) {
       rootElement.dataset['theme'] = themeId;
       this.applyProfileTokens(rootElement, profileTokens);
+      this.applyFontFamily(rootElement, previewFontFamily);
     }
 
     if (bodyElement) {
       bodyElement.dataset['theme'] = themeId;
+      this.applyFontFamily(bodyElement, previewFontFamily);
     }
 
     if (overlayElement) {
       overlayElement.dataset['theme'] = themeId;
+      this.applyFontFamily(overlayElement, previewFontFamily);
     }
   }
 
@@ -94,6 +98,20 @@ export class ThemeState {
         target.style.removeProperty(cssVariable);
       }
     }
+  }
+
+  private applyFontFamily(
+    target: HTMLElement,
+    fontFamily: string | undefined,
+  ): void {
+    if (!fontFamily) {
+      target.style.removeProperty('--hk-font-family');
+      target.style.removeProperty('--hk-heading-font-family');
+      return;
+    }
+
+    target.style.setProperty('--hk-font-family', fontFamily);
+    target.style.setProperty('--hk-heading-font-family', fontFamily);
   }
 }
 
