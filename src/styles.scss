@@ -61,10 +61,29 @@ mat-card-subtitle,
   font-family: var(--hk-font-family);
 }
 
-.mat-mdc-list-item-title,
-.mat-mdc-list-item-line,
-.mdc-list-item__primary-text,
-.mdc-list-item__secondary-text {
+
+:root ::ng-deep .mat-mdc-typography,
+:root ::ng-deep .mat-mdc-typography *:not(.material-symbols-rounded) {
+  font-family: var(--hk-font-family);
+}
+
+:root ::ng-deep .mat-mdc-typography h1,
+:root ::ng-deep .mat-mdc-typography h2,
+:root ::ng-deep .mat-mdc-typography h3,
+:root ::ng-deep .mat-mdc-typography h4,
+:root ::ng-deep .mat-mdc-typography h5,
+:root ::ng-deep .mat-mdc-typography h6,
+:root ::ng-deep mat-card-title,
+:root ::ng-deep .mat-mdc-card-title {
+  font-family: var(--hk-heading-font-family, var(--hk-font-family));
+}
+
+:root ::ng-deep mat-card-subtitle,
+:root ::ng-deep .mat-mdc-card-subtitle,
+:root ::ng-deep .mat-mdc-list-item-title,
+:root ::ng-deep .mdc-list-item__primary-text,
+:root ::ng-deep .mat-mdc-list-item-line,
+:root ::ng-deep .mdc-list-item__secondary-text {
   font-family: var(--hk-font-family);
 }
 
