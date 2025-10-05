@@ -36,12 +36,14 @@ export interface ThemeOption {
   readonly tone: ThemeTone;
   readonly previewFontFamily: string;
   readonly profile?: ThemeProfileTokens;
+  readonly stylesheet?: string;
 }
 
 type ThemeManifest = Omit<ThemeOption, 'tone' | 'profile'> & {
   readonly tone: string;
   readonly isDefault?: boolean;
   readonly profile?: ThemeProfileTokens;
+  readonly stylesheet?: string | readonly string[];
 };
 
 const themeManifests = Object.freeze([
@@ -66,7 +68,8 @@ if (themeManifests.length === 0) {
 const isThemeTone = (value: string): value is ThemeTone => value === 'dark' || value === 'light';
 
 const manifestToThemeOption = (manifest: ThemeManifest): ThemeOption => {
-  const { tone, isDefault: _isDefault, profile, ...optionFields } = manifest;
+  const { tone, isDefault: _isDefault, profile, stylesheet, ...optionFields } = manifest;
+  const normalizedStylesheet = Array.isArray(stylesheet) ? stylesheet.join('\n') : stylesheet;
 
   if (!isThemeTone(tone)) {
     throw new Error(`Invalid tone "${tone}" provided by theme manifest "${manifest.id}".`);
@@ -76,6 +79,7 @@ const manifestToThemeOption = (manifest: ThemeManifest): ThemeOption => {
     ...optionFields,
     tone,
     profile: profile ? Object.freeze({ ...profile }) : undefined,
+    stylesheet: normalizedStylesheet,
   } satisfies ThemeOption;
 };
 

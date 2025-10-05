@@ -15,6 +15,7 @@ type ThemeDto = {
   readonly tone: ThemeTone;
   readonly previewFontFamily: string;
   readonly profile?: ThemeProfileTokens;
+  readonly stylesheet?: string | readonly string[];
 };
 
 @Injectable({ providedIn: 'root' })
@@ -30,11 +31,13 @@ export class ThemeService {
   }
 
   private mapDtoToThemeOption(dto: ThemeDto): ThemeOption {
-    const { profile, ...rest } = dto;
+    const { profile, stylesheet, ...rest } = dto;
+    const normalizedStylesheet = Array.isArray(stylesheet) ? stylesheet.join('\n') : stylesheet;
 
     return Object.freeze({
       ...rest,
       profile: profile ? Object.freeze({ ...profile }) : undefined,
+      stylesheet: normalizedStylesheet,
     }) as ThemeOption;
   }
 }

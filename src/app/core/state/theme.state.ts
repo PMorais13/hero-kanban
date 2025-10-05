@@ -32,6 +32,8 @@ export class ThemeState {
 
   private readonly _currentTheme = signal<ThemeId>(DEFAULT_THEME_ID);
 
+  private themeStylesheetElement: HTMLStyleElement | null = null;
+
   readonly themes = this._themes.asReadonly();
   readonly currentTheme = this._currentTheme.asReadonly();
 
@@ -95,6 +97,9 @@ export class ThemeState {
     const theme = this._themes().find((option) => option.id === themeId);
     const profileTokens = theme?.profile;
     const previewFontFamily = theme?.previewFontFamily;
+    const stylesheet = theme?.stylesheet;
+
+    this.applyStylesheet(stylesheet);
 
     if (rootElement) {
       rootElement.dataset['theme'] = themeId;
@@ -140,6 +145,34 @@ export class ThemeState {
 
     target.style.setProperty('--hk-font-family', fontFamily);
     target.style.setProperty('--hk-heading-font-family', fontFamily);
+  }
+
+  private applyStylesheet(stylesheet: string | undefined): void {
+    const documentRef = this.documentRef;
+
+    if (!documentRef) {
+      return;
+    }
+
+    if (!stylesheet) {
+      if (this.themeStylesheetElement) {
+        this.themeStylesheetElement.remove();
+        this.themeStylesheetElement = null;
+      }
+
+      return;
+    }
+
+    let styleElement = this.themeStylesheetElement;
+
+    if (!styleElement || !documentRef.head.contains(styleElement)) {
+      styleElement = documentRef.createElement('style');
+      styleElement.setAttribute('data-theme-stylesheet', 'dynamic');
+      documentRef.head.appendChild(styleElement);
+      this.themeStylesheetElement = styleElement;
+    }
+
+    styleElement.textContent = stylesheet;
   }
 }
 
