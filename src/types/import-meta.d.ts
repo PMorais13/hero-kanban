@@ -8,6 +8,17 @@ declare interface ImportMeta {
     options: {
       readonly eager: true;
       readonly import: 'default';
-    }
+    },
   ): Record<string, T>;
+
+  glob<T = unknown>(
+    pattern: string,
+    options: {
+      readonly eager: true;
+    },
+  ): Record<string, { readonly default: T }>;
+
+  glob(
+    pattern: string,
+  ): Record<string, () => Promise<unknown>>;
 }

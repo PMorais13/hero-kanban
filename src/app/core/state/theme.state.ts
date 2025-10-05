@@ -1,11 +1,15 @@
 import { DOCUMENT } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { forkJoin } from 'rxjs';
 
 import {
   DEFAULT_THEME_ID,
-  STATIC_THEME_OPTIONS,
+  THEME_MANIFEST_URLS,
+  createThemeConfiguration,
   type ThemeId,
+  type ThemeManifest,
   type ThemeOption,
   type ThemeProfileTokens,
 } from './theme.config';
@@ -27,8 +31,9 @@ const PROFILE_TOKEN_TO_CSS_VARIABLE: ReadonlyArray<readonly [keyof ThemeProfileT
 export class ThemeState {
   private readonly documentRef = inject(DOCUMENT);
   private readonly overlayContainer = inject(OverlayContainer, { optional: true });
+  private readonly httpClient = inject(HttpClient);
 
-  private readonly _themes = signal<readonly ThemeOption[]>(STATIC_THEME_OPTIONS);
+  private readonly _themes = signal<readonly ThemeOption[]>([]);
 
   private readonly _currentTheme = signal<ThemeId>(DEFAULT_THEME_ID);
 
@@ -37,6 +42,7 @@ export class ThemeState {
 
   constructor() {
     this.applyTheme(this._currentTheme());
+    this.loadThemes();
   }
 
   setTheme(themeId: ThemeId): void {
@@ -52,6 +58,31 @@ export class ThemeState {
 
     this._currentTheme.set(themeId);
     this.applyTheme(themeId);
+  }
+
+  private loadThemes(): void {
+    const manifestRequests = THEME_MANIFEST_URLS.map((url) =>
+      this.httpClient.get<ThemeManifest>(url),
+    );
+
+    if (manifestRequests.length === 0) {
+      throw new Error('No theme manifest URLs were found. Provide at least one theme manifest.');
+    }
+
+    forkJoin(manifestRequests).subscribe({
+      next: (manifests) => {
+        const configuration = createThemeConfiguration(manifests);
+        this._themes.set(configuration.options);
+        const defaultThemeId = configuration.defaultThemeId;
+        this._currentTheme.set(defaultThemeId);
+        this.applyTheme(defaultThemeId);
+      },
+      error: (error) => {
+        throw error instanceof Error
+          ? error
+          : new Error('Failed to load theme manifests via HTTP.');
+      },
+    });
   }
 
   private applyTheme(themeId: ThemeId): void {

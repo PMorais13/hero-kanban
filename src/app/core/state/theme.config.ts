@@ -1,10 +1,3 @@
-import auroraCrestManifest from './themes/aurora-crest.json';
-import celestialTidesManifest from './themes/celestial-tides.json';
-import emberForgeManifest from './themes/ember-forge.json';
-import quantumMistManifest from './themes/quantum-mist.json';
-import radiantDawnManifest from './themes/radiant-dawn.json';
-import stellarNightManifest from './themes/stellar-night.json';
-
 export type ThemeTone = 'dark' | 'light';
 
 export interface ThemeProfileTokens {
@@ -32,22 +25,19 @@ export interface ThemeOption {
   readonly profile?: ThemeProfileTokens;
 }
 
-type ThemeManifest = Omit<ThemeOption, 'tone' | 'profile'> & {
+export interface ThemeManifest extends Omit<ThemeOption, 'tone' | 'profile'> {
   readonly tone: string;
   readonly isDefault?: boolean;
   readonly profile?: ThemeProfileTokens;
-};
+}
 
-const themeManifests = Object.freeze([
-  auroraCrestManifest,
-  celestialTidesManifest,
-  emberForgeManifest,
-  quantumMistManifest,
-  radiantDawnManifest,
-  stellarNightManifest,
-]) as readonly ThemeManifest[];
+const manifestResourcePaths = Object.freeze(Object.keys(import.meta.glob('./themes/*.json')));
 
-if (themeManifests.length === 0) {
+const themeManifestUrls = Object.freeze(
+  manifestResourcePaths.map((resourcePath) => `/themes/${resourcePath.replace('./themes/', '')}`),
+);
+
+if (themeManifestUrls.length === 0) {
   throw new Error('No theme manifests were found. Provide at least one theme manifest.');
 }
 
@@ -67,26 +57,25 @@ const manifestToThemeOption = (manifest: ThemeManifest): ThemeOption => {
   } satisfies ThemeOption;
 };
 
-const defaultThemeManifest =
-  themeManifests.find((manifest) => manifest.isDefault === true) ??
-  themeManifests.find((manifest) => manifest.id === 'stellar-night') ??
-  themeManifests[0];
+const sortThemeManifests = (
+  manifests: readonly ThemeManifest[],
+  defaultManifest: ThemeManifest,
+): readonly ThemeManifest[] =>
+  manifests
+    .slice()
+    .sort((first, second) => {
+      if (first.id === defaultManifest.id) {
+        return -1;
+      }
 
-const sortedThemeManifests = themeManifests
-  .slice()
-  .sort((first, second) => {
-    if (first.id === defaultThemeManifest.id) {
-      return -1;
-    }
+      if (second.id === defaultManifest.id) {
+        return 1;
+      }
 
-    if (second.id === defaultThemeManifest.id) {
-      return 1;
-    }
+      return first.label.localeCompare(second.label, 'pt-BR', { sensitivity: 'base' });
+    });
 
-    return first.label.localeCompare(second.label, 'pt-BR', { sensitivity: 'base' });
-  });
-
-const themeOptions = Object.freeze(sortedThemeManifests.map(manifestToThemeOption)) as readonly ThemeOption[];
+export const THEME_MANIFEST_URLS = themeManifestUrls;
 
 export type ThemeId = ThemeOption['id'];
 
@@ -95,11 +84,26 @@ export interface ThemeConfiguration<TOptions extends readonly ThemeOption[] = re
   readonly options: TOptions;
 }
 
-const staticThemeConfiguration = {
-  defaultThemeId: themeOptions[0].id,
-  options: themeOptions,
-} satisfies ThemeConfiguration<typeof themeOptions>;
+export const DEFAULT_THEME_ID: ThemeId = 'stellar-night';
 
-export const STATIC_THEME_CONFIGURATION = staticThemeConfiguration;
-export const DEFAULT_THEME_ID: ThemeId = staticThemeConfiguration.defaultThemeId;
-export const STATIC_THEME_OPTIONS: readonly ThemeOption[] = staticThemeConfiguration.options;
+export const createThemeConfiguration = (
+  manifests: readonly ThemeManifest[],
+): ThemeConfiguration => {
+  if (manifests.length === 0) {
+    throw new Error('No theme manifests were found. Provide at least one theme manifest.');
+  }
+
+  const defaultThemeManifest =
+    manifests.find((manifest) => manifest.isDefault === true) ??
+    manifests.find((manifest) => manifest.id === DEFAULT_THEME_ID) ??
+    manifests[0];
+
+  const sortedThemeManifests = sortThemeManifests(manifests, defaultThemeManifest);
+
+  const themeOptions = Object.freeze(sortedThemeManifests.map(manifestToThemeOption)) as readonly ThemeOption[];
+
+  return Object.freeze({
+    defaultThemeId: defaultThemeManifest.id as ThemeId,
+    options: themeOptions,
+  }) satisfies ThemeConfiguration<typeof themeOptions>;
+};
