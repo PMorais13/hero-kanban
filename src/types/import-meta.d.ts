@@ -7,7 +7,6 @@ declare interface ImportMeta {
     pattern: string,
     options: {
       readonly eager: true;
-      readonly import: 'default';
-    }
-  ): Record<string, T>;
+    },
+  ): Record<string, { readonly default: T }>;
 }

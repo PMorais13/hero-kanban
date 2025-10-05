@@ -33,10 +33,13 @@ type ThemeManifest = Omit<ThemeOption, 'tone' | 'profile'> & {
 
 const manifestModules = import.meta.glob<ThemeManifest>('./themes/*.json', {
   eager: true,
-  import: 'default',
 });
 
-const themeManifests = Object.freeze(Object.values(manifestModules)) as readonly ThemeManifest[];
+const resolvedManifests: ThemeManifest[] = Object.values(manifestModules).map(
+  ({ default: manifest }) => manifest,
+);
+
+const themeManifests = Object.freeze(resolvedManifests) as readonly ThemeManifest[];
 
 if (themeManifests.length === 0) {
   throw new Error('No theme manifests were found. Provide at least one theme manifest.');
