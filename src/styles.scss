@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @include mat.core();
 
@@ -32,6 +32,23 @@ $hero-theme: mat.define-theme((
 
   @include mat.system-level-colors($hero-theme);
   @include mat.all-component-themes($hero-theme);
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--hk-font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--hk-heading-font-family, var(--hk-font-family));
 }
 
 .material-symbols-rounded {
