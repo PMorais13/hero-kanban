@@ -4,7 +4,6 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 
 import {
   DEFAULT_THEME_ID,
-  STATIC_THEME_OPTIONS,
   type ThemeId,
   type ThemeOption,
   type ThemeProfileTokens,
@@ -28,7 +27,7 @@ export class ThemeState {
   private readonly documentRef = inject(DOCUMENT);
   private readonly overlayContainer = inject(OverlayContainer, { optional: true });
 
-  private readonly _themes = signal<readonly ThemeOption[]>(STATIC_THEME_OPTIONS);
+  private readonly _themes = signal<readonly ThemeOption[]>([]);
 
   private readonly _currentTheme = signal<ThemeId>(DEFAULT_THEME_ID);
 
@@ -46,8 +45,23 @@ export class ThemeState {
       return;
     }
 
+    const sortedThemes = [...themes].sort((first, second) => {
+      const firstIsDefault = first.isDefault === true || first.id === DEFAULT_THEME_ID;
+      const secondIsDefault = second.isDefault === true || second.id === DEFAULT_THEME_ID;
+
+      if (firstIsDefault && !secondIsDefault) {
+        return -1;
+      }
+
+      if (secondIsDefault && !firstIsDefault) {
+        return 1;
+      }
+
+      return first.label.localeCompare(second.label, 'pt-BR', { sensitivity: 'base' });
+    });
+
     const normalizedThemes = Object.freeze(
-      themes.map((theme) => Object.freeze({ ...theme })),
+      sortedThemes.map((theme) => Object.freeze({ ...theme })),
     ) as readonly ThemeOption[];
 
     this._themes.set(normalizedThemes);
@@ -55,18 +69,21 @@ export class ThemeState {
     const currentThemeId = this._currentTheme();
     const hasCurrentTheme = normalizedThemes.some((theme) => theme.id === currentThemeId);
 
-    if (!hasCurrentTheme) {
-      const [firstTheme] = normalizedThemes;
-
-      if (firstTheme) {
-        this._currentTheme.set(firstTheme.id as ThemeId);
-        this.applyTheme(firstTheme.id as ThemeId);
-      }
-
+    if (hasCurrentTheme) {
+      this.applyTheme(currentThemeId);
       return;
     }
 
-    this.applyTheme(currentThemeId);
+    const fallbackTheme =
+      normalizedThemes.find((theme) => theme.isDefault === true) ??
+      normalizedThemes.find((theme) => theme.id === DEFAULT_THEME_ID) ??
+      normalizedThemes[0];
+
+    if (fallbackTheme) {
+      const fallbackThemeId = fallbackTheme.id as ThemeId;
+      this._currentTheme.set(fallbackThemeId);
+      this.applyTheme(fallbackThemeId);
+    }
   }
 
   setTheme(themeId: ThemeId): void {

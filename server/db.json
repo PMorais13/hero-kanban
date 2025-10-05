@@ -340,6 +340,7 @@
       "previewGradient": "linear-gradient(135deg, #1b1933 0%, #433978 100%)",
       "tone": "dark",
       "previewFontFamily": "'Chakra Petch', 'Inter', 'Segoe UI', sans-serif",
+      "isDefault": true,
       "profile": {
         "textPrimary": "var(--hk-text-primary)",
         "textSecondary": "var(--hk-text-secondary)",

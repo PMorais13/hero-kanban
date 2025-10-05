@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import type { Observable } from 'rxjs';
 
-import type { ThemeOption, ThemeProfileTokens, ThemeTone } from '../state/theme.state';
+import type { ThemeOption, ThemeProfileTokens, ThemeTone } from '../state/theme.config';
 
 type ThemeDto = {
   readonly id: string;
@@ -12,11 +12,14 @@ type ThemeDto = {
   readonly accent: string;
   readonly softAccent: string;
   readonly previewGradient: string;
-  readonly tone: ThemeTone;
+  readonly tone: string;
   readonly previewFontFamily: string;
   readonly profile?: ThemeProfileTokens;
   readonly stylesheet?: string | readonly string[];
+  readonly isDefault?: boolean;
 };
+
+const isThemeTone = (value: string): value is ThemeTone => value === 'dark' || value === 'light';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
@@ -31,11 +34,16 @@ export class ThemeService {
   }
 
   private mapDtoToThemeOption(dto: ThemeDto): ThemeOption {
-    const { profile, stylesheet, ...rest } = dto;
+    const { profile, stylesheet, tone, ...optionFields } = dto;
     const normalizedStylesheet = Array.isArray(stylesheet) ? stylesheet.join('\n') : stylesheet;
 
+    if (!isThemeTone(tone)) {
+      throw new Error(`Invalid tone "${tone}" provided by theme manifest "${dto.id}".`);
+    }
+
     return Object.freeze({
-      ...rest,
+      ...optionFields,
+      tone,
       profile: profile ? Object.freeze({ ...profile }) : undefined,
       stylesheet: normalizedStylesheet,
     }) as ThemeOption;
