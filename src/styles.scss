@@ -51,6 +51,23 @@ h6 {
   font-family: var(--hk-heading-font-family, var(--hk-font-family));
 }
 
+mat-card-title,
+.mat-mdc-card-title {
+  font-family: var(--hk-heading-font-family, var(--hk-font-family));
+}
+
+mat-card-subtitle,
+.mat-mdc-card-subtitle {
+  font-family: var(--hk-font-family);
+}
+
+.mat-mdc-list-item-title,
+.mat-mdc-list-item-line,
+.mdc-list-item__primary-text,
+.mdc-list-item__secondary-text {
+  font-family: var(--hk-font-family);
+}
+
 .material-symbols-rounded {
   font-family: 'Material Symbols Rounded', sans-serif;
   font-weight: normal;
