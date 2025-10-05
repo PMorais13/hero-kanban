@@ -100,6 +100,106 @@
     </div>
   </section>
 
+  <mat-card class="board__conversations" aria-label="Discussões recentes do quadro">
+    <mat-card-header>
+      <mat-card-title>Discussões recentes</mat-card-title>
+      <mat-card-subtitle>Mantenha a guilda informada e destaque menções críticas.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <section class="board__conversation-form" aria-label="Publicar novo comentário rápido">
+        <form
+          class="board__conversation-form-fields"
+          [formGroup]="quickCommentForm"
+          (ngSubmit)="onSubmitQuickComment()"
+          aria-describedby="board-conversation-hint"
+          novalidate
+        >
+          <div class="board__conversation-row">
+            <mat-form-field appearance="fill">
+              <mat-label>História</mat-label>
+              <mat-select formControlName="storyId" required aria-required="true">
+                <mat-option *ngFor="let option of storyOptions()" [value]="option.id">
+                  {{ option.title }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+              <mat-label>Autor</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="author"
+                required
+                aria-required="true"
+                placeholder="Nome de quem publica"
+              />
+              <mat-hint id="board-conversation-hint">Use &#64; para mencionar colegas e ativar alertas.</mat-hint>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="fill" class="board__conversation-message">
+            <mat-label>Mensagem</mat-label>
+            <textarea
+              matInput
+              formControlName="message"
+              rows="3"
+              required
+              aria-required="true"
+              placeholder="Compartilhe atualizações e menções relevantes"
+            ></textarea>
+          </mat-form-field>
+
+          <div class="board__conversation-actions">
+            <button type="submit" mat-flat-button color="primary">
+              <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">send</mat-icon>
+              Publicar atualização
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="board__conversation-thread" aria-label="Comentários mais recentes">
+        <ol *ngIf="recentComments().length > 0; else emptyComments" class="board__comment-list">
+          <li
+            *ngFor="let entry of recentComments(); trackBy: trackRecentComment"
+            class="board__comment-item"
+          >
+            <article>
+              <header class="board__comment-header">
+                <span class="board__comment-author">{{ entry.comment.author }}</span>
+                <span class="board__comment-story">
+                  {{ entry.storyTitle }} ·
+                  <time [attr.datetime]="entry.comment.createdAtIso">
+                    {{ entry.comment.createdAtIso | date: 'short' }}
+                  </time>
+                </span>
+              </header>
+              <p class="board__comment-message">{{ entry.comment.message }}</p>
+              <div
+                *ngIf="entry.comment.mentions.length > 0"
+                class="board__comment-mentions"
+                aria-label="Menções registradas"
+              >
+                <mat-chip-set>
+                  <mat-chip *ngFor="let mention of entry.comment.mentions" color="primary" selected>
+                    &#64;{{ mention }}
+                  </mat-chip>
+                </mat-chip-set>
+              </div>
+            </article>
+          </li>
+        </ol>
+        <ng-template #emptyComments>
+          <p class="board__comment-empty" role="status">
+            Ainda não temos conversas registradas aqui. Que tal iniciar uma atualização para o squad?
+          </p>
+        </ng-template>
+      </section>
+    </mat-card-content>
+  </mat-card>
+
   <section class="board__columns" role="list">
     <kanban-board-column
       *ngFor="let column of columns(); trackBy: trackColumn"

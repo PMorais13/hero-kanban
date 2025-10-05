@@ -60,6 +60,68 @@ export interface StoryTaskDraft {
   readonly isDone: boolean;
 }
 
+export interface StoryAttachment {
+  readonly id: string;
+  readonly fileName: string;
+  readonly fileSizeLabel: string;
+  readonly uploadedBy: string;
+  readonly uploadedAtIso: string;
+  readonly downloadUrl: string;
+}
+
+export interface StoryCommentReply {
+  readonly id: string;
+  readonly author: string;
+  readonly authorInitials: string;
+  readonly message: string;
+  readonly createdAtIso: string;
+  readonly updatedAtIso?: string;
+  readonly mentions: readonly string[];
+  readonly isEdited: boolean;
+}
+
+export interface StoryComment extends StoryCommentReply {
+  readonly replies: readonly StoryCommentReply[];
+}
+
+export type StoryHistoryEventKind =
+  | 'status_change'
+  | 'comment_added'
+  | 'comment_updated'
+  | 'reply_added'
+  | 'attachment_added'
+  | 'attachment_removed';
+
+export interface StoryHistoryEvent {
+  readonly id: string;
+  readonly kind: StoryHistoryEventKind;
+  readonly actor: string;
+  readonly summary: string;
+  readonly description?: string;
+  readonly createdAtIso: string;
+}
+
+export interface CreateStoryCommentPayload {
+  readonly author: string;
+  readonly message: string;
+}
+
+export interface UpdateStoryCommentPayload {
+  readonly message: string;
+}
+
+export interface CreateStoryCommentReplyPayload {
+  readonly author: string;
+  readonly message: string;
+}
+
+export interface CreateStoryAttachmentPayload {
+  readonly fileName: string;
+  readonly fileSizeLabel: string;
+  readonly uploadedBy: string;
+  readonly downloadUrl?: string;
+}
+
 export interface CreateStoryPayload {
   readonly title: string;
   readonly featureId: string;
@@ -87,6 +149,9 @@ export interface Story {
   readonly tasks: readonly StoryTask[];
   readonly dueDate?: string;
   readonly sprintId?: string;
+  readonly comments: readonly StoryComment[];
+  readonly attachments: readonly StoryAttachment[];
+  readonly history: readonly StoryHistoryEvent[];
 }
 
 export interface Feature {

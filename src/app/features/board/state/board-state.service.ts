@@ -1,4 +1,4 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal, Signal } from '@angular/core';
 import type {
   BoardCardViewModel,
   BoardColumnViewModel,
@@ -16,6 +16,9 @@ import type {
   SprintStoryTaskViewModel,
   SprintStoryViewModel,
   Story,
+  StoryAttachment,
+  StoryComment,
+  StoryHistoryEvent,
   StoryTask,
   StoryDetailsTaskViewModel,
   StoryDetailsViewModel,
@@ -187,6 +190,103 @@ export class BoardState {
         },
       ],
       dueDate: new Date().toISOString(),
+      comments: [
+        {
+          id: 'comment-flow-analytics-dashboard',
+          author: 'Helena Pires',
+          authorInitials: 'HP',
+          message:
+            'Atualizei os dashboards com métricas dos últimos 7 dias. @Aline Santos pode revisar se as narrativas fazem sentido?',
+          createdAtIso: '2024-06-11T13:15:00.000Z',
+          mentions: ['Aline Santos'],
+          isEdited: false,
+          replies: [
+            {
+              id: 'reply-flow-analytics-dashboard-review',
+              author: 'Aline Santos',
+              authorInitials: 'AS',
+              message:
+                'Já conferi e está pronto para compartilhar com o chapter. Vou anexar os highlights para o squad.',
+              createdAtIso: '2024-06-11T14:42:00.000Z',
+              mentions: [],
+              isEdited: false,
+            },
+          ],
+        },
+        {
+          id: 'comment-flow-analytics-tooltips',
+          author: 'Iuri Paiva',
+          authorInitials: 'IP',
+          message:
+            'Incluí microcópias nos tooltips explicando lead time e cycle time para reduzir dúvidas de onboarding.',
+          createdAtIso: '2024-06-12T09:25:00.000Z',
+          updatedAtIso: '2024-06-12T10:10:00.000Z',
+          mentions: ['Helena Pires'],
+          isEdited: true,
+          replies: [],
+        },
+      ],
+      attachments: [
+        {
+          id: 'attachment-flow-analytics-briefing',
+          fileName: 'briefing-narrativas-analytics.pdf',
+          fileSizeLabel: '1,3 MB',
+          uploadedBy: 'Aline Santos',
+          uploadedAtIso: '2024-06-10T15:30:00.000Z',
+          downloadUrl: '#',
+        },
+        {
+          id: 'attachment-flow-analytics-dashboard',
+          fileName: 'dashboard-preview.fig',
+          fileSizeLabel: '4,8 MB',
+          uploadedBy: 'Iuri Paiva',
+          uploadedAtIso: '2024-06-12T09:10:00.000Z',
+          downloadUrl: '#',
+        },
+      ],
+      history: [
+        {
+          id: 'history-flow-analytics-created',
+          kind: 'status_change',
+          actor: 'Aline Santos',
+          summary: 'História criada em Em desenvolvimento',
+          description: 'Aline Santos iniciou a missão no fluxo de desenvolvimento.',
+          createdAtIso: '2024-06-10T12:05:00.000Z',
+        },
+        {
+          id: 'history-flow-analytics-attachment-briefing',
+          kind: 'attachment_added',
+          actor: 'Aline Santos',
+          summary: 'briefing-narrativas-analytics.pdf anexado',
+          description: 'Documento de apoio compartilhado com o squad.',
+          createdAtIso: '2024-06-10T15:30:00.000Z',
+        },
+        {
+          id: 'history-flow-analytics-comment-helena',
+          kind: 'comment_added',
+          actor: 'Helena Pires',
+          summary: 'Helena Pires comentou na missão',
+          description:
+            'Atualizei os dashboards com métricas recentes e solicitei revisão para Aline Santos.',
+          createdAtIso: '2024-06-11T13:15:00.000Z',
+        },
+        {
+          id: 'history-flow-analytics-reply-aline',
+          kind: 'reply_added',
+          actor: 'Aline Santos',
+          summary: 'Aline Santos respondeu ao comentário de Helena Pires',
+          description: 'Confirmou revisão e prometeu anexar highlights para o squad.',
+          createdAtIso: '2024-06-11T14:42:00.000Z',
+        },
+        {
+          id: 'history-flow-analytics-comment-iuri',
+          kind: 'comment_updated',
+          actor: 'Iuri Paiva',
+          summary: 'Iuri Paiva editou um comentário',
+          description: 'Ajustou microcópias dos tooltips após feedback.',
+          createdAtIso: '2024-06-12T10:10:00.000Z',
+        },
+      ],
     },
     {
       id: 'story-avatars',
@@ -232,6 +332,55 @@ export class BoardState {
         },
       ],
       dueDate: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3).toISOString(),
+      comments: [
+        {
+          id: 'comment-avatars-sync',
+          author: 'Diego Martins',
+          authorInitials: 'DM',
+          message:
+            'Programei o handshake inicial para sincronização. @Helena Pires consegue validar o fluxo?',
+          createdAtIso: '2024-06-09T16:20:00.000Z',
+          mentions: ['Helena Pires'],
+          isEdited: false,
+          replies: [],
+        },
+      ],
+      attachments: [
+        {
+          id: 'attachment-avatars-sync',
+          fileName: 'sync-diagrama-v1.drawio',
+          fileSizeLabel: '860 KB',
+          uploadedBy: 'Diego Martins',
+          uploadedAtIso: '2024-06-09T15:50:00.000Z',
+          downloadUrl: '#',
+        },
+      ],
+      history: [
+        {
+          id: 'history-avatars-created',
+          kind: 'status_change',
+          actor: 'Diego Martins',
+          summary: 'História criada em Pronto para iniciar',
+          description: 'Diego Martins posicionou o épico no quadro para pareamento.',
+          createdAtIso: '2024-06-07T11:05:00.000Z',
+        },
+        {
+          id: 'history-avatars-comment-diego',
+          kind: 'comment_added',
+          actor: 'Diego Martins',
+          summary: 'Diego Martins comentou sobre sincronização',
+          description: 'Solicitou validação do fluxo em tempo real para Helena Pires.',
+          createdAtIso: '2024-06-09T16:20:00.000Z',
+        },
+        {
+          id: 'history-avatars-attachment-sync',
+          kind: 'attachment_added',
+          actor: 'Diego Martins',
+          summary: 'sync-diagrama-v1.drawio anexado',
+          description: 'Blueprint inicial do protocolo de sincronização cooperativa.',
+          createdAtIso: '2024-06-09T15:50:00.000Z',
+        },
+      ],
     },
     {
       id: 'story-mission-engine',
@@ -264,6 +413,35 @@ export class BoardState {
           id: 'task-mission-engine-tests',
           title: 'Cobrir fluxo com testes automatizados',
           isDone: true,
+        },
+      ],
+      comments: [],
+      attachments: [
+        {
+          id: 'attachment-mission-engine-api',
+          fileName: 'api-contract-missions.yaml',
+          fileSizeLabel: '42 KB',
+          uploadedBy: 'Helena Pires',
+          uploadedAtIso: '2024-06-08T10:12:00.000Z',
+          downloadUrl: '#',
+        },
+      ],
+      history: [
+        {
+          id: 'history-mission-engine-created',
+          kind: 'status_change',
+          actor: 'Helena Pires',
+          summary: 'História criada em Revisão de código',
+          description: 'Helena abriu merge request para revisão colaborativa.',
+          createdAtIso: '2024-06-08T10:10:00.000Z',
+        },
+        {
+          id: 'history-mission-engine-attachment',
+          kind: 'attachment_added',
+          actor: 'Helena Pires',
+          summary: 'api-contract-missions.yaml anexado',
+          description: 'Contrato da API compartilhado com o squad de plataforma.',
+          createdAtIso: '2024-06-08T10:12:00.000Z',
         },
       ],
     },
@@ -310,6 +488,18 @@ export class BoardState {
           isDone: false,
         },
       ],
+      comments: [],
+      attachments: [],
+      history: [
+        {
+          id: 'history-cfd-created',
+          kind: 'status_change',
+          actor: 'Iuri Paiva',
+          summary: 'História criada em Release',
+          description: 'Iuri sinalizou que o CFD está preparado para hand-off.',
+          createdAtIso: '2024-06-06T09:45:00.000Z',
+        },
+      ],
     },
     {
       id: 'story-team-buffs',
@@ -347,6 +537,18 @@ export class BoardState {
           id: 'task-team-buffs-validation',
           title: 'Rodar sessão de validação com chapter agile',
           isDone: false,
+        },
+      ],
+      comments: [],
+      attachments: [],
+      history: [
+        {
+          id: 'history-team-buffs-created',
+          kind: 'status_change',
+          actor: 'Clara Sato',
+          summary: 'História criada em Backlog',
+          description: 'Clara adicionou a iniciativa para priorização colaborativa.',
+          createdAtIso: '2024-06-05T13:30:00.000Z',
         },
       ],
     },
@@ -388,8 +590,39 @@ export class BoardState {
           isDone: true,
         },
       ],
+      comments: [],
+      attachments: [
+        {
+          id: 'attachment-onboarding-guide',
+          fileName: 'guia-onboarding-guilda.pdf',
+          fileSizeLabel: '980 KB',
+          uploadedBy: 'Rafael Lima',
+          uploadedAtIso: '2024-06-04T18:15:00.000Z',
+          downloadUrl: '#',
+        },
+      ],
+      history: [
+        {
+          id: 'history-onboarding-created',
+          kind: 'status_change',
+          actor: 'Rafael Lima',
+          summary: 'História criada em Concluída',
+          description: 'Rafael finalizou o onboarding gamificado e documentou aprendizados.',
+          createdAtIso: '2024-06-04T18:20:00.000Z',
+        },
+        {
+          id: 'history-onboarding-attachment',
+          kind: 'attachment_added',
+          actor: 'Rafael Lima',
+          summary: 'guia-onboarding-guilda.pdf anexado',
+          description: 'Manual de onboarding liberado para novos integrantes.',
+          createdAtIso: '2024-06-04T18:15:00.000Z',
+        },
+      ],
     },
   ]);
+
+  private readonly storySignals = new Map<string, Signal<Story | null>>();
 
   readonly features = this._features.asReadonly();
   readonly sprints = this._sprints.asReadonly();
@@ -526,6 +759,35 @@ export class BoardState {
     return this.toStoryDetailsViewModel(story);
   }
 
+  watchStory(storyId: string): Signal<Story | null> {
+    const existing = this.storySignals.get(storyId);
+    if (existing) {
+      return existing;
+    }
+
+    const storySignal = computed(() => this._stories().find((item) => item.id === storyId) ?? null);
+    this.storySignals.set(storyId, storySignal);
+    return storySignal;
+  }
+
+  updateStory(storyId: string, projector: (story: Story) => Story): Story | null {
+    let updated: Story | null = null;
+
+    this._stories.update((stories) =>
+      stories.map((story) => {
+        if (story.id !== storyId) {
+          return story;
+        }
+
+        const next = projector(story);
+        updated = next;
+        return next;
+      }),
+    );
+
+    return updated;
+  }
+
   createStory(draft: CreateStoryPayload): Story | null {
     const statusesById = this.getStatusesById();
     const nextStatus = statusesById.get(draft.statusId);
@@ -561,6 +823,8 @@ export class BoardState {
     const sprintId =
       draft.sprintId && this._sprints().some((sprint) => sprint.id === draft.sprintId) ? draft.sprintId : undefined;
 
+    const createdAtIso = new Date().toISOString();
+
     const newStory: Story = {
       id: this.createId('story'),
       featureId: draft.featureId,
@@ -574,6 +838,18 @@ export class BoardState {
       tasks,
       dueDate: draft.dueDate && draft.dueDate.length > 0 ? draft.dueDate : undefined,
       sprintId,
+      comments: [],
+      attachments: [],
+      history: [
+        {
+          id: this.createId('history'),
+          kind: 'status_change',
+          actor: assignee,
+          summary: `História criada em ${nextStatus.name}`,
+          description: `${assignee} iniciou a missão diretamente em ${nextStatus.name}.`,
+          createdAtIso: createdAtIso,
+        },
+      ],
     } satisfies Story;
 
     this._stories.update((stories) => [newStory, ...stories]);

@@ -93,6 +93,238 @@
         </li>
       </ul>
     </section>
+
+    <section class="story-details__attachments" aria-label="Anexos da missão">
+      <header class="story-details__section-header">
+        <h2>Anexos</h2>
+        <p aria-live="polite">{{ attachments().length }} {{ attachments().length === 1 ? 'arquivo' : 'arquivos' }}</p>
+      </header>
+
+      <ul *ngIf="attachments().length > 0; else noAttachments" class="story-details__attachment-list">
+        <li *ngFor="let attachment of attachments(); trackBy: trackAttachment" class="story-details__attachment">
+          <article>
+            <div class="story-details__attachment-info">
+              <span class="material-symbols-rounded" aria-hidden="true">attach_file</span>
+              <div>
+                <a
+                  class="story-details__attachment-link"
+                  [href]="attachment.downloadUrl"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  {{ attachment.fileName }}
+                </a>
+                <p>
+                  {{ attachment.fileSizeLabel }} · enviado por {{ attachment.uploadedBy }} em
+                  <time [attr.datetime]="attachment.uploadedAtIso">{{ attachment.uploadedAtIso | date: 'short' }}</time>
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              mat-stroked-button
+              color="warn"
+              (click)="removeAttachment(attachment.id)"
+            >
+              Remover
+            </button>
+          </article>
+        </li>
+      </ul>
+      <ng-template #noAttachments>
+        <p class="story-details__empty-attachments" role="status">
+          Nenhum arquivo anexado ainda. Compartilhe documentos relevantes com o squad.
+        </p>
+      </ng-template>
+
+      <form
+        class="story-details__attachment-form"
+        [formGroup]="attachmentForm"
+        (ngSubmit)="onSubmitAttachment()"
+        novalidate
+      >
+        <div class="story-details__attachment-fields">
+          <mat-form-field appearance="fill">
+            <mat-label>Nome do arquivo</mat-label>
+            <input matInput type="text" formControlName="fileName" required aria-required="true" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Tamanho</mat-label>
+            <input matInput type="text" formControlName="fileSizeLabel" required aria-required="true" />
+          </mat-form-field>
+        </div>
+        <div class="story-details__attachment-fields">
+          <mat-form-field appearance="fill">
+            <mat-label>Responsável</mat-label>
+            <input matInput type="text" formControlName="uploadedBy" required aria-required="true" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Link (opcional)</mat-label>
+            <input matInput type="url" formControlName="downloadUrl" />
+          </mat-form-field>
+        </div>
+        <button type="submit" mat-stroked-button color="primary">
+          <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">upload</mat-icon>
+          Anexar arquivo
+        </button>
+      </form>
+    </section>
+
+    <section class="story-details__discussion" aria-label="Discussões da missão">
+      <header class="story-details__section-header">
+        <h2>Discussão</h2>
+        <p aria-live="polite">{{ comments().length }} {{ comments().length === 1 ? 'comentário' : 'comentários' }}</p>
+      </header>
+
+      <form
+        class="story-details__comment-form"
+        [formGroup]="commentForm"
+        (ngSubmit)="onSubmitComment()"
+        novalidate
+      >
+        <div class="story-details__comment-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Autor</mat-label>
+            <input matInput type="text" formControlName="author" required aria-required="true" />
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Mensagem</mat-label>
+          <textarea
+            matInput
+            rows="3"
+            formControlName="message"
+            required
+            aria-required="true"
+            placeholder="Use &#64; para mencionar integrantes da guilda"
+          ></textarea>
+        </mat-form-field>
+        <button type="submit" mat-flat-button color="primary">
+          <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">forum</mat-icon>
+          Registrar comentário
+        </button>
+      </form>
+
+      <ol *ngIf="comments().length > 0; else noComments" class="story-details__comment-thread">
+        <li *ngFor="let comment of comments(); trackBy: trackComment" class="story-details__comment">
+          <article>
+            <header class="story-details__comment-header">
+              <div class="story-details__comment-avatar" aria-hidden="true">{{ comment.authorInitials }}</div>
+              <div>
+                <strong class="story-details__comment-author">{{ comment.author }}</strong>
+                <p class="story-details__comment-meta">
+                  <time [attr.datetime]="comment.createdAtIso">{{ comment.createdAtIso | date: 'short' }}</time>
+                  <span *ngIf="comment.isEdited" class="story-details__comment-edited">· editado</span>
+                </p>
+              </div>
+            </header>
+
+            <p *ngIf="editingCommentId() !== comment.id" class="story-details__comment-message">
+              {{ comment.message }}
+            </p>
+
+            <form
+              *ngIf="editingCommentId() === comment.id"
+              class="story-details__edit-form"
+              [formGroup]="editCommentForm"
+              (ngSubmit)="onSubmitEdit(comment.id)"
+            >
+              <mat-form-field appearance="fill">
+                <mat-label>Editar comentário</mat-label>
+                <textarea matInput rows="3" formControlName="message" required aria-required="true"></textarea>
+              </mat-form-field>
+              <div class="story-details__edit-actions">
+                <button type="button" mat-stroked-button color="warn" (click)="cancelEdit()">Cancelar</button>
+                <button type="submit" mat-flat-button color="primary">Salvar alterações</button>
+              </div>
+            </form>
+
+            <div
+              *ngIf="comment.mentions.length > 0"
+              class="story-details__comment-mentions"
+              aria-label="Menções"
+            >
+              <mat-chip-set>
+                <mat-chip *ngFor="let mention of comment.mentions" color="primary" selected>
+                  &#64;{{ mention }}
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+
+            <div class="story-details__comment-actions">
+              <button type="button" mat-button (click)="beginReply(comment)">
+                <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">reply</mat-icon>
+                Responder
+              </button>
+              <button type="button" mat-button (click)="beginEdit(comment)">
+                <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">edit</mat-icon>
+                Editar
+              </button>
+            </div>
+
+            <ul *ngIf="comment.replies.length > 0" class="story-details__reply-list">
+              <li *ngFor="let reply of comment.replies" class="story-details__reply">
+                <header class="story-details__reply-header">
+                  <span class="story-details__reply-avatar" aria-hidden="true">{{ reply.authorInitials }}</span>
+                  <div>
+                    <strong>{{ reply.author }}</strong>
+                    <p class="story-details__reply-meta">
+                      <time [attr.datetime]="reply.createdAtIso">{{ reply.createdAtIso | date: 'short' }}</time>
+                      <span *ngIf="reply.isEdited" class="story-details__comment-edited">· editado</span>
+                    </p>
+                  </div>
+                </header>
+                <p class="story-details__reply-message">{{ reply.message }}</p>
+              </li>
+            </ul>
+
+            <form
+              *ngIf="replyingToCommentId() === comment.id"
+              class="story-details__reply-form"
+              [formGroup]="replyForm"
+              (ngSubmit)="onSubmitReply(comment.id)"
+            >
+              <mat-form-field appearance="fill">
+                <mat-label>Autor da resposta</mat-label>
+                <input matInput type="text" formControlName="author" required aria-required="true" />
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Resposta</mat-label>
+                <textarea matInput rows="2" formControlName="message" required aria-required="true"></textarea>
+              </mat-form-field>
+              <div class="story-details__reply-actions">
+                <button type="button" mat-stroked-button color="warn" (click)="cancelReply()">Cancelar</button>
+                <button type="submit" mat-flat-button color="primary">Enviar resposta</button>
+              </div>
+            </form>
+          </article>
+        </li>
+      </ol>
+      <ng-template #noComments>
+        <p class="story-details__empty-thread" role="status">
+          Ninguém comentou ainda. Use o formulário acima para iniciar a conversa.
+        </p>
+      </ng-template>
+    </section>
+
+    <section class="story-details__history" aria-label="Histórico da missão">
+      <h2>Histórico</h2>
+      <ol class="story-details__history-list">
+        <li *ngFor="let event of history(); trackBy: trackHistory" class="story-details__history-item">
+          <span class="story-details__history-icon" aria-hidden="true">
+            <span class="material-symbols-rounded">{{ historyIcon(event.kind) }}</span>
+          </span>
+          <div>
+            <p class="story-details__history-summary">{{ event.summary }}</p>
+            <p class="story-details__history-description" *ngIf="event.description">{{ event.description }}</p>
+            <p class="story-details__history-meta">
+              {{ event.actor }} ·
+              <time [attr.datetime]="event.createdAtIso">{{ event.createdAtIso | date: 'short' }}</time>
+            </p>
+          </div>
+        </li>
+      </ol>
+    </section>
   </article>
 </section>
 
