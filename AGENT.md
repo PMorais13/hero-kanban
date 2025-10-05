@@ -306,3 +306,4 @@ export const mapDtoToVm = (dto: TaskDto): TaskVm => ({
 - Sempre habilitar `provideAnimationsAsync()` no `app.config.ts` quando usar Material.
 - Preferir `mat-icon` com Material Symbols pré-carregados no `index.html`.
 - Configure o tema global em `styles.scss` (via prebuilt theme ou API de theming) garantindo coerência com o visual escuro existente.
+- Para criar um **tema novo**, adicione um arquivo JSON em `src/assets/themes` descrevendo as propriedades do tema e inclua uma regra `:root[data-theme='tema-novo']` correspondente em `src/styles.scss`.
