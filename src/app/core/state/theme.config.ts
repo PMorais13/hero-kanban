@@ -1,10 +1,3 @@
-import auroraCrestManifest from './themes/aurora-crest.json';
-import celestialTidesManifest from './themes/celestial-tides.json';
-import emberForgeManifest from './themes/ember-forge.json';
-import quantumMistManifest from './themes/quantum-mist.json';
-import radiantDawnManifest from './themes/radiant-dawn.json';
-import stellarNightManifest from './themes/stellar-night.json';
-
 export type ThemeTone = 'dark' | 'light';
 
 export interface ThemeProfileTokens {
@@ -38,14 +31,15 @@ type ThemeManifest = Omit<ThemeOption, 'tone' | 'profile'> & {
   readonly profile?: ThemeProfileTokens;
 };
 
-const themeManifests = Object.freeze([
-  auroraCrestManifest,
-  celestialTidesManifest,
-  emberForgeManifest,
-  quantumMistManifest,
-  radiantDawnManifest,
-  stellarNightManifest,
-]) as readonly ThemeManifest[];
+const manifestModules = import.meta.glob<ThemeManifest>('./themes/*.json', {
+  eager: true,
+});
+
+const resolvedManifests: ThemeManifest[] = Object.values(manifestModules).map(
+  ({ default: manifest }) => manifest,
+);
+
+const themeManifests = Object.freeze(resolvedManifests) as readonly ThemeManifest[];
 
 if (themeManifests.length === 0) {
   throw new Error('No theme manifests were found. Provide at least one theme manifest.');
