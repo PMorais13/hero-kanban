@@ -62,6 +62,13 @@ mat-card-subtitle,
 }
 
 
+:root ::ng-deep [class*='mat-mdc']:not(.material-symbols-rounded),
+:root ::ng-deep [class*='mat-mdc'] *:not(.material-symbols-rounded),
+:root ::ng-deep [class*='mdc-']:not(.material-symbols-rounded),
+:root ::ng-deep [class*='mdc-'] *:not(.material-symbols-rounded) {
+  font-family: var(--hk-font-family);
+}
+
 :root ::ng-deep .mat-mdc-typography,
 :root ::ng-deep .mat-mdc-typography *:not(.material-symbols-rounded) {
   font-family: var(--hk-font-family);
