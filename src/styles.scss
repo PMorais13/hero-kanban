@@ -11,6 +11,25 @@ $hero-theme: mat.define-theme((
 ));
 
 :root {
+  --mdc-typography-font-family: var(--hk-font-family);
+  --mdc-typography-body1-font-family: var(--hk-font-family);
+  --mdc-typography-body2-font-family: var(--hk-font-family);
+  --mdc-typography-subtitle1-font-family: var(--hk-font-family);
+  --mdc-typography-subtitle2-font-family: var(--hk-font-family);
+  --mdc-typography-caption-font-family: var(--hk-font-family);
+  --mdc-typography-button-font-family: var(--hk-font-family);
+  --mdc-typography-overline-font-family: var(--hk-font-family);
+  --mdc-typography-headline1-font-family: var(--hk-heading-font-family);
+  --mdc-typography-headline2-font-family: var(--hk-heading-font-family);
+  --mdc-typography-headline3-font-family: var(--hk-heading-font-family);
+  --mdc-typography-headline4-font-family: var(--hk-heading-font-family);
+  --mdc-typography-headline5-font-family: var(--hk-heading-font-family);
+  --mdc-typography-headline6-font-family: var(--hk-heading-font-family);
+  --mdc-typography-title-large-font-family: var(--hk-heading-font-family);
+  --mdc-typography-title-medium-font-family: var(--hk-heading-font-family);
+  --mdc-typography-title-small-font-family: var(--hk-heading-font-family);
+  --mat-app-default-font: var(--hk-font-family);
+
   @include mat.system-level-colors($hero-theme);
   @include mat.all-component-themes($hero-theme);
 }
@@ -905,6 +924,38 @@ body {
   color: var(--hk-text-primary);
   transition: background-color 240ms ease, background-image 320ms ease, color 200ms ease,
     font-family 200ms ease;
+}
+
+body :where(p,
+    span,
+    div,
+    label,
+    a,
+    li,
+    dd,
+    dt,
+    strong,
+    em,
+    small,
+    code,
+    pre,
+    blockquote,
+    figcaption,
+    table,
+    th,
+    td,
+    button,
+    input,
+    textarea,
+    select) {
+  font-family: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 }
 
 h1,
