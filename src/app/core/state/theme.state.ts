@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, effect } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 import {
@@ -8,6 +8,8 @@ import {
   type ThemeOption,
   type ThemeProfileTokens,
 } from './theme.config';
+import { ThemeService } from '../services/theme.service';
+import { take } from 'rxjs/operators';
 
 const PROFILE_TOKEN_TO_CSS_VARIABLE: ReadonlyArray<readonly [keyof ThemeProfileTokens, string]> = [
   ['textPrimary', '--hk-profile-text-primary'],
@@ -26,6 +28,7 @@ const PROFILE_TOKEN_TO_CSS_VARIABLE: ReadonlyArray<readonly [keyof ThemeProfileT
 export class ThemeState {
   private readonly documentRef = inject(DOCUMENT);
   private readonly overlayContainer = inject(OverlayContainer, { optional: true });
+  private readonly themeService = inject(ThemeService);
 
   private readonly _themes = signal<readonly ThemeOption[]>([]);
 
@@ -35,6 +38,27 @@ export class ThemeState {
 
   readonly themes = this._themes.asReadonly();
   readonly currentTheme = this._currentTheme.asReadonly();
+
+  private readonly hydrateThemesEffect = effect(
+    () => {
+      const subscription = this.themeService
+        .getThemes()
+        .pipe(take(1))
+        .subscribe({
+          next: (themes) => {
+            if (themes.length > 0) {
+              this.setAvailableThemes(themes);
+            }
+          },
+          error: () => {
+            // Keep the current theme when the backend is unavailable.
+          },
+        });
+
+      return () => subscription.unsubscribe();
+    },
+    { allowSignalWrites: true },
+  );
 
   constructor() {
     this.applyTheme(this._currentTheme());

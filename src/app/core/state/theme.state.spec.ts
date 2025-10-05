@@ -3,7 +3,16 @@ import { TestBed } from '@angular/core/testing';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 
+import { of } from 'rxjs';
+
+import { ThemeService } from '../services/theme.service';
 import { DEFAULT_THEME_ID, ThemeState, type ThemeOption } from './theme.state';
+
+class ThemeServiceStub {
+  getThemes() {
+    return of([]);
+  }
+}
 
 const createThemeFixtures = (): ThemeOption[] => [
   {
@@ -49,6 +58,7 @@ describe('ThemeState', () => {
 
     TestBed.configureTestingModule({
       providers: [
+        { provide: ThemeService, useClass: ThemeServiceStub },
         {
           provide: OverlayContainer,
           useValue: {
