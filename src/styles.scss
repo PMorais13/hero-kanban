@@ -521,6 +521,138 @@ mat-card-subtitle,
   --mdc-linear-progress-track-color: rgba(37, 99, 235, 0.16);
 }
 
+:root[data-theme='royal-manuscript'] {
+  color-scheme: light;
+  --hk-text-primary: #2f1c0f;
+  --hk-text-secondary: rgba(47, 28, 15, 0.78);
+  --hk-text-muted: rgba(47, 28, 15, 0.58);
+  --hk-surface: #fff8eb;
+  --hk-surface-elevated: #f3ddba;
+  --hk-border: rgba(124, 71, 34, 0.22);
+  --hk-accent: #b4592d;
+  --hk-accent-rgb: 180, 89, 45;
+  --hk-accent-soft: rgba(180, 89, 45, 0.18);
+  --hk-accent-strong: #7c2f1d;
+  --hk-accent-strong-rgb: 124, 47, 29;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.18);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.24);
+  --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.35);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.5);
+  --hk-chip-primary-text: var(--hk-text-primary);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.22);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.3);
+  --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.48);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.62);
+  --hk-chip-accent-text: var(--hk-text-primary);
+  --hk-accent-gradient: linear-gradient(135deg, #f6e7c2 0%, #d8a162 55%, #7c2f1d 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, #b4592d 0%, #d8a162 50%, #7c2f1d 100%);
+  --hk-success: #3f7a3b;
+  --hk-success-rgb: 63, 122, 59;
+  --hk-success-soft: rgba(63, 122, 59, 0.2);
+  --hk-success-border: rgba(var(--hk-success-rgb), 0.28);
+  --hk-warning: #d97706;
+  --hk-danger: #b91c1c;
+  --hk-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --hk-heading-font-family: 'Cinzel Decorative', 'Inter', 'Segoe UI', serif;
+  --hk-heading-letter-spacing: 0.06em;
+  --hk-body-background-color: #f8ecd7;
+  --hk-body-background-image: radial-gradient(circle at 12% 10%, rgba(250, 221, 169, 0.4), transparent 55%),
+    radial-gradient(circle at 82% 12%, rgba(201, 161, 104, 0.28), transparent 50%),
+    linear-gradient(180deg, #fbf2df 0%, #f2d8aa 100%);
+  --hk-shell-background: linear-gradient(135deg, rgba(255, 250, 240, 0.96) 0%, rgba(245, 225, 188, 0.96) 100%);
+  --hk-toolbar-shadow: 0 12px 28px rgba(96, 54, 23, 0.18);
+  --hk-sidenav-background: rgba(253, 245, 228, 0.92);
+  --hk-sidenav-border: rgba(124, 71, 34, 0.2);
+  --hk-logo-gradient: linear-gradient(135deg, #d8a162 0%, #b4592d 40%, #7c2f1d 100%);
+  --hk-nav-hover: rgba(180, 89, 45, 0.12);
+  background-color: var(--hk-body-background-color);
+  font-family: var(--hk-font-family);
+
+  --mat-sys-color-primary: var(--hk-accent);
+  --mat-sys-color-on-primary: #fff7ed;
+  --mat-sys-color-primary-container: #f3d7bb;
+  --mat-sys-color-on-primary-container: #4f2c11;
+
+  --mat-sys-color-secondary: #8b5a2b;
+  --mat-sys-color-on-secondary: #281404;
+  --mat-sys-color-secondary-container: #f5ddba;
+  --mat-sys-color-on-secondary-container: #42240c;
+
+  --mat-sys-color-tertiary: #c27803;
+  --mat-sys-color-on-tertiary: #301400;
+  --mat-sys-color-tertiary-container: #ffe3b3;
+  --mat-sys-color-on-tertiary-container: #5a2a00;
+
+  --mat-sys-color-error: var(--hk-danger);
+  --mat-sys-color-on-error: #ffffff;
+  --mat-sys-color-error-container: #fee2e2;
+  --mat-sys-color-on-error-container: #7f1d1d;
+
+  --mat-sys-color-surface: #f8ecd7;
+  --mat-sys-color-surface-dim: #e7dcc7;
+  --mat-sys-color-surface-bright: #fff9ed;
+  --mat-sys-color-surface-container-lowest: #fffaf0;
+  --mat-sys-color-surface-container-low: #f6e9d3;
+  --mat-sys-color-surface-container: rgba(253, 247, 236, 0.96);
+  --mat-sys-color-surface-container-high: rgba(246, 232, 206, 0.96);
+  --mat-sys-color-surface-container-highest: rgba(237, 216, 185, 0.96);
+
+  --mat-sys-color-on-surface: var(--hk-text-primary);
+  --mat-sys-color-on-surface-variant: rgba(47, 28, 15, 0.64);
+  --mat-sys-color-outline: rgba(124, 71, 34, 0.3);
+  --mat-sys-color-outline-variant: rgba(124, 71, 34, 0.18);
+  --mat-sys-color-inverse-surface: #3b2416;
+  --mat-sys-color-inverse-on-surface: #fdf5e6;
+  --mat-sys-color-inverse-primary: #f0b892;
+  --mat-sys-color-shadow: rgba(67, 40, 20, 0.18);
+  --mat-sys-color-surface-tint: var(--hk-accent);
+  --mat-sys-elevation-level2: 0 12px 28px rgba(96, 54, 23, 0.18);
+
+  --mat-toolbar-container-background-color: rgba(253, 247, 236, 0.95);
+  --mat-toolbar-container-text-color: var(--hk-text-primary);
+  --mat-toolbar-container-shadow-color: rgba(96, 54, 23, 0.18);
+  --mat-sidenav-container-background-color: rgba(248, 236, 215, 0.65);
+  --mat-sidenav-content-background-color: transparent;
+  --mat-sidenav-container-text-color: var(--hk-text-primary);
+  --mat-list-active-indicator-color: var(--hk-accent);
+  --mat-list-item-label-text-color: var(--hk-text-secondary);
+  --mat-card-background-color: rgba(255, 250, 240, 0.96);
+  --mat-card-title-text-color: var(--hk-text-primary);
+  --mat-card-subtitle-text-color: var(--hk-text-muted);
+  --mat-chip-selected-container-color: var(--hk-accent-soft);
+  --mat-chip-selected-label-text-color: var(--hk-text-primary);
+  --mat-chip-selected-avatar-color: var(--hk-accent);
+  --mat-chip-focus-ring-color: rgba(180, 89, 45, 0.3);
+  --mat-select-panel-background-color: rgba(255, 250, 240, 0.98);
+  --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
+  --mat-option-selected-state-label-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-container-color: rgba(255, 248, 235, 0.9);
+  --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
+  --mdc-filled-text-field-hover-active-indicator-color: rgba(180, 89, 45, 0.32);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
+  --mdc-filled-text-field-active-indicator-color: rgba(180, 89, 45, 0.25);
+  --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
+  --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
+  --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-outline-color: rgba(124, 71, 34, 0.28);
+  --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
+  --mdc-outlined-text-field-hover-outline-color: rgba(124, 71, 34, 0.45);
+  --mdc-protected-button-container-color: rgba(180, 89, 45, 0.16);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
+  --mdc-unelevated-button-container-color: var(--hk-accent);
+  --mdc-unelevated-button-label-text-color: #fff7ed;
+  --mdc-unelevated-button-disabled-container-color: rgba(47, 28, 15, 0.1);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(47, 28, 15, 0.32);
+  --mdc-outlined-button-outline-color: rgba(124, 71, 34, 0.28);
+  --mdc-outlined-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-button-disabled-outline-color: rgba(47, 28, 15, 0.12);
+  --mdc-outlined-button-disabled-label-text-color: rgba(47, 28, 15, 0.28);
+  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  --mdc-icon-button-disabled-icon-color: rgba(47, 28, 15, 0.25);
+  --mdc-linear-progress-active-indicator-color: var(--hk-accent);
+  --mdc-linear-progress-track-color: rgba(180, 89, 45, 0.18);
+}
+
 :root[data-theme='celestial-tides'] {
   color-scheme: light;
   --hk-text-primary: #0f172a;
