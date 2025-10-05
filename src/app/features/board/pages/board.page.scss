@@ -315,3 +315,113 @@
   background: rgba(var(--hk-accent-strong-rgb), 0.35);
   border-radius: 999px;
 }
+
+.board__conversations {
+  background: var(--hk-surface);
+  border: 1px solid var(--hk-border);
+  border-radius: 1.25rem;
+  box-shadow: 0 24px 48px -24px rgba(var(--hk-accent-strong-rgb), 0.45);
+  margin-inline: clamp(0.5rem, 2vw, 1.25rem);
+}
+
+.board__conversations .mat-mdc-card-header,
+.board__conversations .mat-mdc-card-content {
+  padding-inline: clamp(1.25rem, 4vw, 2.25rem);
+}
+
+.board__conversation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.board__conversation-form-fields {
+  display: grid;
+  gap: 1rem;
+}
+
+.board__conversation-row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.board__conversation-message {
+  width: 100%;
+}
+
+.board__conversation-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.board__conversation-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.board__conversation-thread {
+  display: grid;
+  gap: 1rem;
+}
+
+.board__comment-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.board__comment-item {
+  background: color-mix(in srgb, var(--hk-surface-elevated) 75%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 85%, transparent);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+}
+
+.board__comment-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.board__comment-author {
+  font-weight: 700;
+  color: var(--hk-text-primary);
+}
+
+.board__comment-story {
+  color: var(--hk-text-muted);
+  font-size: 0.85rem;
+}
+
+.board__comment-message {
+  margin: 0;
+  color: var(--hk-text-secondary);
+  line-height: 1.5;
+}
+
+.board__comment-mentions {
+  margin-top: 0.75rem;
+}
+
+.board__comment-mentions mat-chip-set {
+  gap: 0.35rem;
+}
+
+.board__comment-empty {
+  margin: 0;
+  color: var(--hk-text-muted);
+  background: color-mix(in srgb, var(--hk-accent) 12%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--hk-accent-strong) 35%, transparent);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
