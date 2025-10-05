@@ -58,11 +58,17 @@ export class AppComponent {
 
   readonly navItems: readonly ShellNavItem[] = [
     {
-      label: 'Quadro',
-      description: 'Visão geral das missões',
+      label: 'Central',
+      description: 'Missões e discussões do time',
       icon: 'dashboard',
       link: '/',
       exact: true,
+    },
+    {
+      label: 'Quadro',
+      description: 'Tarefas e histórias em andamento',
+      icon: 'view_kanban',
+      link: '/quadro',
     },
     {
       label: 'Sprints',
@@ -89,6 +95,11 @@ export class AppComponent {
       link: '/quadro/personalizar',
     },
   ];
+
+  constructor() {
+    // Trigger inicialização do estado de tema ao carregar a shell.
+    void this.themeState;
+  }
 
   toggleMenu(): void {
     this.isMenuOpen.update((isOpen) => !isOpen);

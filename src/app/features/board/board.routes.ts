@@ -14,6 +14,6 @@ export const BOARD_ROUTES: Routes = [
     loadComponent: () =>
       import('./pages/board.page').then((m) => m.BoardPageComponent),
     pathMatch: 'full',
-    title: 'Hero Kanban — Missões do Time',
+    title: 'Hero Kanban — Quadro de tarefas',
   },
 ];

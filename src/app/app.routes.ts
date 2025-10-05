@@ -4,7 +4,7 @@ export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./features/board/board.routes').then((m) => m.BOARD_ROUTES),
+      import('./features/home/home.routes').then((m) => m.HOME_ROUTES),
   },
   {
     path: 'perfil',
@@ -17,6 +17,11 @@ export const routes: Routes = [
       import('./features/board-customizer/board-customizer.routes').then(
         (m) => m.BOARD_CUSTOMIZER_ROUTES,
       ),
+  },
+  {
+    path: 'quadro',
+    loadChildren: () =>
+      import('./features/board/board.routes').then((m) => m.BOARD_ROUTES),
   },
   {
     path: 'features',
