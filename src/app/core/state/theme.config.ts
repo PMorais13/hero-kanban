@@ -3,6 +3,7 @@ import celestialTidesManifest from './themes/celestial-tides.json';
 import emberForgeManifest from './themes/ember-forge.json';
 import quantumMistManifest from './themes/quantum-mist.json';
 import radiantDawnManifest from './themes/radiant-dawn.json';
+import royalManuscriptManifest from './themes/royal-manuscript.json';
 import stellarNightManifest from './themes/stellar-night.json';
 
 export type ThemeTone = 'dark' | 'light';
@@ -44,6 +45,7 @@ const themeManifests = Object.freeze([
   emberForgeManifest,
   quantumMistManifest,
   radiantDawnManifest,
+  royalManuscriptManifest,
   stellarNightManifest,
 ]) as readonly ThemeManifest[];
 
