@@ -1,0 +1,22 @@
+{
+  "id": "verdant-sanctuary",
+  "label": "Santuário Verdejante",
+  "description": "Tema claro botânico com verdes terapêuticos e detalhes em cobre.",
+  "accent": "#0f9d58",
+  "softAccent": "rgba(15, 157, 88, 0.18)",
+  "previewGradient": "linear-gradient(135deg, #f3fff3 0%, #d4f7df 55%, #8bd4a1 100%)",
+  "tone": "light",
+  "previewFontFamily": "'Inter', 'Rubik', 'Segoe UI', sans-serif",
+  "profile": {
+    "textPrimary": "#12261a",
+    "textSecondary": "rgba(18, 38, 26, 0.76)",
+    "textMuted": "rgba(18, 38, 26, 0.54)",
+    "border": "rgba(15, 157, 88, 0.18)",
+    "borderStrong": "rgba(15, 157, 88, 0.28)",
+    "surface": "#ffffff",
+    "surfaceSoft": "#ecfdf5",
+    "surfaceSubtle": "#d1fae5",
+    "progressTrack": "rgba(15, 157, 88, 0.22)",
+    "shadow": "0 20px 40px rgba(12, 83, 45, 0.18)"
+  }
+}

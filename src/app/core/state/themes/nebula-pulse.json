@@ -1,0 +1,22 @@
+{
+  "id": "nebula-pulse",
+  "label": "Pulso da Nebulosa",
+  "description": "Explosão psicodélica de tons neon entre magenta, ciano e verde elétrico.",
+  "accent": "#ff4ecd",
+  "softAccent": "rgba(255, 78, 205, 0.26)",
+  "previewGradient": "linear-gradient(135deg, #050014 0%, #1a0b3c 35%, #004f7a 68%, #0affc2 100%)",
+  "tone": "dark",
+  "previewFontFamily": "'Chakra Petch', 'Space Grotesk', 'Inter', sans-serif",
+  "profile": {
+    "textPrimary": "var(--hk-text-primary)",
+    "textSecondary": "var(--hk-text-secondary)",
+    "textMuted": "var(--hk-text-muted)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "borderStrong": "rgba(255, 255, 255, 0.2)",
+    "surface": "rgba(12, 10, 34, 0.8)",
+    "surfaceSoft": "rgba(255, 255, 255, 0.08)",
+    "surfaceSubtle": "rgba(255, 255, 255, 0.04)",
+    "progressTrack": "rgba(59, 130, 246, 0.22)",
+    "shadow": "0 30px 65px rgba(5, 0, 32, 0.5)"
+  }
+}

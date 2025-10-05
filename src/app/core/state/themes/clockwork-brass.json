@@ -1,0 +1,22 @@
+{
+  "id": "clockwork-brass",
+  "label": "Latão de Engrenagens",
+  "description": "Steampunk elegante com dourado envelhecido e turquesa profundo.",
+  "accent": "#d97706",
+  "softAccent": "rgba(217, 119, 6, 0.28)",
+  "previewGradient": "linear-gradient(135deg, #120d08 0%, #2f2015 45%, #8b5f30 100%)",
+  "tone": "dark",
+  "previewFontFamily": "'Cinzel Decorative', 'Great Vibes', 'Inter', serif",
+  "profile": {
+    "textPrimary": "var(--hk-text-primary)",
+    "textSecondary": "var(--hk-text-secondary)",
+    "textMuted": "var(--hk-text-muted)",
+    "border": "rgba(255, 255, 255, 0.1)",
+    "borderStrong": "rgba(255, 255, 255, 0.2)",
+    "surface": "rgba(24, 17, 10, 0.9)",
+    "surfaceSoft": "rgba(255, 255, 255, 0.07)",
+    "surfaceSubtle": "rgba(255, 255, 255, 0.04)",
+    "progressTrack": "rgba(20, 184, 166, 0.2)",
+    "shadow": "0 32px 64px rgba(12, 8, 4, 0.52)"
+  }
+}

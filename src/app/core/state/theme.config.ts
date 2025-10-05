@@ -1,10 +1,15 @@
 import auroraCrestManifest from './themes/aurora-crest.json';
 import celestialTidesManifest from './themes/celestial-tides.json';
+import clockworkBrassManifest from './themes/clockwork-brass.json';
 import emberForgeManifest from './themes/ember-forge.json';
+import nebulaPulseManifest from './themes/nebula-pulse.json';
+import polarLuminaManifest from './themes/polar-lumina.json';
 import quantumMistManifest from './themes/quantum-mist.json';
 import radiantDawnManifest from './themes/radiant-dawn.json';
 import royalManuscriptManifest from './themes/royal-manuscript.json';
 import stellarNightManifest from './themes/stellar-night.json';
+import sunsetBoulevardManifest from './themes/sunset-boulevard.json';
+import verdantSanctuaryManifest from './themes/verdant-sanctuary.json';
 
 export type ThemeTone = 'dark' | 'light';
 
@@ -42,11 +47,16 @@ type ThemeManifest = Omit<ThemeOption, 'tone' | 'profile'> & {
 const themeManifests = Object.freeze([
   auroraCrestManifest,
   celestialTidesManifest,
+  clockworkBrassManifest,
   emberForgeManifest,
+  nebulaPulseManifest,
+  polarLuminaManifest,
   quantumMistManifest,
   radiantDawnManifest,
   royalManuscriptManifest,
   stellarNightManifest,
+  sunsetBoulevardManifest,
+  verdantSanctuaryManifest,
 ]) as readonly ThemeManifest[];
 
 if (themeManifests.length === 0) {
