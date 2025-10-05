@@ -142,6 +142,11 @@ export class BoardCustomizerPageComponent {
       this.boardConfig.updateStatusIcon(current.id, normalizedIcon);
     }
 
+    const normalizedColor = update.color.trim().toLowerCase();
+    if (normalizedColor !== current.color) {
+      this.boardConfig.updateStatusColor(current.id, normalizedColor);
+    }
+
     this.closeStatusEditor();
   }
 

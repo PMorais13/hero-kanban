@@ -24,6 +24,7 @@ export type StatusEditorFormValue = Readonly<{
   name: string;
   description: string;
   icon: string;
+  color: string;
 }>;
 
 @Component({
@@ -47,6 +48,18 @@ export class StatusEditorModalComponent {
     name: this.formBuilder.control('', [Validators.required, Validators.minLength(3)]),
     description: this.formBuilder.control(''),
     icon: this.formBuilder.control('', Validators.required),
+    color: this.formBuilder.control('', [Validators.required, Validators.pattern(/^#([0-9a-f]{6})$/i)]),
+  });
+
+  protected readonly iconColorPreview = computed(() => {
+    const control = this.form.controls.color;
+    const value = control.value?.trim();
+
+    if (value && /^#([0-9a-f]{6})$/i.test(value)) {
+      return value.toLowerCase();
+    }
+
+    return this.status().color;
   });
 
   protected readonly iconOptionsWithFallback = computed(() => {
@@ -67,6 +80,7 @@ export class StatusEditorModalComponent {
         name: current.name,
         description: current.description,
         icon: current.icon,
+        color: current.color,
       });
     },
     { allowSignalWrites: true },
@@ -87,6 +101,7 @@ export class StatusEditorModalComponent {
       name: value.name.trim(),
       description: value.description?.trim() ?? '',
       icon: value.icon.trim(),
+      color: value.color.trim().toLowerCase(),
     };
 
     this.submitted.emit(payload);

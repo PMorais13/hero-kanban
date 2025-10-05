@@ -6,6 +6,7 @@ type BoardStatusEditorOption = Readonly<{
   name: string;
   description: string;
   icon: string;
+  color: string;
   isActive: boolean;
   order: number;
 }>;
@@ -25,7 +26,7 @@ export class BoardConfigState {
       shortLabel: 'Backlog',
       description: 'Ideias priorizadas aguardando missão de kickoff.',
       category: 'todo',
-      color: 'var(--hk-status-backlog)',
+      color: '#7c5cff',
       icon: 'lightbulb',
       order: 1,
       wipLimit: 12,
@@ -38,7 +39,7 @@ export class BoardConfigState {
       shortLabel: 'Ready',
       description: 'Briefing validado, squad alinhado e artefatos prontos.',
       category: 'todo',
-      color: 'var(--hk-status-ready)',
+      color: '#4f46e5',
       icon: 'rocket_launch',
       order: 2,
       wipLimit: 6,
@@ -51,7 +52,7 @@ export class BoardConfigState {
       shortLabel: 'Dev',
       description: 'Squad em missão ativa, acompanhando XP diário.',
       category: 'in_progress',
-      color: 'var(--hk-status-in-dev)',
+      color: '#f59e0b',
       icon: 'smart_toy',
       order: 3,
       wipLimit: 4,
@@ -64,7 +65,7 @@ export class BoardConfigState {
       shortLabel: 'Review',
       description: 'QA funcional, feedback dos jogadores e ajuste fino.',
       category: 'in_progress',
-      color: 'var(--hk-status-code-review)',
+      color: '#f97316',
       icon: 'stadia_controller',
       order: 4,
       wipLimit: 3,
@@ -77,7 +78,7 @@ export class BoardConfigState {
       shortLabel: 'Deploy',
       description: 'Feature pronta para o lançamento global.',
       category: 'in_progress',
-      color: 'var(--hk-status-release)',
+      color: '#38bdf8',
       icon: 'rocket',
       order: 5,
       wipLimit: 2,
@@ -90,7 +91,7 @@ export class BoardConfigState {
       shortLabel: 'Done',
       description: 'Missões que renderam XP para a guilda.',
       category: 'done',
-      color: 'var(--hk-status-done)',
+      color: '#22c55e',
       icon: 'emoji_events',
       order: 6,
       isActive: true,
@@ -102,7 +103,7 @@ export class BoardConfigState {
       shortLabel: 'Ice',
       description: 'Ideias estacionadas aguardando novo contexto.',
       category: 'todo',
-      color: 'var(--hk-status-icebox)',
+      color: '#94a3b8',
       icon: 'ac_unit',
       order: 0,
       isActive: false,
@@ -114,7 +115,7 @@ export class BoardConfigState {
       shortLabel: 'Block',
       description: 'Dependências ou riscos críticos identificados.',
       category: 'in_progress',
-      color: 'var(--hk-status-blocked)',
+      color: '#f87171',
       icon: 'report',
       order: 7,
       wipLimit: 2,
@@ -138,6 +139,7 @@ export class BoardConfigState {
         name: status.name,
         description: status.description,
         icon: status.icon,
+        color: status.color,
         isActive: status.isActive,
         order: status.order,
       })),
@@ -228,7 +230,7 @@ export class BoardConfigState {
               ? normalizedDescription
               : `Missões na etapa ${name.toLowerCase()}.`,
           category: 'in_progress',
-          color: '#0ea5e9',
+          color: '#38bdf8',
           icon,
           order: nextOrder,
           isActive: true,
@@ -294,6 +296,26 @@ export class BoardConfigState {
           ? {
               ...status,
               icon: nextIcon,
+            }
+          : status,
+      ),
+    );
+  }
+
+  updateStatusColor(statusId: string, color: string): void {
+    const normalized = color.trim().toLowerCase();
+    const isHexColor = /^#([0-9a-f]{6})$/i.test(normalized);
+
+    if (!isHexColor) {
+      return;
+    }
+
+    this._statuses.update((statuses) =>
+      statuses.map((status) =>
+        status.id === statusId
+          ? {
+              ...status,
+              color: normalized,
             }
           : status,
       ),

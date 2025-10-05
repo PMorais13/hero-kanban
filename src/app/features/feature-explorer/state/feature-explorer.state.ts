@@ -44,7 +44,7 @@ export class FeatureExplorerState {
     for (const story of stories) {
       const status = statusById.get(story.statusId);
       const statusLabel = status?.name ?? 'Status desconhecido';
-      const statusColor = status?.color ?? 'var(--hk-status-icebox)';
+      const statusColor = status?.color ?? '#94a3b8';
       const storyCard = this.toStoryCard(story, statusLabel, statusColor);
       const existing = storyCardsByFeature.get(story.featureId) ?? [];
       storyCardsByFeature.set(story.featureId, [...existing, storyCard]);

@@ -100,8 +100,9 @@
   width: 3rem;
   height: 3rem;
   border-radius: 1rem;
-  background: color-mix(in srgb, var(--hk-accent-soft) 70%, var(--hk-surface));
-  color: var(--hk-text-primary);
+  background: color-mix(in srgb, var(--status-icon-color, var(--hk-accent)) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--status-icon-color, var(--hk-accent)) 35%, transparent);
+  color: var(--status-icon-color, var(--hk-text-primary));
   font-size: 1.8rem;
 }
 
