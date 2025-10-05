@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,8 +8,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { HeroControlState } from './core/state/hero-control.state';
+import { ThemeState } from './core/state/theme.state';
+import { ThemeService } from './core/services/theme.service';
 
 interface ShellNavItem {
   readonly label: string;
@@ -41,11 +44,17 @@ interface ShellNavItem {
 })
 export class AppComponent {
   private readonly heroControl = inject(HeroControlState);
+  private readonly themeState = inject(ThemeState);
+  private readonly themeService = inject(ThemeService);
 
   readonly isMenuOpen = signal(false);
 
   readonly experience = this.heroControl.experience;
   readonly experienceProgress = this.heroControl.experienceProgress;
+
+  readonly themes = toSignal(this.themeService.getThemes(), {
+    initialValue: this.themeState.themes(),
+  });
 
   readonly exactMatchOptions = { exact: true } as const;
   readonly defaultMatchOptions = { exact: false } as const;
@@ -106,4 +115,15 @@ export class AppComponent {
   handleSidenavStateChange(isOpened: boolean): void {
     this.isMenuOpen.set(isOpened);
   }
+
+  private readonly syncThemesEffect = effect(
+    () => {
+      const themes = this.themes();
+
+      if (themes.length > 0) {
+        this.themeState.setAvailableThemes(themes);
+      }
+    },
+    { allowSignalWrites: true },
+  );
 }

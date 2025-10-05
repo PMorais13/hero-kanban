@@ -39,6 +39,34 @@ export class ThemeState {
     this.applyTheme(this._currentTheme());
   }
 
+  setAvailableThemes(themes: readonly ThemeOption[]): void {
+    if (themes.length === 0) {
+      return;
+    }
+
+    const normalizedThemes = Object.freeze(
+      themes.map((theme) => Object.freeze({ ...theme })),
+    ) as readonly ThemeOption[];
+
+    this._themes.set(normalizedThemes);
+
+    const currentThemeId = this._currentTheme();
+    const hasCurrentTheme = normalizedThemes.some((theme) => theme.id === currentThemeId);
+
+    if (!hasCurrentTheme) {
+      const [firstTheme] = normalizedThemes;
+
+      if (firstTheme) {
+        this._currentTheme.set(firstTheme.id as ThemeId);
+        this.applyTheme(firstTheme.id as ThemeId);
+      }
+
+      return;
+    }
+
+    this.applyTheme(currentThemeId);
+  }
+
   setTheme(themeId: ThemeId): void {
     if (this._currentTheme() === themeId) {
       return;
