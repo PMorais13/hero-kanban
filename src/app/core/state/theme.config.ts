@@ -33,11 +33,10 @@ type ThemeManifest = Omit<ThemeOption, 'tone' | 'profile'> & {
 
 const manifestModules = import.meta.glob<ThemeManifest>('./themes/*.json', {
   eager: true,
-  import: 'default',
 });
 
 const themeManifests = Object.freeze(
-  Object.values(manifestModules),
+  Object.values(manifestModules).map((module) => module.default),
 ) as readonly ThemeManifest[];
 
 if (themeManifests.length === 0) {
