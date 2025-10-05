@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +19,7 @@ import { CreateStoryModalComponent } from '../components/create-story-modal/crea
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     NgFor,
+    NgIf,
     BoardColumnComponent,
     CreateStoryModalComponent,
     MatButtonModule,
