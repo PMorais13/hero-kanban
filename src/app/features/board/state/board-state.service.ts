@@ -650,7 +650,7 @@ export class BoardState {
           title: story.title,
           estimateLabel: `${story.estimate} pts`,
           statusLabel: status?.name ?? 'Etapa desconhecida',
-          statusColor: status?.color ?? 'var(--hk-status-icebox)',
+          statusColor: status?.color ?? '#94a3b8',
           tasks: story.tasks.map((task) => ({
             id: task.id,
             title: task.title,
@@ -987,7 +987,7 @@ export class BoardState {
       featureMission: feature?.mission ?? 'Missão a ser definida com o squad.',
       statusLabel: status?.name ?? 'Etapa desconhecida',
       statusDescription: status?.description ?? 'Etapa não mapeada no fluxo do quadro.',
-      statusColor: status?.color ?? 'var(--hk-status-icebox)',
+      statusColor: status?.color ?? '#94a3b8',
       statusIcon: status?.icon ?? 'help',
       priorityLabel: this.mapPriorityLabel(story.priority),
       priorityColor: PRIORITY_COLORS[story.priority],

@@ -24,6 +24,7 @@
         cdkDrag
         cdkDragLockAxis="y"
         [cdkDragData]="status"
+        [style.--status-icon-color]="status.color"
       >
         <div class="status-item__main">
           <span class="material-symbols-rounded status-item__icon" aria-hidden="true">{{ status.icon }}</span>

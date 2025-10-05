@@ -6,10 +6,18 @@
     aria-modal="true"
     [attr.aria-labelledby]="'status-editor-title-' + status().id"
   >
-    <form class="status-editor-modal__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <form
+      class="status-editor-modal__form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      [style.--status-icon-color]="iconColorPreview()"
+      novalidate
+    >
       <header class="status-editor-modal__header">
         <div class="status-editor-modal__symbol" aria-hidden="true">
-          <span class="material-symbols-rounded">{{ status().icon }}</span>
+          <span class="material-symbols-rounded">
+            {{ form.controls.icon.value || status().icon }}
+          </span>
         </div>
         <div>
           <h2 [id]="'status-editor-title-' + status().id">Editar etapa</h2>
@@ -55,6 +63,17 @@
               </option>
             </select>
           </div>
+        </label>
+
+        <label class="status-editor-modal__field status-editor-modal__field--color">
+          <span>Cor do ícone</span>
+          <div class="status-editor-modal__color-picker">
+            <input type="color" formControlName="color" aria-label="Selecionar cor do ícone" />
+            <span class="status-editor-modal__color-value">{{ iconColorPreview() }}</span>
+          </div>
+          <small *ngIf="form.controls.color.invalid && form.controls.color.touched">
+            Use um valor hexadecimal válido, como #7c5cff.
+          </small>
         </label>
       </div>
 

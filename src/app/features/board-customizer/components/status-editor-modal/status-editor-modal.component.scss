@@ -47,11 +47,12 @@
   width: 3rem;
   height: 3rem;
   border-radius: 1rem;
-  background: rgba(var(--hk-accent-rgb), 0.25);
+  background: color-mix(in srgb, var(--status-icon-color, #7c5cff) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--status-icon-color, #7c5cff) 45%, transparent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #ede9fe;
+  color: color-mix(in srgb, var(--status-icon-color, #ede9fe) 90%, white 10%);
   font-size: 1.9rem;
 }
 
@@ -142,9 +143,54 @@
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.8rem;
-  background: rgba(var(--hk-accent-rgb), 0.2);
-  color: #f8fafc;
+  background: color-mix(in srgb, var(--status-icon-color, #7c5cff) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--status-icon-color, #7c5cff) 35%, transparent);
+  color: var(--status-icon-color, #f8fafc);
   font-size: 1.7rem;
+}
+
+.status-editor-modal__field--color {
+  gap: 0.65rem;
+}
+
+.status-editor-modal__color-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.status-editor-modal__color-picker input[type='color'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: none;
+  border-radius: 0.9rem;
+  background: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.status-editor-modal__color-picker input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: inherit;
+}
+
+.status-editor-modal__color-picker input[type='color']::-webkit-color-swatch {
+  border: none;
+  border-radius: inherit;
+}
+
+.status-editor-modal__color-picker input[type='color']::-moz-color-swatch {
+  border: none;
+  border-radius: inherit;
+}
+
+.status-editor-modal__color-value {
+  font-family: 'Chakra Petch', 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .status-editor-modal__footer {
