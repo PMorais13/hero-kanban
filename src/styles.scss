@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Uncial+Antiqua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @include mat.core();
 
@@ -36,168 +36,146 @@ $hero-theme: mat.define-theme((
 :root,
 :root[data-theme='stellar-night'] {
   color-scheme: dark;
-  --hk-text-primary: #f7f1dc;
-  --hk-text-secondary: rgba(247, 241, 220, 0.88);
-  --hk-text-muted: rgba(247, 241, 220, 0.7);
-  --hk-surface: rgba(44, 29, 21, 0.88);
-  --hk-surface-elevated: rgba(64, 41, 28, 0.92);
-  --hk-border: rgba(214, 163, 84, 0.25);
-  --hk-accent: #d6a354;
-  --hk-accent-rgb: 214, 163, 84;
-  --hk-accent-soft: rgba(var(--hk-accent-rgb), 0.2);
-  --hk-accent-strong: #b67c2d;
-  --hk-accent-strong-rgb: 182, 124, 45;
-  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.18);
-  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.28);
+  --hk-text-primary: #f3f5ff;
+  --hk-text-secondary: rgba(255, 255, 255, 0.88);
+  --hk-text-muted: rgba(255, 255, 255, 0.72);
+  --hk-surface: rgba(20, 22, 42, 0.85);
+  --hk-surface-elevated: rgba(36, 40, 77, 0.9);
+  --hk-border: rgba(255, 255, 255, 0.08);
+  --hk-accent: #7c5cff;
+  --hk-accent-rgb: 124, 92, 255;
+  --hk-accent-soft: rgba(124, 92, 255, 0.2);
+  --hk-accent-strong: #4f46e5;
+  --hk-accent-strong-rgb: 79, 70, 229;
+  --hk-chip-primary-background: rgba(var(--hk-accent-rgb), 0.22);
+  --hk-chip-primary-hover: rgba(var(--hk-accent-rgb), 0.3);
   --hk-chip-primary-border: rgba(var(--hk-accent-strong-rgb), 0.45);
-  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.65);
+  --hk-chip-primary-focus: rgba(var(--hk-accent-strong-rgb), 0.6);
   --hk-chip-primary-text: var(--hk-text-primary);
-  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.24);
-  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.34);
+  --hk-chip-accent-background: rgba(var(--hk-accent-rgb), 0.28);
+  --hk-chip-accent-hover: rgba(var(--hk-accent-rgb), 0.36);
   --hk-chip-accent-border: rgba(var(--hk-accent-strong-rgb), 0.55);
-  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.72);
+  --hk-chip-accent-focus: rgba(var(--hk-accent-strong-rgb), 0.68);
   --hk-chip-accent-text: var(--hk-text-primary);
-  --hk-accent-gradient: linear-gradient(140deg, #f2d29b 0%, var(--hk-accent-strong) 100%);
-  --hk-accent-gradient-progress: linear-gradient(90deg, #f2d29b 0%, #d6a354 50%, #8b5f27 100%);
-  --hk-status-backlog: color-mix(in srgb, #8f6b3a 65%, var(--hk-accent) 35%);
+  --hk-accent-gradient: linear-gradient(135deg, var(--hk-accent) 0%, var(--hk-accent-strong) 100%);
+  --hk-accent-gradient-progress: linear-gradient(90deg, var(--hk-accent) 0%, #6366f1 50%, #22d3ee 100%);
+  --hk-status-backlog: color-mix(in srgb, var(--hk-accent) 65%, var(--hk-accent-strong) 35%);
   --hk-status-ready: var(--hk-accent);
-  --hk-status-in-dev: color-mix(in srgb, var(--hk-warning) 70%, var(--hk-accent) 30%);
-  --hk-status-code-review: color-mix(in srgb, var(--hk-warning) 55%, var(--hk-text-primary) 45%);
-  --hk-status-release: color-mix(in srgb, var(--hk-accent-strong) 80%, var(--hk-accent) 20%);
+  --hk-status-in-dev: color-mix(in srgb, var(--hk-warning) 80%, var(--hk-accent) 20%);
+  --hk-status-code-review: color-mix(in srgb, var(--hk-warning) 65%, var(--hk-text-primary) 35%);
+  --hk-status-release: color-mix(in srgb, var(--hk-accent-strong) 85%, var(--hk-accent) 15%);
   --hk-status-done: var(--hk-success);
-  --hk-status-icebox: color-mix(in srgb, var(--hk-text-muted) 65%, rgba(54, 34, 24, 0.6) 35%);
+  --hk-status-icebox: color-mix(in srgb, var(--hk-text-muted) 65%, var(--hk-border) 35%);
   --hk-status-blocked: var(--hk-danger);
   --hk-priority-low: var(--hk-success);
   --hk-priority-medium: var(--hk-warning);
-  --hk-priority-high: color-mix(in srgb, var(--hk-danger) 75%, var(--hk-warning) 25%);
-  --hk-priority-critical: color-mix(in srgb, var(--hk-danger) 85%, var(--hk-accent) 15%);
-  --hk-success: #8db96c;
-  --hk-success-rgb: 141, 185, 108;
-  --hk-success-soft: rgba(var(--hk-success-rgb), 0.18);
+  --hk-priority-high: color-mix(in srgb, var(--hk-danger) 80%, var(--hk-warning) 20%);
+  --hk-priority-critical: color-mix(in srgb, var(--hk-danger) 90%, var(--hk-accent) 10%);
+  --hk-success: #6ee7b7;
+  --hk-success-rgb: 110, 231, 183;
+  --hk-success-soft: rgba(110, 231, 183, 0.2);
   --hk-success-border: rgba(var(--hk-success-rgb), 0.32);
-  --hk-warning: #e8c15a;
-  --hk-danger: #d4776f;
-  --hk-font-family: 'Cormorant Garamond', 'Times New Roman', serif;
-  --hk-heading-font-family: 'Uncial Antiqua', 'Cormorant Garamond', serif;
-  --hk-script-font-family: 'Great Vibes', 'Uncial Antiqua', serif;
-  --hk-heading-letter-spacing: 0.04em;
-  --hk-body-background-color: #150c05;
-  --hk-body-background-image: radial-gradient(circle at 20% 20%, rgba(188, 140, 79, 0.24), transparent 55%),
-    radial-gradient(circle at 80% 5%, rgba(115, 73, 36, 0.18), transparent 45%),
-    linear-gradient(180deg, rgba(21, 12, 5, 0.98) 0%, rgba(12, 7, 3, 0.95) 100%);
-  --hk-shell-background: linear-gradient(160deg, rgba(44, 29, 21, 0.96) 0%, rgba(26, 16, 9, 0.96) 60%, rgba(54, 28, 11, 0.92) 100%);
-  --hk-toolbar-shadow: 0 18px 50px rgba(8, 4, 2, 0.65);
-  --hk-sidenav-background: rgba(34, 21, 14, 0.94);
-  --hk-sidenav-border: rgba(214, 163, 84, 0.25);
-  --hk-logo-gradient: linear-gradient(145deg, #f2d29b 0%, #b0772c 100%);
-  --hk-nav-hover: rgba(var(--hk-accent-rgb), 0.22);
+  --hk-warning: #fbbf24;
+  --hk-danger: #f87171;
+  --hk-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --hk-heading-font-family: 'Chakra Petch', 'Inter', 'Segoe UI', sans-serif;
+  --hk-heading-letter-spacing: 0.08em;
+  --hk-body-background-color: #0f0c29;
+  --hk-body-background-image: radial-gradient(circle at 15% 20%, rgba(124, 92, 255, 0.18), transparent 55%),
+    radial-gradient(circle at 80% 5%, rgba(56, 189, 248, 0.14), transparent 45%),
+    linear-gradient(180deg, rgba(15, 12, 41, 0.96) 0%, rgba(9, 7, 32, 0.96) 100%);
+  --hk-shell-background: radial-gradient(circle at 10% 20%, rgba(48, 43, 99, 0.96) 0%, rgba(15, 12, 41, 0.96) 100%);
+  --hk-toolbar-shadow: 0 10px 30px rgba(6, 4, 20, 0.35);
+  --hk-sidenav-background: rgba(20, 22, 42, 0.92);
+  --hk-sidenav-border: rgba(255, 255, 255, 0.08);
+  --hk-logo-gradient: linear-gradient(135deg, #ff6b6b 0%, #845ef7 100%);
+  --hk-nav-hover: rgba(124, 92, 255, 0.16);
   background-color: var(--hk-body-background-color);
   font-family: var(--hk-font-family);
 
   --mat-sys-color-primary: var(--hk-accent);
-  --mat-sys-color-on-primary: #2b1606;
-  --mat-sys-color-primary-container: rgba(64, 41, 20, 0.94);
-  --mat-sys-color-on-primary-container: var(--hk-text-primary);
+  --mat-sys-color-on-primary: #ffffff;
+  --mat-sys-color-primary-container: rgba(43, 34, 86, 0.88);
+  --mat-sys-color-on-primary-container: #f3f5ff;
 
-  --mat-sys-color-secondary: #9c6b3c;
-  --mat-sys-color-on-secondary: #1f1307;
-  --mat-sys-color-secondary-container: rgba(58, 34, 17, 0.95);
-  --mat-sys-color-on-secondary-container: var(--hk-text-primary);
+  --mat-sys-color-secondary: #22d3ee;
+  --mat-sys-color-on-secondary: #051827;
+  --mat-sys-color-secondary-container: rgba(11, 56, 82, 0.92);
+  --mat-sys-color-on-secondary-container: #c7f9ff;
 
-  --mat-sys-color-tertiary: #8db96c;
-  --mat-sys-color-on-tertiary: #12220b;
-  --mat-sys-color-tertiary-container: rgba(39, 52, 29, 0.94);
-  --mat-sys-color-on-tertiary-container: #e4f6d7;
+  --mat-sys-color-tertiary: #6ee7b7;
+  --mat-sys-color-on-tertiary: #08291f;
+  --mat-sys-color-tertiary-container: rgba(10, 63, 49, 0.92);
+  --mat-sys-color-on-tertiary-container: #d0ffe9;
 
   --mat-sys-color-error: var(--hk-danger);
-  --mat-sys-color-on-error: #2f0a07;
-  --mat-sys-color-error-container: rgba(74, 23, 20, 0.92);
-  --mat-sys-color-on-error-container: #fde2de;
+  --mat-sys-color-on-error: #2c0b0b;
+  --mat-sys-color-error-container: rgba(63, 20, 20, 0.92);
+  --mat-sys-color-on-error-container: #fee2e2;
 
-  --mat-sys-color-surface: #1a1008;
-  --mat-sys-color-surface-dim: #130b05;
-  --mat-sys-color-surface-bright: #2b1a0e;
-  --mat-sys-color-surface-container-lowest: #0c0602;
-  --mat-sys-color-surface-container-low: rgba(26, 16, 9, 0.96);
-  --mat-sys-color-surface-container: rgba(32, 20, 12, 0.94);
-  --mat-sys-color-surface-container-high: rgba(40, 24, 14, 0.94);
-  --mat-sys-color-surface-container-highest: rgba(50, 30, 16, 0.95);
+  --mat-sys-color-surface: #0f0c29;
+  --mat-sys-color-surface-dim: #0b091d;
+  --mat-sys-color-surface-bright: #191737;
+  --mat-sys-color-surface-container-lowest: #08061b;
+  --mat-sys-color-surface-container-low: #151331;
+  --mat-sys-color-surface-container: rgba(20, 22, 42, 0.88);
+  --mat-sys-color-surface-container-high: rgba(28, 29, 55, 0.92);
+  --mat-sys-color-surface-container-highest: rgba(36, 40, 77, 0.96);
 
   --mat-sys-color-on-surface: var(--hk-text-primary);
   --mat-sys-color-on-surface-variant: var(--hk-text-muted);
-  --mat-sys-color-outline: rgba(214, 163, 84, 0.3);
-  --mat-sys-color-outline-variant: rgba(214, 163, 84, 0.16);
-  --mat-sys-color-inverse-surface: #f7f1dc;
-  --mat-sys-color-inverse-on-surface: #2a1709;
-  --mat-sys-color-inverse-primary: #f2d29b;
-  --mat-sys-color-shadow: rgba(12, 7, 3, 0.7);
+  --mat-sys-color-outline: rgba(255, 255, 255, 0.14);
+  --mat-sys-color-outline-variant: rgba(255, 255, 255, 0.08);
+  --mat-sys-color-inverse-surface: #f3f5ff;
+  --mat-sys-color-inverse-on-surface: #181432;
+  --mat-sys-color-inverse-primary: #c7b7ff;
+  --mat-sys-color-shadow: rgba(12, 10, 24, 0.6);
   --mat-sys-color-surface-tint: var(--hk-accent);
-  --mat-sys-elevation-level2: 0 24px 55px rgba(8, 4, 2, 0.55);
+  --mat-sys-elevation-level2: 0 20px 40px rgba(6, 4, 20, 0.45);
 
-  --mat-toolbar-container-background-color: rgba(32, 20, 12, 0.94);
+  --mat-toolbar-container-background-color: rgba(18, 16, 36, 0.92);
   --mat-toolbar-container-text-color: var(--hk-text-primary);
-  --mat-toolbar-container-shadow-color: rgba(8, 4, 2, 0.55);
-  --mat-sidenav-container-background-color: rgba(12, 7, 3, 0.95);
+  --mat-toolbar-container-shadow-color: rgba(6, 4, 20, 0.45);
+  --mat-sidenav-container-background-color: #08061b;
   --mat-sidenav-content-background-color: transparent;
   --mat-sidenav-container-text-color: var(--hk-text-primary);
   --mat-list-active-indicator-color: var(--hk-accent);
   --mat-list-item-label-text-color: var(--hk-text-secondary);
-  --mat-card-background-color: rgba(40, 24, 14, 0.94);
+  --mat-card-background-color: rgba(30, 28, 55, 0.92);
   --mat-card-title-text-color: var(--hk-text-primary);
   --mat-card-subtitle-text-color: var(--hk-text-muted);
   --mat-chip-selected-container-color: var(--hk-accent-soft);
   --mat-chip-selected-label-text-color: var(--hk-text-primary);
   --mat-chip-selected-avatar-color: var(--hk-text-primary);
-  --mat-chip-focus-ring-color: rgba(var(--hk-accent-rgb), 0.4);
-  --mat-select-panel-background-color: rgba(28, 17, 9, 0.98);
+  --mat-chip-focus-ring-color: rgba(124, 92, 255, 0.35);
+  --mat-select-panel-background-color: rgba(18, 16, 36, 0.98);
   --mat-select-enabled-trigger-text-color: var(--hk-text-primary);
   --mat-option-selected-state-label-text-color: var(--hk-text-primary);
-  --mdc-filled-text-field-container-color: rgba(20, 12, 6, 0.7);
+  --mdc-filled-text-field-container-color: rgba(12, 10, 30, 0.65);
   --mdc-filled-text-field-input-text-color: var(--hk-text-primary);
   --mdc-filled-text-field-hover-active-indicator-color: var(--hk-accent);
   --mdc-filled-text-field-focus-active-indicator-color: var(--hk-accent);
-  --mdc-filled-text-field-active-indicator-color: rgba(var(--hk-accent-rgb), 0.5);
+  --mdc-filled-text-field-active-indicator-color: rgba(124, 92, 255, 0.5);
   --mdc-filled-text-field-label-text-color: var(--hk-text-muted);
   --mdc-filled-text-field-hover-label-text-color: var(--hk-text-secondary);
   --mdc-filled-text-field-focus-label-text-color: var(--hk-text-primary);
-  --mdc-outlined-text-field-outline-color: rgba(var(--hk-accent-rgb), 0.35);
+  --mdc-outlined-text-field-outline-color: rgba(124, 92, 255, 0.4);
   --mdc-outlined-text-field-focus-outline-color: var(--hk-accent);
-  --mdc-outlined-text-field-hover-outline-color: rgba(var(--hk-accent-rgb), 0.55);
-  --mdc-protected-button-container-color: rgba(var(--hk-accent-rgb), 0.18);
-  --mdc-protected-button-label-text-color: var(--hk-text-primary);
+  --mdc-outlined-text-field-hover-outline-color: rgba(124, 92, 255, 0.65);
+  --mdc-protected-button-container-color: rgba(124, 92, 255, 0.16);
+  --mdc-protected-button-label-text-color: var(--hk-accent);
   --mdc-unelevated-button-container-color: var(--hk-accent);
-  --mdc-unelevated-button-label-text-color: #211205;
-  --mdc-unelevated-button-disabled-container-color: rgba(214, 163, 84, 0.18);
-  --mdc-unelevated-button-disabled-label-text-color: rgba(247, 241, 220, 0.4);
-  --mdc-outlined-button-outline-color: rgba(var(--hk-accent-rgb), 0.35);
+  --mdc-unelevated-button-label-text-color: #0f0c29;
+  --mdc-unelevated-button-disabled-container-color: rgba(255, 255, 255, 0.08);
+  --mdc-unelevated-button-disabled-label-text-color: rgba(255, 255, 255, 0.36);
+  --mdc-outlined-button-outline-color: rgba(124, 92, 255, 0.4);
   --mdc-outlined-button-label-text-color: var(--hk-text-primary);
-  --mdc-outlined-button-disabled-outline-color: rgba(214, 163, 84, 0.18);
-  --mdc-outlined-button-disabled-label-text-color: rgba(247, 241, 220, 0.38);
+  --mdc-outlined-button-disabled-outline-color: rgba(255, 255, 255, 0.12);
+  --mdc-outlined-button-disabled-label-text-color: rgba(255, 255, 255, 0.3);
   --mdc-icon-button-icon-color: var(--hk-text-secondary);
-  --mdc-icon-button-disabled-icon-color: rgba(247, 241, 220, 0.35);
+  --mdc-icon-button-disabled-icon-color: rgba(255, 255, 255, 0.3);
   --mdc-linear-progress-active-indicator-color: var(--hk-accent);
-  --mdc-linear-progress-track-color: rgba(var(--hk-accent-rgb), 0.25);
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: var(--hk-body-background-color);
-  background-image: var(--hk-body-background-image);
-  background-attachment: fixed;
-  color: var(--hk-text-primary);
-  font-family: var(--hk-font-family);
-  text-rendering: optimizeLegibility;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--hk-heading-font-family);
-  letter-spacing: var(--hk-heading-letter-spacing, 0.02em);
+  --mdc-linear-progress-track-color: rgba(124, 92, 255, 0.25);
 }
 
 :root[data-theme='aurora-crest'] {
@@ -233,7 +211,6 @@ h6 {
   --hk-danger: #f87171;
   --hk-font-family: 'Rubik', 'Segoe UI', sans-serif;
   --hk-heading-font-family: 'Space Grotesk', 'Rubik', 'Segoe UI', sans-serif;
-  --hk-script-font-family: 'Great Vibes', 'Space Grotesk', 'Rubik', sans-serif;
   --hk-heading-letter-spacing: 0.06em;
   --hk-body-background-color: #021b27;
   --hk-body-background-image: radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.2), transparent 52%),
