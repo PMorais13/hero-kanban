@@ -7,6 +7,7 @@ import {
   input,
   output,
 } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { NgFor, NgIf } from '@angular/common';
 import {
   NonNullableFormBuilder,
@@ -14,6 +15,7 @@ import {
   Validators,
 } from '@angular/forms';
 import type { BoardStatusEditorOption } from '@features/board/state/board-config.state';
+import { startWith } from 'rxjs';
 
 interface IconOption {
   readonly value: string;
@@ -51,9 +53,13 @@ export class StatusEditorModalComponent {
     color: this.formBuilder.control('', [Validators.required, Validators.pattern(/^#([0-9a-f]{6})$/i)]),
   });
 
+  private readonly colorControlValue = toSignal(
+    this.form.controls.color.valueChanges.pipe(startWith(this.form.controls.color.value)),
+    { initialValue: this.form.controls.color.value },
+  );
+
   protected readonly iconColorPreview = computed(() => {
-    const control = this.form.controls.color;
-    const value = control.value?.trim();
+    const value = this.colorControlValue()?.trim();
 
     if (value && /^#([0-9a-f]{6})$/i.test(value)) {
       return value.toLowerCase();
