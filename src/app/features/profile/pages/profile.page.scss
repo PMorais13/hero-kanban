@@ -88,141 +88,10 @@
   background: var(--hk-accent-gradient-progress);
 }
 
-.profile__sheet {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.profile__sheet > header {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.profile__sheet > header h2 {
-  margin: 0;
-}
-
-.profile__sheet > header p {
-  margin: 0;
-  color: var(--profile-text-muted);
-}
-
-.profile__sheet-body {
-  display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.profile__sheet-info {
-  margin: 0;
-  padding: 1.25rem;
-  border-radius: 1.25rem;
-  border: 1px solid var(--profile-border);
-  background: var(--profile-surface-subtle);
-  display: grid;
-  gap: 0.85rem;
-}
-
-.profile__sheet-info > div {
-  display: grid;
-  gap: 0.2rem;
-}
-
-.profile__sheet-info dt {
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--profile-text-muted);
-  margin: 0;
-}
-
-.profile__sheet-info dd {
-  margin: 0;
-  font-weight: 600;
-}
-
-.profile__sheet-attributes,
-.profile__sheet-traits {
-  padding: 1.25rem;
-  border-radius: 1.25rem;
-  border: 1px solid var(--profile-border);
-  background: var(--profile-surface-subtle);
-  display: grid;
-  gap: 1rem;
-}
-
-.profile__sheet-attributes h3,
-.profile__sheet-traits h3 {
-  margin: 0;
-  font-size: 1.05rem;
-  letter-spacing: 0.04em;
-}
-
-.profile__sheet-attributes ul,
-.profile__sheet-traits ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.75rem;
-}
-
-.profile__sheet-attributes li {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.profile__attribute-label {
-  font-weight: 600;
-}
-
-.profile__attribute-meter {
-  position: relative;
-  height: 0.5rem;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.profile__attribute-bar {
-  height: 100%;
-  border-radius: inherit;
-  background: var(--hk-accent-gradient-progress);
-}
-
-.profile__attribute-value {
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.profile__sheet-traits li {
-  display: grid;
-  gap: 0.35rem;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.profile__sheet-traits li:last-child {
-  border-bottom: none;
-}
-
-.profile__sheet-traits strong {
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
-.profile__sheet-traits p {
-  margin: 0;
-  color: var(--profile-text-muted);
-  font-size: 0.95rem;
-}
-
 .profile__cards {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .profile-card {
@@ -254,6 +123,16 @@
   border-color: rgba(var(--hk-accent-rgb), 0.4);
 }
 
+.profile-card--hero .profile-card__trigger {
+  background: linear-gradient(135deg, rgba(var(--hk-accent-rgb), 0.16), rgba(11, 15, 36, 0.85));
+  border-color: rgba(var(--hk-accent-rgb), 0.45);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.profile-card--hero .profile-card__trigger:hover {
+  border-color: rgba(var(--hk-accent-rgb), 0.6);
+}
+
 .profile-card__icon {
   width: 2.75rem;
   height: 2.75rem;
@@ -265,6 +144,11 @@
   font-size: 1.6rem;
 }
 
+.profile-card--hero .profile-card__icon {
+  background: rgba(var(--hk-accent-rgb), 0.24);
+  color: rgba(255, 255, 255, 0.92);
+}
+
 .profile-card__content h3 {
   margin: 0;
   font-size: 1.15rem;
@@ -273,6 +157,10 @@
 .profile-card__content p {
   margin: 0.35rem 0 0;
   color: var(--profile-text-muted);
+}
+
+.profile-card--hero .profile-card__content p {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .profile-card__stats {
@@ -299,10 +187,22 @@
   font-weight: 600;
 }
 
+.profile-card--hero .profile-card__stats dt {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.profile-card--hero .profile-card__stats dd {
+  color: rgba(255, 255, 255, 0.92);
+}
+
 .profile-card__footer {
   margin: 0.75rem 0 0;
   color: var(--profile-text-secondary);
   font-size: 0.9rem;
+}
+
+.profile-card--hero .profile-card__footer {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .profile-card__action {
@@ -331,19 +231,28 @@
   backdrop-filter: blur(18px);
   color: var(--hk-text-primary);
   padding: 0;
+  max-width: min(94vw, 900px);
 }
 
-:host ::ng-deep .profile-dialog-panel--compact .mat-mdc-dialog-surface {
-  max-width: 720px;
+:host ::ng-deep .profile-dialog-panel--roomy .mat-mdc-dialog-surface {
+  max-width: min(94vw, 940px);
 }
 
-:host ::ng-deep .profile-dialog-panel--wide .mat-mdc-dialog-surface {
-  max-width: 840px;
+:host ::ng-deep .profile-dialog-panel--spacious .mat-mdc-dialog-surface {
+  max-width: min(94vw, 1020px);
+}
+
+:host ::ng-deep .profile-dialog-panel--expansive .mat-mdc-dialog-surface {
+  max-width: min(94vw, 1100px);
+}
+
+:host ::ng-deep .profile-dialog-panel--heroic .mat-mdc-dialog-surface {
+  max-width: min(94vw, 1180px);
 }
 
 @media (max-width: 960px) {
-  .profile__sheet-body {
-    grid-template-columns: 1fr;
+  .profile__cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 

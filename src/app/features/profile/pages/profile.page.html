@@ -21,73 +21,42 @@
     </div>
   </section>
 
-  <section class="profile__sheet" aria-labelledby="sheet-heading">
-    <header>
-      <h2 id="sheet-heading">Ficha de personagem</h2>
-      <p>Resumo épico das origens, classe e talentos exclusivos do herói da squad.</p>
-    </header>
-    <div class="profile__sheet-body">
-      <dl class="profile__sheet-info">
-        <div>
-          <dt>Nome</dt>
-          <dd>{{ heroSheet.name }}</dd>
-        </div>
-        <div>
-          <dt>Título</dt>
-          <dd>{{ heroSheet.title }}</dd>
-        </div>
-        <div>
-          <dt>Classe</dt>
-          <dd>{{ heroSheet.heroClass }}</dd>
-        </div>
-        <div>
-          <dt>Guilda</dt>
-          <dd>{{ heroSheet.guild }}</dd>
-        </div>
-        <div>
-          <dt>Alinhamento</dt>
-          <dd>{{ heroSheet.alignment }}</dd>
-        </div>
-        <div>
-          <dt>Linhagem</dt>
-          <dd>{{ heroSheet.lineage }}</dd>
-        </div>
-        <div>
-          <dt>Estandarte</dt>
-          <dd>{{ heroSheet.banner }}</dd>
-        </div>
-        <div>
-          <dt>Artefato</dt>
-          <dd>{{ heroSheet.signature }}</dd>
-        </div>
-      </dl>
-
-      <div class="profile__sheet-attributes" aria-label="Atributos principais">
-        <h3>Atributos</h3>
-        <ul>
-          <li *ngFor="let attribute of heroSheet.attributes">
-            <span class="profile__attribute-label">{{ attribute.label }}</span>
-            <div class="profile__attribute-meter" role="img" [attr.aria-label]="attribute.label + ' em ' + attribute.value">
-              <div class="profile__attribute-bar" [style.width.%]="attribute.value * 5"></div>
-            </div>
-            <span class="profile__attribute-value">{{ attribute.value }}</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="profile__sheet-traits" aria-label="Traços heroicos">
-        <h3>Talentos únicos</h3>
-        <ul>
-          <li *ngFor="let trait of heroSheet.traits">
-            <strong>{{ trait.title }}</strong>
-            <p>{{ trait.description }}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
   <section class="profile__cards" aria-label="Coleção de registros do perfil">
+    <article class="profile-card profile-card--hero">
+      <button
+        type="button"
+        class="profile-card__trigger"
+        (click)="openHeroSheetDialog()"
+        aria-describedby="hero-sheet-summary"
+      >
+        <span class="profile-card__icon material-symbols-rounded" aria-hidden="true">shield_person</span>
+        <div class="profile-card__content">
+          <h3>Ficha de personagem</h3>
+          <p id="hero-sheet-summary">
+            {{ heroSheet.name }} · {{ heroSheet.title }} · {{ heroSheet.guild }}
+          </p>
+          <dl class="profile-card__stats">
+            <div>
+              <dt>Classe</dt>
+              <dd>{{ heroSheet.heroClass }}</dd>
+            </div>
+            <div>
+              <dt>Alinhamento</dt>
+              <dd>{{ heroSheet.alignment }}</dd>
+            </div>
+            <div>
+              <dt>Talentos</dt>
+              <dd>{{ heroSheet.traits.length }}</dd>
+            </div>
+          </dl>
+          <p class="profile-card__footer">
+            Atributo destaque: {{ heroMainAttributeLabel }} · Artefato: {{ heroSheet.signature }}
+          </p>
+        </div>
+        <span class="profile-card__action">Abrir</span>
+      </button>
+    </article>
+
     <article class="profile-card">
       <button type="button" class="profile-card__trigger" (click)="openThemesDialog()" aria-describedby="themes-summary">
         <span class="profile-card__icon material-symbols-rounded" aria-hidden="true">palette</span>

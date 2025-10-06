@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { DecimalPipe, NgFor, NgIf } from '@angular/common';
+import { DecimalPipe, NgIf } from '@angular/common';
 import { HeroControlState } from '@app/core/state/hero-control.state';
 import { ThemeState } from '@app/core/state/theme.state';
 import type { LootItem, ProfileAchievement } from '@app/core/state/hero-control.models';
@@ -7,29 +7,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProfileThemesDialogComponent } from '../components/profile-themes-dialog/profile-themes-dialog.component';
 import { ProfileAchievementsDialogComponent } from '../components/profile-achievements-dialog/profile-achievements-dialog.component';
 import { ProfileLootDialogComponent } from '../components/profile-loot-dialog/profile-loot-dialog.component';
-
-type HeroAttribute = {
-  readonly label: string;
-  readonly value: number;
-};
-
-type HeroTrait = {
-  readonly title: string;
-  readonly description: string;
-};
-
-type HeroSheet = {
-  readonly name: string;
-  readonly title: string;
-  readonly lineage: string;
-  readonly heroClass: string;
-  readonly guild: string;
-  readonly alignment: string;
-  readonly banner: string;
-  readonly signature: string;
-  readonly attributes: readonly HeroAttribute[];
-  readonly traits: readonly HeroTrait[];
-};
+import { ProfileHeroSheetDialogComponent } from '../components/profile-hero-sheet-dialog/profile-hero-sheet-dialog.component';
+import type { HeroSheet } from '../models/hero-sheet.model';
 
 const LOOT_RARITY_WEIGHT: Record<LootItem['rarity'], number> = {
   comum: 1,
@@ -43,7 +22,7 @@ const LOOT_RARITY_WEIGHT: Record<LootItem['rarity'], number> = {
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgFor, DecimalPipe, NgIf, MatDialogModule],
+  imports: [DecimalPipe, NgIf, MatDialogModule],
 })
 export class ProfilePageComponent {
   private readonly heroControl = inject(HeroControlState);
@@ -89,6 +68,17 @@ export class ProfilePageComponent {
       },
     ],
   };
+
+  private readonly heroSheetMainAttribute = this.heroSheet.attributes.reduce(
+    (best, attribute) => {
+      if (attribute.value > best.value) {
+        return attribute;
+      }
+
+      return best;
+    },
+    this.heroSheet.attributes[0],
+  );
 
   protected readonly themesCount = computed(() => this.themes().length);
 
@@ -160,24 +150,34 @@ export class ProfilePageComponent {
     }, null);
   });
 
+  protected readonly heroMainAttributeLabel = this.heroSheetMainAttribute.label;
+
   protected openThemesDialog(): void {
     this.dialog.open(ProfileThemesDialogComponent, {
-      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--compact'],
+      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--roomy'],
       autoFocus: false,
     });
   }
 
   protected openAchievementsDialog(): void {
     this.dialog.open(ProfileAchievementsDialogComponent, {
-      panelClass: 'profile-dialog-panel',
+      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--spacious'],
       autoFocus: false,
     });
   }
 
   protected openLootDialog(): void {
     this.dialog.open(ProfileLootDialogComponent, {
-      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--wide'],
+      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--expansive'],
       autoFocus: false,
+    });
+  }
+
+  protected openHeroSheetDialog(): void {
+    this.dialog.open(ProfileHeroSheetDialogComponent, {
+      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--heroic'],
+      autoFocus: false,
+      data: this.heroSheet,
     });
   }
 }
