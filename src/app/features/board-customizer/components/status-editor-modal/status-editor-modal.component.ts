@@ -73,6 +73,9 @@ export class StatusEditorModalComponent {
     return [...options, { value: currentIcon, label: currentIcon } satisfies IconOption];
   });
 
+  protected readonly colorInputId = computed(() => `status-color-${this.status().id}`);
+  protected readonly colorLabelId = computed(() => `status-color-label-${this.status().id}`);
+
   private readonly syncFormEffect = effect(
     () => {
       const current = this.status();
