@@ -65,16 +65,22 @@
           </div>
         </label>
 
-        <label class="status-editor-modal__field status-editor-modal__field--color">
-          <span>Cor do ícone</span>
+        <div class="status-editor-modal__field status-editor-modal__field--color">
+          <span [id]="colorLabelId()">Cor do ícone</span>
           <div class="status-editor-modal__color-picker">
-            <input type="color" formControlName="color" aria-label="Selecionar cor do ícone" />
+            <input
+              type="color"
+              [id]="colorInputId()"
+              formControlName="color"
+              [attr.aria-labelledby]="colorLabelId()"
+              aria-label="Selecionar cor do ícone"
+            />
             <span class="status-editor-modal__color-value">{{ iconColorPreview() }}</span>
           </div>
           <small *ngIf="form.controls.color.invalid && form.controls.color.touched">
             Use um valor hexadecimal válido, como #7c5cff.
           </small>
-        </label>
+        </div>
       </div>
 
       <footer class="status-editor-modal__footer">
