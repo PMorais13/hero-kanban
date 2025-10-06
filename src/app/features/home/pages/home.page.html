@@ -14,8 +14,8 @@
       <mat-card-content>
         <div class="home__summary-grid">
           <div class="home__actions" role="group" aria-label="Ações rápidas do quadro">
-            <a mat-flat-button color="primary" routerLink="/quadro">
-              <mat-icon fontSet="material-symbols-rounded">add_circle</mat-icon>
+            <a mat-flat-button color="primary" class="home__accent-button" routerLink="/quadro">
+              <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">add_circle</mat-icon>
               Nova história
             </a>
           </div>
@@ -135,7 +135,7 @@
           </mat-form-field>
 
           <div class="home__conversation-actions">
-            <button type="submit" mat-flat-button color="primary">
+            <button type="submit" mat-flat-button color="primary" class="home__accent-button">
               <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">send</mat-icon>
               Publicar atualização
             </button>
