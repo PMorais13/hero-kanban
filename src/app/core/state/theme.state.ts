@@ -144,17 +144,20 @@ export class ThemeState {
 
     if (rootElement) {
       rootElement.dataset['theme'] = themeId;
+      this.applyAccentTokens(rootElement, theme);
       this.applyProfileTokens(rootElement, profileTokens);
       this.applyFontFamily(rootElement, previewFontFamily);
     }
 
     if (bodyElement) {
       bodyElement.dataset['theme'] = themeId;
+      this.applyAccentTokens(bodyElement, theme);
       this.applyFontFamily(bodyElement, previewFontFamily);
     }
 
     if (overlayElement) {
       overlayElement.dataset['theme'] = themeId;
+      this.applyAccentTokens(overlayElement, theme);
       this.applyFontFamily(overlayElement, previewFontFamily);
     }
   }
@@ -214,6 +217,92 @@ export class ThemeState {
     }
 
     styleElement.textContent = stylesheet;
+  }
+
+  private applyAccentTokens(target: HTMLElement, theme: ThemeOption | undefined): void {
+    if (!target) {
+      return;
+    }
+
+    if (!theme) {
+      this.clearAccentTokens(target);
+      return;
+    }
+
+    const accent = theme.accent?.trim();
+    const softAccent = theme.softAccent?.trim();
+    const previewGradient = theme.previewGradient?.trim();
+
+    this.setCssVariable(target, '--hk-accent', accent);
+    this.setCssVariable(target, '--hk-accent-soft', softAccent);
+    this.setCssVariable(target, '--hk-accent-gradient', previewGradient);
+    this.setCssVariable(target, '--hk-accent-gradient-progress', previewGradient);
+
+    if (accent) {
+      const accentRgb = this.toRgbValue(accent);
+
+      if (accentRgb) {
+        target.style.setProperty('--hk-accent-rgb', accentRgb);
+        target.style.setProperty('--hk-accent-strong', accent);
+        target.style.setProperty('--hk-accent-strong-rgb', accentRgb);
+      } else {
+        target.style.removeProperty('--hk-accent-rgb');
+        target.style.removeProperty('--hk-accent-strong');
+        target.style.removeProperty('--hk-accent-strong-rgb');
+      }
+    } else {
+      target.style.removeProperty('--hk-accent-rgb');
+      target.style.removeProperty('--hk-accent-strong');
+      target.style.removeProperty('--hk-accent-strong-rgb');
+    }
+  }
+
+  private clearAccentTokens(target: HTMLElement): void {
+    target.style.removeProperty('--hk-accent');
+    target.style.removeProperty('--hk-accent-soft');
+    target.style.removeProperty('--hk-accent-rgb');
+    target.style.removeProperty('--hk-accent-strong');
+    target.style.removeProperty('--hk-accent-strong-rgb');
+    target.style.removeProperty('--hk-accent-gradient');
+    target.style.removeProperty('--hk-accent-gradient-progress');
+  }
+
+  private setCssVariable(target: HTMLElement, variableName: string, value: string | undefined): void {
+    if (!value) {
+      target.style.removeProperty(variableName);
+      return;
+    }
+
+    const normalizedValue = value.trim();
+
+    if (normalizedValue.length === 0) {
+      target.style.removeProperty(variableName);
+      return;
+    }
+
+    target.style.setProperty(variableName, normalizedValue);
+  }
+
+  private toRgbValue(color: string): string | null {
+    const hexMatch = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(color.trim());
+
+    if (!hexMatch) {
+      return null;
+    }
+
+    const hex = hexMatch[1];
+
+    const normalizedHex = hex.length === 3 ? hex.split('').map((char) => char + char).join('') : hex;
+
+    const red = parseInt(normalizedHex.substring(0, 2), 16);
+    const green = parseInt(normalizedHex.substring(2, 4), 16);
+    const blue = parseInt(normalizedHex.substring(4, 6), 16);
+
+    if (Number.isNaN(red) || Number.isNaN(green) || Number.isNaN(blue)) {
+      return null;
+    }
+
+    return `${red}, ${green}, ${blue}`;
   }
 }
 
