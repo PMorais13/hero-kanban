@@ -107,6 +107,30 @@ describe('ThemeState', () => {
     expect(overlayContainerElement.dataset['theme']).toBe('radiant-dawn');
   });
 
+  it('should update accent tokens so UI components follow the active theme', () => {
+    state.setAvailableThemes(createThemeFixtures());
+    state.setTheme('radiant-dawn');
+
+    const rootStyle = documentRef.documentElement.style;
+    const bodyStyle = documentRef.body.style;
+    const overlayStyle = overlayContainerElement.style;
+
+    expect(rootStyle.getPropertyValue('--hk-accent').trim()).toBe('#f97316');
+    expect(rootStyle.getPropertyValue('--hk-accent-soft').trim()).toBe('rgba(249, 115, 22, 0.24)');
+    expect(rootStyle.getPropertyValue('--hk-accent-rgb').trim()).toBe('249, 115, 22');
+    expect(rootStyle.getPropertyValue('--hk-accent-strong').trim()).toBe('#f97316');
+    expect(rootStyle.getPropertyValue('--hk-accent-strong-rgb').trim()).toBe('249, 115, 22');
+    expect(rootStyle.getPropertyValue('--hk-accent-gradient').trim()).toBe(
+      'linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%)',
+    );
+    expect(rootStyle.getPropertyValue('--hk-accent-gradient-progress').trim()).toBe(
+      'linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%)',
+    );
+
+    expect(bodyStyle.getPropertyValue('--hk-accent').trim()).toBe('#f97316');
+    expect(overlayStyle.getPropertyValue('--hk-accent').trim()).toBe('#f97316');
+  });
+
   it('should apply the Celestial Tides theme tokens when selected', () => {
     state.setAvailableThemes(createThemeFixtures());
     state.setTheme('celestial-tides');
