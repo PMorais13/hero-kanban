@@ -2,7 +2,10 @@
   <header class="profile__header">
     <div>
       <h1 id="profile-heading">Perfil do herói</h1>
-      <p>Consulte o progresso, conquistas e recompensas desbloqueadas pela guilda.</p>
+      <p>
+        Consulte a ficha de personagem, acompanhe o progresso de XP e administre os artefatos cosméticos
+        da guilda.
+      </p>
     </div>
     <span class="profile__level" aria-label="Nível atual">Lvl {{ experience().level }}</span>
   </header>
@@ -18,76 +21,145 @@
     </div>
   </section>
 
-  <section class="profile__theme" aria-labelledby="theme-heading">
+  <section class="profile__sheet" aria-labelledby="sheet-heading">
     <header>
-      <h2 id="theme-heading">Personalizar tema</h2>
-      <p>Escolha uma paleta visual para combinar com a energia da guilda.</p>
+      <h2 id="sheet-heading">Ficha de personagem</h2>
+      <p>Resumo épico das origens, classe e talentos exclusivos do herói da squad.</p>
     </header>
-    <ul class="theme-options" role="radiogroup" [attr.aria-labelledby]="'theme-heading'">
-      <li *ngFor="let theme of themes(); trackBy: trackTheme" class="theme-options__item">
-        <input
-          type="radio"
-          class="theme-option__input"
-          name="theme-selection"
-          [id]="'theme-' + theme.id"
-          [value]="theme.id"
-          [checked]="isThemeSelected(theme.id)"
-          (change)="onThemeSelect(theme.id)"
-        />
-        <label
-          class="theme-option__card"
-          [attr.for]="'theme-' + theme.id"
-          [class.theme-option__card--active]="isThemeSelected(theme.id)"
-          [style.--theme-accent]="theme.accent"
-          [style.--theme-soft-accent]="theme.softAccent"
-          [style.--theme-preview]="theme.previewGradient"
-          [style.--theme-font-family]="theme.previewFontFamily"
-        >
-          <span class="theme-option__preview" aria-hidden="true"></span>
-          <span class="theme-option__content">
-            <span class="theme-option__title">{{ theme.label }}</span>
-            <span class="theme-option__description">{{ theme.description }}</span>
-          </span>
-          <span class="theme-option__badge" *ngIf="isThemeSelected(theme.id)">Ativo</span>
-        </label>
-      </li>
-    </ul>
-  </section>
+    <div class="profile__sheet-body">
+      <dl class="profile__sheet-info">
+        <div>
+          <dt>Nome</dt>
+          <dd>{{ heroSheet.name }}</dd>
+        </div>
+        <div>
+          <dt>Título</dt>
+          <dd>{{ heroSheet.title }}</dd>
+        </div>
+        <div>
+          <dt>Classe</dt>
+          <dd>{{ heroSheet.heroClass }}</dd>
+        </div>
+        <div>
+          <dt>Guilda</dt>
+          <dd>{{ heroSheet.guild }}</dd>
+        </div>
+        <div>
+          <dt>Alinhamento</dt>
+          <dd>{{ heroSheet.alignment }}</dd>
+        </div>
+        <div>
+          <dt>Linhagem</dt>
+          <dd>{{ heroSheet.lineage }}</dd>
+        </div>
+        <div>
+          <dt>Estandarte</dt>
+          <dd>{{ heroSheet.banner }}</dd>
+        </div>
+        <div>
+          <dt>Artefato</dt>
+          <dd>{{ heroSheet.signature }}</dd>
+        </div>
+      </dl>
 
-  <section class="profile__achievements" aria-labelledby="achievements-heading">
-    <header>
-      <h2 id="achievements-heading">Conquistas desbloqueadas</h2>
-      <p>Meta conquistas colaborativas para liberar novos cosméticos e títulos.</p>
-    </header>
-    <ul>
-      <li *ngFor="let achievement of achievements(); trackBy: trackAchievement">
-        <article class="achievement-card" [attr.aria-label]="'Conquista ' + achievement.title">
-          <header>
-            <span class="achievement-card__icon" aria-hidden="true">★</span>
-            <div>
-              <p class="achievement-card__title">{{ achievement.title }}</p>
-              <p class="achievement-card__description">{{ achievement.description }}</p>
+      <div class="profile__sheet-attributes" aria-label="Atributos principais">
+        <h3>Atributos</h3>
+        <ul>
+          <li *ngFor="let attribute of heroSheet.attributes">
+            <span class="profile__attribute-label">{{ attribute.label }}</span>
+            <div class="profile__attribute-meter" role="img" [attr.aria-label]="attribute.label + ' em ' + attribute.value">
+              <div class="profile__attribute-bar" [style.width.%]="attribute.value * 5"></div>
             </div>
-          </header>
-          <div class="achievement-card__progress" role="img" [attr.aria-label]="'Progresso ' + achievement.progress + '%'">
-            <div class="achievement-card__progress-bar" [style.width.%]="achievement.progress"></div>
-          </div>
-          <span class="achievement-card__value">{{ achievement.progress }}%</span>
-        </article>
-      </li>
-    </ul>
+            <span class="profile__attribute-value">{{ attribute.value }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="profile__sheet-traits" aria-label="Traços heroicos">
+        <h3>Talentos únicos</h3>
+        <ul>
+          <li *ngFor="let trait of heroSheet.traits">
+            <strong>{{ trait.title }}</strong>
+            <p>{{ trait.description }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
 
-  <section class="profile__loot" aria-labelledby="loot-heading">
-    <header>
-      <h2 id="loot-heading">Inventário de loots</h2>
-      <p>Itens raros conquistados em desafios recentes da guilda.</p>
-    </header>
-    <ul>
-      <li *ngFor="let item of loot(); trackBy: trackLoot" [attr.data-rarity]="item.rarity">
-        <span class="loot-card__name">{{ item.name }}</span>
-        <span class="loot-card__quantity">×{{ item.quantity }}</span>
-      </li>
-    </ul>
+  <section class="profile__cards" aria-label="Coleção de registros do perfil">
+    <article class="profile-card">
+      <button type="button" class="profile-card__trigger" (click)="openThemesDialog()" aria-describedby="themes-summary">
+        <span class="profile-card__icon material-symbols-rounded" aria-hidden="true">palette</span>
+        <div class="profile-card__content">
+          <h3>Temas & ambientação</h3>
+          <p id="themes-summary">Gerencie a paleta e fontes que moldam o quadro.</p>
+          <dl class="profile-card__stats">
+            <div>
+              <dt>Ativo</dt>
+              <dd>{{ currentThemeOption()?.label ?? 'Tema padrão' }}</dd>
+            </div>
+            <div>
+              <dt>Desbloqueados</dt>
+              <dd>{{ themesCount() }}</dd>
+            </div>
+          </dl>
+        </div>
+        <span class="profile-card__action">Abrir</span>
+      </button>
+    </article>
+
+    <article class="profile-card">
+      <button
+        type="button"
+        class="profile-card__trigger"
+        (click)="openAchievementsDialog()"
+        aria-describedby="achievements-summary"
+      >
+        <span class="profile-card__icon material-symbols-rounded" aria-hidden="true">workspace_premium</span>
+        <div class="profile-card__content">
+          <h3>Conquistas da guilda</h3>
+          <p id="achievements-summary">Relembre feitos lendários e acompanhe o próximo título.</p>
+          <dl class="profile-card__stats">
+            <div>
+              <dt>Média de progresso</dt>
+              <dd>{{ achievementsAverage() }}%</dd>
+            </div>
+            <div>
+              <dt>Destaque</dt>
+              <dd>{{ highlightedAchievement()?.title ?? 'Nenhuma missão concluída' }}</dd>
+            </div>
+          </dl>
+          <p class="profile-card__footer">
+            {{ achievements().length }} conquistas em andamento · {{ completedAchievements() }} completas
+          </p>
+        </div>
+        <span class="profile-card__action">Abrir</span>
+      </button>
+    </article>
+
+    <article class="profile-card">
+      <button type="button" class="profile-card__trigger" (click)="openLootDialog()" aria-describedby="loot-summary">
+        <span class="profile-card__icon material-symbols-rounded" aria-hidden="true">inventory_2</span>
+        <div class="profile-card__content">
+          <h3>Inventário mágico</h3>
+          <p id="loot-summary">Administre os artefatos e recursos acumulados pela party.</p>
+          <dl class="profile-card__stats">
+            <div>
+              <dt>Itens únicos</dt>
+              <dd>{{ lootUniqueCount() }}</dd>
+            </div>
+            <div>
+              <dt>Peças totais</dt>
+              <dd>{{ lootTotalQuantity() }}</dd>
+            </div>
+          </dl>
+          <p class="profile-card__footer" *ngIf="featuredLoot() as lootItem">
+            Destaque lendário: {{ lootItem.name }} · Raridade {{ lootItem.rarity }}
+          </p>
+        </div>
+        <span class="profile-card__action">Abrir</span>
+      </button>
+    </article>
   </section>
 </section>

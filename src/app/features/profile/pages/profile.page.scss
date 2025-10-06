@@ -41,7 +41,7 @@
 .profile__header p {
   margin: 0.35rem 0 0;
   color: var(--profile-text-muted);
-  max-width: 48ch;
+  max-width: 52ch;
 }
 
 .profile__level {
@@ -59,7 +59,7 @@
   letter-spacing: 0.08em;
 }
 
-.profile__xp { 
+.profile__xp {
   display: grid;
   gap: 0.75rem;
 }
@@ -72,120 +72,6 @@
 .profile__xp p {
   margin: 0;
   color: var(--profile-text-secondary);
-}
-
-.profile__theme {
-  display: grid;
-  gap: 1.25rem;
-}
-
-.profile__theme > header {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.profile__theme > header h2 {
-  margin: 0;
-}
-
-.profile__theme > header p {
-  margin: 0;
-  color: var(--profile-text-muted);
-}
-
-.theme-options {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.theme-options__item {
-  position: relative;
-}
-
-.theme-option__input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.theme-option__card {
-  --theme-accent: var(--hk-accent);
-  --theme-soft-accent: rgba(var(--hk-accent-rgb), 0.22);
-  --theme-preview: linear-gradient(
-    135deg,
-    rgba(var(--hk-accent-rgb), 0.5),
-    rgba(var(--hk-accent-rgb), 0.1)
-  );
-  --theme-font-family: var(--hk-heading-font-family);
-  display: grid;
-  gap: 0.75rem;
-  padding: 1.1rem 1.25rem;
-  border-radius: 1.15rem;
-  border: 1px solid var(--profile-border);
-  background: var(--profile-surface-subtle);
-  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
-  cursor: pointer;
-  position: relative;
-  min-height: 100%;
-}
-
-.theme-option__card:hover {
-  transform: translateY(-2px);
-  border-color: var(--profile-border-strong);
-}
-
-.theme-option__card--active {
-  border-color: var(--theme-accent);
-  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18), 0 0 0 1px var(--theme-accent);
-}
-
-.theme-option__input:focus-visible + .theme-option__card {
-  box-shadow: 0 0 0 1px var(--theme-accent), 0 0 0 4px var(--theme-soft-accent);
-}
-
-.theme-option__card--active .theme-option__title {
-  color: var(--theme-accent);
-}
-
-.theme-option__preview {
-  height: 3rem;
-  border-radius: 0.85rem;
-  background-image: var(--theme-preview);
-  border: 1px solid var(--profile-border);
-}
-
-.theme-option__content {
-  display: grid;
-  gap: 0.35rem;
-}
-
-.theme-option__title {
-  font-weight: 600;
-  font-family: var(--theme-font-family, var(--hk-heading-font-family));
-  letter-spacing: var(--hk-heading-letter-spacing, 0.03em);
-}
-
-.theme-option__description {
-  color: var(--profile-text-muted);
-  font-size: 0.95rem;
-}
-
-.theme-option__badge {
-  justify-self: start;
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  background: var(--theme-soft-accent);
-  color: var(--theme-accent);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
 }
 
 .profile__xp-progress {
@@ -202,124 +88,263 @@
   background: var(--hk-accent-gradient-progress);
 }
 
-.profile__achievements,
-.profile__loot {
+.profile__sheet {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
-.profile__achievements > header,
-.profile__loot > header {
+.profile__sheet > header {
   display: grid;
   gap: 0.35rem;
 }
 
-.profile__achievements > header h2,
-.profile__loot > header h2 {
+.profile__sheet > header h2 {
   margin: 0;
 }
 
-.profile__achievements > header p,
-.profile__loot > header p {
+.profile__sheet > header p {
   margin: 0;
   color: var(--profile-text-muted);
 }
 
-.profile__achievements ul,
-.profile__loot ul {
+.profile__sheet-body {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.profile__sheet-info {
+  margin: 0;
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--profile-border);
+  background: var(--profile-surface-subtle);
+  display: grid;
+  gap: 0.85rem;
+}
+
+.profile__sheet-info > div {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.profile__sheet-info dt {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--profile-text-muted);
+  margin: 0;
+}
+
+.profile__sheet-info dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.profile__sheet-attributes,
+.profile__sheet-traits {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--profile-border);
+  background: var(--profile-surface-subtle);
+  display: grid;
+  gap: 1rem;
+}
+
+.profile__sheet-attributes h3,
+.profile__sheet-traits h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+}
+
+.profile__sheet-attributes ul,
+.profile__sheet-traits ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
-.achievement-card {
+.profile__sheet-attributes li {
   display: grid;
-  gap: 0.85rem;
-  padding: 1.25rem;
-  border-radius: 1.25rem;
-  background: var(--profile-surface-soft);
-  border: 1px solid var(--profile-border);
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
 }
 
-.achievement-card > header {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1rem;
-  align-items: start;
-}
-
-.achievement-card__icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.9rem;
-  display: grid;
-  place-items: center;
-  background: radial-gradient(circle at top, #facc15, #f97316);
-  color: #16121f;
-  font-size: 1.2rem;
+.profile__attribute-label {
   font-weight: 600;
 }
 
-.achievement-card__title {
+.profile__attribute-meter {
+  position: relative;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.profile__attribute-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--hk-accent-gradient-progress);
+}
+
+.profile__attribute-value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.profile__sheet-traits li {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.profile__sheet-traits li:last-child {
+  border-bottom: none;
+}
+
+.profile__sheet-traits strong {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.profile__sheet-traits p {
   margin: 0;
-  font-weight: 600;
-}
-
-.achievement-card__description {
-  margin: 0.25rem 0 0;
   color: var(--profile-text-muted);
   font-size: 0.95rem;
 }
 
-.achievement-card__progress {
-  position: relative;
-  height: 0.6rem;
-  border-radius: 999px;
-  background: var(--profile-progress-track);
+.profile__cards {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.profile-card {
+  border-radius: 1.25rem;
+  background: var(--profile-surface-subtle);
   overflow: hidden;
+  position: relative;
 }
 
-.achievement-card__progress-bar {
-  height: 100%;
+.profile-card__trigger {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: none;
+  border: 1px solid var(--profile-border);
   border-radius: inherit;
-  background: var(--hk-accent-gradient);
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
-.achievement-card__value {
-  justify-self: end;
-  font-size: 0.9rem;
+.profile-card__trigger:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(10, 12, 28, 0.28);
+  border-color: rgba(var(--hk-accent-rgb), 0.4);
+}
+
+.profile-card__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.95rem;
+  display: grid;
+  place-items: center;
+  background: rgba(var(--hk-accent-rgb), 0.12);
+  color: var(--hk-accent);
+  font-size: 1.6rem;
+}
+
+.profile-card__content h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.profile-card__content p {
+  margin: 0.35rem 0 0;
   color: var(--profile-text-muted);
 }
 
-.profile__loot li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 1.25rem;
-  border-radius: 1.1rem;
-  border: 1px solid var(--profile-border);
-  background: var(--profile-surface-subtle);
-  font-size: 1rem;
+.profile-card__stats {
+  margin: 0.75rem 0 0;
+  display: grid;
+  gap: 0.5rem;
 }
 
-.profile__loot li[data-rarity='raro'] {
-  border-color: rgba(56, 189, 248, 0.5);
+.profile-card__stats > div {
+  display: grid;
+  gap: 0.2rem;
 }
 
-.profile__loot li[data-rarity='lendário'] {
-  border-color: rgba(250, 204, 21, 0.6);
-  box-shadow: 0 0 14px rgba(250, 204, 21, 0.24);
+.profile-card__stats dt {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--profile-text-muted);
 }
 
-.loot-card__name {
+.profile-card__stats dd {
+  margin: 0;
   font-weight: 600;
 }
 
-.loot-card__quantity {
-  color: var(--profile-text-muted);
+.profile-card__footer {
+  margin: 0.75rem 0 0;
+  color: var(--profile-text-secondary);
+  font-size: 0.9rem;
+}
+
+.profile-card__action {
+  align-self: center;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(var(--hk-accent-rgb), 0.12);
+  color: var(--hk-accent);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.profile-card__trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.16), 0 0 0 6px rgba(var(--hk-accent-rgb), 0.2);
+  border-color: rgba(var(--hk-accent-rgb), 0.5);
+}
+
+:host ::ng-deep .profile-dialog-panel .mat-mdc-dialog-surface {
+  background: rgba(17, 21, 40, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 30px 70px rgba(8, 10, 24, 0.5);
+  backdrop-filter: blur(18px);
+  color: var(--hk-text-primary);
+  padding: 0;
+}
+
+:host ::ng-deep .profile-dialog-panel--compact .mat-mdc-dialog-surface {
+  max-width: 720px;
+}
+
+:host ::ng-deep .profile-dialog-panel--wide .mat-mdc-dialog-surface {
+  max-width: 840px;
+}
+
+@media (max-width: 960px) {
+  .profile__sheet-body {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 720px) {
@@ -330,5 +355,14 @@
   .profile__header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .profile-card__trigger {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card__icon,
+  .profile-card__action {
+    justify-self: flex-start;
   }
 }
