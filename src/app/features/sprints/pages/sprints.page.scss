@@ -131,7 +131,7 @@
 }
 
 .sprint__meta {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 0.75rem;
   margin: 0;
