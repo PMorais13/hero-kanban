@@ -57,7 +57,7 @@ Os testes cobrem o shell principal e regras de negócio dos serviços de estado 
 ### Feature Explorer (`/features`)
 - `FeatureExplorerState` agrega dados do quadro e expõe view models para catálogo e detalhe de features.
 - Signals e `computed` sincronizam cards e listas sem lógica adicional nos templates.
-- Catálogo conta com botão **Nova feature** que abre modal validando tema, missão e recompensa antes de registrar no `BoardState`.
+- Catálogo conta com botão **Novo marco** que abre modal validando tema, missão e recompensa antes de registrar no `BoardState`.
 
 ### Sprints (`/sprints`)
 - Aproveita `BoardState.sprintOverviews` para listar objetivos, datas e status das histórias de cada sprint.

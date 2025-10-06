@@ -31,7 +31,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'sprints',
+    path: 'journey',
     loadChildren: () =>
       import('./features/sprints/sprints.routes').then((m) => m.SPRINTS_ROUTES),
   },

@@ -96,7 +96,7 @@ export class BoardState {
   private readonly _sprints = signal<Sprint[]>([
     {
       id: 'sprint-nebula',
-      name: 'Sprint Nebulosa',
+      name: 'Jornada Nebulosa',
       goal: 'Dar visibilidade previsível ao fluxo de valor.',
       focus: 'Analytics e narrativa do fluxo',
       startDateIso: '2024-06-03',
@@ -104,7 +104,7 @@ export class BoardState {
     },
     {
       id: 'sprint-aether',
-      name: 'Sprint Aether',
+      name: 'Jornada Aether',
       goal: 'Habilitar recompensas colaborativas com segurança.',
       focus: 'Gamificação e economia cooperativa',
       startDateIso: '2024-06-17',

@@ -71,13 +71,13 @@ export class AppComponent {
       link: '/quadro',
     },
     {
-      label: 'Sprints',
+      label: 'Jornadas',
       description: 'Alinhamento por ciclo',
       icon: 'flag',
-      link: '/sprints',
+      link: '/journey',
     },
     {
-      label: 'Features & histórias',
+      label: 'Marcos & histórias',
       description: 'Mapa estratégico da guilda',
       icon: 'auto_awesome_mosaic',
       link: '/features',

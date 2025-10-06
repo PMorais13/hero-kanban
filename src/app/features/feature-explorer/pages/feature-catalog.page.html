@@ -1,18 +1,18 @@
 <section class="catalog" aria-labelledby="feature-catalog-title">
   <header class="catalog__header">
     <div class="catalog__heading">
-      <h1 id="feature-catalog-title">Explorar features e histórias</h1>
+      <h1 id="feature-catalog-title">Explorar marcos e histórias</h1>
       <p>
-        Conheça as missões épicas em andamento. Cada feature reúne histórias que impulsionam a jornada da guilda.
+        Conheça as missões épicas em andamento. Cada marco reúne histórias que impulsionam a jornada da guilda.
       </p>
       <p class="catalog__definition" role="note">
-        <strong>Feature</strong> é uma iniciativa épica que orienta a estratégia do produto e agrupa histórias relacionadas.
+        <strong>Marco</strong> é uma iniciativa épica que orienta a estratégia do produto e agrupa histórias relacionadas.
         Cada história detalha uma entrega de valor que, quando concluída, avança a guilda rumo ao objetivo da feature.
       </p>
     </div>
     <button type="button" mat-flat-button color="primary" class="catalog__cta" (click)="openCreateFeatureDialog()">
       <mat-icon fontSet="material-symbols-rounded">add</mat-icon>
-      Nova feature
+      Novo marco
     </button>
   </header>
 
@@ -64,5 +64,5 @@
 </section>
 
 <ng-template #emptyState>
-  <p class="catalog__empty">Nenhuma feature encontrada no momento.</p>
+  <p class="catalog__empty">Nenhum marco encontrada no momento.</p>
 </ng-template>

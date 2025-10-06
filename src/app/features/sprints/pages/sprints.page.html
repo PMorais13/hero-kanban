@@ -1,22 +1,22 @@
 <section class="sprints" aria-labelledby="sprints-heading">
   <header class="sprints__hero">
     <div class="sprints__hero-heading">
-      <h1 id="sprints-heading">Planejamento de sprints</h1>
+      <h1 id="sprints-heading">Planejamento das Jornadas</h1>
       <p>
-        Acompanhe o objetivo, o foco estratégico e todas as histórias previstas para cada sprint. Use este painel para alinhar o
+        Acompanhe o objetivo, o foco estratégico e todas as histórias previstas para cada jornada. Use este painel para alinhar o
         squad antes das cerimônias e garantir que nenhuma tarefa épica fique de fora.
       </p>
     </div>
     <button type="button" class="sprints__new-sprint" (click)="openCreateSprint()">
       <span class="sprints__new-sprint-icon" aria-hidden="true">playlist_add</span>
-      Nova sprint
+      Nova jornada
     </button>
   </header>
 
   <section
     *ngIf="hasSprints(); else emptySprints"
     class="sprints__list"
-    aria-label="Sprints planejadas e suas histórias"
+    aria-label="Jornadas planejadas e suas histórias"
   >
     <article
       *ngFor="let overview of sprintOverviews(); trackBy: trackSprint"
