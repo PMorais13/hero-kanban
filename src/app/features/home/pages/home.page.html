@@ -90,59 +90,6 @@
     </mat-card-header>
 
     <mat-card-content>
-      <section class="home__conversation-form" aria-label="Publicar novo comentário rápido">
-        <form
-          class="home__conversation-form-fields"
-          [formGroup]="quickCommentForm"
-          (ngSubmit)="onSubmitQuickComment()"
-          aria-describedby="home-conversation-hint"
-          novalidate
-        >
-          <div class="home__conversation-row">
-            <mat-form-field appearance="fill">
-              <mat-label>História</mat-label>
-              <mat-select formControlName="storyId" required aria-required="true">
-                <mat-option *ngFor="let option of storyOptions()" [value]="option.id">
-                  {{ option.title }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill">
-              <mat-label>Autor</mat-label>
-              <input
-                matInput
-                type="text"
-                formControlName="author"
-                required
-                aria-required="true"
-                placeholder="Nome de quem publica"
-              />
-              <mat-hint id="home-conversation-hint">Use &#64; para mencionar colegas e ativar alertas.</mat-hint>
-            </mat-form-field>
-          </div>
-
-          <mat-form-field appearance="fill" class="home__conversation-message">
-            <mat-label>Mensagem</mat-label>
-            <textarea
-              matInput
-              formControlName="message"
-              rows="3"
-              required
-              aria-required="true"
-              placeholder="Compartilhe atualizações e menções relevantes"
-            ></textarea>
-          </mat-form-field>
-
-          <div class="home__conversation-actions">
-            <button type="submit" mat-flat-button color="primary" class="home__accent-button">
-              <mat-icon fontSet="material-symbols-rounded" aria-hidden="true">send</mat-icon>
-              Publicar atualização
-            </button>
-          </div>
-        </form>
-      </section>
-
       <section class="home__conversation-thread" aria-label="Comentários mais recentes">
         <ol *ngIf="recentComments().length > 0; else emptyComments" class="home__comment-list">
           <li *ngFor="let entry of recentComments(); trackBy: trackRecentComment" class="home__comment-item">

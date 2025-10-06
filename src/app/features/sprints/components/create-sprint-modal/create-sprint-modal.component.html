@@ -4,7 +4,7 @@
     <form class="create-sprint-modal__form" (ngSubmit)="onSubmit()" novalidate>
       <header class="create-sprint-modal__header">
         <div>
-          <h2 id="create-sprint-title">Cadastrar nova sprint</h2>
+          <h2 id="create-sprint-title">Cadastrar nova jornada</h2>
           <p>Planeje o próximo ciclo com objetivo claro, foco estratégico e datas alinhadas à guilda.</p>
         </div>
         <button type="button" class="create-sprint-modal__close" (click)="onCancel()" aria-label="Fechar modal">
@@ -14,8 +14,8 @@
 
       <div class="create-sprint-modal__grid">
         <label class="create-sprint-modal__field">
-          <span>Nome da sprint</span>
-          <input type="text" formControlName="name" placeholder="Ex.: Sprint Aurora" />
+          <span>Nome da jornada</span>
+          <input type="text" formControlName="name" placeholder="Ex.: Jornada Aurora" />
           <small *ngIf="form.controls.name.invalid && form.controls.name.touched">
             Informe um nome com pelo menos 3 caracteres.
           </small>
@@ -25,7 +25,7 @@
           <span>Objetivo</span>
           <textarea formControlName="goal" rows="3" placeholder="Defina o resultado esperado para o squad"></textarea>
           <small *ngIf="form.controls.goal.invalid && form.controls.goal.touched">
-            Explique o objetivo estratégico da sprint.
+            Explique o objetivo estratégico da jornada.
           </small>
         </label>
 
@@ -42,7 +42,7 @@
             <span>Início</span>
             <input type="date" formControlName="startDate" />
             <small *ngIf="form.controls.startDate.invalid && form.controls.startDate.touched">
-              Informe a data de início da sprint.
+              Informe a data de início da jornada.
             </small>
           </label>
 
@@ -50,7 +50,7 @@
             <span>Término</span>
             <input type="date" formControlName="endDate" />
             <small *ngIf="form.controls.endDate.invalid && form.controls.endDate.touched">
-              Informe a data de término da sprint.
+              Informe a data de término da jornada.
             </small>
             <small *ngIf="hasInvalidPeriod">A data final deve ser posterior ou igual ao início.</small>
           </label>
@@ -60,7 +60,7 @@
       <footer class="create-sprint-modal__footer">
         <button type="button" class="create-sprint-modal__secondary" (click)="onCancel()">Cancelar</button>
         <button type="submit" class="create-sprint-modal__primary" [disabled]="form.invalid || hasInvalidPeriod">
-          Salvar sprint
+          Salvar jornada
         </button>
       </footer>
     </form>
