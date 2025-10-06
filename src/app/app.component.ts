@@ -92,7 +92,7 @@ export class AppComponent {
       label: 'Editar quadro',
       description: 'Personalizar etapas e limites',
       icon: 'tune',
-      link: '/quadro/personalizar',
+      link: '/personalizar',
     },
   ];
 

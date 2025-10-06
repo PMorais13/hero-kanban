@@ -3,18 +3,27 @@
     <div class="catalog__heading">
       <h1 id="feature-catalog-title">Explorar marcos e histórias</h1>
       <p>
-        Conheça as missões épicas em andamento. Cada marco reúne histórias que impulsionam a jornada da guilda.
-      </p>
-      <p class="catalog__definition" role="note">
-        <strong>Marco</strong> é uma iniciativa épica que orienta a estratégia do produto e agrupa histórias relacionadas.
-        Cada história detalha uma entrega de valor que, quando concluída, avança a guilda rumo ao objetivo da feature.
+        Conheça as missões épicas em andamento. Cada marco reúne histórias que
+        impulsionam a jornada da guilda.
       </p>
     </div>
-    <button type="button" mat-flat-button color="primary" class="catalog__cta" (click)="openCreateFeatureDialog()">
+    <button
+      type="button"
+      mat-flat-button
+      color="primary"
+      class="catalog__cta"
+      (click)="openCreateFeatureDialog()"
+    >
       <mat-icon fontSet="material-symbols-rounded">add</mat-icon>
       Novo marco
     </button>
   </header>
+
+  <p class="catalog__definition" role="note">
+    <strong>Marco</strong> é uma iniciativa épica que orienta a estratégia do
+    produto e agrupa histórias relacionadas. Cada história detalha uma entrega
+    de valor que, quando concluída, avança a guilda rumo ao objetivo da feature.
+  </p>
 
   <ng-container *ngIf="featureCards().length > 0; else emptyState">
     <div class="catalog__grid" role="list">
@@ -24,7 +33,9 @@
         class="feature-card"
       >
         <header class="feature-card__header">
-          <span class="feature-card__type" aria-label="Tipo de item">Feature</span>
+          <span class="feature-card__type" aria-label="Tipo de item"
+            >Feature</span
+          >
           <h2>{{ feature.title }}</h2>
           <p class="feature-card__theme">{{ feature.theme }}</p>
         </header>
@@ -54,10 +65,15 @@
           aria-valuemax="100"
           [attr.aria-label]="'Progresso da feature ' + feature.title"
         >
-          <span class="feature-card__progress-bar" [style.width.%]="feature.progressPercent"></span>
+          <span
+            class="feature-card__progress-bar"
+            [style.width.%]="feature.progressPercent"
+          ></span>
         </div>
 
-        <a [routerLink]="['/features', feature.id]" class="feature-card__link">Ver detalhes da feature</a>
+        <a [routerLink]="['/features', feature.id]" class="feature-card__link"
+          >Ver detalhes da feature</a
+        >
       </article>
     </div>
   </ng-container>
