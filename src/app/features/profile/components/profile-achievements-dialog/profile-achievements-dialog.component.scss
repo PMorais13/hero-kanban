@@ -1,29 +1,5 @@
 :host {
-  display: grid;
-  gap: 1.5rem;
-  padding: 1.75rem;
-  color: var(--hk-text-primary);
-}
-
-.dialog__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.dialog__header h2 {
-  margin: 0;
-  font-size: 1.45rem;
-}
-
-.dialog__header p {
-  margin: 0.35rem 0 0;
-  color: var(--hk-text-muted);
-}
-
-.dialog__header button[mat-icon-button] {
-  --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  display: block;
 }
 
 .dialog__xp {

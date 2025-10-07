@@ -1,35 +1,11 @@
 :host {
-  display: grid;
-  gap: 2rem;
-  padding: 2rem;
+  display: block;
   color: var(--hk-text-primary);
-  --hero-sheet-border: rgba(255, 255, 255, 0.12);
-  --hero-sheet-surface: rgba(255, 255, 255, 0.04);
-}
-
-.dialog__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 1rem;
-}
-
-.dialog__header h2 {
-  margin: 0;
-  font-size: 1.6rem;
-}
-
-.dialog__header p {
-  margin: 0.35rem 0 0;
-  color: var(--hk-text-muted);
-  max-width: 48ch;
-}
-
-.dialog__header button[mat-icon-button] {
-  --mdc-icon-button-icon-color: var(--hk-text-secondary);
 }
 
 .hero-sheet {
+  --hero-sheet-border: rgba(255, 255, 255, 0.12);
+  --hero-sheet-surface: rgba(255, 255, 255, 0.04);
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -139,21 +115,7 @@
   font-size: 0.95rem;
 }
 
-.dialog__actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.dialog__actions button[mat-stroked-button] {
-  color: var(--hk-text-primary);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
 @media (max-width: 600px) {
-  :host {
-    padding: 1.5rem;
-  }
-
   .hero-sheet {
     grid-template-columns: 1fr;
   }

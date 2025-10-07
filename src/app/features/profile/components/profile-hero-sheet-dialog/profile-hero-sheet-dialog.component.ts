@@ -3,6 +3,7 @@ import { NgFor } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { HeroSheet } from '../../models/hero-sheet.model';
+import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 @Component({
   selector: 'hk-profile-hero-sheet-dialog',
@@ -10,7 +11,7 @@ import { HeroSheet } from '../../models/hero-sheet.model';
   templateUrl: './profile-hero-sheet-dialog.component.html',
   styleUrls: ['./profile-hero-sheet-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatDialogModule, MatButtonModule, NgFor],
+  imports: [MatDialogModule, MatButtonModule, NgFor, ProfileModalComponent],
 })
 export class ProfileHeroSheetDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<ProfileHeroSheetDialogComponent>);

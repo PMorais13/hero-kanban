@@ -1,29 +1,34 @@
-<header class="dialog__header">
-  <div>
-    <h2>Conquistas da guilda</h2>
-    <p>Reviva feitos memoráveis, acompanhe o progresso coletivo e planeje o próximo título lendário.</p>
+<hk-profile-modal>
+  <div hkProfileModalHeader>
+    <div class="profile-modal__heading">
+      <h2>Conquistas da guilda</h2>
+      <p>Reviva feitos memoráveis, acompanhe o progresso coletivo e planeje o próximo título lendário.</p>
+    </div>
+    <button type="button" mat-icon-button (click)="close()" aria-label="Fechar conquistas">
+      <span class="material-symbols-rounded" aria-hidden="true">close</span>
+    </button>
   </div>
-  <button type="button" mat-icon-button (click)="close()" aria-label="Fechar conquistas">
-    <span class="material-symbols-rounded" aria-hidden="true">close</span>
-  </button>
-</header>
 
-<p class="dialog__xp">Total de XP atual: {{ experience().current | number: '1.0-0' }} · Próximo nível aos {{ experience().nextLevel | number: '1.0-0' }}.</p>
+  <p hkProfileModalContent class="dialog__xp">
+    Total de XP atual: {{ experience().current | number: '1.0-0' }} · Próximo nível aos
+    {{ experience().nextLevel | number: '1.0-0' }}.
+  </p>
 
-<ul class="achievement-list">
-  <li *ngFor="let achievement of achievements(); trackBy: trackAchievement">
-    <article class="achievement-card" [attr.aria-label]="'Conquista ' + achievement.title">
-      <header>
-        <span class="achievement-card__icon" aria-hidden="true">★</span>
-        <div>
-          <p class="achievement-card__title">{{ achievement.title }}</p>
-          <p class="achievement-card__description">{{ achievement.description }}</p>
+  <ul hkProfileModalContent class="achievement-list">
+    <li *ngFor="let achievement of achievements(); trackBy: trackAchievement">
+      <article class="achievement-card" [attr.aria-label]="'Conquista ' + achievement.title">
+        <header>
+          <span class="achievement-card__icon" aria-hidden="true">★</span>
+          <div>
+            <p class="achievement-card__title">{{ achievement.title }}</p>
+            <p class="achievement-card__description">{{ achievement.description }}</p>
+          </div>
+        </header>
+        <div class="achievement-card__progress" role="img" [attr.aria-label]="experienceProgressLabel(achievement)">
+          <div class="achievement-card__progress-bar" [style.width.%]="achievement.progress"></div>
         </div>
-      </header>
-      <div class="achievement-card__progress" role="img" [attr.aria-label]="experienceProgressLabel(achievement)">
-        <div class="achievement-card__progress-bar" [style.width.%]="achievement.progress"></div>
-      </div>
-      <span class="achievement-card__value">{{ achievement.progress }}%</span>
-    </article>
-  </li>
-</ul>
+        <span class="achievement-card__value">{{ achievement.progress }}%</span>
+      </article>
+    </li>
+  </ul>
+</hk-profile-modal>

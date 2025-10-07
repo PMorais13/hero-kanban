@@ -231,23 +231,8 @@
   backdrop-filter: blur(18px);
   color: var(--hk-text-primary);
   padding: 0;
-  max-width: min(94vw, 900px);
-}
-
-:host ::ng-deep .profile-dialog-panel--roomy .mat-mdc-dialog-surface {
-  max-width: min(94vw, 940px);
-}
-
-:host ::ng-deep .profile-dialog-panel--spacious .mat-mdc-dialog-surface {
-  max-width: min(94vw, 1020px);
-}
-
-:host ::ng-deep .profile-dialog-panel--expansive .mat-mdc-dialog-surface {
-  max-width: min(94vw, 1100px);
-}
-
-:host ::ng-deep .profile-dialog-panel--heroic .mat-mdc-dialog-surface {
-  max-width: min(94vw, 1180px);
+  width: auto;
+  max-width: none;
 }
 
 @media (max-width: 960px) {

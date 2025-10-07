@@ -3,6 +3,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ThemeState, type ThemeId, type ThemeOption } from '@app/core/state/theme.state';
+import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 @Component({
   selector: 'hk-profile-themes-dialog',
@@ -10,7 +11,7 @@ import { ThemeState, type ThemeId, type ThemeOption } from '@app/core/state/them
   templateUrl: './profile-themes-dialog.component.html',
   styleUrls: ['./profile-themes-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatDialogModule, MatButtonModule, NgFor, NgIf],
+  imports: [MatDialogModule, MatButtonModule, NgFor, NgIf, ProfileModalComponent],
 })
 export class ProfileThemesDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<ProfileThemesDialogComponent>);

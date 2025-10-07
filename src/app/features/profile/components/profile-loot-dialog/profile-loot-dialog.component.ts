@@ -4,6 +4,7 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { HeroControlState } from '@app/core/state/hero-control.state';
 import type { LootItem } from '@app/core/state/hero-control.models';
+import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 @Component({
   selector: 'hk-profile-loot-dialog',
@@ -11,7 +12,7 @@ import type { LootItem } from '@app/core/state/hero-control.models';
   templateUrl: './profile-loot-dialog.component.html',
   styleUrls: ['./profile-loot-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatDialogModule, MatButtonModule, NgFor],
+  imports: [MatDialogModule, MatButtonModule, NgFor, ProfileModalComponent],
 })
 export class ProfileLootDialogComponent {
   private readonly dialogRef = inject(MatDialogRef<ProfileLootDialogComponent>);

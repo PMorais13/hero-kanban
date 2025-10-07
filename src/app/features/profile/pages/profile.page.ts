@@ -154,28 +154,28 @@ export class ProfilePageComponent {
 
   protected openThemesDialog(): void {
     this.dialog.open(ProfileThemesDialogComponent, {
-      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--roomy'],
+      panelClass: 'profile-dialog-panel',
       autoFocus: false,
     });
   }
 
   protected openAchievementsDialog(): void {
     this.dialog.open(ProfileAchievementsDialogComponent, {
-      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--spacious'],
+      panelClass: 'profile-dialog-panel',
       autoFocus: false,
     });
   }
 
   protected openLootDialog(): void {
     this.dialog.open(ProfileLootDialogComponent, {
-      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--expansive'],
+      panelClass: 'profile-dialog-panel',
       autoFocus: false,
     });
   }
 
   protected openHeroSheetDialog(): void {
     this.dialog.open(ProfileHeroSheetDialogComponent, {
-      panelClass: ['profile-dialog-panel', 'profile-dialog-panel--heroic'],
+      panelClass: 'profile-dialog-panel',
       autoFocus: false,
       data: this.heroSheet,
     });

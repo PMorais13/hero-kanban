@@ -1,39 +1,41 @@
-<header class="dialog__header">
-  <div>
-    <h2>Temas & ambientação</h2>
-    <p>Escolha o clima visual que melhor representa o espírito aventureiro da guilda.</p>
+<hk-profile-modal>
+  <div hkProfileModalHeader>
+    <div class="profile-modal__heading">
+      <h2>Temas & ambientação</h2>
+      <p>Escolha o clima visual que melhor representa o espírito aventureiro da guilda.</p>
+    </div>
+    <button type="button" mat-icon-button (click)="close()" aria-label="Fechar seleção de temas">
+      <span class="material-symbols-rounded" aria-hidden="true">close</span>
+    </button>
   </div>
-  <button type="button" mat-icon-button (click)="close()" aria-label="Fechar seleção de temas">
-    <span class="material-symbols-rounded" aria-hidden="true">close</span>
-  </button>
-</header>
 
-<ul class="theme-options" role="radiogroup" aria-label="Temas disponíveis">
-  <li *ngFor="let theme of themes(); trackBy: trackTheme" class="theme-options__item">
-    <input
-      type="radio"
-      class="theme-option__input"
-      name="theme-selection"
-      [id]="'dialog-theme-' + theme.id"
-      [value]="theme.id"
-      [checked]="isThemeSelected(theme.id)"
-      (change)="onThemeSelect(theme.id)"
-    />
-    <label
-      class="theme-option__card"
-      [attr.for]="'dialog-theme-' + theme.id"
-      [class.theme-option__card--active]="isThemeSelected(theme.id)"
-      [style.--theme-accent]="theme.accent"
-      [style.--theme-soft-accent]="theme.softAccent"
-      [style.--theme-preview]="theme.previewGradient"
-      [style.--theme-font-family]="theme.previewFontFamily"
-    >
-      <span class="theme-option__preview" aria-hidden="true"></span>
-      <span class="theme-option__content">
-        <span class="theme-option__title">{{ theme.label }}</span>
-        <span class="theme-option__description">{{ theme.description }}</span>
-      </span>
-      <span class="theme-option__badge" *ngIf="isThemeSelected(theme.id)">Ativo</span>
-    </label>
-  </li>
-</ul>
+  <ul hkProfileModalContent class="theme-options" role="radiogroup" aria-label="Temas disponíveis">
+    <li *ngFor="let theme of themes(); trackBy: trackTheme" class="theme-options__item">
+      <input
+        type="radio"
+        class="theme-option__input"
+        name="theme-selection"
+        [id]="'dialog-theme-' + theme.id"
+        [value]="theme.id"
+        [checked]="isThemeSelected(theme.id)"
+        (change)="onThemeSelect(theme.id)"
+      />
+      <label
+        class="theme-option__card"
+        [attr.for]="'dialog-theme-' + theme.id"
+        [class.theme-option__card--active]="isThemeSelected(theme.id)"
+        [style.--theme-accent]="theme.accent"
+        [style.--theme-soft-accent]="theme.softAccent"
+        [style.--theme-preview]="theme.previewGradient"
+        [style.--theme-font-family]="theme.previewFontFamily"
+      >
+        <span class="theme-option__preview" aria-hidden="true"></span>
+        <span class="theme-option__content">
+          <span class="theme-option__title">{{ theme.label }}</span>
+          <span class="theme-option__description">{{ theme.description }}</span>
+        </span>
+        <span class="theme-option__badge" *ngIf="isThemeSelected(theme.id)">Ativo</span>
+      </label>
+    </li>
+  </ul>
+</hk-profile-modal>
