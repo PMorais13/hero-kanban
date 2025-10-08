@@ -12,6 +12,9 @@
   grid-template-rows: auto minmax(0, 1fr) auto;
   gap: 1.75rem;
   padding: clamp(1.5rem, 2vw, 2.5rem);
+  border-radius: clamp(1.25rem, 2vw, 1.75rem);
+  border: 1px solid color-mix(in srgb, var(--hk-border) 85%, transparent);
+  background: color-mix(in srgb, var(--hk-surface-elevated) 92%, transparent);
   color: var(--hk-text-primary);
   max-height: inherit;
   overflow: hidden;
