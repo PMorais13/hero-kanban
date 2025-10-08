@@ -1,0 +1,18 @@
+<section class="profile-modal" role="document">
+  <header class="profile-modal__header">
+    <div class="profile-modal__header-content">
+      <ng-content select="[hkProfileModalHeader]"></ng-content>
+    </div>
+    <button type="button" mat-icon-button (click)="close()" [attr.aria-label]="closeAriaLabel">
+      <span class="material-symbols-rounded" aria-hidden="true">close</span>
+    </button>
+  </header>
+
+  <div class="profile-modal__content">
+    <ng-content select="[hkProfileModalContent]"></ng-content>
+  </div>
+
+  <footer class="profile-modal__actions">
+    <ng-content select="[hkProfileModalActions]"></ng-content>
+  </footer>
+</section>

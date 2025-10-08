@@ -1,0 +1,105 @@
+:host {
+  display: block;
+}
+
+.dialog__summary {
+  margin: 0;
+  color: var(--hk-text-secondary);
+}
+
+.loot-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.loot-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.loot-card__header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.loot-card__icon {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.85rem;
+  background: radial-gradient(circle at top, rgba(168, 85, 247, 0.9), rgba(59, 130, 246, 0.75));
+  color: #0a0d1c;
+}
+
+.loot-card__name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.loot-card__rarity {
+  margin: 0.15rem 0 0;
+  color: var(--hk-text-muted);
+  font-size: 0.9rem;
+}
+
+.loot-card__quantity {
+  font-weight: 600;
+}
+
+.loot-list li[data-rarity='raro'] .loot-card {
+  border-color: rgba(56, 189, 248, 0.5);
+}
+
+.loot-list li[data-rarity='lendário'] .loot-card {
+  border-color: rgba(250, 204, 21, 0.6);
+  box-shadow: 0 0 14px rgba(250, 204, 21, 0.24);
+}
+
+.loot-groups {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.loot-groups h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.loot-groups ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.loot-groups li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.loot-groups__rarity {
+  font-weight: 600;
+}
+
+.loot-groups__count {
+  color: var(--hk-text-muted);
+}

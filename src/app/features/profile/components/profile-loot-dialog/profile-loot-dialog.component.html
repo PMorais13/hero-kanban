@@ -1,0 +1,35 @@
+<hk-profile-modal closeAriaLabel="Fechar inventário">
+  <div hkProfileModalHeader>
+    <div class="profile-modal__heading">
+      <h2>Inventário mágico</h2>
+      <p>Organize artefatos raros, monitore quantidades e distribua recursos entre as squads.</p>
+    </div>
+  </div>
+
+  <p hkProfileModalContent class="dialog__summary">Total de itens na bolsa: {{ totalQuantity() }} peças.</p>
+
+  <ul hkProfileModalContent class="loot-list">
+    <li *ngFor="let item of loot(); trackBy: trackLoot" [attr.data-rarity]="item.rarity">
+      <div class="loot-card">
+        <div class="loot-card__header">
+          <span class="loot-card__icon material-symbols-rounded" aria-hidden="true">auto_awesome</span>
+          <div>
+            <p class="loot-card__name">{{ item.name }}</p>
+            <p class="loot-card__rarity">Raridade {{ item.rarity }}</p>
+          </div>
+        </div>
+        <span class="loot-card__quantity">×{{ item.quantity }}</span>
+      </div>
+    </li>
+  </ul>
+
+  <section hkProfileModalContent class="loot-groups" aria-label="Grupos por raridade">
+    <h3>Resumo por raridade</h3>
+    <ul>
+      <li *ngFor="let group of rarityGroups()">
+        <span class="loot-groups__rarity">{{ group[0] }}</span>
+        <span class="loot-groups__count">{{ group[1].length }} itens</span>
+      </li>
+    </ul>
+  </section>
+</hk-profile-modal>

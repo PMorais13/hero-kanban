@@ -1,0 +1,31 @@
+<hk-profile-modal closeAriaLabel="Fechar conquistas">
+  <div hkProfileModalHeader>
+    <div class="profile-modal__heading">
+      <h2>Conquistas da guilda</h2>
+      <p>Reviva feitos memoráveis, acompanhe o progresso coletivo e planeje o próximo título lendário.</p>
+    </div>
+  </div>
+
+  <p hkProfileModalContent class="dialog__xp">
+    Total de XP atual: {{ experience().current | number: '1.0-0' }} · Próximo nível aos
+    {{ experience().nextLevel | number: '1.0-0' }}.
+  </p>
+
+  <ul hkProfileModalContent class="achievement-list">
+    <li *ngFor="let achievement of achievements(); trackBy: trackAchievement">
+      <article class="achievement-card" [attr.aria-label]="'Conquista ' + achievement.title">
+        <header>
+          <span class="achievement-card__icon" aria-hidden="true">★</span>
+          <div>
+            <p class="achievement-card__title">{{ achievement.title }}</p>
+            <p class="achievement-card__description">{{ achievement.description }}</p>
+          </div>
+        </header>
+        <div class="achievement-card__progress" role="img" [attr.aria-label]="experienceProgressLabel(achievement)">
+          <div class="achievement-card__progress-bar" [style.width.%]="achievement.progress"></div>
+        </div>
+        <span class="achievement-card__value">{{ achievement.progress }}%</span>
+      </article>
+    </li>
+  </ul>
+</hk-profile-modal>

@@ -1,0 +1,75 @@
+<hk-profile-modal closeAriaLabel="Fechar ficha de personagem">
+  <div hkProfileModalHeader>
+    <div class="profile-modal__heading">
+      <h2>Ficha de personagem</h2>
+      <p>Conheça a origem, os atributos e os talentos lendários do herói da squad.</p>
+    </div>
+  </div>
+
+  <section hkProfileModalContent class="hero-sheet" aria-labelledby="hero-sheet-identity">
+    <section class="hero-sheet__identity" aria-labelledby="hero-sheet-identity">
+      <h3 id="hero-sheet-identity">Identidade</h3>
+      <dl>
+        <div>
+          <dt>Nome</dt>
+          <dd>{{ sheet.name }}</dd>
+        </div>
+        <div>
+          <dt>Título</dt>
+          <dd>{{ sheet.title }}</dd>
+        </div>
+        <div>
+          <dt>Classe</dt>
+          <dd>{{ sheet.heroClass }}</dd>
+        </div>
+        <div>
+          <dt>Guilda</dt>
+          <dd>{{ sheet.guild }}</dd>
+        </div>
+        <div>
+          <dt>Linhagem</dt>
+          <dd>{{ sheet.lineage }}</dd>
+        </div>
+        <div>
+          <dt>Alinhamento</dt>
+          <dd>{{ sheet.alignment }}</dd>
+        </div>
+        <div>
+          <dt>Estandarte</dt>
+          <dd>{{ sheet.banner }}</dd>
+        </div>
+        <div>
+          <dt>Artefato assinatura</dt>
+          <dd>{{ sheet.signature }}</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="hero-sheet__attributes" aria-labelledby="hero-sheet-attributes">
+      <h3 id="hero-sheet-attributes">Atributos</h3>
+      <ul>
+        <li *ngFor="let attribute of sheet.attributes">
+          <span class="hero-sheet__attribute-label">{{ attribute.label }}</span>
+          <div class="hero-sheet__attribute-meter" role="img" [attr.aria-label]="attribute.label + ' em ' + attribute.value">
+            <div class="hero-sheet__attribute-bar" [style.width.%]="attribute.value * 5"></div>
+          </div>
+          <span class="hero-sheet__attribute-value">{{ attribute.value }}</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="hero-sheet__traits" aria-labelledby="hero-sheet-traits">
+      <h3 id="hero-sheet-traits">Talentos únicos</h3>
+      <ul>
+        <li *ngFor="let trait of sheet.traits">
+          <strong>{{ trait.title }}</strong>
+          <p>{{ trait.description }}</p>
+        </li>
+      </ul>
+    </section>
+  </section>
+
+  <div hkProfileModalActions>
+    <button type="button" mat-stroked-button (click)="close()">Fechar</button>
+  </div>
+</hk-profile-modal>
