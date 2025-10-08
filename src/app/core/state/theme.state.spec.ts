@@ -97,6 +97,7 @@ describe('ThemeState', () => {
     const state = createState();
 
     expect(state.currentTheme()).toBe(DEFAULT_THEME_ID);
+    expect(state.themes().length).toBe(0);
     expect(documentRef.documentElement.dataset['theme']).toBe(DEFAULT_THEME_ID);
     expect(documentRef.body.dataset['theme']).toBe(DEFAULT_THEME_ID);
     expect(overlayContainerElement.dataset['theme']).toBe(DEFAULT_THEME_ID);
@@ -105,6 +106,7 @@ describe('ThemeState', () => {
   it('should expose the available themes with their tone metadata', () => {
     const state = createState();
 
+    expect(state.themes().length).toBe(0);
     state.setAvailableThemes(createThemeFixtures());
     const themes = state.themes();
 
