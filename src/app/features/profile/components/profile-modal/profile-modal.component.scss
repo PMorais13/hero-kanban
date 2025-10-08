@@ -24,7 +24,15 @@
   gap: 1rem;
 }
 
-.profile-modal__header:empty,
+.profile-modal__header-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.profile-modal__header-content:empty {
+  display: none;
+}
+
 .profile-modal__actions:empty {
   display: none;
 }

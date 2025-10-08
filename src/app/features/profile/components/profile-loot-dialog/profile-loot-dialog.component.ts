@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { HeroControlState } from '@app/core/state/hero-control.state';
 import type { LootItem } from '@app/core/state/hero-control.models';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
@@ -12,10 +11,9 @@ import { ProfileModalComponent } from '../profile-modal/profile-modal.component'
   templateUrl: './profile-loot-dialog.component.html',
   styleUrls: ['./profile-loot-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatDialogModule, MatButtonModule, NgFor, ProfileModalComponent],
+  imports: [MatDialogModule, NgFor, ProfileModalComponent],
 })
 export class ProfileLootDialogComponent {
-  private readonly dialogRef = inject(MatDialogRef<ProfileLootDialogComponent>);
   private readonly heroControl = inject(HeroControlState);
 
   protected readonly loot = this.heroControl.loot;
@@ -43,7 +41,4 @@ export class ProfileLootDialogComponent {
     );
   });
 
-  protected close(): void {
-    this.dialogRef.close();
-  }
 }

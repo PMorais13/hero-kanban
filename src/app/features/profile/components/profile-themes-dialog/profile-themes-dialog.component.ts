@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { ThemeState, type ThemeId, type ThemeOption } from '@app/core/state/theme.state';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
@@ -11,10 +10,9 @@ import { ProfileModalComponent } from '../profile-modal/profile-modal.component'
   templateUrl: './profile-themes-dialog.component.html',
   styleUrls: ['./profile-themes-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MatDialogModule, MatButtonModule, NgFor, NgIf, ProfileModalComponent],
+  imports: [MatDialogModule, NgFor, NgIf, ProfileModalComponent],
 })
 export class ProfileThemesDialogComponent {
-  private readonly dialogRef = inject(MatDialogRef<ProfileThemesDialogComponent>);
   private readonly themeState = inject(ThemeState);
 
   protected readonly themes = this.themeState.themes;
@@ -30,9 +28,5 @@ export class ProfileThemesDialogComponent {
 
   protected onThemeSelect(themeId: ThemeId): void {
     this.themeState.setTheme(themeId);
-  }
-
-  protected close(): void {
-    this.dialogRef.close();
   }
 }

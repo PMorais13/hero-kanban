@@ -1,6 +1,11 @@
 <section class="profile-modal" role="document">
   <header class="profile-modal__header">
-    <ng-content select="[hkProfileModalHeader]"></ng-content>
+    <div class="profile-modal__header-content">
+      <ng-content select="[hkProfileModalHeader]"></ng-content>
+    </div>
+    <button type="button" mat-icon-button (click)="close()" [attr.aria-label]="closeAriaLabel">
+      <span class="material-symbols-rounded" aria-hidden="true">close</span>
+    </button>
   </header>
 
   <div class="profile-modal__content">

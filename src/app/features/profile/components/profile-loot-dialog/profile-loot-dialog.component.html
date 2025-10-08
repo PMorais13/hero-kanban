@@ -1,12 +1,9 @@
-<hk-profile-modal>
+<hk-profile-modal closeAriaLabel="Fechar inventário">
   <div hkProfileModalHeader>
     <div class="profile-modal__heading">
       <h2>Inventário mágico</h2>
       <p>Organize artefatos raros, monitore quantidades e distribua recursos entre as squads.</p>
     </div>
-    <button type="button" mat-icon-button (click)="close()" aria-label="Fechar inventário">
-      <span class="material-symbols-rounded" aria-hidden="true">close</span>
-    </button>
   </div>
 
   <p hkProfileModalContent class="dialog__summary">Total de itens na bolsa: {{ totalQuantity() }} peças.</p>
