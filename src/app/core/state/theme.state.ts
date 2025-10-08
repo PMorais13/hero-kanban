@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { inject, Injectable, signal, effect } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 import {
@@ -39,29 +39,25 @@ export class ThemeState {
   readonly themes = this._themes.asReadonly();
   readonly currentTheme = this._currentTheme.asReadonly();
 
-  private readonly hydrateThemesEffect = effect(
-    () => {
-      const subscription = this.themeService
-        .getThemes()
-        .pipe(take(1))
-        .subscribe({
-          next: (themes) => {
-            if (themes.length > 0) {
-              this.setAvailableThemes(themes);
-            }
-          },
-          error: () => {
-            // Keep the current theme when the backend is unavailable.
-          },
-        });
-
-      return () => subscription.unsubscribe();
-    },
-    { allowSignalWrites: true },
-  );
-
   constructor() {
     this.applyTheme(this._currentTheme());
+    this.hydrateThemes();
+  }
+
+  private hydrateThemes(): void {
+    this.themeService
+      .getThemes()
+      .pipe(take(1))
+      .subscribe({
+        next: (themes) => {
+          if (themes.length > 0) {
+            this.setAvailableThemes(themes);
+          }
+        },
+        error: () => {
+          // Keep the current theme when the backend is unavailable.
+        },
+      });
   }
 
   setAvailableThemes(themes: readonly ThemeOption[]): void {

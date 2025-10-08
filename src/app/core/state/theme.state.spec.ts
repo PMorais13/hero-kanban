@@ -3,14 +3,24 @@ import { TestBed } from '@angular/core/testing';
 
 import { OverlayContainer } from '@angular/cdk/overlay';
 
-import { of } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 import { ThemeService } from '../services/theme.service';
 import { DEFAULT_THEME_ID, ThemeState, type ThemeOption } from './theme.state';
 
 class ThemeServiceStub {
+  private readonly themesSubject = new ReplaySubject<readonly ThemeOption[]>(1);
+
+  constructor() {
+    this.setThemes([]);
+  }
+
+  setThemes(themes: readonly ThemeOption[]): void {
+    this.themesSubject.next(themes);
+  }
+
   getThemes() {
-    return of([]);
+    return this.themesSubject.asObservable();
   }
 }
 
@@ -49,9 +59,11 @@ const createThemeFixtures = (): ThemeOption[] => [
 ];
 
 describe('ThemeState', () => {
-  let state: ThemeState;
   let documentRef: Document;
   let overlayContainerElement: HTMLElement;
+  let themeServiceStub: ThemeServiceStub;
+
+  const createState = () => TestBed.inject(ThemeState);
 
   beforeEach(() => {
     overlayContainerElement = document.createElement('div');
@@ -72,7 +84,7 @@ describe('ThemeState', () => {
     documentRef.documentElement.dataset['theme'] = '';
     documentRef.body.dataset['theme'] = '';
     overlayContainerElement.dataset['theme'] = '';
-    state = TestBed.inject(ThemeState);
+    themeServiceStub = TestBed.inject(ThemeService) as unknown as ThemeServiceStub;
   });
 
   afterEach(() => {
@@ -82,6 +94,8 @@ describe('ThemeState', () => {
   });
 
   it('should expose the default theme and apply it to the document', () => {
+    const state = createState();
+
     expect(state.currentTheme()).toBe(DEFAULT_THEME_ID);
     expect(documentRef.documentElement.dataset['theme']).toBe(DEFAULT_THEME_ID);
     expect(documentRef.body.dataset['theme']).toBe(DEFAULT_THEME_ID);
@@ -89,6 +103,8 @@ describe('ThemeState', () => {
   });
 
   it('should expose the available themes with their tone metadata', () => {
+    const state = createState();
+
     state.setAvailableThemes(createThemeFixtures());
     const themes = state.themes();
 
@@ -98,6 +114,8 @@ describe('ThemeState', () => {
   });
 
   it('should change the theme when a valid option is selected', () => {
+    const state = createState();
+
     state.setAvailableThemes(createThemeFixtures());
     state.setTheme('radiant-dawn');
 
@@ -108,6 +126,8 @@ describe('ThemeState', () => {
   });
 
   it('should update accent tokens so UI components follow the active theme', () => {
+    const state = createState();
+
     state.setAvailableThemes(createThemeFixtures());
     state.setTheme('radiant-dawn');
 
@@ -132,6 +152,8 @@ describe('ThemeState', () => {
   });
 
   it('should apply the Celestial Tides theme tokens when selected', () => {
+    const state = createState();
+
     state.setAvailableThemes(createThemeFixtures());
     state.setTheme('celestial-tides');
 
@@ -142,6 +164,8 @@ describe('ThemeState', () => {
   });
 
   it('should ignore unknown theme identifiers', () => {
+    const state = createState();
+
     state.setAvailableThemes(createThemeFixtures());
     state.setTheme('radiant-dawn');
     state.setTheme('unknown-theme' as never);
@@ -150,6 +174,8 @@ describe('ThemeState', () => {
   });
 
   it('should adopt the backend default theme when the current selection is unavailable', () => {
+    const state = createState();
+
     state.setAvailableThemes([
       {
         id: 'quantum-mist',
@@ -180,5 +206,13 @@ describe('ThemeState', () => {
     ]);
 
     expect(state.currentTheme()).toBe('ember-forge');
+  });
+
+  it('should hydrate available themes when the backend responds successfully', () => {
+    themeServiceStub.setThemes(createThemeFixtures());
+
+    const state = createState();
+
+    expect(state.themes().length).toBe(3);
   });
 });
