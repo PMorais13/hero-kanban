@@ -8,7 +8,6 @@ import {
   type ThemeOption,
   type ThemeProfileTokens,
 } from './theme.config';
-import { FALLBACK_THEMES } from './theme.defaults';
 import { ThemeService } from '../services/theme.service';
 import { take } from 'rxjs/operators';
 
@@ -31,7 +30,7 @@ export class ThemeState {
   private readonly overlayContainer = inject(OverlayContainer, { optional: true });
   private readonly themeService = inject(ThemeService);
 
-  private readonly _themes = signal<readonly ThemeOption[]>(FALLBACK_THEMES);
+  private readonly _themes = signal<readonly ThemeOption[]>([]);
 
   private readonly _currentTheme = signal<ThemeId>(DEFAULT_THEME_ID);
 
