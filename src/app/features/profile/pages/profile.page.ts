@@ -3,7 +3,7 @@ import { DecimalPipe, NgIf } from '@angular/common';
 import { HeroControlState } from '@app/core/state/hero-control.state';
 import { ThemeState } from '@app/core/state/theme.state';
 import type { LootItem, ProfileAchievement } from '@app/core/state/hero-control.models';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, type MatDialogConfig } from '@angular/material/dialog';
 import { ProfileThemesDialogComponent } from '../components/profile-themes-dialog/profile-themes-dialog.component';
 import { ProfileAchievementsDialogComponent } from '../components/profile-achievements-dialog/profile-achievements-dialog.component';
 import { ProfileLootDialogComponent } from '../components/profile-loot-dialog/profile-loot-dialog.component';
@@ -28,6 +28,13 @@ export class ProfilePageComponent {
   private readonly heroControl = inject(HeroControlState);
   private readonly themeState = inject(ThemeState);
   private readonly dialog = inject(MatDialog);
+  private readonly profileDialogConfig: MatDialogConfig = {
+    panelClass: 'profile-dialog-panel',
+    autoFocus: false,
+    width: '80vw',
+    maxWidth: '1180px',
+    minWidth: 'min(80vw, 320px)',
+  };
 
   protected readonly experience = this.heroControl.experience;
   protected readonly experienceProgress = this.heroControl.experienceProgress;
@@ -153,30 +160,20 @@ export class ProfilePageComponent {
   protected readonly heroMainAttributeLabel = this.heroSheetMainAttribute.label;
 
   protected openThemesDialog(): void {
-    this.dialog.open(ProfileThemesDialogComponent, {
-      panelClass: 'profile-dialog-panel',
-      autoFocus: false,
-    });
+    this.dialog.open(ProfileThemesDialogComponent, this.profileDialogConfig);
   }
 
   protected openAchievementsDialog(): void {
-    this.dialog.open(ProfileAchievementsDialogComponent, {
-      panelClass: 'profile-dialog-panel',
-      autoFocus: false,
-    });
+    this.dialog.open(ProfileAchievementsDialogComponent, this.profileDialogConfig);
   }
 
   protected openLootDialog(): void {
-    this.dialog.open(ProfileLootDialogComponent, {
-      panelClass: 'profile-dialog-panel',
-      autoFocus: false,
-    });
+    this.dialog.open(ProfileLootDialogComponent, this.profileDialogConfig);
   }
 
   protected openHeroSheetDialog(): void {
     this.dialog.open(ProfileHeroSheetDialogComponent, {
-      panelClass: 'profile-dialog-panel',
-      autoFocus: false,
+      ...this.profileDialogConfig,
       data: this.heroSheet,
     });
   }
