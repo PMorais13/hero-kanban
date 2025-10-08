@@ -223,6 +223,13 @@
   border-color: rgba(var(--hk-accent-rgb), 0.5);
 }
 
+:host ::ng-deep .profile-dialog-panel {
+  --mdc-dialog-container-max-width: min(80vw, 1180px);
+  --mdc-dialog-container-min-width: min(80vw, 1180px);
+  width: min(80vw, 1180px);
+  max-width: min(80vw, 1180px);
+}
+
 :host ::ng-deep .profile-dialog-panel .mat-mdc-dialog-surface {
   background: rgba(17, 21, 40, 0.96);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -231,8 +238,8 @@
   backdrop-filter: blur(18px);
   color: var(--hk-text-primary);
   padding: 0;
-  width: min(80vw, 1180px);
-  max-width: min(90vw, 1180px);
+  width: 100%;
+  max-width: none;
   max-height: 92vh;
   display: flex;
   overflow: hidden;

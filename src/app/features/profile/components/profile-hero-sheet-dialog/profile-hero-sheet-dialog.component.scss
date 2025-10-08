@@ -8,7 +8,7 @@
   --hero-sheet-surface: rgba(255, 255, 255, 0.04);
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .hero-sheet__identity,
@@ -20,6 +20,10 @@
   background: var(--hero-sheet-surface);
   display: grid;
   gap: 1rem;
+}
+
+.hero-sheet__traits {
+  grid-column: 1 / -1;
 }
 
 .hero-sheet__identity h3,
@@ -115,8 +119,18 @@
   font-size: 0.95rem;
 }
 
+@media (max-width: 960px) {
+  .hero-sheet {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
 @media (max-width: 600px) {
   .hero-sheet {
     grid-template-columns: 1fr;
+  }
+
+  .hero-sheet__traits {
+    grid-column: auto;
   }
 }

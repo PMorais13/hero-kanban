@@ -41,6 +41,8 @@
 
 .profile-modal__header button[mat-icon-button] {
   --mdc-icon-button-icon-color: var(--hk-text-secondary);
+  margin-left: auto;
+  align-self: flex-start;
 }
 
 .profile-modal__content {
