@@ -22,7 +22,7 @@
   </section>
 
   <section class="profile__cards" aria-label="Coleção de registros do perfil">
-    <article class="profile-card profile-card--hero">
+    <article class="profile-card">
       <button
         type="button"
         class="profile-card__trigger"
@@ -53,7 +53,6 @@
             Atributo destaque: {{ heroMainAttributeLabel }} · Artefato: {{ heroSheet.signature }}
           </p>
         </div>
-        <span class="profile-card__action">Abrir</span>
       </button>
     </article>
 
@@ -74,7 +73,6 @@
             </div>
           </dl>
         </div>
-        <span class="profile-card__action">Abrir</span>
       </button>
     </article>
 
@@ -103,7 +101,6 @@
             {{ achievements().length }} conquistas em andamento · {{ completedAchievements() }} completas
           </p>
         </div>
-        <span class="profile-card__action">Abrir</span>
       </button>
     </article>
 
@@ -127,7 +124,6 @@
             Destaque lendário: {{ lootItem.name }} · Raridade {{ lootItem.rarity }}
           </p>
         </div>
-        <span class="profile-card__action">Abrir</span>
       </button>
     </article>
   </section>
